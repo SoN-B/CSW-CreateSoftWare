@@ -1,3 +1,2 @@
-test
-
-my name is son
+this is test TEXT file
+welcome my github
