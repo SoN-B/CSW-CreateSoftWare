@@ -1,29 +1,29 @@
 #include <iostream>
-#include <vector>
+#include <stack>
+
 using namespace std;
 
 void main()
 {
-	vector<int> number = { 1,5,10,50,100,500,1000,5000,10000,50000 };
-	int N, K;
-	int count = 0;
-
-	cout << "N입력 : ";
-	cin >> N;
-	cout << "K입력 : ";
+	stack <int> s;
+	int K, x;
+	int sum = 0;
+	
+	cout << "K : ";
 	cin >> K;
 
-	for (int i = N - 1; i >= 0;) {
-		if (number[i] > K) {
-			i--;
-			continue;
-		}
+	for (int i = 0; i < K; i++)
+	{
+		cin >> x;
+		if (x == 0) s.pop();
 
-		K -= number[i];
-		count++;
-
-		if (K == 0) break;
+		s.push(x);
 	}
 
-	cout << count << "\n";
+	for (int i = 0; i < s.size(); i++)
+	{
+		sum += s.pop();
+	}
+
+	cout << sum;
 }
