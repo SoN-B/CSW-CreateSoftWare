@@ -20,7 +20,7 @@ int main()
 	}
 	for(int x=0;x<number;x++)
 	{
-		for(int y=0;y<number;y++)
+		for(int y=0;y<VPS[x].length();y++)
 		{
 			cheaknum=0;
 			temp=VPS[x][y];
