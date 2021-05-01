@@ -6,8 +6,8 @@ typedef struct character {
   int mp;
   int atk;
   int def;
-  string ettype;
-  string kind;
+  string ettype;  //이 개체의 타입을 나타냄. 노말몹이면 normal,엘리트 몹이면 elite, 보스몹이면 boss, 플레이어면 player
+  string kind;  //이 개체의 종족을 나타냄.
   void init(string kind,string ettype = normal,int hp = 5000,int mp = 1250 ,int atk = 500,int def=250)
   {// character 슬라임 = {"슬라임","normal",hp,mp,atk,def};
     //character 슬라임_보스 = {"슬라임","boss",hp,mp,atk,def};
