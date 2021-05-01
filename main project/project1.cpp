@@ -7,6 +7,6 @@ using namespace std;
 void main()
 {
 	string str;
-	gets(str);
+	gets(str);;;
 	puts(str);
 }
