@@ -1,9 +1,18 @@
 #pragma once
-
+#include <string>
+using namespace std;
 typedef struct character {
-  public : 
-  	int hp = 10000;
-  	int mp = 5000;
-  	int atk = 300;
-  	int def = 150;
+  int hp;
+  int mp;
+  int atk;
+  int def;
+  string ettype;
+  void init(int hp,int mp,int atk,int def,string ettype)
+  {
+    this->hp = hp;
+    this-> mp = mp;
+    this-> atk = atk;
+    this-> def = def;
+    this-> ettype = ettype;
+  }
 };
