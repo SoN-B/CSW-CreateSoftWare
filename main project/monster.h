@@ -25,4 +25,5 @@ typedef struct character {
   {
     cout << "종족 : "<<kind<<" ["<<ettype<<"] "<<endl;
     cout << "HP : "<<hp<<endl;
+  }
 };
