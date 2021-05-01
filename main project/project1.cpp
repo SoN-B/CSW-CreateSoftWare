@@ -1,12 +1,10 @@
 #include <iostream>
-#include <string>
-#include <vector>
-
 using namespace std;
 
-void main()
-{
-	string str;
-	gets(str);;;
-	puts(str);
-}
+struct SoNB {
+	public :
+		int hp = 10000;
+		int mp = 5000;
+		int atk = 300;
+		int def = 150;
+};
