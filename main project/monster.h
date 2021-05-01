@@ -8,7 +8,7 @@ typedef struct character {
   int def;
   string ettype;
   string enemykind;
-  void init(string enemykind,int hp = 5000,int mp = 1250 ,int atk = 500,int def=250,string ettype = normal)
+  void init(string enemykind,string ettype = normal,int hp = 5000,int mp = 1250 ,int atk = 500,int def=250)
   {
     this->hp = hp;
     this-> mp = mp;
