@@ -3,7 +3,6 @@
 using namespace std;
 
 struct SoNB {
-public:
 	int hp = 10000;
 	int mp = 5000;
 	int atk = 300;
@@ -11,7 +10,7 @@ public:
 };
 
 int main()
-{//¸Þ´º ¼±ÅÃ
+{//Â¸ÃžÂ´Âº Â¼Â±Ã…Ãƒ
 
 
 }
