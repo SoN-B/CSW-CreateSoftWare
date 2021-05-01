@@ -1,17 +1,9 @@
 #pragma once
 
-struct monster1 {
+typedef struct character {
 
 };
 
-struct monster2 {
-
-};
-
-struct monster3 {
-
-};
-
-struct boss {
+typedef struct boss {
 
 };
