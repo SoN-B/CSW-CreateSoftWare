@@ -21,4 +21,8 @@ typedef struct character {
     this-> ettype = ettype;
     this-> kind = kind;
   }
+  void GetInfo()
+  {
+    cout << "종족 : "<<kind<<" ["<<ettype<<"] "<<endl;
+    cout << "HP : "<<hp<<endl;
 };
