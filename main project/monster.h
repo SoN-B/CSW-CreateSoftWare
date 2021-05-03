@@ -8,7 +8,8 @@ struct mob {
     string ettype; //몹종류 -> normal,elite,boss
     string kind; //종족
 
-    mob(string kind, int hp, int mp, int atk, int def, string ettype = "normal") //default 매개변수 맨끝
+    mob(string kind, int hp = 0, int mp = 0, int atk = 0, 
+        int def = 0, string ettype = "normal") //default 매개변수 맨끝
     {
         //ex) mob Slime_Normal = { "slime",100,20,10,5,"normal" };
 
@@ -26,4 +27,3 @@ struct mob {
         cout << "HP : " << hp << endl;
     }
 };
-
