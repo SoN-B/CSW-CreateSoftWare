@@ -6,24 +6,33 @@ typedef struct character {
     int mp;
     int atk;
     int def;
-    string ettype;  //ÀÌ °³Ã¼ÀÇ Å¸ÀÔÀ» ³ªÅ¸³¿. ³ë¸»¸÷ÀÌ¸é normal,¿¤¸®Æ® ¸÷ÀÌ¸é elite, º¸½º¸÷ÀÌ¸é boss, ÇÃ·¹ÀÌ¾î¸é player
-    string kind;  //ÀÌ °³Ã¼ÀÇ Á¾Á·À» ³ªÅ¸³¿.
-    void init(string kind, string ettype = normal, int hp = 5000, int mp = 1250, int atk = 500, int def = 250)
-    {// character ½½¶óÀÓ = {"½½¶óÀÓ","normal",hp,mp,atk,def};
-      //character ½½¶óÀÓ_º¸½º = {"½½¶óÀÓ","boss",hp,mp,atk,def};
-      //character ½½¶óÀÓ_¿¤¸®Æ® = {"½½¶óÀÓ","elite",hp,mp,atk,def};
+    int speed;
+    string ettype;  //ì´ ê°œì²´ì˜ íƒ€ì…ì„ ë‚˜íƒ€ëƒ„. ë…¸ë§ëª¹ì´ë©´ normal,ì—˜ë¦¬íŠ¸ ëª¹ì´ë©´ elite, ë³´ìŠ¤ëª¹ì´ë©´ boss, í”Œë ˆì´ì–´ë©´ player
+    string kind;  //ì´ ê°œì²´ì˜ ì¢…ì¡±ì„ ë‚˜íƒ€ëƒ„.
+    void init(string kind, string ettype = normal, int hp = 5000, int mp = 1250, int atk = 500, int def = 250,int speed = 1)
+    {// character ìŠ¬ë¼ì„ = {"ìŠ¬ë¼ì„","normal",hp,mp,atk,def};
+      //character ìŠ¬ë¼ì„_ë³´ìŠ¤ = {"ìŠ¬ë¼ì„","boss",hp,mp,atk,def};
+      //character ìŠ¬ë¼ì„_ì—˜ë¦¬íŠ¸ = {"ìŠ¬ë¼ì„","elite",hp,mp,atk,def};
 
-      //character player = {»ç¶÷,player,hp,mp,atk,def};
+      //character player = {ì‚¬ëŒ,player,hp,mp,atk,def};
         this->hp = hp;
         this->mp = mp;
         this->atk = atk;
         this->def = def;
         this->ettype = ettype;
         this->kind = kind;
+        this->speed = speed;
     }
     void GetInfo()
     {
-        cout << "Á¾Á· : " << kind << " [" << ettype << "] " << endl;
+        cout << "ì¢…ì¡± : " << kind << " [" << ettype << "] " << endl;
         cout << "HP : " << hp << endl;
+    }
+    character ì„ ê³µ(character& a,character& b)
+    {
+        if(a.speed > b.speed)
+            return a;
+        else
+            return b;
     }
 };
