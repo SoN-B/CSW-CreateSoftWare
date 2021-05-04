@@ -4,12 +4,12 @@
 using namespace std;
 
 struct mob {
-    int hp, mp, atk, def, speed;//선공 선별(speed)
+    float hp, mp, atk, def, speed;//선공 선별(speed)
     string ettype; //몹종류 -> normal,elite,boss
     string kind; //종족
 
-    mob(string kind, int hp = 0, int mp = 0, int atk = 0, 
-        int def = 0, int speed = 1, string ettype = "normal") //default 매개변수 맨끝
+    mob(string kind, float hp = 0, float mp = 0, float atk = 0,
+        float def = 0, float speed = 1, string ettype = "normal") //default 매개변수 맨끝
     {
         //ex) mob Slime_Normal = { "slime",100,20,10,5,"normal" };
 
