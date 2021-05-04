@@ -28,11 +28,11 @@ typedef struct character {
         cout << "종족 : " << kind << " [" << ettype << "] " << endl;
         cout << "HP : " << hp << endl;
     }
-    character 선공(character& a,character& b)
-    {
+};
+character 선공(character& a,character& b)
+{
         if(a.speed > b.speed)
             return a;
         else
             return b;
-    }
-};
+}
