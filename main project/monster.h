@@ -3,7 +3,7 @@
 #include <iostream> //+
 using namespace std;
 
-struct mob {
+typedef struct mob {
     float hp, mp, atk, def, speed;//선공 선별(speed)
     string ettype; //몹종류 -> normal,elite,boss
     string kind; //종족
@@ -27,4 +27,4 @@ struct mob {
         cout << "종족 : " << kind << " [" << ettype << "] " << endl;
         cout << "HP : " << hp << endl;
     }
-};
+}mob;
