@@ -68,6 +68,10 @@ void atkmenu(My_Character character, mob mob)//플레이어 공격 메뉴
 void mobatk(mob mob, My_Character character)
 {
 	float damage=character.hp-(mob.atk - character.def);
+	if (damage<0)//몹 공격력<플레이어 방어력 경우 음수 나오는 상황 배제
+	{
+		damage = 0;
+	}
 	character.hp -= damage;
 	cout << mob.kind << " 의 공격!" << endl;
 	cout << "플레이어는 " << damage << " 의 피해를 입었다!" << endl;
