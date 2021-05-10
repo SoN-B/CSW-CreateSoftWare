@@ -21,7 +21,7 @@ typedef struct My_Character { //기본
 		this->speed = speed;
 	}
 	
-	void Get_Character_Info()//내 상태 확인
+	void Get_Character_Info()//플레이어 상태 출력 
 	{
 		cout << "HP : " << hp << "\nMP: " << mp << "\n공격력: " << atk << "\n방어력: " << def << endl;
 	}
@@ -65,7 +65,13 @@ void atkmenu(My_Character character, mob mob)//플레이어 공격 메뉴
 
 }
 
-void mobatk(struct mob);//몬스터 공격함수-최현범
+void mobatk(mob mob, My_Character character)
+{
+	float damage=character.hp-(mob.atk - character.def);
+	character.hp -= damage;
+	cout << mob.kind << " 의 공격!" << endl;
+	cout << "플레이어는 " << damage << " 의 피해를 입었다!" << endl;
+}
 
 int main()
 {//메뉴 선택
@@ -77,28 +83,49 @@ int main()
 		cin >> Menu;
 		switch (Menu)
 		{
-		case 1://
+		case 1:
 			for (int i = 0; i < map1.size(); i++)
 			{
-				int leftmob = map1[i].size();//방에 남은 몬스터의 수
-				for (int j = 0; j < leftmob; j++)
+				for (int j = 0; j < map1[i].size(); j++)
 				{
 					cout << map1[i][j].kind << " 가 나타났다!" << endl;//몬스터 등장
-					if (SoNB.speed > map1[i][j].speed)//스피드 비교 
+					while (true)//전투
 					{
-						atkmenu(SoNB, map1[i][j]);//캐릭터 spd>mob spd 이므로 플레이어 선공
-						mobatk(map1[i][j], SoNB);
-					}
-					else
-					{
-						mobatk(map1[i][j], SoNB);//mob spd> 캐릭터 spd 이므로 mob 선공
-						atkmenu(SoNB, map1[i][j]);
-					}
-					if (SoNB.hp == 0) //도중에 캐릭터가 사망시 게임오버 (수정필요)
-					{
-						cout << "Game over...";
-						i = map1.size(); //한번에 i를 끝인덱스까지 올려서 중첩for문 반복중지
-						break;
+						if (SoNB.speed > map1[i][j].speed)//스피드 비교 
+						{
+							atkmenu(SoNB, map1[i][j]);//캐릭터 spd>mob spd 이므로 플레이어 선공
+							if (map1[i][j].hp==0)//몬스터 사망시
+							{
+								cout << map1[i][j].kind << " 를 물리쳤다!" << endl;
+								break;
+							}
+							mobatk(map1[i][j], SoNB);
+							if (SoNB.hp == 0) //도중에 캐릭터가 사망시 게임오버 
+							{
+								cout << "Game over..." << endl;
+								i = map1.size(); //한번에 i를 끝인덱스까지 올려서 중첩for문 반복중지
+								break;
+							}
+
+						}
+
+						else
+						{
+							mobatk(map1[i][j], SoNB);//mob spd> 캐릭터 spd 이므로 mob 선공
+							if (SoNB.hp == 0) 							
+							{
+								cout << "Game over..." << endl;
+								i = map1.size();
+								break;
+							}
+
+							atkmenu(SoNB, map1[i][j]);
+							if (map1[i][j].hp == 0)
+							{
+								cout << map1[i][j].kind << " 를 물리쳤다!" << endl;
+								break;
+							}
+						}
 					}
 				}
 				
@@ -110,6 +137,9 @@ int main()
 			break;
 		case 3:
 			Flag = false;
+			break;
+		default:
+			cout << "올바른 숫자 입력" << endl;
 			break;
 		}
 	} while (Flag); //메뉴 정석(do while) 
