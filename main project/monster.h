@@ -27,19 +27,19 @@ typedef struct mob {
         cout << "종족 : " << kind << " [" << ettype << "] " << endl;
         cout << "HP : " << hp << endl;
     }
-    void hp_plus(int a)
+    void hp_plus(double a)
     {
         this->hp += a;
     }
-    void mp_plus(int a)
+    void mp_plus(double a)
     {
         this->mp += a;
     }
-    void atk_plus(int a)
+    void atk_plus(double a)
     {
         this->atk += a;
     }
-    void def_plus(int a)
+    void def_plus(double a)
     {
         this->def += a;
     }
