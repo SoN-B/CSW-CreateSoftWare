@@ -13,7 +13,7 @@ typedef struct My_Character { //기본
 	double hp, mp, atk, def, speed;
 
 	My_Character(double hp = 200, double mp = 100, double atk = 50, 
-		double def = 30, double speed = 1.5)
+		double def = 5, double speed = 1.5)
 	{
 		this->hp = hp;
 		this->mp = mp;
@@ -123,7 +123,7 @@ int main()
 							if (SoNB_P->hp < 0) //도중에 캐릭터가 사망시 게임오버 
 							{
 								cout << "Game over..." << endl;
-								i = map1.size(); //한번에 i를 끝인덱스까지 올려서 중첩for문 반복중지
+								i = map1.size() - 1; //한번에 i를 끝인덱스까지 올려서 중첩for문 반복중지
 								break;
 							}
 
@@ -135,7 +135,7 @@ int main()
 							if (SoNB_P->hp < 0)
 							{
 								cout << "Game over..." << endl;
-								i = map1.size();
+								i = map1.size() - 1;
 								break;
 							}
 
