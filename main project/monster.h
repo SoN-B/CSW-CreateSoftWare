@@ -3,12 +3,13 @@
 #include <iostream> //+
 using namespace std;
 
-typedef struct mob {
+class entity {
+    private:
     double hp, mp, atk, def, speed;//선공 선별(speed)
     string ettype; //몹종류 -> normal,elite,boss
     string kind; //종족
-
-    mob(string kind, double hp = 0, double mp = 0, double atk = 0,
+    public:
+    entity(string kind, double hp = 0, double mp = 0, double atk = 0,
         double def = 0, double speed = 1, string ettype = "normal") //default 매개변수 맨끝
     {
         //ex) mob Slime_Normal = { "slime",100,20,10,5,"normal" };
@@ -21,7 +22,6 @@ typedef struct mob {
         this->speed = speed;
         this->ettype = ettype;
     }
-
     void GetInfo()
     {
         cout << "종족 : " << kind << " [" << ettype << "] " << endl;
@@ -43,4 +43,18 @@ typedef struct mob {
     {
         this->def += a;
     }
-}mob;
+    ~entity()
+    {}
+}
+Class mob : public entity
+{
+    private:
+        double item_drop;
+    public: 
+        mob(string kind, double hp = 0, double mp = 0, double atk = 0,
+        double def = 0, double speed = 1, string ettype = "normal",double drop=125) : entity(kind,hp,mp,atk,def,speed,ettype)
+        {
+            this->item_drop = drop;
+        }
+}
+        
