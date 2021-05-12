@@ -43,8 +43,6 @@ class entity {
     {
         this->def += a;
     }
-    ~entity()
-    {}
 }
 Class mob : public entity
 {
