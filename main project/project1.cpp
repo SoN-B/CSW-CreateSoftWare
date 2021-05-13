@@ -12,7 +12,7 @@ bool Flag = true; //do while문 탈출조건
 typedef struct My_Character { //기본
 	double hp, mp, atk, def, speed;
 
-	My_Character(double hp = 200, double mp = 100, double atk = 50, 
+	My_Character(double hp = 200, double mp = 100, double atk = 50,
 		double def = 5, double speed = 1.5)
 	{
 		this->hp = hp;
@@ -31,8 +31,8 @@ typedef struct My_Character { //기본
 My_Character SoNB;
 My_Character* SoNB_P = &SoNB;
 
-bool skillmenu(My_Character* character, mob* mob);//스킬메뉴 선언
-void atkmenu(My_Character *character, mob *mob)//플레이어 공격 메뉴
+bool skillmenu(My_Character* character, mob* mob , bool atkFlag);//스킬메뉴 선언
+void atkmenu(My_Character* character, mob* mob)//플레이어 공격 메뉴
 {
 	int choice;//선택
 	bool atkFlag = true;//공격함수제어
@@ -111,13 +111,13 @@ bool skillmenu(My_Character* character, mob* mob, bool atkFlag)
 			break;
 		case 0:
 			SkillFlag = false;
-			return atkFlag = true;
+			return true;
 			break;
 		}
 	}
 }
 
-void mobatk(mob *mob, My_Character *character)
+void mobatk(mob* mob, My_Character* character)
 {
 	double damage = mob->atk - character->def;
 	if (damage < 0) damage = 0;
