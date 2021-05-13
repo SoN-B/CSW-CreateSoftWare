@@ -1,0 +1,91 @@
+#pragma once
+#include <string>
+#include <iostream> //+
+#include "inventory.h"
+using namespace std;
+
+class entity {
+    private:
+    double hp, mp, atk, def, speed;//선공 선별(speed)
+    string ettype; //몹종류 -> normal,elite,boss
+    string kind; //종족
+    public:
+    entity(string kind, double hp = 0, double mp = 0, double atk = 0,
+        double def = 0, double speed = 1, string ettype = "normal") //default 매개변수 맨끝
+    {
+        //ex) mob Slime_Normal = { "slime",100,20,10,5,"normal" };
+
+        this->kind = kind;
+        this->hp = hp;
+        this->mp = mp;
+        this->atk = atk;
+        this->def = def;
+        this->speed = speed;
+        this->ettype = ettype;
+    }
+    void GetInfo()
+    {
+        cout << "종족 : " << kind << " [" << ettype << "] " << endl;
+        cout << "HP : " << hp << endl;
+    }
+    void hp_plus(double a)
+    {
+        this->hp += a;
+    }
+    void mp_plus(double a)
+    {
+        this->mp += a;
+    }
+    void atk_plus(double a)
+    {
+        this->atk += a;
+    }
+    void def_plus(double a)
+    {
+        this->def += a;
+    }
+}
+Class mob : public entity
+{
+    private:
+        double item_drop;
+    public: 
+        mob(string kind, double hp = 0, double mp = 0, double atk = 0,
+        double def = 0, double speed = 1, string ettype = "normal",double drop=125) : entity(kind,hp,mp,atk,def,speed,ettype)
+        {
+            this->item_drop = drop;
+        }
+}
+Class player : public entity
+{
+    private :
+        atk_item weapon = NULL;
+        def_item Armor[5] = NULL;
+    public :
+        player(string kind, double hp = 0, double mp = 0, double atk = 0,
+        double def = 0, double speed = 1, string ettype = "normal") : entity(kind,hp,mp,atk,def,speed,ettype)
+        { }
+    def_item drop_armor(double a)
+{
+    if(this->Armor[a] != NULL)
+    {   
+        def_item items = this->Armor[a];
+        return Armor[a];
+    }
+    else
+    {
+        cout << "아무것도 없습니다."
+        return NULL;
+    }
+}   
+    void equip_weapon(atk_item *a)
+{
+    if(this->weapon == NULL)
+    {
+        this->weapon = a;
+    }
+    else
+    {
+        cout << "이미 있습니다." << endl;
+    }
+}
