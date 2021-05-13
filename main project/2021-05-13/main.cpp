@@ -76,7 +76,7 @@ void atkmenu(My_Character* character, mob* mob)//플레이어 공격 메뉴
     double damage;
     while (atkFlag)
     {
-        cout << "무엇을 할까...\n1. 공격\n2. 스킬\n3. 가방\n4. 내상태\n5. 적 정보\n6. 도주" << endl; //메뉴
+        cout << "무엇을 할까...\n1. 공격\n2. 죽음의 DEATH\n3. 가방\n4. 내상태\n5. 적 정보\n6. 도주" << endl; //메뉴
         cin >> choice;
         switch (choice)
         {
