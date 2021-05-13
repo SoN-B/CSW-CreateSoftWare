@@ -56,7 +56,6 @@ void atkmenu(My_Character *character, mob *mob)//플레이어 공격 메뉴
 			break;
 		case 2:
 			atkFlag = skillmenu(character, mob, atkFlag);
-			atkFlag = false;
 			break;
 		case 3:
 			//인벤토리
