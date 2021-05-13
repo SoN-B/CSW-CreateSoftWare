@@ -4,7 +4,7 @@
 #include "inventory.h"
 using namespace std;
 
-class entity {
+class mob {
     private:
     double hp, mp, atk, def, speed;//선공 선별(speed)
     string ettype; //몹종류 -> normal,elite,boss
@@ -44,16 +44,5 @@ class entity {
     {
         this->def += a;
     }
-}
-Class mob : public entity
-{
-    private:
-        double item_drop;
-    public: 
-        mob(string kind, double hp = 0, double mp = 0, double atk = 0,
-        double def = 0, double speed = 1, string ettype = "normal",double drop=125) : entity(kind,hp,mp,atk,def,speed,ettype)
-        {
-            this->item_drop = drop;
-        }
 }
         
