@@ -31,6 +31,7 @@ typedef struct My_Character { //기본
 My_Character SoNB;
 My_Character* SoNB_P = &SoNB;
 
+bool skillmenu(My_Character* character, mob* mob);//스킬메뉴 선언
 void atkmenu(My_Character *character, mob *mob)//플레이어 공격 메뉴
 {
 	int choice;//선택
@@ -54,7 +55,7 @@ void atkmenu(My_Character *character, mob *mob)//플레이어 공격 메뉴
 			atkFlag = false;
 			break;
 		case 2:
-			//스킬
+			atkFlag = skillmenu(character, mob, atkFlag);
 			atkFlag = false;
 			break;
 		case 3:
@@ -75,6 +76,46 @@ void atkmenu(My_Character *character, mob *mob)//플레이어 공격 메뉴
 		}
 	}
 
+}
+
+bool skillmenu(My_Character* character, mob* mob, bool atkFlag)
+{
+	int skill_menu;
+	char YN;//스킬선택, 스킬사용확인용
+	bool SkillFlag = true;
+	while (SkillFlag)
+	{
+		cout << "SKILL MENU" << endl;
+		cout << "1. 스킬1번\n2. 스킬2번\n0. 뒤로가기" << endl;
+		cin >> skill_menu;
+		switch (skill_menu)//스킬
+		{
+		case 1:
+			cout << "스킬 1번의 설명\n사용할까? (Y or else)" << endl;
+			cin >> YN;
+			if (YN == 'Y')
+			{
+				//스킬 1번 사용
+				SkillFlag = false;
+				return atkFlag = false;
+			}
+			break;
+		case 2:
+			cout << "스킬 2번의 설명\n사용할까? (Y or else)" << endl;
+			cin >> YN;
+			if (YN == 'Y')
+			{
+				//스킬 2번 사용
+				SkillFlag = false;
+				return atkFlag = false;
+			}
+			break;
+		case 0:
+			SkillFlag = false;
+			return atkFlag = false;
+			break;
+		}
+	}
 }
 
 void mobatk(mob *mob, My_Character *character)
