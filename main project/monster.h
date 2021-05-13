@@ -4,12 +4,10 @@
 #include "inventory.h"
 using namespace std;
 
-class mob {
-    private:
+struct mob {
     double hp, mp, atk, def, speed;//선공 선별(speed)
     string ettype; //몹종류 -> normal,elite,boss
     string kind; //종족
-    public:
     mob(string kind, double hp = 0, double mp = 0, double atk = 0,
         double def = 0, double speed = 1, string ettype = "normal") //default 매개변수 맨끝
     {
