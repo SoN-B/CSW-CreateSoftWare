@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream> //+
+#include "inventory.h"
 using namespace std;
 
 class entity {
