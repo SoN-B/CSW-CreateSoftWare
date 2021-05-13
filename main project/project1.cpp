@@ -112,7 +112,7 @@ bool skillmenu(My_Character* character, mob* mob, bool atkFlag)
 			break;
 		case 0:
 			SkillFlag = false;
-			return atkFlag = false;
+			return atkFlag = true;
 			break;
 		}
 	}
