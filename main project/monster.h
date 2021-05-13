@@ -10,7 +10,7 @@ class mob {
     string ettype; //몹종류 -> normal,elite,boss
     string kind; //종족
     public:
-    entity(string kind, double hp = 0, double mp = 0, double atk = 0,
+    mob(string kind, double hp = 0, double mp = 0, double atk = 0,
         double def = 0, double speed = 1, string ettype = "normal") //default 매개변수 맨끝
     {
         //ex) mob Slime_Normal = { "slime",100,20,10,5,"normal" };
