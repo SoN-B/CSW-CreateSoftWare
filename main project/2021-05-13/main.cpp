@@ -7,9 +7,9 @@
 using namespace std;
 
 int Menu;
-bool Flag = true; //do while¹® Å»ÃâÁ¶°Ç
+bool Flag = true; //do whileë¬¸ íƒˆì¶œì¡°ê±´
 
-typedef struct My_Character { //±âº»
+typedef struct My_Character { //ê¸°ë³¸
     double hp, mp, atk, def, speed;
 
     My_Character(double hp = 200, double mp = 100, double atk = 50,
@@ -22,9 +22,9 @@ typedef struct My_Character { //±âº»
         this->speed = speed;
     }
 
-    void Get_Character_Info()//ÇÃ·¹ÀÌ¾î »óÅÂ Ãâ·Â 
+    void Get_Character_Info()//í”Œë ˆì´ì–´ ìƒíƒœ ì¶œë ¥ 
     {
-        cout << "HP : " << hp << "\nMP: " << mp << "\n°ø°İ·Â: " << atk << "\n¹æ¾î·Â: " << def << endl;
+        cout << "HP : " << hp << "\nMP: " << mp << "\nê³µê²©ë ¥: " << atk << "\në°©ì–´ë ¥: " << def << endl;
     }
 }My_Character;
 
@@ -34,18 +34,18 @@ My_Character* SoNB_P = &SoNB;
 string inventory[5] = { "red potion","red potion","purple potion","purple potion","0" };
 
 void use_item(My_Character* character, string inventory[]) {
-    // ¾ÆÀÌÅÛÀ» »ç¿ëÇÒ ¶§
+    // ì•„ì´í…œì„ ì‚¬ìš©í•  ë•Œ
     int n;
 
-    cout << "ÀÎº¥Åä¸® ¸ñ·Ï\n";
+    cout << "ì¸ë²¤í† ë¦¬ ëª©ë¡\n";
     for (int i = 0; i < 5; i++) { cout << i << " : " << inventory[i] << "\n"; }
-    cout << "0~4¸¦ Á¦¿ÜÇÑ ´Ù¸¥ ¼ıÀÚ ÀÔ·Â½Ã ¾ÆÀÌÅÛ »ç¿ëÀÌ Ãë¼ÒµË´Ï´Ù\n";
-    cout << "»ç¿ëÇÒ ¾ÆÀÌÅÛÀÇ À§Ä¡¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n" << "À§Ä¡ : ";
+    cout << "0~4ë¥¼ ì œì™¸í•œ ë‹¤ë¥¸ ìˆ«ì ì…ë ¥ì‹œ ì•„ì´í…œ ì‚¬ìš©ì´ ì·¨ì†Œë©ë‹ˆë‹¤\n";
+    cout << "ì‚¬ìš©í•  ì•„ì´í…œì˜ ìœ„ì¹˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”\n" << "ìœ„ì¹˜ : ";
     cin >> n;
     if (n >= 0 && n <= 4) {
-        if (inventory[n] == "0") { cout << "¼±ÅÃÇÏ½Å À§Ä¡¿¡ ¾ÆÀÌÅÛÀÌ ¾ø½À´Ï´Ù\n"; }
+        if (inventory[n] == "0") { cout << "ì„ íƒí•˜ì‹  ìœ„ì¹˜ì— ì•„ì´í…œì´ ì—†ìŠµë‹ˆë‹¤\n"; }
         else {
-            for (int i = 0; i < 14; i++) {   //14´Â item¹è¿­ Å©±â
+            for (int i = 0; i < 14; i++) {   //14ëŠ” itemë°°ì—´ í¬ê¸°
                 if (inventory[n] == items[i].name) {
                     character->hp += items[i].hp;
                     character->mp += items[i].mp;
@@ -53,7 +53,7 @@ void use_item(My_Character* character, string inventory[]) {
                     character->def += items[i].def;
                     character->speed += items[i].speed;
                     inventory[n] = "0";
-                    cout << items[i].name << "À» »ç¿ëÇß½À´Ï´Ù\n";
+                    cout << items[i].name << "ì„ ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤\n";
                     cout << "hp : " << character->hp - items[i].hp << " -> " << character->hp << "\n";
                     cout << "mp : " << character->mp - items[i].mp << " -> " << character->mp << "\n";
                     cout << "atk : " << character->atk - items[i].atk << " -> " << character->atk << "\n";
@@ -64,30 +64,30 @@ void use_item(My_Character* character, string inventory[]) {
             }
         }
     }
-    else { cout << "¾ÆÀÌÅÛ »ç¿ëÀÌ Ãë¼ÒµÇ¾ú½À´Ï´Ù\n"; }
+    else { cout << "ì•„ì´í…œ ì‚¬ìš©ì´ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤\n"; }
 }
 
 bool skillmenu(My_Character* character, mob* mob, bool atkFlag);
-void atkmenu(My_Character* character, mob* mob)//ÇÃ·¹ÀÌ¾î °ø°İ ¸Ş´º
+void atkmenu(My_Character* character, mob* mob)//í”Œë ˆì´ì–´ ê³µê²© ë©”ë‰´
 {
-    int choice;//¼±ÅÃ
-    bool atkFlag = true;//°ø°İÇÔ¼öÁ¦¾î
+    int choice;//ì„ íƒ
+    bool atkFlag = true;//ê³µê²©í•¨ìˆ˜ì œì–´
 
     double damage;
     while (atkFlag)
     {
-        cout << "¹«¾ùÀ» ÇÒ±î...\n1. °ø°İ\n2. ½ºÅ³\n3. °¡¹æ\n4. ³»»óÅÂ\n5. Àû Á¤º¸\n6. µµÁÖ" << endl; //¸Ş´º
+        cout << "ë¬´ì—‡ì„ í• ê¹Œ...\n1. ê³µê²©\n2. ìŠ¤í‚¬\n3. ê°€ë°©\n4. ë‚´ìƒíƒœ\n5. ì  ì •ë³´\n6. ë„ì£¼" << endl; //ë©”ë‰´
         cin >> choice;
         switch (choice)
         {
         case 1:
-            cout << "\nÀû¿¡°Ô °ø°İÀ» °¡ÇÕ´Ï´Ù!!\n";
+            cout << "\nì ì—ê²Œ ê³µê²©ì„ ê°€í•©ë‹ˆë‹¤!!\n";
             damage = character->atk - mob->def;
             if (damage < 0) damage = 0;
 
             mob->hp -= damage;
-            cout << "ÇÃ·¹ÀÌ¾îÀÇ °ø°İ!" << endl;
-            cout << "ÇÃ·¹ÀÌ¾î´Â " << damage << " ÀÇ ÇÇÇØ¸¦ ÀÔÇû´Ù!" << endl;
+            cout << "í”Œë ˆì´ì–´ì˜ ê³µê²©!" << endl;
+            cout << "í”Œë ˆì´ì–´ëŠ” " << damage << " ì˜ í”¼í•´ë¥¼ ì…í˜”ë‹¤!" << endl;
             atkFlag = false;
             break;
         case 2:
@@ -103,10 +103,10 @@ void atkmenu(My_Character* character, mob* mob)//ÇÃ·¹ÀÌ¾î °ø°İ ¸Ş´º
             mob->GetInfo();
             break;
         case 6:
-            //µµÁÖ
+            //ë„ì£¼
             break;
         default:
-            cout << "¿Ã¹Ù¸£Áö ¾ÊÀº ÀÔ·Â" << endl;
+            cout << "ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥" << endl;
             break;
         }
     }
@@ -114,19 +114,19 @@ void atkmenu(My_Character* character, mob* mob)//ÇÃ·¹ÀÌ¾î °ø°İ ¸Ş´º
 }
 bool skillmenu(My_Character* character, mob* mob, bool atkFlag)
 {
-    int skill_menu;//½ºÅ³ ¼±ÅÃ
-    string YN;//½ºÅ³ »ç¿ë È®ÀÎ
-    bool SkillFlag = true;// ½ºÅ³¸Ş´º ÇÔ¼ö Á¦¾î
+    int skill_menu;//ìŠ¤í‚¬ ì„ íƒ
+    string YN;//ìŠ¤í‚¬ ì‚¬ìš© í™•ì¸
+    bool SkillFlag = true;// ìŠ¤í‚¬ë©”ë‰´ í•¨ìˆ˜ ì œì–´
     double damage;
     while (SkillFlag)
     {
         cout << "SKILL MENU" << endl;
-        cout << "1. ÆÄ¿ö ½½·¡½Ã\n2. ½ºÅ³2¹ø\n0. µÚ·Î°¡±â" << endl;
+        cout << "1. íŒŒì›Œ ìŠ¬ë˜ì‹œ\n2. ìŠ¤í‚¬2ë²ˆ\n0. ë’¤ë¡œê°€ê¸°" << endl;
         cin >> skill_menu;
-        switch (skill_menu)//½ºÅ³
+        switch (skill_menu)//ìŠ¤í‚¬
         {
         case 1:
-            cout << "°ø°İ·Â: " << character->atk * 1.2 << "\nMP: 100\n»ç¿ëÇÒ±î? (Y or else)" << endl;
+            cout << "ê³µê²©ë ¥: " << character->atk * 1.2 << "\nMP: 100\nì‚¬ìš©í• ê¹Œ? (Y or else)" << endl;
             cin >> YN;
             if (YN == "Y")
             {
@@ -135,20 +135,26 @@ bool skillmenu(My_Character* character, mob* mob, bool atkFlag)
                 if (damage < 0) damage = 0;
 
                 mob->hp -= damage;
-                cout << "Po½½·¡½ÃweR!!" << endl;
-                cout << "ÇÃ·¹ÀÌ¾î´Â " << damage << " ÀÇ ÇÇÇØ¸¦ ÀÔÇû´Ù!" << endl;
+                cout << "PoìŠ¬ë˜ì‹œweR!!" << endl;
+                cout << "í”Œë ˆì´ì–´ëŠ” " << damage << " ì˜ í”¼í•´ë¥¼ ì…í˜”ë‹¤!" << endl;
                 SkillFlag = false;
                 return false;
             }
             break;
         case 2:
-            cout << "½ºÅ³ 2¹øÀÇ ¼³¸í\n»ç¿ëÇÒ±î? (Y or else)" << endl;
-            cin >> YN;
-            if (YN == "Y")
-            {
-                //½ºÅ³ 2¹ø »ç¿ë
-                SkillFlag = false;
-                return false;
+			cout << "ê³µê²©ë ¥: "<<character->atk * 3<<" (defë¬´ì‹œ)"<<"\n-HP: 50%\nì‚¬ìš©í• ê¹Œ? (Y or else)" << endl;
+			cin >> YN;
+			if (YN == "Y")
+			{
+				character->hp = character->hp / 2;
+				damage = (character->atk * 3);
+				if (damage < 0) damage = 0;
+
+				mob->hp -= damage;
+				cout << "JJUGEMì˜ ë°ìŠ¤!!!" << endl;
+				cout << "í”Œë ˆì´ì–´ëŠ” " << damage << " ì˜ í”¼í•´ë¥¼ ì…í˜”ë‹¤!" << endl;
+				SkillFlag = false;
+				return false;
             }
             break;
         case 0:
@@ -163,19 +169,19 @@ void mobatk(mob* mob, My_Character* character)
 {
     double damage = mob->atk - character->def;
     if (damage < 0) damage = 0;
-    //¸÷ °ø°İ·Â<ÇÃ·¹ÀÌ¾î ¹æ¾î·Â °æ¿ì À½¼ö ³ª¿À´Â »óÈ² ¹èÁ¦
+    //ëª¹ ê³µê²©ë ¥<í”Œë ˆì´ì–´ ë°©ì–´ë ¥ ê²½ìš° ìŒìˆ˜ ë‚˜ì˜¤ëŠ” ìƒí™© ë°°ì œ
 
     character->hp -= damage;
-    cout << mob->kind << " ÀÇ °ø°İ!" << endl;
-    cout << "ÇÃ·¹ÀÌ¾î´Â " << damage << " ÀÇ ÇÇÇØ¸¦ ÀÔ¾ú´Ù!" << endl;
+    cout << mob->kind << " ì˜ ê³µê²©!" << endl;
+    cout << "í”Œë ˆì´ì–´ëŠ” " << damage << " ì˜ í”¼í•´ë¥¼ ì…ì—ˆë‹¤!" << endl;
 }
 
 int main()
-{//¸Ş´º ¼±ÅÃ
+{//ë©”ë‰´ ì„ íƒ
 
     do {
-        cout << "¡¼ TEST BETA GAME ¡½\n\n" << "¸Ş´º¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä ~ !\n";
-        cout << "\n1.°ÔÀÓ½ÃÀÛ\n2.°ÔÀÓ ¼³¸í\n3.°ÔÀÓ Á¾·á\n";
+        cout << "ã€ TEST BETA GAME ã€‘\n\n" << "ë©”ë‰´ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš” ~ !\n";
+        cout << "\n1.ê²Œì„ì‹œì‘\n2.ê²Œì„ ì„¤ëª…\n3.ê²Œì„ ì¢…ë£Œ\n";
 
         cin >> Menu;
         switch (Menu)
@@ -185,27 +191,27 @@ int main()
             {
                 for (int j = 0; j < map1[i].size(); j++)
                 {
-                    cout << map1[i][j]->kind << " °¡ ³ªÅ¸³µ´Ù!" << endl;//¸ó½ºÅÍ µîÀå
+                    cout << map1[i][j]->kind << " ê°€ ë‚˜íƒ€ë‚¬ë‹¤!" << endl;//ëª¬ìŠ¤í„° ë“±ì¥
                     Temp_mob_P->hp = map1[i][j]->hp;
                     Temp_mob_P->mp = map1[i][j]->mp;
 
-                    while (true)//ÀüÅõ
+                    while (true)//ì „íˆ¬
                     {
-                        if (SoNB_P->speed > map1[i][j]->speed)//½ºÇÇµå ºñ±³ 
+                        if (SoNB_P->speed > map1[i][j]->speed)//ìŠ¤í”¼ë“œ ë¹„êµ 
                         {
-                            atkmenu(SoNB_P, map1[i][j]);//Ä³¸¯ÅÍ spd>mob spd ÀÌ¹Ç·Î ÇÃ·¹ÀÌ¾î ¼±°ø
-                            if (map1[i][j]->hp < 0)//¸ó½ºÅÍ »ç¸Á½Ã
+                            atkmenu(SoNB_P, map1[i][j]);//ìºë¦­í„° spd>mob spd ì´ë¯€ë¡œ í”Œë ˆì´ì–´ ì„ ê³µ
+                            if (map1[i][j]->hp < 0)//ëª¬ìŠ¤í„° ì‚¬ë§ì‹œ
                             {
-                                cout << map1[i][j]->kind << " ¸¦ ¹°¸®ÃÆ´Ù!" << endl;
+                                cout << map1[i][j]->kind << " ë¥¼ ë¬¼ë¦¬ì³¤ë‹¤!" << endl;
                                 map1[i][j]->hp = Temp_mob_P->hp;
                                 map1[i][j]->mp = Temp_mob_P->mp;
                                 break;
                             }
                             mobatk(map1[i][j], SoNB_P);
-                            if (SoNB_P->hp < 0) //µµÁß¿¡ Ä³¸¯ÅÍ°¡ »ç¸Á½Ã °ÔÀÓ¿À¹ö 
+                            if (SoNB_P->hp < 0) //ë„ì¤‘ì— ìºë¦­í„°ê°€ ì‚¬ë§ì‹œ ê²Œì„ì˜¤ë²„ 
                             {
                                 cout << "Game over..." << endl;
-                                i = map1.size() - 1; //ÇÑ¹ø¿¡ i¸¦ ³¡ÀÎµ¦½º±îÁö ¿Ã·Á¼­ ÁßÃ¸for¹® ¹İº¹ÁßÁö
+                                i = map1.size() - 1; //í•œë²ˆì— ië¥¼ ëì¸ë±ìŠ¤ê¹Œì§€ ì˜¬ë ¤ì„œ ì¤‘ì²©forë¬¸ ë°˜ë³µì¤‘ì§€
                                 break;
                             }
 
@@ -213,7 +219,7 @@ int main()
 
                         else
                         {
-                            mobatk(map1[i][j], SoNB_P);//mob spd> Ä³¸¯ÅÍ spd ÀÌ¹Ç·Î mob ¼±°ø
+                            mobatk(map1[i][j], SoNB_P);//mob spd> ìºë¦­í„° spd ì´ë¯€ë¡œ mob ì„ ê³µ
                             if (SoNB_P->hp < 0)
                             {
                                 cout << "Game over..." << endl;
@@ -224,7 +230,7 @@ int main()
                             atkmenu(SoNB_P, map1[i][j]);
                             if (map1[i][j]->hp < 0)
                             {
-                                cout << map1[i][j]->kind << " ¸¦ ¹°¸®ÃÆ´Ù!" << endl;
+                                cout << map1[i][j]->kind << " ë¥¼ ë¬¼ë¦¬ì³¤ë‹¤!" << endl;
                                 map1[i][j]->hp = Temp_mob_P->hp;
                                 map1[i][j]->mp = Temp_mob_P->mp;
                                 break;
@@ -237,14 +243,14 @@ int main()
             Flag = false;
             break;
         case 2:
-            cout << "ÀÌ °ÔÀÓÀº ÇöÀç °³¹ß Áß¿¡ ÀÖ´Â C++ ±â¹İ RPGÀÔ´Ï´Ù.\n\n";
+            cout << "ì´ ê²Œì„ì€ í˜„ì¬ ê°œë°œ ì¤‘ì— ìˆëŠ” C++ ê¸°ë°˜ RPGì…ë‹ˆë‹¤.\n\n";
             break;
         case 3:
             Flag = false;
             break;
         default:
-            cout << "¿Ã¹Ù¸¥ ¼ıÀÚ ÀÔ·Â" << endl;
+            cout << "ì˜¬ë°”ë¥¸ ìˆ«ì ì…ë ¥" << endl;
             break;
         }
-    } while (Flag); //¸Ş´º Á¤¼®(do while) 
+    } while (Flag); //ë©”ë‰´ ì •ì„(do while) 
 }
