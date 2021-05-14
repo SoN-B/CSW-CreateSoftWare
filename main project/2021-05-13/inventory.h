@@ -31,25 +31,50 @@ item carrot = { "carrot",0,0,10 };
 item protein = { "protein",0,0,20 };
 //----------------def
 item radish = { "radish",0,0,0,5 };
-item sugar = { "radish",0,0,0,10 };
+item sugar = { "sugar",0,0,0,10 };
 //----------------speed
 item banana = { "banana",0,0,0,0,0.5 };
 item pear = { "pear",0,0,0,0,1 };
 //----------------hp,mp
-item sweet_potato = { "sweet_potato",30,-10,0,0,0 };
+item sweet_potato = { "sweet potato",30,-10,0,0,0 };
 item dew = { "dew",-10,30,0,0,0 };
 //----------------atk,def
 item chili = { "chili",0,0,30,-10,0 };
-item tea = { "chili",0,0,-10,30,0 };
+item tea = { "tea",0,0,-10,30,0 };
 
 item items[14] = { red_portion,yellow_portion,blue_portion,purple_portion
 ,carrot ,protein ,radish ,sugar ,banana ,pear ,sweet_potato,dew,chili,tea };
 
-string drop_item(struct item item[]) {   //드롭되는 아이템 결정
+string drop_item(item items[]) {
 	srand((unsigned int)time(NULL));
-	int n = rand() % 14;  //14는 item배열 크기
-	string drop_item = item[n].name;
-	return drop_item;
+	int i = rand() % 10;
+	if (i < 5) {   //아이템 드랍 확률
+		int n = rand() % 14;  //14는 item배열 크기
+		string drop_item = items[n].name;
+		cout << "몬스터에게서 " << drop_item << "이 떨어졌다!!!\n";
+		return drop_item;
+	}
+}
+
+void item_list() {
+	cout << "0.red potion : hp +10\n";
+	cout << "1.yellow potion : hp +20\n";
+	cout << "2.blue potion : mp +10\n";
+	cout << "3.purple potion : mp +20\n";
+	cout << "4.carrot : atk +10\n";
+	cout << "5.protein : atk +20\n";
+	cout << "6.radish : def +5\n";
+	cout << "7.sugar : def +10\n";
+	cout << "8.banana : speed +5\n";
+	cout << "9.pear : speed +1\n";
+	cout << "10.sweet potato : hp +30\n";
+	cout << "                : mp -10\n";
+	cout << "11.dew : hp -10\n";
+	cout << "       : mp +30\n";
+	cout << "12.chili : atk +30\n";
+	cout << "         : def -10\n";
+	cout << "13.tea : atk -10\n";
+	cout << "       : def +30\n";
 }
 
 void pick_up_item(string inventory[], string item_name) { //아이템을 주울 때
