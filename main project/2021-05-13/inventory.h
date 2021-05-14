@@ -56,7 +56,7 @@ string drop_item(item items[]) {
 	}
 }
 
-void item_list() {   //아이템 
+void item_list() {   //아이템 설명
 	cout << "0.red potion : hp +10\n";
 	cout << "1.yellow potion : hp +20\n";
 	cout << "2.blue potion : mp +10\n";
