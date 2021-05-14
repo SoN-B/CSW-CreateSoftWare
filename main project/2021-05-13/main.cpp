@@ -32,6 +32,7 @@ My_Character SoNB;
 My_Character* SoNB_P = &SoNB;
 
 string inventory[5] = { "red potion","red potion","purple potion","purple potion","0" };
+string DropItem;
 
 void use_item(My_Character* character, string inventory[]) {
     // 아이템을 사용할 때
@@ -68,6 +69,8 @@ void use_item(My_Character* character, string inventory[]) {
 }
 
 bool skillmenu(My_Character* character, mob* mob, bool atkFlag);
+bool inventorymenu();
+
 void atkmenu(My_Character* character, mob* mob)//플레이어 공격 메뉴
 {
     int choice;//선택
@@ -76,7 +79,7 @@ void atkmenu(My_Character* character, mob* mob)//플레이어 공격 메뉴
     double damage;
     while (atkFlag)
     {
-        cout << "무엇을 할까...\n1. 공격\n2. 죽음의 DEATH\n3. 가방\n4. 내상태\n5. 적 정보\n6. 도주" << endl; //메뉴
+        cout << "무엇을 할까...\n1. 공격\n2. 스킬\n3. 가방\n4. 내상태\n5. 적 정보\n6. 도주" << endl; //메뉴
         cin >> choice;
         switch (choice)
         {
@@ -94,7 +97,7 @@ void atkmenu(My_Character* character, mob* mob)//플레이어 공격 메뉴
             atkFlag = skillmenu(character, mob, atkFlag);
             break;
         case 3:
-            use_item(SoNB_P,inventory);
+            atkFlag = inventorymenu();
             break;
         case 4:
             character->Get_Character_Info();
@@ -121,7 +124,7 @@ bool skillmenu(My_Character* character, mob* mob, bool atkFlag)
     while (SkillFlag)
     {
         cout << "SKILL MENU" << endl;
-        cout << "1. 파워 슬래시\n2. 스킬2번\n0. 뒤로가기" << endl;
+        cout << "1. 파워 슬래시\n2. 죽음의 DEATH\n0. 뒤로가기" << endl;
         cin >> skill_menu;
         switch (skill_menu)//스킬
         {
@@ -142,24 +145,56 @@ bool skillmenu(My_Character* character, mob* mob, bool atkFlag)
             }
             break;
         case 2:
-			cout << "공격력: "<<character->atk * 3<<" (def무시)"<<"\n-HP: 50%\n사용할까? (Y or else)" << endl;
-			cin >> YN;
-			if (YN == "Y")
-			{
-				character->hp = character->hp / 2;
-				damage = (character->atk * 3);
-				if (damage < 0) damage = 0;
+            cout << "공격력: " << character->atk * 3 << " (def무시)" << "\n-HP: 50%\n사용할까? (Y or else)" << endl;
+            cin >> YN;
+            if (YN == "Y")
+            {
+                character->hp = character->hp / 2;
+                damage = (character->atk * 3);
+                if (damage < 0) damage = 0;
 
-				mob->hp -= damage;
-				cout << "JJUGEM의 데스!!!" << endl;
-				cout << "플레이어는 " << damage << " 의 피해를 입혔다!" << endl;
-				SkillFlag = false;
-				return false;
+                mob->hp -= damage;
+                cout << "JJUGEM의 데스!!!" << endl;
+                cout << "플레이어는 " << damage << " 의 피해를 입혔다!" << endl;
+                SkillFlag = false;
+                return false;
             }
             break;
         case 0:
             SkillFlag = false;
             return true;
+            break;
+        }
+    }
+}
+
+bool inventorymenu()
+{
+    int inventory_menu;
+    bool InventoryFlag = true;
+    int inventory_flag;
+    while (InventoryFlag)
+    {
+        cout << "1. 아이템 사용\n2. 아이템 설명\n3. 인벤토리 불러오기\n0. 뒤로가기\n";
+        cin >> inventory_flag;
+        switch (inventory_flag)
+        {
+        case 1:
+            use_item(SoNB_P, inventory);
+            InventoryFlag = false;
+            break;
+        case 2:
+            item_list();
+            break;
+        case 3:
+            look_inventory(inventory);
+            break;
+        case 0:
+            InventoryFlag = false;
+            return true;
+            break;
+        default:
+            cout << "다시 입력해 주세요.";
             break;
         }
     }
@@ -178,7 +213,6 @@ void mobatk(mob* mob, My_Character* character)
 
 int main()
 {//메뉴 선택
-
     do {
         cout << "【 TEST BETA GAME 】\n\n" << "메뉴를 선택해 주세요 ~ !\n";
         cout << "\n1.게임시작\n2.게임 설명\n3.게임 종료\n";
@@ -205,6 +239,8 @@ int main()
                                 cout << map1[i][j]->kind << " 를 물리쳤다!" << endl;
                                 map1[i][j]->hp = Temp_mob_P->hp;
                                 map1[i][j]->mp = Temp_mob_P->mp;
+                                DropItem = drop_item();
+                                if (DropItem != "") pick_up_item(inventory, DropItem);
                                 break;
                             }
                             mobatk(map1[i][j], SoNB_P);
@@ -233,6 +269,8 @@ int main()
                                 cout << map1[i][j]->kind << " 를 물리쳤다!" << endl;
                                 map1[i][j]->hp = Temp_mob_P->hp;
                                 map1[i][j]->mp = Temp_mob_P->mp;
+                                DropItem = drop_item();
+                                if (DropItem != "") pick_up_item(inventory, DropItem);
                                 break;
                             }
                         }
