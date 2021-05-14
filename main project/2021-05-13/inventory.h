@@ -31,29 +31,30 @@ item carrot = { "carrot",0,0,10 };
 item protein = { "protein",0,0,20 };
 //----------------def
 item radish = { "radish",0,0,0,5 };
-item sugar = { "sugar",0,0,0,10 };
+item sugar = { "radish",0,0,0,10 };
 //----------------speed
 item banana = { "banana",0,0,0,0,0.5 };
 item pear = { "pear",0,0,0,0,1 };
 //----------------hp,mp
-item sweet_potato = { "sweet potato",30,-10,0,0,0 };
+item sweet_potato = { "sweet_potato",30,-10,0,0,0 };
 item dew = { "dew",-10,30,0,0,0 };
 //----------------atk,def
 item chili = { "chili",0,0,30,-10,0 };
-item tea = { "tea",0,0,-10,30,0 };
+item tea = { "chili",0,0,-10,30,0 };
 
 item items[14] = { red_portion,yellow_portion,blue_portion,purple_portion
 ,carrot ,protein ,radish ,sugar ,banana ,pear ,sweet_potato,dew,chili,tea };
 
-string drop_item(item items[]) {
+string drop_item() {
 	srand((unsigned int)time(NULL));
-	int i = rand() % 10;
+	int i = rand() % 7;
 	if (i < 5) {   //아이템 드랍 확률
 		int n = rand() % 14;  //14는 item배열 크기
 		string drop_item = items[n].name;
 		cout << "몬스터에게서 " << drop_item << "이 떨어졌다!!!\n";
 		return drop_item;
 	}
+	return "";
 }
 
 void item_list() {   //아이템 설명
@@ -77,7 +78,7 @@ void item_list() {   //아이템 설명
 	cout << "       : def +30\n";
 }
 
-void pick_up_item(string inventory[], string item_name) { //아이템을 주울 때
+void pick_up_item(string *inventory, string item_name) { //아이템을 주울 때
 	int count = 0;
 	int n;
 	char c;
@@ -125,7 +126,7 @@ void pick_up_item(string inventory[], string item_name) { //아이템을 주울 
 	}
 }
 
-void look_inventory(string inventory[]) {    //인벤토리 불러오기
+void look_inventory(string *inventory) {    //인벤토리 불러오기
 	cout << "인벤토리 목록\n";
 	for (int i = 0; i < 5; i++) { cout << i << " : " << inventory[i] << "\n"; }
 }
