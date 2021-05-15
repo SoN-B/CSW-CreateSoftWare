@@ -31,7 +31,7 @@ item carrot = { "carrot",0,0,10 };
 item protein = { "protein",0,0,20 };
 //----------------def
 item radish = { "radish",0,0,0,5 };
-item sugar = { "radish",0,0,0,10 };
+item sugar = { "sugar",0,0,0,10 };
 //----------------speed
 item banana = { "banana",0,0,0,0,0.5 };
 item pear = { "pear",0,0,0,0,1 };
@@ -40,7 +40,7 @@ item sweet_potato = { "sweet_potato",30,-10,0,0,0 };
 item dew = { "dew",-10,30,0,0,0 };
 //----------------atk,def
 item chili = { "chili",0,0,30,-10,0 };
-item tea = { "chili",0,0,-10,30,0 };
+item tea = { "tea",0,0,-10,30,0 };
 
 item items[14] = { red_portion,yellow_portion,blue_portion,purple_portion
 ,carrot ,protein ,radish ,sugar ,banana ,pear ,sweet_potato,dew,chili,tea };
