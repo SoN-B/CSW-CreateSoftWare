@@ -41,6 +41,6 @@ typedef struct Monster {
     }
     void Def_Plus(double a)
     {
-        this->Def += a;
+        this->ef += a;
     }
 }Monster;
