@@ -3,43 +3,44 @@
 #include <iostream> //+
 using namespace std;
 
-struct mob {
-    double hp, mp, atk, def, speed;//선공 선별(speed)
-    string ettype; //몹종류 -> normal,elite,boss
-    string kind; //종족
-    mob(string kind, double hp = 0, double mp = 0, double atk = 0,
-        double def = 0, double speed = 1, string ettype = "normal") //default 매개변수 맨끝
+typedef struct Monster {
+    double Hp, Mp, Atk, Def, Speed;//선공 선별(speed)
+    string Ettype; //몹종류 -> normal,elite,boss
+    string Kind; //종족
+
+    Monster(string Kind, double Hp = 0, double Mp = 0, double Atk = 0,
+        double Def = 0, double Speed = 1, string Ettype = "normal") //default 매개변수 맨끝
     {
         //ex) mob Slime_Normal = { "slime",100,20,10,5,"normal" };
 
-        this->kind = kind;
-        this->hp = hp;
-        this->mp = mp;
-        this->atk = atk;
-        this->def = def;
-        this->speed = speed;
-        this->ettype = ettype;
+        this->Kind = Kind;
+        this->Hp = Hp;
+        this->Mp = Mp;
+        this->Atk = Atk;
+        this->Def = Def;
+        this->Speed = Speed;
+        this->Ettype = Ettype;
     }
-    void GetInfo()
+
+    void Get_Info()
     {
-        cout << "종족 : " << kind << " [" << ettype << "] " << endl;
-        cout << "HP : " << hp << endl;
+        cout << "종족 : " << Kind << " [" << Ettype << "] " << endl;
+        cout << "HP : " << Hp << endl;
     }
-    void hp_plus(double a)
+    void Hp_Plus(double a)
     {
-        this->hp += a;
+        this->Hp += a;
     }
-    void mp_plus(double a)
+    void Mp_Plus(double a)
     {
-        this->mp += a;
+        this->Mp += a;
     }
-    void atk_plus(double a)
+    void Atk_Plus(double a)
     {
-        this->atk += a;
+        this->Atk += a;
     }
-    void def_plus(double a)
+    void Def_Plus(double a)
     {
         this->def += a;
     }
-}
-        
+}Monster
