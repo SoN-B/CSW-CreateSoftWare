@@ -43,4 +43,4 @@ typedef struct Monster {
     {
         this->def += a;
     }
-}mob;
+}Monster
