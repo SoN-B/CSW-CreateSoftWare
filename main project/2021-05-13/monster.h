@@ -3,43 +3,43 @@
 #include <iostream> //+
 using namespace std;
 
-typedef struct mob {
-    double hp, mp, atk, def, speed;//¼±°ø ¼±º°(speed)
-    string ettype; //¸÷Á¾·ù -> normal,elite,boss
-    string kind; //Á¾Á·
+typedef struct Monster {
+    double Hp, Mp, Atk, Def, Speed;//ì„ ê³µ ì„ ë³„(speed)
+    string Ettype; //ëª¹ì¢…ë¥˜ -> normal,elite,boss
+    string Kind; //ì¢…ì¡±
 
-    mob(string kind, double hp = 0, double mp = 0, double atk = 0,
-        double def = 0, double speed = 1, string ettype = "normal") //default ¸Å°³º¯¼ö ¸Ç³¡
+    Monster(string Kind, double Hp = 0, double Mp = 0, double Atk = 0,
+        double Def = 0, double Speed = 1, string Ettype = "normal") //default ë§¤ê°œë³€ìˆ˜ ë§¨ë
     {
         //ex) mob Slime_Normal = { "slime",100,20,10,5,"normal" };
 
-        this->kind = kind;
-        this->hp = hp;
-        this->mp = mp;
-        this->atk = atk;
-        this->def = def;
-        this->speed = speed;
-        this->ettype = ettype;
+        this->Kind = Kind;
+        this->Hp = Hp;
+        this->Mp = Mp;
+        this->Atk = Atk;
+        this->Def = Def;
+        this->Speed = Speed;
+        this->Ettype = Ettype;
     }
 
-    void GetInfo()
+    void Get_Info()
     {
-        cout << "Á¾Á· : " << kind << " [" << ettype << "] " << endl;
-        cout << "HP : " << hp << endl;
+        cout << "ì¢…ì¡± : " << Kind << " [" << Ettype << "] " << endl;
+        cout << "HP : " << Hp << endl;
     }
-    void hp_plus(double a)
+    void Hp_Plus(double a)
     {
-        this->hp += a;
+        this->Hp += a;
     }
-    void mp_plus(double a)
+    void Mp_Plus(double a)
     {
-        this->mp += a;
+        this->Mp += a;
     }
-    void atk_plus(double a)
+    void Atk_Plus(double a)
     {
-        this->atk += a;
+        this->Atk += a;
     }
-    void def_plus(double a)
+    void Def_Plus(double a)
     {
         this->def += a;
     }
