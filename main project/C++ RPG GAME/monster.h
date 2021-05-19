@@ -11,7 +11,7 @@ typedef struct Monster {
     Monster(string Kind, double Hp = 0, double Mp = 0, double Atk = 0,
         double Def = 0, double Speed = 1, string Ettype = "normal") //default 매개변수 맨끝
     {
-        //ex)  Slime_Normal = { "slime",100,20,10,5,"normal" };
+        //ex) Monster Slime_Normal = { "slime",100,20,10,5,"normal" };
 
         this->Kind = Kind;
         this->Hp = Hp;
