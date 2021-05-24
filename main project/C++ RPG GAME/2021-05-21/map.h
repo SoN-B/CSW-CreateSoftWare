@@ -1,7 +1,7 @@
 #pragma once
 #include "monster.h"
 #include <vector>
-//[±âº» ¼³Á¤ ½ºÅÝ ¼³Á¤]
+//[ê¸°ë³¸ ì„¤ì • ìŠ¤í…Ÿ ì„¤ì •]
 //Normal * 1.5(stat) = Elite
 //Normal * 2(stat) = Boss
 
