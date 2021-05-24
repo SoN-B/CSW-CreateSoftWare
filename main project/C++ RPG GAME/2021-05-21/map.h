@@ -29,8 +29,12 @@ Monster* Orc_Elite_P = &Orc_Elite;
 Monster Orc_Boss = { "orc_boss",300,0,30,24,3,"normal" };
 Monster* Orc_Boss_P = &Orc_Boss;
 
+vector<vector<Monster*>> Map;//Temp_Map
+
 vector<vector<Monster*>> Map1 = { {Slime_Normal_P},{Slime_Normal_P,Slime_Elite_P},
 	{Goblin_Normal_P},{Goblin_Normal_P,Slime_Elite_P},{Slime_Boss_P} };
 
 vector<vector<Monster*>> Map2 = { {Slime_Normal_P,Goblin_Normal_P},{Slime_Normal_P,Slime_Elite_P},
 	{Goblin_Normal_P,Goblin_Elite_P},{Goblin_Normal_P,Orc_Normal_P},{Goblin_Boss_P} };
+
+vector<vector<vector<Monster*>>> Maps = { Map1,Map2 };//맵들을 넣어놓는 벡터배열
