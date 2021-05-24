@@ -8,91 +8,135 @@
 using namespace std;
 
 int Menu;
-bool Flag = true; //do whileπÆ ≈ª√‚¡∂∞«
+int Select;
+bool Firstflag = true; //do whileÎ¨∏ ÌÉàÏ∂úÏ°∞Í±¥
+bool Secondflag = true;
+bool Thirdflag = true;
+
+bool Menu1()
+{
+    cout << "------------------------\n";
+    cout << "Map1   Map2   Map3\n";
+    cin >> Select;
+    Map = Maps[Select - 1];
+
+    for (int i = 0; i < Map.size(); i++)
+    {
+        for (int j = 0; j < Map[i].size(); j++)
+        {
+            cout << "------------------------\n" << Map[i][j]->Kind << " Í∞Ä ÎÇòÌÉÄÎÇ¨Îã§!\n" << endl;//Î™¨Ïä§ÌÑ∞ Îì±Ïû•
+            Temp_Mob_P->Hp = Map[i][j]->Hp;
+            Temp_Mob_P->Mp = Map[i][j]->Mp;
+
+            while (true)//Ï†ÑÌà¨
+            {
+                if (SoNB_P->Speed > Map[i][j]->Speed)//Ïä§ÌîºÎìú ÎπÑÍµê 
+                {
+                    Atk_Menu(SoNB_P, Map[i][j]);//Ï∫êÎ¶≠ÌÑ∞ spd>mob spd Ïù¥ÎØÄÎ°ú ÌîåÎ†àÏù¥Ïñ¥ ÏÑ†Í≥µ
+                    if (Map[i][j]->Hp < 0)//Î™¨Ïä§ÌÑ∞ ÏÇ¨ÎßùÏãú
+                    {
+                        cout << "\n" << Map[i][j]->Kind << " Î•º Î¨ºÎ¶¨Ï≥§Îã§!" << endl;
+                        Map[i][j]->Hp = Temp_Mob_P->Hp;
+                        Map[i][j]->Mp = Temp_Mob_P->Mp;
+                        DropItem = Drop_Item();
+                        if (DropItem != "") Pick_Up_Item(Inventory, DropItem);
+                        break;
+                    }
+                    Mob_Atk(Map[i][j], SoNB_P);
+                    if (SoNB_P->Hp < 0) //ÎèÑÏ§ëÏóê Ï∫êÎ¶≠ÌÑ∞Í∞Ä ÏÇ¨ÎßùÏãú Í≤åÏûÑÏò§Î≤Ñ 
+                    {
+                        cout << "Game over..." << endl;
+                        i = Map.size() - 1; //ÌïúÎ≤àÏóê iÎ•º ÎÅùÏù∏Îç±Ïä§ÍπåÏßÄ Ïò¨Î†§ÏÑú Ï§ëÏ≤©forÎ¨∏ Î∞òÎ≥µÏ§ëÏßÄ
+                        return false;
+                        break;
+                    }
+                    cout << "------------------------\n";
+
+                }
+
+                else
+                {
+                    Mob_Atk(Map[i][j], SoNB_P);//mob spd> Ï∫êÎ¶≠ÌÑ∞ spd Ïù¥ÎØÄÎ°ú mob ÏÑ†Í≥µ
+                    if (SoNB_P->Hp < 0)
+                    {
+                        cout << "Game over..." << endl;
+                        i = Map.size() - 1;
+                        return false;
+                        break;
+                    }
+
+                    Atk_Menu(SoNB_P, Map[i][j]);
+                    if (Map[i][j]->Hp < 0)
+                    {
+                        cout << Map[i][j]->Kind << " Î•º Î¨ºÎ¶¨Ï≥§Îã§!" << endl;
+                        Map[i][j]->Hp = Temp_Mob_P->Hp;
+                        Map[i][j]->Mp = Temp_Mob_P->Mp;
+                        DropItem = Drop_Item();
+                        if (DropItem != "") Pick_Up_Item(Inventory, DropItem);
+                        break;
+                    }
+                    cout << "------------------------\n";
+                }
+            }
+        }
+    }
+    if (SoNB_P->Hp > 0) cout << "\n\nDungeon clear!\n\n";
+    return true;
+}
+
+/*
+bool Menu2()
+{
+   ÏÉÅÏ†ê Î©îÎâ¥
+}
+*/
 
 int main()
-{//∏ﬁ¥∫ º±≈√
+{//Î©îÎâ¥ ÏÑ†ÌÉù
 
     do {
-        cout << "°º TEST BETA GAME °Ω\n\n" << "∏ﬁ¥∫∏¶ º±≈√«ÿ ¡÷ººø‰ ~ !\n";
-        cout << "\n1.∞‘¿”Ω√¿€\n2.∞‘¿” º≥∏Ì\n3.∞‘¿” ¡æ∑·\n";
+        cout << "„Äê TEST BETA GAME „Äë\n\n" << "Î©îÎâ¥Î•º ÏÑ†ÌÉùÌï¥ Ï£ºÏÑ∏Ïöî ~ !\n";
+        cout << "\n1.Í≤åÏûÑÏãúÏûë\n2.Í≤åÏûÑ ÏÑ§Î™Ö\n3.Í≤åÏûÑ Ï¢ÖÎ£å\n";
 
         cin >> Menu;
         switch (Menu)
         {
         case 1:
-            for (int i = 0; i < Map1.size(); i++)
+            Secondflag = true;//Î©îÏù∏Î©îÎâ¥ --> ÎßµÏÑ†ÌÉù(flaseÎ∞©ÏßÄ)
+            while (Secondflag)
             {
-                for (int j = 0; j < Map1[i].size(); j++)
+                cout << "------------------------\n";
+                cout << "1. Îßµ ÏÑ†ÌÉù\n2. ÏÉÅÏ†ê\n3. Î©îÏù∏Î©îÎâ¥\n";
+                cin >> Menu;
+                switch (Menu)
                 {
-                    cout << "------------------------\n" << Map1[i][j]->Kind << " ∞° ≥™≈∏≥µ¥Ÿ!\n" << endl;//∏ÛΩ∫≈Õ µÓ¿Â
-                    Temp_Mob_P->Hp = Map1[i][j]->Hp;
-                    Temp_Mob_P->Mp = Map1[i][j]->Mp;
-
-                    while (true)//¿¸≈ı
-                    {
-                        if (SoNB_P->Speed > Map1[i][j]->Speed)//Ω∫««µÂ ∫Ò±≥ 
-                        {
-                            Atk_Menu(SoNB_P, Map1[i][j]);//ƒ≥∏Ø≈Õ spd>mob spd ¿Ãπ«∑Œ «√∑π¿ÃæÓ º±∞¯
-                            if (Map1[i][j]->Hp < 0)//∏ÛΩ∫≈Õ ªÁ∏¡Ω√
-                            {
-                                cout << "\n" << Map1[i][j]->Kind << " ∏¶ π∞∏Æ√∆¥Ÿ!" << endl;
-                                Map1[i][j]->Hp = Temp_Mob_P->Hp;
-                                Map1[i][j]->Mp = Temp_Mob_P->Mp;
-                                DropItem = Drop_Item();
-                                if (DropItem != "") Pick_Up_Item(Inventory, DropItem);
-                                break;
-                            }
-                            Mob_Atk(Map1[i][j], SoNB_P);
-                            if (SoNB_P->Hp < 0) //µµ¡ﬂø° ƒ≥∏Ø≈Õ∞° ªÁ∏¡Ω√ ∞‘¿”ø¿πˆ 
-                            {
-                                cout << "Game over..." << endl;
-                                i = Map1.size() - 1; //«—π¯ø° i∏¶ ≥°¿Œµ¶Ω∫±Ó¡ˆ ø√∑¡º≠ ¡ﬂ√∏forπÆ π›∫π¡ﬂ¡ˆ
-                                break;
-                            }
-                            cout << "------------------------\n";
-
-                        }
-
-                        else
-                        {
-                            Mob_Atk(Map1[i][j], SoNB_P);//mob spd> ƒ≥∏Ø≈Õ spd ¿Ãπ«∑Œ mob º±∞¯
-                            if (SoNB_P->Hp < 0)
-                            {
-                                cout << "Game over..." << endl;
-                                i = Map1.size() - 1;
-                                break;
-                            }
-
-                            Atk_Menu(SoNB_P, Map1[i][j]);
-                            if (Map1[i][j]->Hp < 0)
-                            {
-                                cout << Map1[i][j]->Kind << " ∏¶ π∞∏Æ√∆¥Ÿ!" << endl;
-                                Map1[i][j]->Hp = Temp_Mob_P->Hp;
-                                Map1[i][j]->Mp = Temp_Mob_P->Mp;
-                                DropItem = Drop_Item();
-                                if (DropItem != "") Pick_Up_Item(Inventory, DropItem);
-                                break;
-                            }
-                            cout << "------------------------\n";
-                        }
-                    }
+                case 1:
+                    Secondflag = Menu1();
+                    break;
+                case 2:
+                    cout << "\n\nÏÉÅÏ†ê Í∞úÎ∞úÏ§ë\n\n";
+                    break;
+                case 3:
+                    Secondflag = false;
+                    cout << "------------------------\n";
+                    break;
+                default:
+                    cout << "\nÎã§Ïãú ÏûÖÎ†•Ìï¥ Ï£ºÏÑ∏Ïöî\n";
+                    break;
                 }
             }
-            if (SoNB_P->Hp > 0) cout << "Congratulations! Game clear!\n\n";
-            Flag = false;
             break;
         case 2:
+            cout << "\nÏù¥ Í≤åÏûÑÏùÄ ÌòÑÏû¨ Í∞úÎ∞ú Ï§ëÏóê ÏûàÎäî C++ Í∏∞Î∞ò RPGÏûÖÎãàÎã§.\n";
             cout << "------------------------\n";
-            cout << "¿Ã ∞‘¿”¿∫ «ˆ¿Á ∞≥πﬂ ¡ﬂø° ¿÷¥¬ C++ ±‚π› RPG¿‘¥œ¥Ÿ.\n\n";
             break;
         case 3:
-            Flag = false;
+            FirstFlag = false;
             break;
         default:
             cout << "------------------------\n";
-            cout << "ø√πŸ∏• º˝¿⁄ ¿‘∑¬" << endl;
+            cout << "Ïò¨Î∞îÎ•∏ Ïà´Ïûê ÏûÖÎ†•" << endl;
             break;
         }
-    } while (Flag); //∏ﬁ¥∫ ¡§ºÆ(do while) 
+    } while (Firstflag); //Î©îÎâ¥ Ï†ïÏÑù(do while) 
 }
