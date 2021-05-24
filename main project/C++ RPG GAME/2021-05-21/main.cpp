@@ -131,7 +131,7 @@ int main()
             cout << "------------------------\n";
             break;
         case 3:
-            FirstFlag = false;
+            Firstflag = false;
             break;
         default:
             cout << "------------------------\n";
