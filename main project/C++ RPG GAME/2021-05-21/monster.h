@@ -70,7 +70,7 @@ typedef struct Monster {
         this->Speed += 0.1;
         this->Exp = 0;
     }
-    void Exp_Edit(double a)
+    void Exp_Plus(double a)
     {
         this->Exp += a;
     }
