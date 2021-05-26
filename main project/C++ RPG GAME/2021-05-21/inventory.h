@@ -1,16 +1,22 @@
+#pragma once
 #include <iostream> 
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include "player.h"
 using namespace std;
 
 // 인벤토리의 빈 공간을 "0"으로 표현함
 
+
 double Money = 1300;
+string DropItem;
 //----------------장비창
 //----------------인덱스마다 장착 가능한 종류가 다름
 //----------------0 : 투구, 1 : 갑옷, 2 : 무기, 3 : 장갑, 4 : 신발
 string Equipment_slot[5] = { "0", "0", "0", "0", "0" };
+//----------------인벤토리
+string Inventory[5] = { "0", "0", "0", "0", "0" };
 
 class Equipment {
 public:
