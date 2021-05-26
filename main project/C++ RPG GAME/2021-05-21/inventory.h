@@ -6,6 +6,7 @@ using namespace std;
 
 // 인벤토리의 빈 공간을 "0"으로 표현함
 
+double Money = 1300;
 //----------------장비창
 //----------------인덱스마다 장착 가능한 종류가 다름
 //----------------0 : 투구, 1 : 갑옷, 2 : 무기, 3 : 장갑, 4 : 신발
@@ -324,4 +325,90 @@ void Throw_Away_Item(string* Inventory) {       //아이템을 버릴 때
 	cin >> N;
 	if (N >= 0 && N <= 4) { Inventory[N] = "0"; }
 	else { cout << "아이템 버리기가 취소되었습니다\n"; }
+}
+
+void Open_Store(string* inventory) {  //상점
+	int Num;
+	string Gacha = "Gacha";
+	srand((unsigned int)time(NULL));
+	//----------------소비 아이템
+	int I_num1 = rand() % 14;
+	int I_num2 = rand() % 14;
+	//----------------장비 아이템
+	int E_num1 = rand() % 15;
+	int E_num2 = rand() % 15;
+	string Item_list[5] = { Items[I_num1].Name, Items[I_num2].Name,   //아이템의 이름을 담아두는 배열
+		Equipments[E_num1].Name, Equipments[E_num2].Name, Gacha };
+	double Price[5] = { Items[I_num1].Price, Items[I_num2].Price,     //아이템의 가격을 담아두는 배열
+		Equipments[E_num1].Price, Equipments[E_num2].Price, 500 };
+	while (true) {
+		for (int I = 0; I < 5; I++) {     //상점 아이템 목록
+			cout << "아이템 목록\n";
+			cout << I << ". " << Item_list[I] << " : " << Price[I] << "원\n";
+		}
+		cout << "------------------------\n";
+		cout << "아이템을 구매하시려면 0~4중에 원하는 아이템의 숫자를 입력해주세요\n";
+		cout << "5를 입력하시면 소비 아이템의 정보를 볼 수 있습니다.\n";
+		cout << "6을 입력하시면 장비 아이템의 정보를 볼 수 있습니다.\n";
+		cout << "7을 입력하시면 인벤토리의 아이템을 버릴 수 있습니다.\n";
+		cout << "8을 입력하시면 상점을 종료할 수 있습니다.\n";
+		cout << "Gacha는 구매와 동시에 사용되며 랜덤 아이템을 획득할 수 있습니다.\n";
+		cout << "오직 Gacha로만 구할 수 있는 아이템도 존재하니 여러분의 운을 시험해보세요.\n";
+		cout << "------------------------\n";
+		cout << "입력 : ";
+		cin >> Num;
+		cout << endl;
+		if (Num < 0 && Num > 8) { cout << "제대로 된 숫자를 입력해주세요\n"; }
+		else if (Num >= 0 && Num < 4) {     //아이템 구매
+			if (Money < Price[Num]) { cout << "돈이 부족합니다.\n"; }
+			else {
+				Pick_Up_Item(inventory, Item_list[Num]);
+				Money -= Price[Num];
+				cout << Item_list[Num] << "을(를) 구매했습니다.\n";
+				cout << "소지금 : " << Money + Price[Num] << " -> " << Money << endl;
+				Item_list[Num] = "0";
+				Price[Num] = 0;
+			}
+		}
+		else if (Num == 4) {    //가챠 구매
+			if (Money < Price[Num]) { cout << "돈이 부족합니다.\n"; }
+			else {
+				int L;
+				string result;
+				cout << Item_list[Num] << "을(를) 구매했습니다.\n";
+				int Luck = rand() % 7;
+				if (Luck >= 0 && Luck < 3) {   //가챠에서 소비 아이템 등장
+					L = rand() % 14;
+					result = Items[L].Name;
+					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!";
+					Pick_Up_Item(inventory, result);
+					Money -= Price[Num];
+				}
+				else if (Luck >= 3 && Luck < 5) {    //가챠에서 장비 아이템 등장
+					L = rand() % 15;
+					result = Equipments[L].Name;
+					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!";
+					Pick_Up_Item(inventory, result);
+					Money -= Price[Num];
+				}
+				else if (Luck == 5) {    //가챠에서 가챠 장비 등장
+					L = rand() % 5;
+					result = Gacha_Equipments[L].Name;
+					cout << "오잉? 가챠에서 빛이?\n";
+					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!";
+					Pick_Up_Item(inventory, result);
+					Money -= Price[Num];
+				}
+				else if (Luck == 6) {   //꽝
+					cout << "당신의 500원, '꺼~억'으로 대체되었다... 무야호~\n";
+				}
+				cout << "소지금 : " << Money + Price[Num] << " -> " << Money << endl;
+			}
+		}
+		else if (Num == 5) { Item_List(); }    //소비 아이템 목록
+		else if (Num == 6) { Equipment_List(); }    //장비 아이템 목록
+		else if (Num == 7) { Throw_Away_Item(inventory); }    //인벤토리의 아이템 버리기
+		else if (Num == 8) { break; }    //상점 종료
+		cout << "------------------------\n";
+	}
 }
