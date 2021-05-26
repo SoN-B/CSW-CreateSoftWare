@@ -1,14 +1,95 @@
-#pragma once
 #include <iostream> 
 #include <string>
 #include <cstdlib>
 #include <ctime>
-#include "player.h"
 using namespace std;
-// ÀÎº¥Åä¸®ÀÇ ºó °ø°£À» "0"À¸·Î Ç¥ÇöÇÔ
-string DropItem;
 
-//typedef struct My_Character;
+// ì¸ë²¤í† ë¦¬ì˜ ë¹ˆ ê³µê°„ì„ "0"ìœ¼ë¡œ í‘œí˜„í•¨
+
+//----------------ìž¥ë¹„ì°½
+//----------------ì¸ë±ìŠ¤ë§ˆë‹¤ ìž¥ì°© ê°€ëŠ¥í•œ ì¢…ë¥˜ê°€ ë‹¤ë¦„
+//----------------0 : íˆ¬êµ¬, 1 : ê°‘ì˜·, 2 : ë¬´ê¸°, 3 : ìž¥ê°‘, 4 : ì‹ ë°œ
+string Equipment_slot[5] = { "0", "0", "0", "0", "0" };
+
+class Equipment {
+public:
+	string Name;
+	double Hp, Mp, Atk, Def, Speed, Price, Kind;
+	Equipment(string Name, double Hp = 0, double Mp = 0, double Atk = 0,
+		double Def = 0, double Speed = 0, double Price = 0, double Kind = 0) {
+		this->Name = Name;
+		this->Hp = Hp;
+		this->Mp = Mp;
+		this->Atk = Atk;
+		this->Def = Def;
+		this->Speed = Speed;
+		this->Price = Price;
+		//----------------KindëŠ” ì•„ì´í…œì˜ ì¢…ë¥˜ë¥¼ ë‚˜íƒ€ëƒ„
+		//----------------0 : íˆ¬êµ¬, 1 : ê°‘ì˜·, 2 : ë¬´ê¸°, 3 : ìž¥ê°‘, 4 : ì‹ ë°œ
+		this->Kind = Kind;
+	}
+};
+
+//----------------ìž¥ë¹„ ì•„ì´í…œ
+//----------------íˆ¬êµ¬
+Equipment Fabric_helmet = { "Fabric helmet", 5, 0, 0, 5, 0, 200, 0 };
+Equipment Leather_helmet = { "Leather helmet", 10, 0, 0, 10, 0, 300 , 0 };
+Equipment Wood_helmet = { "Wood helmet", 20, 0, 0, 20, -0.3, 500, 0 };
+//----------------ê°‘ì˜·
+Equipment Fabric_armor = { "Fabric armor", 10, 0, 0, 10, 0, 300, 1 };
+Equipment Leather_armor = { "Leather armor", 15, 0, 0, 15, 0, 400, 1 };
+Equipment Wood_armor = { "Wood armor", 25, 0, 0, 25, -0.5, 600, 1 };
+//----------------ë¬´ê¸°
+Equipment Fabric_sword = { "Fabric sword", 0, 0, 15, 0, 1, 300, 2 };
+Equipment Leather_sword = { "Leather sword", 0, 0, 20, 0, 1, 400, 2 };
+Equipment Wood_sword = { "Wood sword", 0, 0, 30, 0, 1, 600, 2 };
+//----------------ìž¥ê°‘
+Equipment Fabric_gloves = { "Fabric gloves", 3, 0, 0, 3, 0.2, 100, 3 };
+Equipment Leather_gloves = { "Leather gloves", 5, 0, 0, 5, 0.2, 250, 3 };
+Equipment Wood_gloves = { "Wood gloves", 15, 0, 0, 15, 0.5, 450, 3 };
+//----------------ì‹ ë°œ
+Equipment Fabric_shoes = { "Fabric shoes", 3, 0, 0, 3, 0.2, 100, 4 };
+Equipment Leather_shoes = { "Leather shoes", 5, 0, 0, 5, 0.2, 250, 4 };
+Equipment Wood_shoes = { "Wood shoes", 15, 0, 0, 15, 0.5, 450, 4 };
+
+Equipment Equipments[15] = { Fabric_helmet, Leather_helmet, Wood_helmet, Fabric_armor,
+Leather_armor, Wood_armor, Fabric_sword, Leather_sword, Wood_sword, Fabric_gloves,
+Leather_gloves, Wood_gloves, Fabric_shoes, Leather_shoes, Wood_shoes };
+
+class Gacha_Equipment {   //ìƒì ì˜ ê°€ì± ì—ì„œë§Œ ë½‘ì„ ìˆ˜ ìžˆëŠ” í¬ê·€ ì•„ì´í…œ
+public:
+	string Name;
+	double Hp, Mp, Atk, Def, Speed, Price, Kind;
+	Gacha_Equipment(string Name, double Hp = 0, double Mp = 0, double Atk = 0,
+		double Def = 0, double Speed = 0, double Price = 0, double Kind = 0) {
+		this->Name = Name;
+		this->Hp = Hp;
+		this->Mp = Mp;
+		this->Atk = Atk;
+		this->Def = Def;
+		this->Speed = Speed;
+		this->Price = Price;
+		//----------------KindëŠ” ì•„ì´í…œì˜ ì¢…ë¥˜ë¥¼ ë‚˜íƒ€ëƒ„
+		//----------------0 : íˆ¬êµ¬, 1 : ê°‘ì˜·, 2 : ë¬´ê¸°, 3 : ìž¥ê°‘, 4 : ì‹ ë°œ
+		this->Kind = Kind;
+	}
+};
+
+//----------------ê°€ì±  ìž¥ë¹„
+//----------------íˆ¬êµ¬
+Gacha_Equipment Bamboo_helmet = { "Bamboo helmet", 150, 0, 0, 50, 0, 0, 0 };
+//----------------ê°‘ì˜·
+Gacha_Equipment Bamboo_aromr = { "Bamboo armor", 150, 0, 0, 50, 0, 0, 1 };
+//----------------ë¬´ê¸°
+Gacha_Equipment Bamboo_spear = { "Bamboo spear", 0, 0, 100, 0, 10, 0, 2 };
+//----------------ìž¥ê°‘
+Gacha_Equipment Bamboo_gloves = { "Bamboo gloves", 100, 0, 0, 50, 10, 0, 3 };
+//----------------ì‹ ë°œ
+Gacha_Equipment Bamboo_shoes = { "Bamboo shoes", 100, 0, 0, 50, 10, 0, 4 };
+
+Gacha_Equipment Gacha_Equipments[5] = { Bamboo_helmet, Bamboo_aromr, Bamboo_spear,
+Bamboo_gloves, Bamboo_shoes };
+
 struct Item {
 	string Name;
 	double Hp, Mp, Atk, Def, Speed;
@@ -47,22 +128,20 @@ Item Tea = { "Tea",0,0,-10,30,0 };
 
 Item Items[14] = { Red_portion,Yellow_portion,Blue_portion,Purple_portion
 ,Carrot ,Protein ,Radish ,Sugar ,Banana ,Pear ,Sweet_potato,Dew,Chili,Tea };
-string Inventory[5] = { "Red potion","Red potion","Purple potion","Purple potion","0" };
 
 string Drop_Item() {
 	srand((unsigned int)time(NULL));
 	int I = rand() % 7;
-	if (I < 5) {   //¾ÆÀÌÅÛ µå¶ø È®·ü
-		int N = rand() % 14;  //14´Â Items¹è¿­ Å©±â
+	if (I < 5) {   //ì•„ì´í…œ ë“œëž í™•ë¥ 
+		int N = rand() % 14;  //14ëŠ” Itemsë°°ì—´ í¬ê¸°
 		string Drop_Item = Items[N].Name;
-		cout << "\n------------¸ó½ºÅÍ¿¡°Ô¼­ " << Drop_Item << "ÀÌ(°¡) ¶³¾îÁ³´Ù!!!------------\n";
+		cout << "ëª¬ìŠ¤í„°ì—ê²Œì„œ " << Drop_Item << "ì´ ë–¨ì–´ì¡Œë‹¤!!!\n";
 		return Drop_Item;
 	}
 	return "";
 }
 
-void Item_List() {   //¾ÆÀÌÅÛ ¼³¸í
-	cout << "------------------------\n";
+void Item_List() {   //ì•„ì´í…œ ì„¤ëª…
 	cout << "0.Red potion : Hp +10\n";
 	cout << "1.Yellow potion : Hp +20\n";
 	cout << "2.Blue potion : Mp +10\n";
@@ -83,69 +162,69 @@ void Item_List() {   //¾ÆÀÌÅÛ ¼³¸í
 	cout << "       : Def +30\n";
 }
 
-void Pick_Up_Item(string* Inventory, string Item_Name) { //¾ÆÀÌÅÛÀ» ÁÖ¿ï ¶§
+void Pick_Up_Item(string* Inventory, string Item_Name) { //ì•„ì´í…œì„ ì£¼ìš¸ ë•Œ
 	int Count = 0;
 	int N;
 	char C;
-	for (int I = 0; I < 5; I++) {      //ÀÎº¥Åä¸®¿¡ ºó°ø°£ÀÌ ÀÖ´ÂÁö È®ÀÎ
-		if (Inventory[I] == "0") Count++;
+	for (int I = 0; I < 5; I++) {      //ì¸ë²¤í† ë¦¬ì— ë¹ˆê³µê°„ì´ ìžˆëŠ”ì§€ í™•ì¸
+		if (Inventory[I] == "0") { Count++; }
 	}
-	if (Count == 0) {    //ÀÎº¥Åä¸®°¡ °¡µæ Âù °æ¿ì
-		cout << "ÀÎº¥Åä¸®°¡ °¡µæ Ã¡½À´Ï´Ù.\n\n";
+	if (Count == 0) {    //ì¸ë²¤í† ë¦¬ê°€ ê°€ë“ ì°¬ ê²½ìš°
+		cout << "ì¸ë²¤í† ë¦¬ê°€ ê°€ë“ ì°¼ìŠµë‹ˆë‹¤.\n";
 		while (true) {
-			cout << "ÀÎº¥Åä¸® ¸ñ·Ï\n";
+			cout << "ì¸ë²¤í† ë¦¬ ëª©ë¡\n";
 			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
-			cout << "\n±âÁ¸ÀÇ ¾ÆÀÌÅÛ°ú ±³Ã¼ÇÏ½Ç°Å¸é Y, ¾Æ´Ï¸é N¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n" << "ÀÔ·Â : ";
+			cout << "ê¸°ì¡´ì˜ ì•„ì´í…œê³¼ êµì²´í•˜ì‹¤ê±°ë©´ Y, ì•„ë‹ˆë©´ Në¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”\n" << "ìž…ë ¥ : ";
 			cin >> C;
 			if (C == 'N') {
-				cout << "¾ÆÀÌÅÛÀ» ÁÝÁö ¾Ê¾Ò½À´Ï´Ù\n";
+				cout << "ì•„ì´í…œì„ ì¤ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n";
 				break;
 			}
 			else if (C == 'Y') {
-				cout << "\n±³Ã¼ÇÒ ¾ÆÀÌÅÛÀÇ À§Ä¡¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n" << "ÀÔ·Â : ";
+				cout << "êµì²´í•  ì•„ì´í…œì˜ ìœ„ì¹˜ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”\n" << "ìž…ë ¥ : ";
 				cin >> N;
 				if (N >= 0 && N <= 4) {
 					Inventory[N] = Item_Name;
 					break;
 				}
-				else { cout << "´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä\n"; }
+				else { cout << "ë‹¤ì‹œ ìž…ë ¥í•´ì£¼ì„¸ìš”\n"; }
 			}
-			else { cout << "´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä\n"; }
+			else { cout << "ë‹¤ì‹œ ìž…ë ¥í•´ì£¼ì„¸ìš”\n"; }
 		}
 	}
-	else {     //ÀÎº¥Åä¸®¿¡ ºó °ø°£ÀÌ ÀÖ´Â °æ¿ì
+	else {     //ì¸ë²¤í† ë¦¬ì— ë¹ˆ ê³µê°„ì´ ìžˆëŠ” ê²½ìš°
 		while (true) {
-			cout << "ÀÎº¥Åä¸® ¸ñ·Ï\n";
+			cout << "ì¸ë²¤í† ë¦¬ ëª©ë¡\n";
 			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
-			cout << "ÀÎº¥Åä¸®ÀÇ ¸î ¹ø À§Ä¡¿¡ µÎ½Ç °Ì´Ï±î?\n" << "ÀÔ·Â : ";
+			cout << "ì¸ë²¤í† ë¦¬ì˜ ëª‡ ë²ˆ ìœ„ì¹˜ì— ë‘ì‹¤ ê²ë‹ˆê¹Œ?\n" << "ìž…ë ¥ : ";
 			cin >> N;
 			if (N >= 0 && N <= 4) {
 				if (Inventory[N] == "0") {
 					Inventory[N] = Item_Name;
 					break;
 				}
-				else { cout << "¼±ÅÃÇÏ½Å À§Ä¡¿¡´Â ÀÌ¹Ì ¾ÆÀÌÅÛÀÌ ÀÖ½À´Ï´Ù. ´Ù¸¥ À§Ä¡¸¦ ¼±ÅÃÇØ ÁÖ½Ê½Ã¿À\n\n"; }
+				else { cout << "ì„ íƒí•˜ì‹  ìœ„ì¹˜ì—ëŠ” ì´ë¯¸ ì•„ì´í…œì´ ìžˆìŠµë‹ˆë‹¤. ë‹¤ë¥¸ ìœ„ì¹˜ë¥¼ ì„ íƒí•´ ì£¼ì‹­ì‹œì˜¤\n"; }
 			}
-			else { cout << "0~4ÀÇ ¼ýÀÚ Áß ÇÏ³ª¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n"; }
+			else { cout << "0~4ì˜ ìˆ«ìž ì¤‘ í•˜ë‚˜ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”\n"; }
 		}
 	}
 }
 
-void Look_Inventory(string Inventory[]) {    //ÀÎº¥Åä¸® ºÒ·¯¿À±â
-	cout << "\nÀÎº¥Åä¸® ¸ñ·Ï\n";
+void Look_Inventory(string Inventory[]) {    //ì¸ë²¤í† ë¦¬ ë¶ˆëŸ¬ì˜¤ê¸°
+	cout << "ì¸ë²¤í† ë¦¬ ëª©ë¡\n";
 	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
 }
 
-void Swap_Item(string* Inventory) {     //ÀÎº¥Åä¸®¿¡ ÀÖ´Â ¾ÆÀÌÅÛ À§Ä¡ º¯°æ
+void Swap_Item(string* Inventory) {     //ì¸ë²¤í† ë¦¬ì— ìžˆëŠ” ì•„ì´í…œ ìœ„ì¹˜ ë³€ê²½
 	int N1, N2;
 	string Temp;
-	cout << "ÀÎº¥Åä¸® ¸ñ·Ï\n";
+	cout << "ì¸ë²¤í† ë¦¬ ëª©ë¡\n";
 	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
 
-	cout << "0~4¸¦ Á¦¿ÜÇÑ ´Ù¸¥ ¼ýÀÚ ÀÔ·Â½Ã À§Ä¡ º¯°æÀÌ Ãë¼ÒµË´Ï´Ù\n";
-	cout << "À§Ä¡¸¦ º¯°æÇÒ ¾ÆÀÌÅÛÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n" << "ÀÔ·Â : ";
+	cout << "0~4ë¥¼ ì œì™¸í•œ ë‹¤ë¥¸ ìˆ«ìž ìž…ë ¥ì‹œ ìœ„ì¹˜ ë³€ê²½ì´ ì·¨ì†Œë©ë‹ˆë‹¤\n";
+	cout << "ìœ„ì¹˜ë¥¼ ë³€ê²½í•  ì•„ì´í…œì˜ ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”\n" << "ìž…ë ¥ : ";
 	cin >> N1;
-	cout << "¼±ÅÃÇÏ½Å ¾ÆÀÌÅÛ°ú À§Ä¡¸¦ º¯°æÇÒ ¾ÆÀÌÅÛÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n" << "ÀÔ·Â : ";
+	cout << "ì„ íƒí•˜ì‹  ì•„ì´í…œê³¼ ìœ„ì¹˜ë¥¼ ë³€ê²½í•  ì•„ì´í…œì˜ ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”\n" << "ìž…ë ¥ : ";
 	cin >> N2;
 	if (N1 >= 0 && N1 <= 4) {
 		if (N2 >= 0 && N2 <= 4) {
@@ -154,16 +233,17 @@ void Swap_Item(string* Inventory) {     //ÀÎº¥Åä¸®¿¡ ÀÖ´Â ¾ÆÀÌÅÛ À§Ä¡ º¯°æ
 			Inventory[N2] = Temp;
 		}
 	}
-	else { cout << "¾ÆÀÌÅÛÀÇ À§Ä¡ º¯°æÀÌ Ãë¼ÒµÇ¾ú½À´Ï´Ù\n"; }
+	else { cout << "ì•„ì´í…œì˜ ìœ„ì¹˜ ë³€ê²½ì´ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤\n"; }
 }
 
-void Throw_Away_Item(string* Inventory) {       //¾ÆÀÌÅÛÀ» ¹ö¸± ¶§
+
+void Throw_Away_Item(string* Inventory) {       //ì•„ì´í…œì„ ë²„ë¦´ ë•Œ
 	int N;
-	cout << "ÀÎº¥Åä¸® ¸ñ·Ï\n";
+	cout << "ì¸ë²¤í† ë¦¬ ëª©ë¡\n";
 	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
-	cout << "0~4¸¦ Á¦¿ÜÇÑ ´Ù¸¥ ¼ýÀÚ ÀÔ·Â½Ã À§Ä¡ º¯°æÀÌ Ãë¼ÒµË´Ï´Ù\n";
-	cout << "¹ö¸± ¾ÆÀÌÅÛÀÇ À§Ä¡¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n" << "ÀÔ·Â : ";
+	cout << "0~4ë¥¼ ì œì™¸í•œ ë‹¤ë¥¸ ìˆ«ìž ìž…ë ¥ì‹œ ìœ„ì¹˜ ë³€ê²½ì´ ì·¨ì†Œë©ë‹ˆë‹¤\n";
+	cout << "ë²„ë¦´ ì•„ì´í…œì˜ ìœ„ì¹˜ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”\n" << "ìž…ë ¥ : ";
 	cin >> N;
 	if (N >= 0 && N <= 4) { Inventory[N] = "0"; }
-	else { cout << "¾ÆÀÌÅÛ ¹ö¸®±â°¡ Ãë¼ÒµÇ¾ú½À´Ï´Ù\n"; }
+	else { cout << "ì•„ì´í…œ ë²„ë¦¬ê¸°ê°€ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤\n"; }
 }
