@@ -92,39 +92,40 @@ Bamboo_gloves, Bamboo_shoes };
 
 struct Item {
 	string Name;
-	double Hp, Mp, Atk, Def, Speed;
+	double Hp, Mp, Atk, Def, Speed, Price;
 	Item(string Name, double Hp = 0, double Mp = 0, double Atk = 0,
-		double Def = 0, double Speed = 0) {
+		double Def = 0, double Speed = 0, double Price = 0) {
 		this->Name = Name;
 		this->Hp = Hp;
 		this->Mp = Mp;
 		this->Atk = Atk;
 		this->Def = Def;
 		this->Speed = Speed;
+		this->Price = Price;
 	}
 };
-
+//----------------소비 아이템
 //----------------Hp
-Item Red_portion = { "Red potion",10 };
-Item Yellow_portion = { "Yellow potion",20 };
+Item Red_portion = { "Red potion", 10, 0, 0, 0, 0, 100 };
+Item Yellow_portion = { "Yellow potion", 20, 0, 0, 0, 0, 200 };
 //----------------Mp
-Item Blue_portion = { "Blue potion",0,10 };
-Item Purple_portion = { "Purple potion",0,20 };
+Item Blue_portion = { "Blue potion", 0, 10, 0, 0, 0, 100 };
+Item Purple_portion = { "Purple potion", 0, 20, 0, 0, 0, 200 };
 //----------------Atk
-Item Carrot = { "Carrot",0,0,10 };
-Item Protein = { "Protein",0,0,20 };
+Item Carrot = { "Carrot", 0, 0, 10, 0, 0, 100 };
+Item Protein = { "Protein", 0, 0, 20, 0, 0, 200 };
 //----------------Def
-Item Radish = { "Radish",0,0,0,5 };
-Item Sugar = { "Sugar",0,0,0,10 };
+Item Radish = { "Radish", 0, 0, 0, 5, 0, 100 };
+Item Sugar = { "Sugar", 0, 0, 0, 10, 0, 200 };
 //----------------Speed
-Item Banana = { "Banana",0,0,0,0,0.5 };
-Item Pear = { "Pear",0,0,0,0,1 };
+Item Banana = { "Banana", 0, 0, 0, 0, 0.5, 100 };
+Item Pear = { "Pear", 0, 0, 0, 0, 1, 200 };
 //----------------Hp,Mp
-Item Sweet_potato = { "Sweet potato",30,-10,0,0,0 };
-Item Dew = { "Dew",-10,30,0,0,0 };
+Item Sweet_potato = { "Sweet potato", 30, -10, 0, 0, 0, 200 };
+Item Dew = { "Dew", -10, 30, 0, 0, 0, 200 };
 //----------------Atk,Def
-Item Chili = { "Chili",0,0,30,-10,0 };
-Item Tea = { "Tea",0,0,-10,30,0 };
+Item Chili = { "Chili", 0, 0, 30, -10, 0, 200 };
+Item Tea = { "Tea", 0, 0, -10, 30, 0, 200 };
 
 Item Items[14] = { Red_portion,Yellow_portion,Blue_portion,Purple_portion
 ,Carrot ,Protein ,Radish ,Sugar ,Banana ,Pear ,Sweet_potato,Dew,Chili,Tea };
