@@ -302,7 +302,7 @@ bool Inventory_Menu()
         switch (flag)
         {
         case 1:
-            Use_Item(SoNB_P, Inventory);
+			Use_Item(SoNB_P, Inventory, Equipment_slot);
             Inventoryflag = false;
             break;
         case 2:
