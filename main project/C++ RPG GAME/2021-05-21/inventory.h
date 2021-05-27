@@ -363,6 +363,7 @@ void Open_Store(string* inventory) {  //상점
 		cout << "Gacha는 구매와 동시에 사용되며 랜덤 아이템을 획득할 수 있습니다.\n";
 		cout << "오직 Gacha로만 구할 수 있는 아이템도 존재하니 여러분의 운을 시험해보세요.\n";
 		cout << "------------------------\n";
+		cout << "소지금 : " << Money << "원\n";
 		cout << "입력 : ";
 		cin >> Num;
 		cout << endl;
