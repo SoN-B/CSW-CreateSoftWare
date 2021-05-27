@@ -135,38 +135,92 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
     }
 }
 
-void Use_Item(My_Character* Character, string Inventory[]) {
-    // 아이템을 사용할 때
-    int n;
+void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot) {
+	// 아이템을 사용할 때
+	int n;
 
-    cout << "\n인벤토리 목록\n";
-    for (int i = 0; i < 5; i++) { cout << i << " : " << Inventory[i] << "\n"; }
-    cout << "\n0~4를 제외한 다른 숫자 입력시 아이템 사용이 취소됩니다\n";
-    cout << "사용할 아이템의 위치를 입력해주세요\n" << "위치 : ";
-    cin >> n;
-    if (n >= 0 && n <= 4) {
-        if (Inventory[n] == "0") { cout << "\n선택하신 위치에 아이템이 없습니다\n\n"; }
-        else {
-            for (int i = 0; i < 14; i++) {   //14는 item배열 크기
-                if (Inventory[n] == Items[i].Name) {
-                    Character->Hp += Items[i].Hp;
-                    Character->Mp += Items[i].Mp;
-                    Character->Atk += Items[i].Atk;
-                    Character->Def += Items[i].Def;
-                    Character->Speed += Items[i].Speed;
-                    Inventory[n] = "0";
-                    cout << "\n" << Items[i].Name << "을 사용했습니다\n";
-                    cout << "hp : " << Character->Hp - Items[i].Hp << " -> " << Character->Hp << "\n";
-                    cout << "mp : " << Character->Mp - Items[i].Mp << " -> " << Character->Mp << "\n";
-                    cout << "atk : " << Character->Atk - Items[i].Atk << " -> " << Character->Atk << "\n";
-                    cout << "def : " << Character->Def - Items[i].Def << " -> " << Character->Def << "\n";
-                    cout << "speed : " << Character->Speed - Items[i].Speed << " -> " << Character->Speed << "\n\n";
-                    break;
-                }
-            }
-        }
-    }
-    else { cout << "아이템 사용이 취소되었습니다\n"; }
+	cout << "\n인벤토리 목록\n";
+	for (int i = 0; i < 5; i++) { cout << i << " : " << Inventory[i] << "\n"; }
+	cout << "\n0~4를 제외한 다른 숫자 입력시 아이템 사용이 취소됩니다\n";
+	cout << "사용할 아이템의 위치를 입력해주세요\n" << "위치 : ";
+	cin >> n;
+	if (n >= 0 && n <= 4) {
+		if (Inventory[n] == "0") { cout << "\n선택하신 위치에 아이템이 없습니다\n\n"; }
+		else {
+			for (int i = 0; i < 14; i++) {   //14는 items 배열 크기
+				if (Inventory[n] == Items[i].Name) {  //소비아이템 사용
+					Character->Hp += Items[i].Hp;
+					Character->Mp += Items[i].Mp;
+					Character->Atk += Items[i].Atk;
+					Character->Def += Items[i].Def;
+					Character->Speed += Items[i].Speed;
+					Inventory[n] = "0";
+					cout << "\n" << Items[i].Name << "을 사용했습니다\n";
+					cout << "hp : " << Character->Hp - Items[i].Hp << " -> " << Character->Hp << "\n";
+					cout << "mp : " << Character->Mp - Items[i].Mp << " -> " << Character->Mp << "\n";
+					cout << "atk : " << Character->Atk - Items[i].Atk << " -> " << Character->Atk << "\n";
+					cout << "def : " << Character->Def - Items[i].Def << " -> " << Character->Def << "\n";
+					cout << "speed : " << Character->Speed - Items[i].Speed << " -> " << Character->Speed << "\n\n";
+					break;
+				}
+			}
+			for (int i = 0; i < 15; i++) {   //15는 Equipments 배열 크기
+				if (Inventory[n] == "0") { break; }//앞의 for문에서 아이템을 사용했다면 이 for문을 돌리지 않음
+				if (Inventory[n] == Equipments[i].Name) {
+					int Num = Equipments[i].Kind;
+					if (Equipment_slot[Num] != "0") {//장비창 확인
+						cout << "선택하신 장비와 같은 종류의 장비를 이미 착용하고 있습니다.\n";
+						cout << "착용중인 장비를 해제하고 다시 시도해주세요\n";
+						break;
+					}
+					else {    //장비 아이템 착용
+						Equipment_slot[Num] == Gacha_Equipments[i].Name;
+						Character->Hp += Equipments[i].Hp;
+						Character->Mp += Equipments[i].Mp;
+						Character->Atk += Equipments[i].Atk;
+						Character->Def += Equipments[i].Def;
+						Character->Speed += Equipments[i].Speed;
+						Inventory[n] = "0";
+						cout << "\n" << Equipments[i].Name << "을 착용했습니다\n";
+						cout << "hp : " << Character->Hp - Equipments[i].Hp << " -> " << Character->Hp << "\n";
+						cout << "mp : " << Character->Mp - Equipments[i].Mp << " -> " << Character->Mp << "\n";
+						cout << "atk : " << Character->Atk - Equipments[i].Atk << " -> " << Character->Atk << "\n";
+						cout << "def : " << Character->Def - Equipments[i].Def << " -> " << Character->Def << "\n";
+						cout << "speed : " << Character->Speed - Equipments[i].Speed << " -> " << Character->Speed << "\n\n";
+						break;
+					}
+				}
+			}
+			for (int i = 0; i < 5; i++) {   //5는 Gacha_Equipments 배열 크기
+				if (Inventory[n] == "0") { break; }//앞의 for문에서 아이템을 사용했다면 이 for문을 돌리지 않음
+				if (Inventory[n] == Gacha_Equipments[i].Name) {
+					int Num = Gacha_Equipments[i].Kind;
+					if (Equipment_slot[Num] != "0") {//장비창 확인
+						cout << "선택하신 장비와 같은 종류의 장비를 이미 착용하고 있습니다.\n";
+						cout << "착용중인 장비를 해제하고 다시 시도해주세요\n";
+						break;
+					}
+					else {    //가챠 장비 착용
+						Equipment_slot[Num] == Gacha_Equipments[i].Name;
+						Character->Hp += Gacha_Equipments[i].Hp;
+						Character->Mp += Gacha_Equipments[i].Mp;
+						Character->Atk += Gacha_Equipments[i].Atk;
+						Character->Def += Gacha_Equipments[i].Def;
+						Character->Speed += Gacha_Equipments[i].Speed;
+						Inventory[n] = "0";
+						cout << "\n" << Gacha_Equipments[i].Name << "을 착용했습니다\n";
+						cout << "hp : " << Character->Hp - Gacha_Equipments[i].Hp << " -> " << Character->Hp << "\n";
+						cout << "mp : " << Character->Mp - Gacha_Equipments[i].Mp << " -> " << Character->Mp << "\n";
+						cout << "atk : " << Character->Atk - Gacha_Equipments[i].Atk << " -> " << Character->Atk << "\n";
+						cout << "def : " << Character->Def - Gacha_Equipments[i].Def << " -> " << Character->Def << "\n";
+						cout << "speed : " << Character->Speed - Gacha_Equipments[i].Speed << " -> " << Character->Speed << "\n\n";
+						break;
+					}
+				}
+			}
+		}
+	}
+	else { cout << "아이템 사용이 취소되었습니다\n"; }
 }
 
 bool Inventory_Menu()
