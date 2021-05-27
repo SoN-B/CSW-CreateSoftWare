@@ -21,9 +21,10 @@ string Inventory[5] = { "0", "0", "0", "0", "0" };
 class Equipment {
 public:
 	string Name;
-	double Hp, Mp, Atk, Def, Speed, Price, Kind;
+	double Hp, Mp, Atk, Def, Speed, Price;
+	int Kind;
 	Equipment(string Name, double Hp = 0, double Mp = 0, double Atk = 0,
-		double Def = 0, double Speed = 0, double Price = 0, double Kind = 0) {
+		double Def = 0, double Speed = 0, double Price = 0, int Kind = 0) {
 		this->Name = Name;
 		this->Hp = Hp;
 		this->Mp = Mp;
@@ -66,9 +67,10 @@ Leather_gloves, Wood_gloves, Fabric_shoes, Leather_shoes, Wood_shoes };
 class Gacha_Equipment {   //상점의 가챠에서만 뽑을 수 있는 희귀 아이템
 public:
 	string Name;
-	double Hp, Mp, Atk, Def, Speed, Price, Kind;
+	double Hp, Mp, Atk, Def, Speed, Price;
+	int Kind
 	Gacha_Equipment(string Name, double Hp = 0, double Mp = 0, double Atk = 0,
-		double Def = 0, double Speed = 0, double Price = 0, double Kind = 0) {
+		double Def = 0, double Speed = 0, double Price = 0, int Kind = 0) {
 		this->Name = Name;
 		this->Hp = Hp;
 		this->Mp = Mp;
