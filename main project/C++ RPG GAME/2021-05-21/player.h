@@ -223,6 +223,72 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 	else { cout << "아이템 사용이 취소되었습니다\n"; }
 }
 
+void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equipment_slot) {
+	//장비 아이템 착용 해제 함수
+	int Count = 0;
+	int N;
+	for (int I = 0; I < 5; I++) {      //인벤토리에 빈공간이 있는지 확인
+		if (Inventory[I] == "0") { Count++; }
+	}
+	if (Count == 0) {    //인벤토리가 가득 찬 경우
+		cout << "인벤토리가 가득 찼습니다.\n";
+		cout << "인벤토리를 비운 후에 다시 시도해주세요\n";
+	}
+	else {
+		cout << "착용중인 장비 아이템 목록\n";
+		for (int I = 0; I < 5; I++) { cout << I << " : " << Equipment_slot[I] << endl; }
+		cout << "------------------------\n";
+		cout << "착용 해제할 아이템의 번호를 입력해주세요\n";
+		cout << "0~4 이외의 숫자를 입력하면 장비 해제가 취소됩니다.\n";
+		cout << "입력 : ";
+		cin >> N;
+		cout << endl;
+		if (N < 0 && N > 4) { cout << "선택하신 위치에 착용중인 장비가 없습니다.\n"; }
+		else if (N >= 0 && N <= 4) {
+			if (Equipment_slot[N] == "0") { cout << "선택하신 위치에 착용중인 장비가 없습니다.\n"; }
+			else {
+				for (int J = 0; J < 15; J++) {//15는 Equipments 배열 크기
+					if (Equipment_slot[N] == Equipments[J].Name) {//장비 아이템 착용 해제
+						Pick_Up_Item(Inventory, Equipment_slot[N]);
+						Character->Hp -= Equipments[J].Hp;
+						Character->Mp -= Equipments[J].Mp;
+						Character->Atk -= Equipments[J].Atk;
+						Character->Def -= Equipments[J].Def;
+						Character->Speed -= Equipments[J].Speed;
+						Equipment_slot[N] == "0";
+						cout << "\n" << Equipments[J].Name << "을 착용 해제했습니다\n";
+						cout << "hp : " << Character->Hp + Equipments[J].Hp << " -> " << Character->Hp << "\n";
+						cout << "mp : " << Character->Mp + Equipments[J].Mp << " -> " << Character->Mp << "\n";
+						cout << "atk : " << Character->Atk + Equipments[J].Atk << " -> " << Character->Atk << "\n";
+						cout << "def : " << Character->Def + Equipments[J].Def << " -> " << Character->Def << "\n";
+						cout << "speed : " << Character->Speed + Equipments[J].Speed << " -> " << Character->Speed << "\n\n";
+						break;
+					}
+				}
+				for (int J = 0; J < 5; J++) {//5는 Gacha_Equipments 배열 크기
+					if (Equipment_slot[N] == "0") { break; }//앞의 for문에서 장비를 해제했다면 이 for문을 돌리지 않음
+					if (Equipment_slot[N] == Gacha_Equipments[J].Name) {//가챠 장비 착용 해제
+						Pick_Up_Item(Inventory, Equipment_slot[N]);
+						Character->Hp -= Gacha_Equipments[J].Hp;
+						Character->Mp -= Gacha_Equipments[J].Mp;
+						Character->Atk -= Gacha_Equipments[J].Atk;
+						Character->Def -= Gacha_Equipments[J].Def;
+						Character->Speed -= Gacha_Equipments[J].Speed;
+						Equipment_slot[N] == "0";
+						cout << "\n" << Gacha_Equipments[J].Name << "을 착용 해제했습니다\n";
+						cout << "hp : " << Character->Hp + Gacha_Equipments[J].Hp << " -> " << Character->Hp << "\n";
+						cout << "mp : " << Character->Mp + Gacha_Equipments[J].Mp << " -> " << Character->Mp << "\n";
+						cout << "atk : " << Character->Atk + Gacha_Equipments[J].Atk << " -> " << Character->Atk << "\n";
+						cout << "def : " << Character->Def + Gacha_Equipments[J].Def << " -> " << Character->Def << "\n";
+						cout << "speed : " << Character->Speed + Gacha_Equipments[J].Speed << " -> " << Character->Speed << "\n\n";
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
 bool Inventory_Menu()
 {
     int Inventorymenu;
