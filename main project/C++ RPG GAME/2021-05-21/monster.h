@@ -12,7 +12,6 @@ typedef struct Monster {
     double Level = 1;
     string Ettype; //몹종류 -> normal,elite,boss
     string Kind; //종족
-    srand((unsigned int)time(NULL));
     Monster(string Kind, double Hp = 0, double Mp = 0, double Atk = 0,
         double Def = 0, double Speed = 1, double Exp = 1, double Money = 10, string Ettype = "normal") //default 매개변수 맨끝
     {
@@ -63,3 +62,7 @@ typedef struct Monster {
         this->Money += a;
     }
 }Monster;
+void Randy()
+{
+    srand((unsigned int)time(NULL));
+}
