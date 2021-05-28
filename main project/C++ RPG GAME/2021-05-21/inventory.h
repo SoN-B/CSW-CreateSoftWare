@@ -143,10 +143,19 @@ string Drop_Item() {
 	srand((unsigned int)time(NULL));
 	int I = rand() % 7;
 	if (I < 5) {   //아이템 드랍 확률
-		int N = rand() % 14;  //14는 Items배열 크기
-		string Drop_Item = Items[N].Name;
-		cout << "몬스터에게서 " << Drop_Item << "이 떨어졌다!!!\n";
-		return Drop_Item;
+		int Temp = rand() % 4;  //드랍 아이템 종류 결정
+		if (Temp < 3) {  //소비 아이템 드랍
+			int N = rand() % 14;  //14는 Items배열 크기
+			string Drop_Item = Items[N].Name;
+			cout << "몬스터에게서 " << Drop_Item << "이 떨어졌다!!!\n";
+			return Drop_Item;
+		}
+		else if (Temp == 3) {   //장비 아이템 드랍
+			int N = rand() % 15;  //15는 Equipments배열 크기
+			string Drop_Item = Equipments[N].Name;
+			cout << "몬스터에게서 " << Drop_Item << "이 떨어졌다!!!\n";
+			return Drop_Item;
+		}
 	}
 	return "";
 }
