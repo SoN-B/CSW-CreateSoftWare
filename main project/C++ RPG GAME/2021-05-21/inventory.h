@@ -68,7 +68,7 @@ class Gacha_Equipment {   //상점의 가챠에서만 뽑을 수 있는 희귀 �
 public:
 	string Name;
 	double Hp, Mp, Atk, Def, Speed, Price;
-	int Kind
+	int Kind;
 	Gacha_Equipment(string Name, double Hp = 0, double Mp = 0, double Atk = 0,
 		double Def = 0, double Speed = 0, double Price = 0, int Kind = 0) {
 		this->Name = Name;
