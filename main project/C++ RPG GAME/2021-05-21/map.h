@@ -24,9 +24,9 @@ Monster* Goblin_Boss_P = &Goblin_Boss;
 
 Monster Orc_Normal = { "orc_normal",150,0,15,12,1.5,15,20,"normal" };
 Monster* Orc_Normal_P = &Orc_Normal;
-Monster Orc_Elite = { "orc_elite",225,0,22.5,18,2.25,20,25,"elite" };
+Monster Orc_Elite = { "orc_elite",225,0,22.5,18,2.25,20,25,"normal" };
 Monster* Orc_Elite_P = &Orc_Elite;
-Monster Orc_Boss = { "orc_boss",300,0,30,24,3,30,35"boss" };
+Monster Orc_Boss = { "orc_boss",300,0,30,24,3,30,35,"normal" };
 Monster* Orc_Boss_P = &Orc_Boss;
 
 vector<vector<Monster*>> Map;//Temp_Map
