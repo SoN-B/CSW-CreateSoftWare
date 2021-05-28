@@ -28,7 +28,6 @@ typedef struct Monster {
         this->Exp = Exp + rand() % 6 - 2.5;
         this->Money = Money + rand() % 6 - 2.5;
     }
-
     void Get_Info()
     {
         cout << "\nÁ¾Á· : " << this->Kind << " [" << Ettype << "] " << endl;
@@ -62,20 +61,5 @@ typedef struct Monster {
     void Money_Plus(double a)
     {
         this->Money += a;
-    }
-    void Level_Up()
-    {
-        this->Level += 1;
-        this->Max_Exp = this->Max_Exp + (this->Max_Exp * 0.5);
-        this->Hp += 50;
-        this->Mp += 25;
-        this->Atk += 10;
-        this->Def += 5;
-        this->Speed += 0.1;
-        this->Exp = 0;
-    }
-    void Exp_Plus(double a)
-    {
-        this->Exp += a;
     }
 }Monster;
