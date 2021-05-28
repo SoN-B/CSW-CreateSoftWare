@@ -36,6 +36,7 @@ bool Menu1()
                     if (Map[i][j]->Hp < 0)//몬스터 사망시
                     {
                         cout << "\n" << Map[i][j]->Kind << " 를 물리쳤다!" << endl;
+                        Monster_Die(SoNB_P, Map[i][j]);
                         Map[i][j]->Hp = Temp_Mob_P->Hp;
                         Map[i][j]->Mp = Temp_Mob_P->Mp;
                         DropItem = Drop_Item();
@@ -93,7 +94,7 @@ bool Menu2()
 
 int main()
 {//메뉴 선택
-
+    Randy();
     do {
         cout << "【 TEST BETA GAME 】\n\n" << "메뉴를 선택해 주세요 ~ !\n";
         cout << "\n1.게임시작\n2.게임 설명\n3.게임 종료\n";
