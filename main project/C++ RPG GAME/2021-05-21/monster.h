@@ -30,7 +30,6 @@ typedef struct Monster {
     void Get_Info()
     {
         cout << "\nÁ¾Á· : " << this->Kind << " [" << Ettype << "] " << endl;
-        cout << "Level : " << this->Level << endl;
         cout << "HP : " << this->Hp << endl;
         cout << "MP : " << this->Mp << endl;
         cout << "ATK : " << this->Atk << endl;
