@@ -6,7 +6,9 @@ using namespace std;
 
 typedef struct My_Character //플레이어 클래스
 {
-    double Hp, Mp, Atk, Def, Speed;
+    double Hp, Mp, Atk, Def, Speed,Exp = 0, Max_Exp = 100;
+	double Money = 0;
+	double Level = 1;
 
     My_Character(double Hp = 200, double Mp = 100, double Atk = 50, double Def = 5, double Speed = 1.5)
     {
@@ -19,9 +21,30 @@ typedef struct My_Character //플레이어 클래스
 
     void Get_Character_Info()//플레이어 상태 출력 
     {
-        cout << "\nHP : " << Hp << "\nMP: " << Mp << "\nATK: " << Atk << "\nDEF: " << Def << endl;
+        cout <<"\nLevel : "<<this->Level<<"\nHP : " << Hp << "\nMP: " << Mp << "\nATK: " << Atk << "\nDEF: " << Def << endl;
         cout << "------------------------\n";
     }
+
+	void Level_Plus()
+	{
+		this->Level += 1;
+		this->Exp = this->Exp - this->Max_Exp;
+		this->Max_Exp = this->Max_Exp + (this->Max_Exp * 0.5);
+		this->Hp += 50;
+		this->Mp += 25;
+		this->Atk += 10;
+		this->Def += 5;
+		this->Speed += 0.1;
+	}
+
+	void Exp_Plus(double a)
+	{
+		this->Exp += a;
+	}
+	void Pick_UP_Money(double a)
+	{
+		this->Money += a;
+	}
 }My_Character;
 My_Character SoNB;
 My_Character* SoNB_P = &SoNB;
@@ -321,4 +344,9 @@ bool Inventory_Menu()
             break;
         }
     }
+}
+void Level_Up(My_Character* a)
+{
+	if (a->Exp > a->Max_Exp)
+		a->Level_Plus;
 }
