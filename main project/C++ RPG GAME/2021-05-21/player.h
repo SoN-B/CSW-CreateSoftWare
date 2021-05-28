@@ -6,7 +6,7 @@ using namespace std;
 
 typedef struct My_Character //플레이어 클래스
 {
-	double Hp, Mp, Atk, Def, Speed,Level=1,Exp = 0,Max_Exp = 100;
+	double Hp, Mp, Atk, Def, Speed,Level=1,Exp = 0,Max_Exp = 100,Money = 0;
 
 	My_Character(double Hp = 200, double Mp = 100, double Atk = 50, double Def = 5, double Speed = 1.5)
 	{
