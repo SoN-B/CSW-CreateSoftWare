@@ -343,3 +343,12 @@ bool Inventory_Menu()
 		}
 	}
 }
+void Monster_Die(My_Character* a, Monster* b)
+{
+	a->Pick_UP_Money(b->Money);
+	SoNB_P->Exp_Plus(b->Exp);
+	if (SoNB_P->Exp > SoNB_P->Max_Exp)
+	{
+		SoNB_P->Level_Plus();
+	}
+}
