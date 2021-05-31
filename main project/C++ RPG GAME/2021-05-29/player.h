@@ -3,7 +3,7 @@
 #include "monster.h"
 using namespace std;
 
-typedef struct My_Character //ÇÃ·¹ÀÌ¾î Å¬·¡½º
+typedef struct My_Character //í”Œë ˆì´ì–´ í´ë˜ìŠ¤
 {
 	double Hp, Mp, Atk, Def, Speed, Level = 1, Exp = 0, Max_Exp = 100, Money = 0;
 
@@ -18,7 +18,7 @@ typedef struct My_Character //ÇÃ·¹ÀÌ¾î Å¬·¡½º
 		this->Money = Money;
 	}
 
-	void Get_Character_Info()//ÇÃ·¹ÀÌ¾î »óÅÂ Ãâ·Â 
+	void Get_Character_Info()//í”Œë ˆì´ì–´ ìƒíƒœ ì¶œë ¥ 
 	{
 		cout << "\Level : " << Level << "\nMax Exp/Exp : "<< Max_Exp << "/" << Exp
 			<< "\nHP : " << Hp << "\nMP: " << Mp << "\nATK: " << Atk << "\nDEF: " << Def 
@@ -46,6 +46,18 @@ typedef struct My_Character //ÇÃ·¹ÀÌ¾î Å¬·¡½º
 	{
 		this->Money += a - rand() % 50;
 	}
+	void Restat()
+	{
+		this->Hp = 200;
+		this->Mp = 100;
+		this->Atk = 50;
+		this->Def = 5;
+		this->Speed = 1.5;
+		this->Level = 1;
+		this->Exp = 0;
+		this->Max_Exp = 100;
+		this->Money = 0;
+	}
 }My_Character;
 My_Character SoNB;
 My_Character* SoNB_P = &SoNB;
@@ -54,54 +66,54 @@ void Mob_Atk(Monster* Mob, My_Character* Character)
 {
 	double Damage = Mob->Atk - Character->Def;
 	if (Damage < 0) Damage = 0;
-	//¸÷ °ø°İ·Â<ÇÃ·¹ÀÌ¾î ¹æ¾î·Â °æ¿ì À½¼ö ³ª¿À´Â »óÈ² ¹èÁ¦
+	//ëª¹ ê³µê²©ë ¥<í”Œë ˆì´ì–´ ë°©ì–´ë ¥ ê²½ìš° ìŒìˆ˜ ë‚˜ì˜¤ëŠ” ìƒí™© ë°°ì œ
 
 	Character->Hp -= Damage;
-	cout << "¡¼" << Mob->Kind << " ÀÇ °ø°İ!¡½" << endl;
-	cout << "ÇÃ·¹ÀÌ¾î´Â " << Damage << " ÀÇ ÇÇÇØ¸¦ ÀÔ¾ú´Ù!\n" << endl;
+	cout << "ã€" << Mob->Kind << " ì˜ ê³µê²©!ã€‘" << endl;
+	cout << "í”Œë ˆì´ì–´ëŠ” " << Damage << " ì˜ í”¼í•´ë¥¼ ì…ì—ˆë‹¤!\n" << endl;
 }
 
 bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag);
 bool Inventory_Menu();
-void Atk_Menu(My_Character* Character, Monster* Mob)//ÇÃ·¹ÀÌ¾îÅÏ ¸Ş´º
+void Atk_Menu(My_Character* Character, Monster* Mob)//í”Œë ˆì´ì–´í„´ ë©”ë‰´
 {
-	int Choice; //ÇÃ·¹ÀÌ¾î ¼±ÅÃ º¯¼ö
-	bool Atkflag = true; //Atk_Menu ÇÔ¼ö Á¦¾î¿ë º¯¼ö
-	double Damage; //ÇÃ·¹ÀÌ¾îÀÇ ÃÖÁ¾ µ¥¹ÌÁö
+	int Choice; //í”Œë ˆì´ì–´ ì„ íƒ ë³€ìˆ˜
+	bool Atkflag = true; //Atk_Menu í•¨ìˆ˜ ì œì–´ìš© ë³€ìˆ˜
+	double Damage; //í”Œë ˆì´ì–´ì˜ ìµœì¢… ë°ë¯¸ì§€
 	while (Atkflag)
 	{
-		cout << "¹«¾ùÀ» ÇÒ±î...\n1. °ø°İ\n2. ½ºÅ³\n3. °¡¹æ\n4. ³»»óÅÂ\n5. Àû Á¤º¸\n6. µµÁÖ" << endl; //±âº» ¸Ş´º
+		cout << "ë¬´ì—‡ì„ í• ê¹Œ...\n1. ê³µê²©\n2. ìŠ¤í‚¬\n3. ê°€ë°©\n4. ë‚´ìƒíƒœ\n5. ì  ì •ë³´\n6. ë„ì£¼" << endl; //ê¸°ë³¸ ë©”ë‰´
 		cin >> Choice;
 		switch (Choice)
 		{
-		case 1: //±âº»°ø°İ
-			cout << "\nÀû¿¡°Ô °ø°İÀ» °¡ÇÕ´Ï´Ù!!\n\n";
-			Damage = Character->Atk - Mob->Def; //ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö °è»ê (ÇÃ·¹ÀÌ¾îAtk - ¸ó½ºÅÍdef)
-			if (Damage < 0) Damage = 0; //¿¹¿Ü»çÇ×: µ¥¹ÌÁö À½¼öÀÏ °æ¿ì 0À¸·Î °è»ê
-			Mob->Hp -= Damage; //ÃÖÁ¾ µ¥¹ÌÁö °è»ê
-			cout << "¡¼ÇÃ·¹ÀÌ¾îÀÇ °ø°İ!¡½" << endl;
-			cout << "ÇÃ·¹ÀÌ¾î´Â " << Damage << " ÀÇ ÇÇÇØ¸¦ ÀÔÇû´Ù!\n" << endl;
+		case 1: //ê¸°ë³¸ê³µê²©
+			cout << "\nì ì—ê²Œ ê³µê²©ì„ ê°€í•©ë‹ˆë‹¤!!\n\n";
+			Damage = Character->Atk - Mob->Def; //í”Œë ˆì´ì–´ ë°ë¯¸ì§€ ê³„ì‚° (í”Œë ˆì´ì–´Atk - ëª¬ìŠ¤í„°def)
+			if (Damage < 0) Damage = 0; //ì˜ˆì™¸ì‚¬í•­: ë°ë¯¸ì§€ ìŒìˆ˜ì¼ ê²½ìš° 0ìœ¼ë¡œ ê³„ì‚°
+			Mob->Hp -= Damage; //ìµœì¢… ë°ë¯¸ì§€ ê³„ì‚°
+			cout << "ã€í”Œë ˆì´ì–´ì˜ ê³µê²©!ã€‘" << endl;
+			cout << "í”Œë ˆì´ì–´ëŠ” " << Damage << " ì˜ í”¼í•´ë¥¼ ì…í˜”ë‹¤!\n" << endl;
 			Atkflag = false;
 			break;
-		case 2: //½ºÅ³»ç¿ë
+		case 2: //ìŠ¤í‚¬ì‚¬ìš©
 			Atkflag = Skill_Menu(Character, Mob, Atkflag);
 			break;
-		case 3: //°¡¹æ¿­±â
+		case 3: //ê°€ë°©ì—´ê¸°
 			Atkflag = Inventory_Menu();
 			break;
-		case 4: //Ä³¸¯ÅÍ »óÅÂº¸±â
+		case 4: //ìºë¦­í„° ìƒíƒœë³´ê¸°
 			Character->Get_Character_Info();
 			break;
-		case 5: //¸ó½ºÅÍ »óÅÂº¸±â
+		case 5: //ëª¬ìŠ¤í„° ìƒíƒœë³´ê¸°
 			Mob->Get_Info();
 			break;
-		case 6: //¹Ì±¸Çö
-			//µµÁÖ
-			cout << "\n´øÀü¿¡¼­ µµ¸ÁÃÄ ³ª¿Í °ÔÀÓÀÌ Á¾·áµË´Ï´Ù...";
+		case 6: //ë¯¸êµ¬í˜„
+			//ë„ì£¼
+			cout << "\në˜ì „ì—ì„œ ë„ë§ì³ ë‚˜ì™€ ê²Œì„ì´ ì¢…ë£Œë©ë‹ˆë‹¤...";
 			exit(0);
 			break;
-		default: //Àß¸øµÈ º¯¼ö ÀÔ·Â¹ŞÀ»½Ã
-			cout << "¿Ã¹Ù¸£Áö ¾ÊÀº ÀÔ·Â" << endl;
+		default: //ì˜ëª»ëœ ë³€ìˆ˜ ì…ë ¥ë°›ì„ì‹œ
+			cout << "ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥" << endl;
 			break;
 		}
 	}
@@ -109,51 +121,51 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//ÇÃ·¹ÀÌ¾îÅÏ ¸Ş´º
 
 bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 {
-	int Skillmenu;//½ºÅ³ ¼±ÅÃ
-	string Skillcheck;//½ºÅ³ »ç¿ë È®ÀÎ
-	bool Skillflag = true;// Skill_Menu ÇÔ¼ö Á¦¾î¿ë º¯¼ö
-	double Damage; // ÇÃ·¹ÀÌ¾îÀÇ ÃÖÁ¾ ½ºÅ³ µ¥¹ÌÁö
+	int Skillmenu;//ìŠ¤í‚¬ ì„ íƒ
+	string Skillcheck;//ìŠ¤í‚¬ ì‚¬ìš© í™•ì¸
+	bool Skillflag = true;// Skill_Menu í•¨ìˆ˜ ì œì–´ìš© ë³€ìˆ˜
+	double Damage; // í”Œë ˆì´ì–´ì˜ ìµœì¢… ìŠ¤í‚¬ ë°ë¯¸ì§€
 	while (Skillflag)
 	{
 		cout << "------------------------\n" << "SKILL MENU" << endl;
-		cout << "1. ÆÄ¿ö ½½·¡½Ã\n2. Á×À½ÀÇ DEATH\n0. µÚ·Î°¡±â" << endl;// ½ºÅ³ ¸Ş´º
+		cout << "1. íŒŒì›Œ ìŠ¬ë˜ì‹œ\n2. ì£½ìŒì˜ DEATH\n0. ë’¤ë¡œê°€ê¸°" << endl;// ìŠ¤í‚¬ ë©”ë‰´
 		cin >> Skillmenu;
 		switch (Skillmenu)
 		{
-		case 1: //ÆÄ¿ö ½½·¡½Ã 
-			cout << "\n°ø°İ·Â: " << Character->Atk * 1.2 << "\nMP: 100\n»ç¿ëÇÒ±î? (Y or else)" << endl;
-			cin >> Skillcheck; //½ºÅ³»ç¿ë ÃÖÁ¾È®ÀÎ
-			if (Skillcheck == "Y") //½ºÅ³»ç¿ë
+		case 1: //íŒŒì›Œ ìŠ¬ë˜ì‹œ 
+			cout << "\nê³µê²©ë ¥: " << Character->Atk * 1.2 << "\nMP: 100\nì‚¬ìš©í• ê¹Œ? (Y or else)" << endl;
+			cin >> Skillcheck; //ìŠ¤í‚¬ì‚¬ìš© ìµœì¢…í™•ì¸
+			if (Skillcheck == "Y") //ìŠ¤í‚¬ì‚¬ìš©
 			{
-				Character->Mp -= 20; //Mp ¼Ò¸ğ
-				Damage = (Character->Atk * 1.5) - Mob->Def; //ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö °è»ê (ÇÃ·¹ÀÌ¾îAtk - ¸ó½ºÅÍdef)
-				if (Damage < 0) Damage = 0; //¿¹¿Ü»çÇ×: µ¥¹ÌÁö À½¼öÀÏ °æ¿ì 0À¸·Î °è»ê
-				Mob->Hp -= Damage; //ÃÖÁ¾ µ¥¹ÌÁö °è»ê
-				cout << "\n¡¼Po½½·¡½ÃweR!!¡½" << endl;
-				cout << "ÇÃ·¹ÀÌ¾î´Â " << Damage << " ÀÇ ÇÇÇØ¸¦ ÀÔÇû´Ù!\n" << endl;
-				Skillflag = false; //Skill_Menu ÇÔ¼ö Á¾·á
-				return false; //Atkflag=false : Atk_Menu ÇÔ¼ö Á¾·á return
+				Character->Mp -= 20; //Mp ì†Œëª¨
+				Damage = (Character->Atk * 1.5) - Mob->Def; //í”Œë ˆì´ì–´ ë°ë¯¸ì§€ ê³„ì‚° (í”Œë ˆì´ì–´Atk - ëª¬ìŠ¤í„°def)
+				if (Damage < 0) Damage = 0; //ì˜ˆì™¸ì‚¬í•­: ë°ë¯¸ì§€ ìŒìˆ˜ì¼ ê²½ìš° 0ìœ¼ë¡œ ê³„ì‚°
+				Mob->Hp -= Damage; //ìµœì¢… ë°ë¯¸ì§€ ê³„ì‚°
+				cout << "\nã€PoìŠ¬ë˜ì‹œweR!!ã€‘" << endl;
+				cout << "í”Œë ˆì´ì–´ëŠ” " << Damage << " ì˜ í”¼í•´ë¥¼ ì…í˜”ë‹¤!\n" << endl;
+				Skillflag = false; //Skill_Menu í•¨ìˆ˜ ì¢…ë£Œ
+				return false; //Atkflag=false : Atk_Menu í•¨ìˆ˜ ì¢…ë£Œ return
 			}
 			break;
-		case 2: //Á×À½ÀÇ µ¥½º
-			cout << "\n°ø°İ·Â: " << Character->Atk * 3 << " (def¹«½Ã)" << "\n-HP: 50%\n»ç¿ëÇÒ±î? (Y or else)" << endl;
+		case 2: //ì£½ìŒì˜ ë°ìŠ¤
+			cout << "\nê³µê²©ë ¥: " << Character->Atk * 3 << " (defë¬´ì‹œ)" << "\n-HP: 50%\nì‚¬ìš©í• ê¹Œ? (Y or else)" << endl;
 			cin >> Skillcheck;
-			if (Skillcheck == "Y") //½ºÅ³»ç¿ë ÃÖÁ¾È®ÀÎ
+			if (Skillcheck == "Y") //ìŠ¤í‚¬ì‚¬ìš© ìµœì¢…í™•ì¸
 			{
-				Character->Hp = Character->Hp / 2; //Hp¼Ò¸ğ
-				Damage = (Character->Atk * 3); //ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö °è»ê (ÇÃ·¹ÀÌ¾îAtk - ¸ó½ºÅÍdef)
-				if (Damage < 0) Damage = 0; //¿¹¿Ü»çÇ×: µ¥¹ÌÁö À½¼öÀÏ °æ¿ì 0À¸·Î °è»ê
-				Mob->Hp -= Damage; //ÃÖÁ¾ µ¥¹ÌÁö °è»ê
-				cout << "\n¡¼JJUGEMÀÇ µ¥½º!!!¡½" << endl;
-				cout << "ÇÃ·¹ÀÌ¾î´Â " << Damage << " ÀÇ ÇÇÇØ¸¦ ÀÔÇû´Ù!\n" << endl;
-				Skillflag = false; //Skill_Menu ÇÔ¼ö Á¾·á
-				return false; //Atkflag=false : Atk_Menu ÇÔ¼ö Á¾·á return
+				Character->Hp = Character->Hp / 2; //Hpì†Œëª¨
+				Damage = (Character->Atk * 3); //í”Œë ˆì´ì–´ ë°ë¯¸ì§€ ê³„ì‚° (í”Œë ˆì´ì–´Atk - ëª¬ìŠ¤í„°def)
+				if (Damage < 0) Damage = 0; //ì˜ˆì™¸ì‚¬í•­: ë°ë¯¸ì§€ ìŒìˆ˜ì¼ ê²½ìš° 0ìœ¼ë¡œ ê³„ì‚°
+				Mob->Hp -= Damage; //ìµœì¢… ë°ë¯¸ì§€ ê³„ì‚°
+				cout << "\nã€JJUGEMì˜ ë°ìŠ¤!!!ã€‘" << endl;
+				cout << "í”Œë ˆì´ì–´ëŠ” " << Damage << " ì˜ í”¼í•´ë¥¼ ì…í˜”ë‹¤!\n" << endl;
+				Skillflag = false; //Skill_Menu í•¨ìˆ˜ ì¢…ë£Œ
+				return false; //Atkflag=false : Atk_Menu í•¨ìˆ˜ ì¢…ë£Œ return
 			}
 			break;
-		case 0: //µÚ·Î°¡±â
+		case 0: //ë’¤ë¡œê°€ê¸°
 			cout << "------------------------\n";
-			Skillflag = false; //Skill_Menu ÇÔ¼ö Á¾·á
-			return true; //Atkflag=ture : Atk_Menu ÇÔ¼ö ÀÌ¾îÁü
+			Skillflag = false; //Skill_Menu í•¨ìˆ˜ ì¢…ë£Œ
+			return true; //Atkflag=ture : Atk_Menu í•¨ìˆ˜ ì´ì–´ì§
 			break;
 		}
 	}
