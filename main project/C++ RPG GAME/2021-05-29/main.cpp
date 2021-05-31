@@ -9,7 +9,7 @@ using namespace std;
 
 int Menu;
 int Select;
-bool Firstflag = true; //do while¹® Å»ÃâÁ¶°Ç
+bool Firstflag = true; //do whileë¬¸ íƒˆì¶œì¡°ê±´
 bool Secondflag = true;
 bool Thirdflag = true;
 
@@ -24,18 +24,18 @@ bool Menu1()
     {
         for (int j = 0; j < Map[i].size(); j++)
         {
-            cout << "------------------------\n" << Map[i][j]->Kind << " °¡ ³ªÅ¸³µ´Ù!\n" << endl;//¸ó½ºÅÍ µîÀå
+            cout << "------------------------\n" << Map[i][j]->Kind << " ê°€ ë‚˜íƒ€ë‚¬ë‹¤!\n" << endl;//ëª¬ìŠ¤í„° ë“±ì¥
             Temp_Mob_P->Hp = Map[i][j]->Hp;
             Temp_Mob_P->Mp = Map[i][j]->Mp;
 
-            while (true)//ÀüÅõ
+            while (true)//ì „íˆ¬
             {
-                if (SoNB_P->Speed > Map[i][j]->Speed)//½ºÇÇµå ºñ±³ 
+                if (SoNB_P->Speed > Map[i][j]->Speed)//ìŠ¤í”¼ë“œ ë¹„êµ 
                 {
-                    Atk_Menu(SoNB_P, Map[i][j]);//Ä³¸¯ÅÍ spd>mob spd ÀÌ¹Ç·Î ÇÃ·¹ÀÌ¾î ¼±°ø
-                    if (Map[i][j]->Hp < 0)//¸ó½ºÅÍ »ç¸Á½Ã
+                    Atk_Menu(SoNB_P, Map[i][j]);//ìºë¦­í„° spd>mob spd ì´ë¯€ë¡œ í”Œë ˆì´ì–´ ì„ ê³µ
+                    if (Map[i][j]->Hp < 0)//ëª¬ìŠ¤í„° ì‚¬ë§ì‹œ
                     {
-                        cout << "\n" << Map[i][j]->Kind << " ¸¦ ¹°¸®ÃÆ´Ù!" << endl;
+                        cout << "\n" << Map[i][j]->Kind << " ë¥¼ ë¬¼ë¦¬ì³¤ë‹¤!" << endl;
                         Monster_Die(SoNB_P, Map[i][j]);
                         Map[i][j]->Hp = Temp_Mob_P->Hp;
                         Map[i][j]->Mp = Temp_Mob_P->Mp;
@@ -44,10 +44,11 @@ bool Menu1()
                         break;
                     }
                     Mob_Atk(Map[i][j], SoNB_P);
-                    if (SoNB_P->Hp < 0) //µµÁß¿¡ Ä³¸¯ÅÍ°¡ »ç¸Á½Ã °ÔÀÓ¿À¹ö 
+                    if (SoNB_P->Hp < 0) //ë„ì¤‘ì— ìºë¦­í„°ê°€ ì‚¬ë§ì‹œ ê²Œì„ì˜¤ë²„ 
                     {
                         cout << "Game over..." << endl;
-                        i = Map.size() - 1; //ÇÑ¹ø¿¡ i¸¦ ³¡ÀÎµ¦½º±îÁö ¿Ã·Á¼­ ÁßÃ¸for¹® ¹İº¹ÁßÁö
+                        SoNB_P->Restat();
+                        i = Map.size() - 1; //í•œë²ˆì— ië¥¼ ëì¸ë±ìŠ¤ê¹Œì§€ ì˜¬ë ¤ì„œ ì¤‘ì²©forë¬¸ ë°˜ë³µì¤‘ì§€
                         return false;                
                         break;
                     }
@@ -57,10 +58,11 @@ bool Menu1()
 
                 else
                 {
-                    Mob_Atk(Map[i][j], SoNB_P);//mob spd> Ä³¸¯ÅÍ spd ÀÌ¹Ç·Î mob ¼±°ø
+                    Mob_Atk(Map[i][j], SoNB_P);//mob spd> ìºë¦­í„° spd ì´ë¯€ë¡œ mob ì„ ê³µ
                     if (SoNB_P->Hp < 0)
                     {
                         cout << "Game over..." << endl;
+                        SoNB_P->Restat();
                         i = Map.size() - 1;
                         return false;
                         break;
@@ -69,7 +71,7 @@ bool Menu1()
                     Atk_Menu(SoNB_P, Map[i][j]);
                     if (Map[i][j]->Hp < 0)
                     {
-                        cout << Map[i][j]->Kind << " ¸¦ ¹°¸®ÃÆ´Ù!" << endl;
+                        cout << Map[i][j]->Kind << " ë¥¼ ë¬¼ë¦¬ì³¤ë‹¤!" << endl;
                         Monster_Die(SoNB_P, Map[i][j]);
                         Map[i][j]->Hp = Temp_Mob_P->Hp;
                         Map[i][j]->Mp = Temp_Mob_P->Mp;
@@ -87,21 +89,21 @@ bool Menu1()
 }
 
 int main()
-{//¸Ş´º ¼±ÅÃ
+{//ë©”ë‰´ ì„ íƒ
 
     do {
-        cout << "¡¼ TEST BETA GAME ¡½\n\n" << "¸Ş´º¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä ~ !\n";
-        cout << "\n1.°ÔÀÓ½ÃÀÛ\n2.°ÔÀÓ ¼³¸í\n3.°ÔÀÓ Á¾·á\n";
+        cout << "ã€ TEST BETA GAME ã€‘\n\n" << "ë©”ë‰´ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš” ~ !\n";
+        cout << "\n1.ê²Œì„ì‹œì‘\n2.ê²Œì„ ì„¤ëª…\n3.ê²Œì„ ì¢…ë£Œ\n";
 
         cin >> Menu;
         switch (Menu)
         {
         case 1:
-            Secondflag = true;//¸ŞÀÎ¸Ş´º --> ¸Ê¼±ÅÃ(flase¹æÁö)
+            Secondflag = true;//ë©”ì¸ë©”ë‰´ --> ë§µì„ íƒ(flaseë°©ì§€)
             while (Secondflag)
             {
                 cout << "------------------------\n";
-                cout << "1. ¸Ê ¼±ÅÃ\n2. »óÁ¡\n3. ¸ŞÀÎ¸Ş´º\n";
+                cout << "1. ë§µ ì„ íƒ\n2. ìƒì \n3. ë©”ì¸ë©”ë‰´\n";
                 cin >> Menu;
                 switch (Menu)
                 {
@@ -117,13 +119,13 @@ int main()
                     cout << "------------------------\n";
                     break;
                 default:
-                    cout << "\n´Ù½Ã ÀÔ·ÂÇØ ÁÖ¼¼¿ä\n";
+                    cout << "\në‹¤ì‹œ ì…ë ¥í•´ ì£¼ì„¸ìš”\n";
                     break;
                 }
             }
             break;
         case 2:
-            cout << "\nÀÌ °ÔÀÓÀº ÇöÀç °³¹ß Áß¿¡ ÀÖ´Â C++ ±â¹İ RPGÀÔ´Ï´Ù.\n";
+            cout << "\nì´ ê²Œì„ì€ í˜„ì¬ ê°œë°œ ì¤‘ì— ìˆëŠ” C++ ê¸°ë°˜ RPGì…ë‹ˆë‹¤.\n";
             cout << "------------------------\n";
             break;
         case 3:
@@ -131,8 +133,8 @@ int main()
             break;
         default:
             cout << "------------------------\n";
-            cout << "¿Ã¹Ù¸¥ ¼ıÀÚ ÀÔ·Â" << endl;
+            cout << "ì˜¬ë°”ë¥¸ ìˆ«ì ì…ë ¥" << endl;
             break;
         }
-    } while (Firstflag); //¸Ş´º Á¤¼®(do while)
+    } while (Firstflag); //ë©”ë‰´ ì •ì„(do while)
 }
