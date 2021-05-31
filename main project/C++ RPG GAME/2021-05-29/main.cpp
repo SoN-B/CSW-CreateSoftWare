@@ -2,8 +2,8 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include "player.h"
 #include "inventory.h"
+#include "player.h"
 #include "map.h"
 using namespace std;
 
