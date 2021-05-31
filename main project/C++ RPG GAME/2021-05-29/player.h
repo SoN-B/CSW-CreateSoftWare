@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include "monster.h"
-#include "inventory.h"
 using namespace std;
 
 typedef struct My_Character //플레이어 클래스
