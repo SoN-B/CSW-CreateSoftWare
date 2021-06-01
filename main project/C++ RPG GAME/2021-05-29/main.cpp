@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -58,7 +58,11 @@ bool Menu1()
     {
         for (int j = 0; j < Map[i].size(); j++)
         {
-            cout << "------------------------\n" << Map[i][j]->Kind << " 가 나타났다!\n" << endl;//몬스터 등장
+            cout << "------------------------\n";
+            setColor(2);
+            cout << Map[i][j]->Kind << " 가 나타났다!\n" << endl;//몬스터 등장
+            setColor(15);
+
             Temp_Mob_P->Hp = Map[i][j]->Hp;
             Temp_Mob_P->Mp = Map[i][j]->Mp;
 
@@ -83,7 +87,7 @@ bool Menu1()
                         cout << "Game over..." << endl;
                         SoNB_P->Restat();
                         i = Map.size() - 1; //한번에 i를 끝인덱스까지 올려서 중첩for문 반복중지
-                        return false;                
+                        return false;
                         break;
                     }
                     cout << "------------------------\n";
@@ -124,18 +128,27 @@ bool Menu1()
 
 int main()
 {//메뉴 선택
+    SetConsoleTitle(TEXT("C++ based RPG GAME"));
 
     do {
+        system("cls");
         //cout << "【 TEST BETA GAME 】\n\n";
+        setColor(12);
         Dungeon();
+        setColor(15);
+
+
         GoToXy(25, 18);
+        setColor(10);
         cout << "메뉴를 선택해 주세요 ~ !\n";
+        setColor(15);
         GoToXy(27, 19);
         cout << "1.게임시작\n";
         GoToXy(27, 20);
         cout << "2.게임 설명\n";
         GoToXy(27, 21);
         cout << "3.게임 종료\n";
+
         Menu = _getch() - 48;
         system("cls");
         switch (Menu)
