@@ -1,13 +1,18 @@
 #pragma once
 #include <iostream>
+#include <Windows.h>
 #include "monster.h"
 using namespace std;
+
+void setColor(unsigned short text) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
+}
 
 typedef struct My_Character //플레이어 클래스
 {
 	double Hp, Mp, Atk, Def, Speed, Level = 1, Exp = 0, Max_Exp = 100, Money = 0;
 
-	My_Character(double Hp = 200, double Mp = 100, double Atk = 50, double Def = 5, 
+	My_Character(double Hp = 200, double Mp = 100, double Atk = 50, double Def = 5,
 		double Speed = 1.5, double Money = 1000)
 	{
 		this->Hp = Hp;
@@ -20,9 +25,9 @@ typedef struct My_Character //플레이어 클래스
 
 	void Get_Character_Info()//플레이어 상태 출력 
 	{
-		cout << "\Level : " << Level << "\nMax Exp/Exp : "<< Max_Exp << "/" << Exp
-			<< "\nHP : " << Hp << "\nMP: " << Mp << "\nATK: " << Atk << "\nDEF: " << Def 
-			<<"\nMoney : " << Money << " Coin"<< endl;
+		cout << "\Level : " << Level << "\nMax Exp/Exp : " << Max_Exp << "/" << Exp
+			<< "\nHP : " << Hp << "\nMP: " << Mp << "\nATK: " << Atk << "\nDEF: " << Def
+			<< "\nMoney : " << Money << " Coin" << endl;
 		cout << "------------------------\n";
 	}
 
@@ -65,24 +70,24 @@ My_Character* SoNB_P = &SoNB;
 class Skill //스킬 클래스
 {
 public:
-    string Skillname;
-    double Usedhp, Usedmp, Healhp, Healmp, Multiples, Static;
-    Skill()
-    {
-        Skillname = "";
-    }
-    Skill(string Skillname,double Usedhp,double Usedmp,double Healhp,double Healmp,double Multiples, double Static)
-    {
-        this->Skillname = Skillname; //스킬이름
-        this->Usedhp = Usedhp; //사용되는 Hp
-        this->Usedmp = Usedmp; //사용되는 Mp
-        this->Healhp = Healhp; // 효과로 받는 Hp
-        this->Healmp = Healmp; // 효과로 받는 Mp
-        this->Multiples = Multiples; // 배수 데미지
-        this->Static = Static; // 고정데미지 
-    }
-    void Use_Skill(My_Character* Character, Monster* Mob, Skill Skill);
-    void Skill_Info(My_Character* Character, Skill Skill);
+	string Skillname;
+	double Usedhp, Usedmp, Healhp, Healmp, Multiples, Static;
+	Skill()
+	{
+		Skillname = "";
+	}
+	Skill(string Skillname, double Usedhp, double Usedmp, double Healhp, double Healmp, double Multiples, double Static)
+	{
+		this->Skillname = Skillname; //스킬이름
+		this->Usedhp = Usedhp; //사용되는 Hp
+		this->Usedmp = Usedmp; //사용되는 Mp
+		this->Healhp = Healhp; // 효과로 받는 Hp
+		this->Healmp = Healmp; // 효과로 받는 Mp
+		this->Multiples = Multiples; // 배수 데미지
+		this->Static = Static; // 고정데미지 
+	}
+	void Use_Skill(My_Character* Character, Monster* Mob, Skill Skill);
+	void Skill_Info(My_Character* Character, Skill Skill);
 };
 
 void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스킬 사용 함수
@@ -113,16 +118,60 @@ void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스�
 
 void Skill::Skill_Info(My_Character* Character, Skill Skill)//스킬 정보 함수
 {//해당 스킬에 관련된 정보만 전달
-    cout << "-------------------\n스킬: " << Skill.Skillname << endl;
-    if (Skill.Usedhp != 0) { cout << "소모 HP: " << Skill.Usedhp << endl; }
-    if (Skill.Usedmp != 0) { cout << "소모 MP: " << Skill.Usedmp << endl; }
-    if (Skill.Healhp != 0) { cout << "회복 HP: " << Skill.Healhp << endl; }
-    if (Skill.Healmp != 0) { cout << "회복 MP: " << Skill.Healmp << endl; }
-    if (Skill.Multiples != 0) 
-    { 
-        cout << "적에게 " << Character->Atk << " * " << Skill.Multiples << " 만큼의 데미지를 입힌다.\n현재 데미지: " << Character->Atk * Skill.Multiples << endl;
-    }
-    if (Skill.Static != 0) { cout << "적에게 " << Skill.Static << " 만큼의 데미지를 입힌다." << endl; }
+	cout << "-------------------\n스킬: " << Skill.Skillname << endl;
+	if (Skill.Usedhp != 0) { 
+		cout << "소모 HP: ";
+
+		setColor(4);
+		cout << Skill.Usedhp << endl; 
+		setColor(15);
+	}
+	if (Skill.Usedmp != 0) { 
+		cout << "소모 MP: ";
+
+		setColor(9);
+		cout << Skill.Usedmp << endl; 
+		setColor(15);
+	}
+	if (Skill.Healhp != 0) {
+		cout << "회복 HP: ";
+
+		setColor(4);
+		cout << Skill.Healhp << endl;
+		setColor(15);
+	}
+	if (Skill.Healmp != 0) { 
+		cout << "회복 MP: ";
+
+		setColor(9);
+		cout << Skill.Healmp << endl; 
+		setColor(15);
+	}
+	if (Skill.Multiples != 0)
+	{
+		cout << "적에게 ";
+
+		setColor(12);
+		cout << Character->Atk << " * " << Skill.Multiples;
+		setColor(15);
+
+
+		cout << " 만큼의 데미지를 입힌다.\n";
+		cout << "현재 데미지: ";
+
+		setColor(12);
+		cout << Character->Atk * Skill.Multiples << endl;
+		setColor(15);
+	}
+	if (Skill.Static != 0) {
+		cout << "적에게 ";
+
+		setColor(12);
+		cout << Skill.Static;
+		setColor(15);
+
+		cout << " 만큼의 데미지를 입힌다." << endl;
+	}
 }
 //이하 스킬 구현
 Skill Power_Slash("파워 슬래시", 0.0, 20.0, 0.0, 0.0, 1.2, 0.0);//마나20소모, 데미지1.2배
@@ -139,8 +188,18 @@ void Mob_Atk(Monster* Mob, My_Character* Character)
 	//몹 공격력<플레이어 방어력 경우 음수 나오는 상황 배제
 
 	Character->Hp -= Damage;
+
+	setColor(10);
 	cout << "【" << Mob->Kind << " 의 공격!】" << endl;
-	cout << "플레이어는 " << Damage << " 의 피해를 입었다!\n" << endl;
+	setColor(15);
+
+	cout << "플레이어는 ";
+
+	setColor(12);
+	cout << Damage;
+	setColor(15);
+
+	cout << " 의 피해를 입었다!\n" << endl;
 }
 
 bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag);
@@ -157,12 +216,25 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 		switch (Choice)
 		{
 		case 1: //기본공격
+			setColor(12);
 			cout << "\n적에게 공격을 가합니다!!\n\n";
+			setColor(15);
+
 			Damage = Character->Atk - Mob->Def; //플레이어 데미지 계산 (플레이어Atk - 몬스터def)
 			if (Damage < 0) Damage = 0; //예외사항: 데미지 음수일 경우 0으로 계산
 			Mob->Hp -= Damage; //최종 데미지 계산
+
+			setColor(10);
 			cout << "【플레이어의 공격!】" << endl;
-			cout << "플레이어는 " << Damage << " 의 피해를 입혔다!\n" << endl;
+			setColor(15);
+
+			cout << "플레이어는 ";
+			
+			setColor(12);
+			cout << Damage;
+			setColor(15);
+			
+			cout << " 의 피해를 입혔다!\n" << endl;
 			Atkflag = false;
 			break;
 		case 2: //스킬사용
@@ -197,7 +269,12 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 	double Damage; // 플레이어의 최종 스킬 데미지
 	while (Skillflag)
 	{
-		cout << "------------------------\n" << "SKILL MENU" << endl;
+		cout << "------------------------\n";
+		
+		setColor(10);
+		cout << "SKILL MENU" << endl;
+		setColor(15);
+
 		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Arry[i].Skillname << endl; }// 스킬 메뉴
 		cout << "0. 뒤로가기" << endl;
 		cin >> Skillmenu;
