@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <Windows.h>
+#include <conio.h>
 #include "player.h"
 #include "inventory.h"
 #include "map.h"
@@ -13,6 +15,13 @@ bool Firstflag = true; //do while문 탈출조건
 bool Secondflag = true;
 bool Thirdflag = true;
 
+void GoToXy(int x, int y)
+{
+    COORD Pos;
+    Pos.X = 2 * x;
+    Pos.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
 bool Menu1()
 {
     cout << "------------------------\n";
