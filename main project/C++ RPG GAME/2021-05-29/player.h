@@ -199,7 +199,7 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 	while (Skillflag)
 	{
 		cout << "------------------------\n" << "SKILL MENU" << endl;
-		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Arry[ㅑ].Skillname << endl; }// 스킬 메뉴
+		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Arry[i].Skillname << endl; }// 스킬 메뉴
 		cout << "0. 뒤로가기" << endl;
 		cin >> Skillmenu;
 		if (Skillmenu == 0)
