@@ -137,9 +137,14 @@ int main()
             Secondflag = true;//메인메뉴 --> 맵선택(flase방지)
             while (Secondflag)
             {
-                cout << "------------------------\n";
-                cout << "1. 맵 선택\n2. 상점\n3. 메인메뉴\n";
-                cin >> Menu;
+                GoToXy(10, 15);
+                cout << "1. 맵 선택";
+                GoToXy(27, 15);
+                cout << "2. 상점";
+                GoToXy(43, 15);
+                cout << "3. 메인메뉴\n";
+                GoToXy(0, 30);
+                Menu = _getch() - 48;
                 switch (Menu)
                 {
                 case 1:
