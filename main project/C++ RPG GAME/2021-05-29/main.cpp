@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -144,6 +144,7 @@ int main()
             Secondflag = true;//메인메뉴 --> 맵선택(flase방지)
             while (Secondflag)
             {
+                system("cls");
                 GoToXy(10, 15);
                 cout << "1. 맵 선택";
                 GoToXy(27, 15);
