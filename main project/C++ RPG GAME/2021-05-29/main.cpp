@@ -119,10 +119,18 @@ int main()
 {//메뉴 선택
 
     do {
-        cout << "【 TEST BETA GAME 】\n\n" << "메뉴를 선택해 주세요 ~ !\n";
-        cout << "\n1.게임시작\n2.게임 설명\n3.게임 종료\n";
-
-        cin >> Menu;
+        //cout << "【 TEST BETA GAME 】\n\n";
+        Dungeon();
+        GoToXy(25, 18);
+        cout << "메뉴를 선택해 주세요 ~ !\n";
+        GoToXy(27, 19);
+        cout << "1.게임시작\n";
+        GoToXy(27, 20);
+        cout << "2.게임 설명\n";
+        GoToXy(27, 21);
+        cout << "3.게임 종료\n";
+        Menu = _getch() - 48;
+        system("cls");
         switch (Menu)
         {
         case 1:
