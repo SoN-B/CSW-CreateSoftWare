@@ -42,10 +42,17 @@ void Dungeon()
 }
 bool Menu1()
 {
-    cout << "------------------------\n";
-    cout << "Map1   Map2   Map3\n";
-    cin >> Select;
+    system("cls");
+    GoToXy(10, 15);
+    cout << "Map1";
+    GoToXy(27, 15);
+    cout << "Map2";
+    GoToXy(43, 15);
+    cout << "Map3";
+    GoToXy(0, 30);
+    Select = _getch() - 48;
     Map = Maps[Select - 1];
+    system("cls");
 
     for (int i = 0; i < Map.size(); i++)
     {
