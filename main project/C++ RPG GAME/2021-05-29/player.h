@@ -211,8 +211,8 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 		if (Skillmenu >= 1 && Skillmenu <= 4)
 		{
 			Skill_Arry[Skillmenu - 1].Skill_Info(Character, Skill_Arry[Skillmenu - 1]);//스킬정보 출력
-			cin >> Skillcheck; //스킬사용 최종확인
 			cout << Skill_Arry[Skillmenu - 1].Skillname << " 를 사용할까? (Y or else)" << endl;
+			cin >> Skillcheck; //스킬사용 최종확인
 			if (Skillcheck == "Y")//스킬 사용 확인시
 			{
 				Skill_Arry[Skillmenu - 1].Use_Skill(Character, Mob, Skill_Arry[Skillmenu - 1]);//스킬사용
