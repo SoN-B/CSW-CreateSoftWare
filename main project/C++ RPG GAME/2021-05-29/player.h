@@ -62,6 +62,73 @@ typedef struct My_Character //플레이어 클래스
 My_Character SoNB;
 My_Character* SoNB_P = &SoNB;
 
+class Skill //스킬 클래스
+{
+public:
+    string Skillname;
+    double Usedhp, Usedmp, Healhp, Healmp, Multiples, Static;
+    Skill()
+    {
+        Skillname = "";
+    }
+    Skill(string Skillname,double Usedhp,double Usedmp,double Healhp,double Healmp,double Multiples, double Static)
+    {
+        this->Skillname = Skillname; //스킬이름
+        this->Usedhp = Usedhp; //사용되는 Hp
+        this->Usedmp = Usedmp; //사용되는 Mp
+        this->Healhp = Healhp; // 효과로 받는 Hp
+        this->Healmp = Healmp; // 효과로 받는 Mp
+        this->Multiples = Multiples; // 배수 데미지
+        this->Static = Static; // 고정데미지 
+    }
+    void Use_Skill(My_Character* Character, Monster* Mob, Skill Skill);
+    void Skill_Info(My_Character* Character, Skill Skill);
+};
+
+void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스킬 사용 함수
+{
+    double Damage=0;//데미지 초기화
+    cout << "----------------\n스킬사용! " << Skill.Skillname << endl;
+    Character->Hp -= Skill.Usedhp;//체력 소모
+    Character->Mp -= Skill.Usedmp;//마나 소모
+    if (Skill.Healhp != 0 || Skill.Healmp != 0)//회복 관련 경우
+    {
+        Character->Hp += Skill.Healhp;//체력 회복
+        Character->Mp += Skill.Healmp;//마나 회복
+        cout << "플레이어는 " << Skill.Healhp << " 의 체력을 회복했다!" << endl;
+        cout << "플레이어는 " << Skill.Healmp << " 의 마나를 회복했다!" << endl;
+    }
+    if (Skill.Multiples != 0 || Skill.Static != 0)//공격 관련 경우
+    {
+        if (Skill.Multiples != 0) { Damage = (Character->Atk * Skill.Multiples) - Mob->Def; }//배수 데미지 계산
+        if (Skill.Static != 0) { Damage = Skill.Static - Mob->Def; }//고정 데미지 계산
+        if (Damage < 0) { Damage = 0; }//예외사항: 데미지 음수일 경우 0으로 계산
+        Mob->Hp -= Damage;//최종 데미지 계산
+        cout << "플레이어는 " << Damage << " 의 데미지를 입혔다!" << endl;
+    }
+}
+
+void Skill::Skill_Info(My_Character* Character, Skill Skill)//스킬 정보 함수
+{//해당 스킬에 관련된 정보만 전달
+    cout << "-------------------\n스킬: " << Skill.Skillname << endl;
+    if (Skill.Usedhp != 0) { cout << "소모 HP: " << Skill.Usedhp << endl; }
+    if (Skill.Usedmp != 0) { cout << "소모 MP: " << Skill.Usedmp << endl; }
+    if (Skill.Healhp != 0) { cout << "회복 HP: " << Skill.Healhp << endl; }
+    if (Skill.Healmp != 0) { cout << "회복 MP: " << Skill.Healmp << endl; }
+    if (Skill.Multiples != 0) 
+    { 
+        cout << "적에게 " << Character->Atk << " * " << Skill.Multiples << " 만큼의 데미지를 입힌다.\n현재 데미지: " << Character->Atk * Skill.Multiples << endl;
+    }
+    if (Skill.Static != 0) { cout << "적에게 " << Skill.Static << " 만큼의 데미지를 입힌다." << endl; }
+}
+//이하 스킬 구현
+Skill Power_Slash("파워 슬래시", 0.0, 20.0, 0.0, 0.0, 1.2, 0.0);//마나20소모, 데미지1.2배
+Skill Blood_Slash("블러드 슬래시", 100, 0, 0, 0, 0, 150);//체력100소모, 150데미지
+Skill Mind_Fuel("회광반조", 0, 30, 15, 0, 0, 0);//마나 30소모, 체력15회복
+Skill Prayer("기도", 0, 0, 0, 20, 0, 0);//소모없음, 마나20회복
+//플레이어의 스킬창 기본값
+Skill Skill_Arry[4] = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };
+
 void Mob_Atk(Monster* Mob, My_Character* Character)
 {
 	double Damage = Mob->Atk - Character->Def;
