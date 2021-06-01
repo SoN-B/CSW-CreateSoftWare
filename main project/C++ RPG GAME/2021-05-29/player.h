@@ -195,45 +195,26 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 	while (Skillflag)
 	{
 		cout << "------------------------\n" << "SKILL MENU" << endl;
-		cout << "1. 파워 슬래시\n2. 죽음의 DEATH\n0. 뒤로가기" << endl;// 스킬 메뉴
+		for (int i = 0; i < 3; i++) { cout << i + 1 << ". " << Skill_Arry[0].Skillname << endl; }// 스킬 메뉴
+		cout << "0. 뒤로가기" << endl;
 		cin >> Skillmenu;
-		switch (Skillmenu)
+		if (Skillmenu == 0)
 		{
-		case 1: //파워 슬래시 
-			cout << "\n공격력: " << Character->Atk * 1.2 << "\nMP: 100\n사용할까? (Y or else)" << endl;
-			cin >> Skillcheck; //스킬사용 최종확인
-			if (Skillcheck == "Y") //스킬사용
-			{
-				Character->Mp -= 20; //Mp 소모
-				Damage = (Character->Atk * 1.5) - Mob->Def; //플레이어 데미지 계산 (플레이어Atk - 몬스터def)
-				if (Damage < 0) Damage = 0; //예외사항: 데미지 음수일 경우 0으로 계산
-				Mob->Hp -= Damage; //최종 데미지 계산
-				cout << "\n【Po슬래시weR!!】" << endl;
-				cout << "플레이어는 " << Damage << " 의 피해를 입혔다!\n" << endl;
-				Skillflag = false; //Skill_Menu 함수 종료
-				return false; //Atkflag=false : Atk_Menu 함수 종료 return
-			}
-			break;
-		case 2: //죽음의 데스
-			cout << "\n공격력: " << Character->Atk * 3 << " (def무시)" << "\n-HP: 50%\n사용할까? (Y or else)" << endl;
-			cin >> Skillcheck;
-			if (Skillcheck == "Y") //스킬사용 최종확인
-			{
-				Character->Hp = Character->Hp / 2; //Hp소모
-				Damage = (Character->Atk * 3); //플레이어 데미지 계산 (플레이어Atk - 몬스터def)
-				if (Damage < 0) Damage = 0; //예외사항: 데미지 음수일 경우 0으로 계산
-				Mob->Hp -= Damage; //최종 데미지 계산
-				cout << "\n【JJUGEM의 데스!!!】" << endl;
-				cout << "플레이어는 " << Damage << " 의 피해를 입혔다!\n" << endl;
-				Skillflag = false; //Skill_Menu 함수 종료
-				return false; //Atkflag=false : Atk_Menu 함수 종료 return
-			}
-			break;
-		case 0: //뒤로가기
 			cout << "------------------------\n";
 			Skillflag = false; //Skill_Menu 함수 종료
 			return true; //Atkflag=ture : Atk_Menu 함수 이어짐
-			break;
+		}
+		if (Skillmenu >= 1 && Skillmenu <= 4)
+		{
+			Skill_Arry[Skillmenu - 1].Skill_Info(Character, Skill_Arry[Skillmenu - 1]);//스킬정보 출력
+			cin >> Skillcheck; //스킬사용 최종확인
+			cout << Skill_Arry[Skillmenu - 1].Skillname << " 를 사용할까? (Y or else)" << endl;
+			if (Skillcheck == "Y")//스킬 사용 확인시
+			{
+				Skill_Arry[Skillmenu - 1].Use_Skill(Character, Mob, Skill_Arry[Skillmenu - 1]);//스킬사용
+				Skillflag = false; //Skill_Menu 함수 종료
+				return false; //Atkflag=false : Atk_Menu 함수 종료 return
+			}
 		}
 	}
 }
