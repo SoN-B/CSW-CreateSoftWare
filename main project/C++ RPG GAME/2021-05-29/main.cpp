@@ -152,11 +152,12 @@ int main()
                     break;
                 case 2:
                     Thirdflag = true;
+                    system("cls");
                     while (Thirdflag) Thirdflag = Open_Store(Inventory);
                     break;
                 case 3:
                     Secondflag = false;
-                    cout << "------------------------\n";
+                    GoToXy(0, 30);
                     break;
                 default:
                     cout << "\n다시 입력해 주세요\n";
