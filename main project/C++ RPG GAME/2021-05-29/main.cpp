@@ -22,6 +22,24 @@ void GoToXy(int x, int y)
     Pos.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
+void Dungeon()
+{
+    GoToXy(10, 10);
+    cout << "DDDDD     UU       UU NNN      N	 GGGGGG    EEEEEEEE	OOOO	NNN      N";
+    GoToXy(10, 11);
+    cout << "DD    DD  UU       UU NNNN     N  GG      GG   EE	      OO    OO	NNNN     N";
+    GoToXy(10, 12);
+    cout << "DD     DD UU       UU NN NN    N  GG           EE	     OO      OO	NN NN    N";
+    GoToXy(10, 13);
+    cout << "DD      DDUU       UU NN  NN   N  GG   GGGGGG  EEEEEEEE OO        OONN  NN   N";
+    GoToXy(10, 14);
+    cout << "DD     DD UU       UU NN   NN  N  GG       GG  EE	     OO      OO	NN   NN  N";
+    GoToXy(10, 15);
+    cout << "DD    DD	UU    UU  NN    NN N	GG    GG   EE	      OO    OO	NN    NN N";
+    GoToXy(10, 16);
+    cout << "DDDDD         UUUU    NN     NNN	  GGGGG    EEEEEEEE	OOOO	NN     NNN";
+    GoToXy(10, 17);
+}
 bool Menu1()
 {
     cout << "------------------------\n";
