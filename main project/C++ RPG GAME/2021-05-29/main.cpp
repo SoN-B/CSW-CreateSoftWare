@@ -160,7 +160,6 @@ int main()
                     GoToXy(0, 30);
                     break;
                 default:
-                    cout << "\n다시 입력해 주세요\n";
                     break;
                 }
             }
@@ -173,8 +172,6 @@ int main()
             Firstflag = false;
             break;
         default:
-            cout << "------------------------\n";
-            cout << "올바른 숫자 입력" << endl;
             break;
         }
     } while (Firstflag); //메뉴 정석(do while)
