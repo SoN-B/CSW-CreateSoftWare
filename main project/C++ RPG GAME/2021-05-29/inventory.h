@@ -7,13 +7,13 @@
 
 double Money = SoNB_P->Money;
 using namespace std;
-// ¿Œ∫•≈‰∏Æ¿« ∫Û ∞¯∞£¿ª "0"¿∏∑Œ «•«ˆ«‘
+// Ïù∏Î≤§ÌÜ†Î¶¨Ïùò Îπà Í≥µÍ∞ÑÏùÑ "0"ÏúºÎ°ú ÌëúÌòÑÌï®
 string DropItem;
-//----------------¿Â∫Ò√¢
-//----------------¿Œµ¶Ω∫∏∂¥Ÿ ¿Â¬¯ ∞°¥…«— ¡æ∑˘∞° ¥Ÿ∏ß
-//----------------0 : ≈ı±∏, 1 : ∞©ø , 2 : π´±‚, 3 : ¿Â∞©, 4 : Ω≈πﬂ
+//----------------Ïû•ÎπÑÏ∞Ω
+//----------------Ïù∏Îç±Ïä§ÎßàÎã§ Ïû•Ï∞© Í∞ÄÎä•Ìïú Ï¢ÖÎ•òÍ∞Ä Îã§Î¶Ñ
+//----------------0 : Ìà¨Íµ¨, 1 : Í∞ëÏò∑, 2 : Î¨¥Í∏∞, 3 : Ïû•Í∞ë, 4 : Ïã†Î∞ú
 string Equipment_slot[5] = { "0", "0", "0", "0", "0" };
-//----------------¿Œ∫•≈‰∏Æ
+//----------------Ïù∏Î≤§ÌÜ†Î¶¨
 string Inventory[5] = { "0", "0", "0", "0", "0" };
 
 class Equipment {
@@ -30,30 +30,30 @@ public:
 		this->Def = Def;
 		this->Speed = Speed;
 		this->Price = Price;
-		//----------------Kind¥¬ æ∆¿Ã≈€¿« ¡æ∑˘∏¶ ≥™≈∏≥ø
-		//----------------0 : ≈ı±∏, 1 : ∞©ø , 2 : π´±‚, 3 : ¿Â∞©, 4 : Ω≈πﬂ
+		//----------------KindÎäî ÏïÑÏù¥ÌÖúÏùò Ï¢ÖÎ•òÎ•º ÎÇòÌÉÄÎÉÑ
+		//----------------0 : Ìà¨Íµ¨, 1 : Í∞ëÏò∑, 2 : Î¨¥Í∏∞, 3 : Ïû•Í∞ë, 4 : Ïã†Î∞ú
 		this->Kind = Kind;
 	}
 };
 
-//----------------¿Â∫Ò æ∆¿Ã≈€
-//----------------≈ı±∏
+//----------------Ïû•ÎπÑ ÏïÑÏù¥ÌÖú
+//----------------Ìà¨Íµ¨
 Equipment Fabric_helmet = { "Fabric helmet", 5, 0, 0, 5, 0, 200, 0 };
 Equipment Leather_helmet = { "Leather helmet", 10, 0, 0, 10, 0, 300 , 0 };
 Equipment Wood_helmet = { "Wood helmet", 20, 0, 0, 20, -0.3, 500, 0 };
-//----------------∞©ø 
+//----------------Í∞ëÏò∑
 Equipment Fabric_armor = { "Fabric armor", 10, 0, 0, 10, 0, 300, 1 };
 Equipment Leather_armor = { "Leather armor", 15, 0, 0, 15, 0, 400, 1 };
 Equipment Wood_armor = { "Wood armor", 25, 0, 0, 25, -0.5, 600, 1 };
-//----------------π´±‚
+//----------------Î¨¥Í∏∞
 Equipment Fabric_sword = { "Fabric sword", 0, 0, 15, 0, 1, 300, 2 };
 Equipment Leather_sword = { "Leather sword", 0, 0, 20, 0, 1, 400, 2 };
 Equipment Wood_sword = { "Wood sword", 0, 0, 30, 0, 1, 600, 2 };
-//----------------¿Â∞©
+//----------------Ïû•Í∞ë
 Equipment Fabric_gloves = { "Fabric gloves", 3, 0, 0, 3, 0.2, 100, 3 };
 Equipment Leather_gloves = { "Leather gloves", 5, 0, 0, 5, 0.2, 250, 3 };
 Equipment Wood_gloves = { "Wood gloves", 15, 0, 0, 15, 0.5, 450, 3 };
-//----------------Ω≈πﬂ
+//----------------Ïã†Î∞ú
 Equipment Fabric_shoes = { "Fabric shoes", 3, 0, 0, 3, 0.2, 100, 4 };
 Equipment Leather_shoes = { "Leather shoes", 5, 0, 0, 5, 0.2, 250, 4 };
 Equipment Wood_shoes = { "Wood shoes", 15, 0, 0, 15, 0.5, 450, 4 };
@@ -62,7 +62,7 @@ Equipment Equipments[15] = { Fabric_helmet, Leather_helmet, Wood_helmet, Fabric_
 Leather_armor, Wood_armor, Fabric_sword, Leather_sword, Wood_sword, Fabric_gloves,
 Leather_gloves, Wood_gloves, Fabric_shoes, Leather_shoes, Wood_shoes };
 
-class Gacha_Equipment {   //ªÛ¡°¿« ∞°√≠ø°º≠∏∏ ªÃ¿ª ºˆ ¿÷¥¬ »Ò±Õ æ∆¿Ã≈€
+class Gacha_Equipment {   //ÏÉÅÏ†êÏùò Í∞ÄÏ±†ÏóêÏÑúÎßå ÎΩëÏùÑ Ïàò ÏûàÎäî Ìù¨Í∑Ä ÏïÑÏù¥ÌÖú
 public:
 	string Name;
 	double Hp, Mp, Atk, Def, Speed, Price;
@@ -76,22 +76,22 @@ public:
 		this->Def = Def;
 		this->Speed = Speed;
 		this->Price = Price;
-		//----------------Kind¥¬ æ∆¿Ã≈€¿« ¡æ∑˘∏¶ ≥™≈∏≥ø
-		//----------------0 : ≈ı±∏, 1 : ∞©ø , 2 : π´±‚, 3 : ¿Â∞©, 4 : Ω≈πﬂ
+		//----------------KindÎäî ÏïÑÏù¥ÌÖúÏùò Ï¢ÖÎ•òÎ•º ÎÇòÌÉÄÎÉÑ
+		//----------------0 : Ìà¨Íµ¨, 1 : Í∞ëÏò∑, 2 : Î¨¥Í∏∞, 3 : Ïû•Í∞ë, 4 : Ïã†Î∞ú
 		this->Kind = Kind;
 	}
 };
 
-//----------------∞°√≠ ¿Â∫Ò
-//----------------≈ı±∏
+//----------------Í∞ÄÏ±† Ïû•ÎπÑ
+//----------------Ìà¨Íµ¨
 Gacha_Equipment Bamboo_helmet = { "Bamboo helmet", 150, 0, 0, 50, 0, 0, 0 };
-//----------------∞©ø 
+//----------------Í∞ëÏò∑
 Gacha_Equipment Bamboo_aromr = { "Bamboo armor", 150, 0, 0, 50, 0, 0, 1 };
-//----------------π´±‚
+//----------------Î¨¥Í∏∞
 Gacha_Equipment Bamboo_spear = { "Bamboo spear", 0, 0, 100, 0, 10, 0, 2 };
-//----------------¿Â∞©
+//----------------Ïû•Í∞ë
 Gacha_Equipment Bamboo_gloves = { "Bamboo gloves", 100, 0, 0, 50, 10, 0, 3 };
-//----------------Ω≈πﬂ
+//----------------Ïã†Î∞ú
 Gacha_Equipment Bamboo_shoes = { "Bamboo shoes", 100, 0, 0, 50, 10, 0, 4 };
 
 Gacha_Equipment Gacha_Equipments[5] = { Bamboo_helmet, Bamboo_aromr, Bamboo_spear,
@@ -111,7 +111,7 @@ struct Item {
 		this->Price = Price;
 	}
 };
-//----------------º“∫Ò æ∆¿Ã≈€
+//----------------ÏÜåÎπÑ ÏïÑÏù¥ÌÖú
 //----------------Hp
 Item Red_portion = { "Red potion", 10, 0, 0, 0, 0, 100 };
 Item Yellow_portion = { "Yellow potion", 20, 0, 0, 0, 0, 200 };
@@ -140,102 +140,103 @@ Item Items[14] = { Red_portion,Yellow_portion,Blue_portion,Purple_portion
 string Drop_Item() {
 	srand((unsigned int)time(NULL));
 	int I = rand() % 7;
-	if (I < 5) {   //æ∆¿Ã≈€ µÂ∂¯ »Æ∑¸
-		int Temp = rand() % 4;  //µÂ∂¯ æ∆¿Ã≈€ ¡æ∑˘ ∞·¡§
-		if (Temp < 3) {  //º“∫Ò æ∆¿Ã≈€ µÂ∂¯
-			int N = rand() % 14;  //14¥¬ ItemsπËø≠ ≈©±‚
+	if (I < 5) {   //ÏïÑÏù¥ÌÖú ÎìúÎûç ÌôïÎ•†
+		int Temp = rand() % 4;  //ÎìúÎûç ÏïÑÏù¥ÌÖú Ï¢ÖÎ•ò Í≤∞Ï†ï
+		if (Temp < 3) {  //ÏÜåÎπÑ ÏïÑÏù¥ÌÖú ÎìúÎûç
+			int N = rand() % 14;  //14Îäî ItemsÎ∞∞Ïó¥ ÌÅ¨Í∏∞
 			string Drop_Item = Items[N].Name;
-			cout << "∏ÛΩ∫≈Õø°∞‘º≠ " << Drop_Item << "¿Ã ∂≥æÓ¡≥¥Ÿ!!!\n";
+			cout << "Î™¨Ïä§ÌÑ∞ÏóêÍ≤åÏÑú " << Drop_Item << "Ïù¥ Îñ®Ïñ¥Ï°åÎã§!!!\n";
 			return Drop_Item;
 		}
-		else if (Temp == 3) {   //¿Â∫Ò æ∆¿Ã≈€ µÂ∂¯
-			int N = rand() % 15;  //15¥¬ EquipmentsπËø≠ ≈©±‚
+		else if (Temp == 3) {   //Ïû•ÎπÑ ÏïÑÏù¥ÌÖú ÎìúÎûç
+			int N = rand() % 15;  //15Îäî EquipmentsÎ∞∞Ïó¥ ÌÅ¨Í∏∞
 			string Drop_Item = Equipments[N].Name;
-			cout << "∏ÛΩ∫≈Õø°∞‘º≠ " << Drop_Item << "¿Ã ∂≥æÓ¡≥¥Ÿ!!!\n";
+			cout << "Î™¨Ïä§ÌÑ∞ÏóêÍ≤åÏÑú " << Drop_Item << "Ïù¥ Îñ®Ïñ¥Ï°åÎã§!!!\n";
 			return Drop_Item;
 		}
 	}
 	return "";
 }
 
-void Equipment_List() {  //¿Â∫Ò æ∆¿Ã≈€ º≥∏Ì
+void Equipment_List() {  //Ïû•ÎπÑ ÏïÑÏù¥ÌÖú ÏÑ§Î™Ö
 	cout << "------------------------\n";
-	cout << "∞°√≠ ¿Â∫Ò\n";
+	cout << "Í∞ÄÏ±† Ïû•ÎπÑ\n";
 	cout << "0.Bamboo helmet : Hp +150\n";
 	cout << "                : Def +50\n";
-	cout << "                : Kind ≈ı±∏\n";
+	cout << "                : Kind Ìà¨Íµ¨\n";
 	cout << "1.Bamboo aromr : Hp +150\n";
 	cout << "               : Def +50\n";
-	cout << "               : Kind ∞©ø \n";
+	cout << "               : Kind Í∞ëÏò∑\n";
 	cout << "2.Bamboo spear : Atk +100\n";
 	cout << "               : Speed +10\n";
-	cout << "               : Kind π´±‚\n";
+	cout << "               : Kind Î¨¥Í∏∞\n";
 	cout << "3.Bamboo gloves : Hp +100\n";
 	cout << "                : Def +50\n";
 	cout << "                : Speed +10\n";
-	cout << "                : Kind ¿Â∞©\n";
+	cout << "                : Kind Ïû•Í∞ë\n";
 	cout << "4.Bamboo shoes : Hp +100\n";
 	cout << "               : Def +50\n";
 	cout << "               : Speed +10\n";
-	cout << "               : Kind Ω≈πﬂ\n";
+	cout << "               : Kind Ïã†Î∞ú\n";
 	cout << "------------------------\n";
-	cout << "¿œπ› ¿Â∫Ò\n";
+	cout << "ÏùºÎ∞ò Ïû•ÎπÑ\n";
 	cout << "0.Fabric helmet : Hp +5\n";
 	cout << "                : Def +5\n";
-	cout << "                : Kind ≈ı±∏\n";
+	cout << "                : Kind Ìà¨Íµ¨\n";
 	cout << "1.Leather helmet : Hp +10\n";
 	cout << "                 : Def +10\n";
-	cout << "                 : Kind ≈ı±∏\n";
+	cout << "                 : Kind Ìà¨Íµ¨\n";
 	cout << "2.Wood helmet : Hp +20\n";
 	cout << "              : Def +20\n";
 	cout << "              : Speed -0.3\n";
-	cout << "              : Kind ≈ı±∏\n";
+	cout << "              : Kind Ìà¨Íµ¨\n";
 	cout << "3.Fabric armor : Hp +10\n";
 	cout << "               : Def +10\n";
-	cout << "               : Kind ∞©ø \n";
+	cout << "               : Kind Í∞ëÏò∑\n";
 	cout << "4.Leather armor : Hp +15\n";
 	cout << "                : Def +15\n";
-	cout << "                : Kind ∞©ø \n";
+	cout << "                : Kind Í∞ëÏò∑\n";
 	cout << "5.Wood armor : Hp +25\n";
 	cout << "             : Def +25\n";
 	cout << "             : Speed -0.5\n";
-	cout << "             : Kind ∞©ø \n";
+	cout << "             : Kind Í∞ëÏò∑\n";
 	cout << "6.Fabric sword : Atk +15\n";
 	cout << "               : Speed +1\n";
-	cout << "               : Kind π´±‚\n";
+	cout << "               : Kind Î¨¥Í∏∞\n";
 	cout << "7.Leather sword : Atk +20\n";
 	cout << "                : Speed +1\n";
-	cout << "                : Kind π´±‚\n";
+	cout << "                : Kind Î¨¥Í∏∞\n";
 	cout << "8.Wood sword : Atk +30\n";
 	cout << "             : Speed +1\n";
-	cout << "             : Kind π´±‚\n";
+	cout << "             : Kind Î¨¥Í∏∞\n";
 	cout << "9.Fabric gloves : Hp +3\n";
 	cout << "                : Def +3\n";
 	cout << "                : Speed +0.2\n";
-	cout << "                : Kind ¿Â∞©\n";
+	cout << "                : Kind Ïû•Í∞ë\n";
 	cout << "10.Leather gloves : Hp +5\n";
 	cout << "                  : Def +5\n";
 	cout << "                  : Speed +0.2\n";
-	cout << "                  : Kind ¿Â∞©\n";
+	cout << "                  : Kind Ïû•Í∞ë\n";
 	cout << "11.Wood gloves : Hp +15\n";
 	cout << "               : Def +15\n";
 	cout << "               : Speed +0.5\n";
-	cout << "               : Kind ¿Â∞©\n";
+	cout << "               : Kind Ïû•Í∞ë\n";
 	cout << "12.Fabric shoes : Hp +3\n";
 	cout << "                : Def +3\n";
 	cout << "                : Speed +0.2\n";
-	cout << "                : Kind Ω≈πﬂ\n";
+	cout << "                : Kind Ïã†Î∞ú\n";
 	cout << "13.Leather shoes : Hp +5\n";
 	cout << "                 : Def +5\n";
 	cout << "                 : Speed +0.2\n";
-	cout << "                 : Kind Ω≈πﬂ\n";
+	cout << "                 : Kind Ïã†Î∞ú\n";
 	cout << "14.Wood shoes : Hp +15\n";
 	cout << "              : Def +15\n";
 	cout << "              : Speed +0.5\n";
-	cout << "              : Kind Ω≈πﬂ\n";
+	cout << "              : Kind Ïã†Î∞ú\n";
 }
 
-void Item_List() {   //æ∆¿Ã≈€ º≥∏Ì
+void Item_List() {   //ÏïÑÏù¥ÌÖú ÏÑ§Î™Ö
+	cout << "------------------------\n";
 	cout << "0.Red potion : Hp +10\n";
 	cout << "1.Yellow potion : Hp +20\n";
 	cout << "2.Blue potion : Mp +10\n";
@@ -256,69 +257,83 @@ void Item_List() {   //æ∆¿Ã≈€ º≥∏Ì
 	cout << "       : Def +30\n";
 }
 
-void Pick_Up_Item(string* Inventory, string Item_Name) { //æ∆¿Ã≈€¿ª ¡÷øÔ ∂ß
+void Pick_Up_Item(string* Inventory, string Item_Name) { //ÏïÑÏù¥ÌÖúÏùÑ Ï£ºÏö∏ Îïå
 	int Count = 0;
 	int N;
 	char C;
-	for (int I = 0; I < 5; I++) {      //¿Œ∫•≈‰∏Æø° ∫Û∞¯∞£¿Ã ¿÷¥¬¡ˆ »Æ¿Œ
+	for (int I = 0; I < 5; I++) {      //Ïù∏Î≤§ÌÜ†Î¶¨Ïóê ÎπàÍ≥µÍ∞ÑÏù¥ ÏûàÎäîÏßÄ ÌôïÏù∏
 		if (Inventory[I] == "0") { Count++; }
 	}
-	if (Count == 0) {    //¿Œ∫•≈‰∏Æ∞° ∞°µÊ ¬˘ ∞ÊøÏ
-		cout << "¿Œ∫•≈‰∏Æ∞° ∞°µÊ √°Ω¿¥œ¥Ÿ.\n";
+	if (Count == 0) {    //Ïù∏Î≤§ÌÜ†Î¶¨Í∞Ä Í∞ÄÎìù Ï∞¨ Í≤ΩÏö∞
+		cout << "Ïù∏Î≤§ÌÜ†Î¶¨Í∞Ä Í∞ÄÎìù Ï∞ºÏäµÎãàÎã§.\n";
 		while (true) {
-			cout << "¿Œ∫•≈‰∏Æ ∏Ò∑œ\n";
+
+			setColor(2);
+			cout << "Ïù∏Î≤§ÌÜ†Î¶¨ Î™©Î°ù\n";
+			setColor(15);
+
 			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
-			cout << "±‚¡∏¿« æ∆¿Ã≈€∞˙ ±≥√º«œΩ«∞≈∏È Y, æ∆¥œ∏È N∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n" << "¿‘∑¬ : ";
+			cout << "Í∏∞Ï°¥Ïùò ÏïÑÏù¥ÌÖúÍ≥º ÍµêÏ≤¥ÌïòÏã§Í±∞Î©¥ Y, ÏïÑÎãàÎ©¥ NÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n" << "ÏûÖÎ†• : ";
 			cin >> C;
 			if (C == 'N') {
-				cout << "æ∆¿Ã≈€¿ª ¡›¡ˆ æ æ“Ω¿¥œ¥Ÿ\n";
+				cout << "ÏïÑÏù¥ÌÖúÏùÑ Ï§çÏßÄ ÏïäÏïòÏäµÎãàÎã§\n";
 				break;
 			}
 			else if (C == 'Y') {
-				cout << "±≥√º«“ æ∆¿Ã≈€¿« ¿ßƒ°∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n" << "¿‘∑¬ : ";
+				cout << "ÍµêÏ≤¥Ìï† ÏïÑÏù¥ÌÖúÏùò ÏúÑÏπòÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n" << "ÏûÖÎ†• : ";
 				cin >> N;
 				if (N >= 0 && N <= 4) {
 					Inventory[N] = Item_Name;
 					break;
 				}
-				else { cout << "¥ŸΩ√ ¿‘∑¬«ÿ¡÷ººø‰\n"; }
+				else { cout << "Îã§Ïãú ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n"; }
 			}
-			else { cout << "¥ŸΩ√ ¿‘∑¬«ÿ¡÷ººø‰\n"; }
+			else { cout << "Îã§Ïãú ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n"; }
 		}
 	}
-	else {     //¿Œ∫•≈‰∏Æø° ∫Û ∞¯∞£¿Ã ¿÷¥¬ ∞ÊøÏ
+	else {     //Ïù∏Î≤§ÌÜ†Î¶¨Ïóê Îπà Í≥µÍ∞ÑÏù¥ ÏûàÎäî Í≤ΩÏö∞
 		while (true) {
-			cout << "¿Œ∫•≈‰∏Æ ∏Ò∑œ\n";
+
+			setColor(2);
+			cout << "Ïù∏Î≤§ÌÜ†Î¶¨ Î™©Î°ù\n";
+			setColor(15);
+
 			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
-			cout << "¿Œ∫•≈‰∏Æ¿« ∏Ó π¯ ¿ßƒ°ø° µŒΩ« ∞Ã¥œ±Ó?\n" << "¿‘∑¬ : ";
+			cout << "Ïù∏Î≤§ÌÜ†Î¶¨Ïùò Î™á Î≤à ÏúÑÏπòÏóê ÎëêÏã§ Í≤ÅÎãàÍπå?\n" << "ÏûÖÎ†• : ";
 			cin >> N;
 			if (N >= 0 && N <= 4) {
 				if (Inventory[N] == "0") {
 					Inventory[N] = Item_Name;
 					break;
 				}
-				else { cout << "º±≈√«œΩ≈ ¿ßƒ°ø°¥¬ ¿ÃπÃ æ∆¿Ã≈€¿Ã ¿÷Ω¿¥œ¥Ÿ. ¥Ÿ∏• ¿ßƒ°∏¶ º±≈√«ÿ ¡÷Ω Ω√ø¿\n"; }
+				else { cout << "ÏÑ†ÌÉùÌïòÏã† ÏúÑÏπòÏóêÎäî Ïù¥ÎØ∏ ÏïÑÏù¥ÌÖúÏù¥ ÏûàÏäµÎãàÎã§. Îã§Î•∏ ÏúÑÏπòÎ•º ÏÑ†ÌÉùÌï¥ Ï£ºÏã≠ÏãúÏò§\n"; }
 			}
-			else { cout << "0~4¿« º˝¿⁄ ¡ﬂ «œ≥™∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n"; }
+			else { cout << "0~4Ïùò Ïà´Ïûê Ï§ë ÌïòÎÇòÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n"; }
 		}
 	}
 }
 
-void Look_Inventory(string Inventory[]) {    //¿Œ∫•≈‰∏Æ ∫“∑Øø¿±‚
-	cout << "¿Œ∫•≈‰∏Æ ∏Ò∑œ\n";
+void Look_Inventory(string Inventory[]) {    //Ïù∏Î≤§ÌÜ†Î¶¨ Î∂àÎü¨Ïò§Í∏∞
+	setColor(2);
+	cout << "\nÏù∏Î≤§ÌÜ†Î¶¨ Î™©Î°ù\n";
+	setColor(15);
+
 	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
 }
 
-void Swap_Item(string* Inventory) {     //¿Œ∫•≈‰∏Æø° ¿÷¥¬ æ∆¿Ã≈€ ¿ßƒ° ∫Ø∞Ê
+void Swap_Item(string* Inventory) {     //Ïù∏Î≤§ÌÜ†Î¶¨Ïóê ÏûàÎäî ÏïÑÏù¥ÌÖú ÏúÑÏπò Î≥ÄÍ≤Ω
 	int N1, N2;
 	string Temp;
-	cout << "¿Œ∫•≈‰∏Æ ∏Ò∑œ\n";
+	setColor(2);
+	cout << "Ïù∏Î≤§ÌÜ†Î¶¨ Î™©Î°ù\n";
+	setColor(15);
+
 	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
 
-	cout << "0~4∏¶ ¡¶ø‹«— ¥Ÿ∏• º˝¿⁄ ¿‘∑¬Ω√ ¿ßƒ° ∫Ø∞Ê¿Ã √Îº“µÀ¥œ¥Ÿ\n";
-	cout << "¿ßƒ°∏¶ ∫Ø∞Ê«“ æ∆¿Ã≈€¿« π¯»£∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n" << "¿‘∑¬ : ";
+	cout << "0~4Î•º Ï†úÏô∏Ìïú Îã§Î•∏ Ïà´Ïûê ÏûÖÎ†•Ïãú ÏúÑÏπò Î≥ÄÍ≤ΩÏù¥ Ï∑®ÏÜåÎê©ÎãàÎã§\n";
+	cout << "ÏúÑÏπòÎ•º Î≥ÄÍ≤ΩÌï† ÏïÑÏù¥ÌÖúÏùò Î≤àÌò∏Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n" << "ÏûÖÎ†• : ";
 	cin >> N1;
-	cout << "º±≈√«œΩ≈ æ∆¿Ã≈€∞˙ ¿ßƒ°∏¶ ∫Ø∞Ê«“ æ∆¿Ã≈€¿« π¯»£∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n" << "¿‘∑¬ : ";
+	cout << "ÏÑ†ÌÉùÌïòÏã† ÏïÑÏù¥ÌÖúÍ≥º ÏúÑÏπòÎ•º Î≥ÄÍ≤ΩÌï† ÏïÑÏù¥ÌÖúÏùò Î≤àÌò∏Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n" << "ÏûÖÎ†• : ";
 	cin >> N2;
 	if (N1 >= 0 && N1 <= 4) {
 		if (N2 >= 0 && N2 <= 4) {
@@ -327,136 +342,152 @@ void Swap_Item(string* Inventory) {     //¿Œ∫•≈‰∏Æø° ¿÷¥¬ æ∆¿Ã≈€ ¿ßƒ° ∫Ø∞Ê
 			Inventory[N2] = Temp;
 		}
 	}
-	else { cout << "æ∆¿Ã≈€¿« ¿ßƒ° ∫Ø∞Ê¿Ã √Îº“µ«æ˙Ω¿¥œ¥Ÿ\n"; }
+	else { cout << "ÏïÑÏù¥ÌÖúÏùò ÏúÑÏπò Î≥ÄÍ≤ΩÏù¥ Ï∑®ÏÜåÎêòÏóàÏäµÎãàÎã§\n"; }
 }
 
 
-void Throw_Away_Item(string* Inventory) {       //æ∆¿Ã≈€¿ª πˆ∏± ∂ß
+void Throw_Away_Item(string* Inventory) {       //ÏïÑÏù¥ÌÖúÏùÑ Î≤ÑÎ¶¥ Îïå
 	int N;
-	cout << "¿Œ∫•≈‰∏Æ ∏Ò∑œ\n";
+	setColor(2);
+	cout << "Ïù∏Î≤§ÌÜ†Î¶¨ Î™©Î°ù\n";
+	setColor(15);
 	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
-	cout << "0~4∏¶ ¡¶ø‹«— ¥Ÿ∏• º˝¿⁄ ¿‘∑¬Ω√ ¿ßƒ° ∫Ø∞Ê¿Ã √Îº“µÀ¥œ¥Ÿ\n";
-	cout << "πˆ∏± æ∆¿Ã≈€¿« ¿ßƒ°∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n" << "¿‘∑¬ : ";
+	cout << "0~4Î•º Ï†úÏô∏Ìïú Îã§Î•∏ Ïà´Ïûê ÏûÖÎ†•Ïãú ÏúÑÏπò Î≥ÄÍ≤ΩÏù¥ Ï∑®ÏÜåÎê©ÎãàÎã§\n";
+	cout << "Î≤ÑÎ¶¥ ÏïÑÏù¥ÌÖúÏùò ÏúÑÏπòÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n" << "ÏûÖÎ†• : ";
 	cin >> N;
 	if (N >= 0 && N <= 4) { Inventory[N] = "0"; }
-	else { cout << "æ∆¿Ã≈€ πˆ∏Æ±‚∞° √Îº“µ«æ˙Ω¿¥œ¥Ÿ\n"; }
+	else { cout << "ÏïÑÏù¥ÌÖú Î≤ÑÎ¶¨Í∏∞Í∞Ä Ï∑®ÏÜåÎêòÏóàÏäµÎãàÎã§\n"; }
 }
 
-bool Open_Store(string* inventory) {  //ªÛ¡°
+bool Open_Store(string* inventory) {  //ÏÉÅÏ†ê
 	int Num;
 	string Gacha = "Gacha";
 	srand((unsigned int)time(NULL));
-	//----------------º“∫Ò æ∆¿Ã≈€
+	//----------------ÏÜåÎπÑ ÏïÑÏù¥ÌÖú
 	int I_num1 = rand() % 14;
 	int I_num2 = rand() % 14;
-	//----------------¿Â∫Ò æ∆¿Ã≈€
+	//----------------Ïû•ÎπÑ ÏïÑÏù¥ÌÖú
 	int E_num1 = rand() % 15;
 	int E_num2 = rand() % 15;
-	string Item_list[5] = { Items[I_num1].Name, Items[I_num2].Name,   //æ∆¿Ã≈€¿« ¿Ã∏ß¿ª ¥„æ∆µŒ¥¬ πËø≠
+	string Item_list[5] = { Items[I_num1].Name, Items[I_num2].Name,   //ÏïÑÏù¥ÌÖúÏùò Ïù¥Î¶ÑÏùÑ Îã¥ÏïÑÎëêÎäî Î∞∞Ïó¥
 		Equipments[E_num1].Name, Equipments[E_num2].Name, Gacha };
-	double Price[5] = { Items[I_num1].Price, Items[I_num2].Price,     //æ∆¿Ã≈€¿« ∞°∞›¿ª ¥„æ∆µŒ¥¬ πËø≠
+	double Price[5] = { Items[I_num1].Price, Items[I_num2].Price,     //ÏïÑÏù¥ÌÖúÏùò Í∞ÄÍ≤©ÏùÑ Îã¥ÏïÑÎëêÎäî Î∞∞Ïó¥
 		Equipments[E_num1].Price, Equipments[E_num2].Price, 500 };
 	while (true) {
-		for (int I = 0; I < 5; I++) {     //ªÛ¡° æ∆¿Ã≈€ ∏Ò∑œ
+		for (int I = 0; I < 5; I++) {     //ÏÉÅÏ†ê ÏïÑÏù¥ÌÖú Î™©Î°ù
 			cout << "------------------------\n";
-			cout << "æ∆¿Ã≈€ ∏Ò∑œ\n";
-			cout << I << ". " << Item_list[I] << " : " << Price[I] << "ø¯\n";
+
+			setColor(2);
+			cout << "ÏïÑÏù¥ÌÖú Î™©Î°ù\n";
+			setColor(15);
+			cout << I << ". " << Item_list[I] << " : " << Price[I] << "Ïõê\n";
 		}
 		cout << "------------------------\n";
-		cout << "æ∆¿Ã≈€¿ª ±∏∏≈«œΩ√∑¡∏È 0~4¡ﬂø° ø¯«œ¥¬ æ∆¿Ã≈€¿« º˝¿⁄∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n";
-		cout << "5∏¶ ¿‘∑¬«œΩ√∏È º“∫Ò æ∆¿Ã≈€¿« ¡§∫∏∏¶ ∫º ºˆ ¿÷Ω¿¥œ¥Ÿ.\n";
-		cout << "6¿ª ¿‘∑¬«œΩ√∏È ¿Â∫Ò æ∆¿Ã≈€¿« ¡§∫∏∏¶ ∫º ºˆ ¿÷Ω¿¥œ¥Ÿ.\n";
-		cout << "7¿ª ¿‘∑¬«œΩ√∏È ¿Œ∫•≈‰∏Æ¿« æ∆¿Ã≈€¿ª πˆ∏± ºˆ ¿÷Ω¿¥œ¥Ÿ.\n";
-		cout << "8¿ª ¿‘∑¬«œΩ√∏È ªÛ¡°¿ª ¡æ∑·«“ ºˆ ¿÷Ω¿¥œ¥Ÿ.\n";
-		cout << "Gacha¥¬ ±∏∏≈øÕ µøΩ√ø° ªÁøÎµ«∏Á ∑£¥˝ æ∆¿Ã≈€¿ª »πµÊ«“ ºˆ ¿÷Ω¿¥œ¥Ÿ.\n";
-		cout << "ø¿¡˜ Gacha∑Œ∏∏ ±∏«“ ºˆ ¿÷¥¬ æ∆¿Ã≈€µµ ¡∏¿Á«œ¥œ ø©∑Ø∫–¿« øÓ¿ª Ω√«Ë«ÿ∫∏ººø‰.\n";
+		cout << "ÏïÑÏù¥ÌÖúÏùÑ Íµ¨Îß§ÌïòÏãúÎ†§Î©¥ 0~4Ï§ëÏóê ÏõêÌïòÎäî ÏïÑÏù¥ÌÖúÏùò Ïà´ÏûêÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n\n";
+		cout << "5Î•º ÏûÖÎ†•ÌïòÏãúÎ©¥ ÏÜåÎπÑ ÏïÑÏù¥ÌÖúÏùò Ï†ïÎ≥¥Î•º Î≥º Ïàò ÏûàÏäµÎãàÎã§.\n";
+		cout << "6ÏùÑ ÏûÖÎ†•ÌïòÏãúÎ©¥ Ïû•ÎπÑ ÏïÑÏù¥ÌÖúÏùò Ï†ïÎ≥¥Î•º Î≥º Ïàò ÏûàÏäµÎãàÎã§.\n";
+		cout << "7ÏùÑ ÏûÖÎ†•ÌïòÏãúÎ©¥ Ïù∏Î≤§ÌÜ†Î¶¨Ïùò ÏïÑÏù¥ÌÖúÏùÑ Î≤ÑÎ¶¥ Ïàò ÏûàÏäµÎãàÎã§.\n";
+		cout << "8ÏùÑ ÏûÖÎ†•ÌïòÏãúÎ©¥ ÏÉÅÏ†êÏùÑ Ï¢ÖÎ£åÌï† Ïàò ÏûàÏäµÎãàÎã§.\n";
+
+		setColor(14);
+		cout << "\nGacha"; 
+		setColor(15);
+		cout << "Îäî Íµ¨Îß§ÏôÄ ÎèôÏãúÏóê ÏÇ¨Ïö©ÎêòÎ©∞ ÎûúÎç§ ÏïÑÏù¥ÌÖúÏùÑ ÌöçÎìùÌï† Ïàò ÏûàÏäµÎãàÎã§.\nÏò§ÏßÅ";
+
+		setColor(14);
+		cout << "Gacha";
+		setColor(15);
+		cout << "Î°úÎßå Íµ¨Ìï† Ïàò ÏûàÎäî ÏïÑÏù¥ÌÖúÎèÑ Ï°¥Ïû¨ÌïòÎãà Ïó¨Îü¨Î∂ÑÏùò Ïö¥ÏùÑ ÏãúÌóòÌï¥Î≥¥ÏÑ∏Ïöî.\n";
 		cout << "------------------------\n";
-		cout << "º“¡ˆ±› : " << Money << endl;
-		cout << "¿‘∑¬ : ";
+		cout << "ÏÜåÏßÄÍ∏à : " << Money << endl;
+		cout << "ÏûÖÎ†• : ";
 		cin >> Num;
 		cout << endl;
-		if (Num < 0 && Num > 8) { cout << "¡¶¥Î∑Œ µ» º˝¿⁄∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n"; }
-		else if (Num >= 0 && Num < 4) {     //æ∆¿Ã≈€ ±∏∏≈
-			if (Money < Price[Num]) { cout << "µ∑¿Ã ∫Œ¡∑«’¥œ¥Ÿ.\n"; }
+		if (Num < 0 && Num > 8) { cout << "Ï†úÎåÄÎ°ú Îêú Ïà´ÏûêÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n"; }
+		else if (Num >= 0 && Num < 4) {     //ÏïÑÏù¥ÌÖú Íµ¨Îß§
+			if (Money < Price[Num]) { cout << "ÎèàÏù¥ Î∂ÄÏ°±Ìï©ÎãàÎã§.\n"; }
 			else {
 				Pick_Up_Item(inventory, Item_list[Num]);
 				Money -= Price[Num];
-				cout << Item_list[Num] << "¿ª(∏¶) ±∏∏≈«ﬂΩ¿¥œ¥Ÿ.\n";
-				cout << "º“¡ˆ±› : " << Money + Price[Num] << " -> " << Money << endl;
+				cout << Item_list[Num] << "ÏùÑ(Î•º) Íµ¨Îß§ÌñàÏäµÎãàÎã§.\n";
+				cout << "ÏÜåÏßÄÍ∏à : " << Money + Price[Num] << " -> " << Money << endl;
 				Item_list[Num] = "0";
 				Price[Num] = 0;
 			}
 		}
-		else if (Num == 4) {    //∞°√≠ ±∏∏≈
-			if (Money < Price[Num]) { cout << "µ∑¿Ã ∫Œ¡∑«’¥œ¥Ÿ.\n"; }
+		else if (Num == 4) {    //Í∞ÄÏ±† Íµ¨Îß§
+			if (Money < Price[Num]) { cout << "ÎèàÏù¥ Î∂ÄÏ°±Ìï©ÎãàÎã§.\n"; }
 			else {
 				int L;
 				string result;
-				cout << Item_list[Num] << "¿ª(∏¶) ±∏∏≈«ﬂΩ¿¥œ¥Ÿ.\n";
+				cout << Item_list[Num] << "ÏùÑ(Î•º) Íµ¨Îß§ÌñàÏäµÎãàÎã§.\n";
 				int Luck = rand() % 7;
-				if (Luck >= 0 && Luck < 3) {   //∞°√≠ø°º≠ º“∫Ò æ∆¿Ã≈€ µÓ¿Â
+				if (Luck >= 0 && Luck < 3) {   //Í∞ÄÏ±†ÏóêÏÑú ÏÜåÎπÑ ÏïÑÏù¥ÌÖú Îì±Ïû•
 					L = rand() % 14;
 					result = Items[L].Name;
-					cout << "∞°√≠ø°º≠ " << result << "¿Ã(∞°) ≥™ø‘Ω¿¥œ¥Ÿ!!!";
+					cout << "Í∞ÄÏ±†ÏóêÏÑú " << result << "Ïù¥(Í∞Ä) ÎÇòÏôîÏäµÎãàÎã§!!!";
 					Pick_Up_Item(inventory, result);
 					Money -= Price[Num];
 				}
-				else if (Luck >= 3 && Luck < 5) {    //∞°√≠ø°º≠ ¿Â∫Ò æ∆¿Ã≈€ µÓ¿Â
+				else if (Luck >= 3 && Luck < 5) {    //Í∞ÄÏ±†ÏóêÏÑú Ïû•ÎπÑ ÏïÑÏù¥ÌÖú Îì±Ïû•
 					L = rand() % 15;
 					result = Equipments[L].Name;
-					cout << "∞°√≠ø°º≠ " << result << "¿Ã(∞°) ≥™ø‘Ω¿¥œ¥Ÿ!!!";
+					cout << "Í∞ÄÏ±†ÏóêÏÑú " << result << "Ïù¥(Í∞Ä) ÎÇòÏôîÏäµÎãàÎã§!!!";
 					Pick_Up_Item(inventory, result);
 					Money -= Price[Num];
 				}
-				else if (Luck == 5) {    //∞°√≠ø°º≠ ∞°√≠ ¿Â∫Ò µÓ¿Â
+				else if (Luck == 5) {    //Í∞ÄÏ±†ÏóêÏÑú Í∞ÄÏ±† Ïû•ÎπÑ Îì±Ïû•
 					L = rand() % 5;
 					result = Gacha_Equipments[L].Name;
-					cout << "ø¿¿◊? ∞°√≠ø°º≠ ∫˚¿Ã?\n";
-					cout << "∞°√≠ø°º≠ " << result << "¿Ã(∞°) ≥™ø‘Ω¿¥œ¥Ÿ!!!";
+					cout << "Ïò§Ïûâ? Í∞ÄÏ±†ÏóêÏÑú ÎπõÏù¥?\n";
+					cout << "Í∞ÄÏ±†ÏóêÏÑú " << result << "Ïù¥(Í∞Ä) ÎÇòÏôîÏäµÎãàÎã§!!!";
 					Pick_Up_Item(inventory, result);
 					Money -= Price[Num];
 				}
-				else if (Luck == 6) {   //≤Œ
-					cout << "¥ÁΩ≈¿« 500ø¯, '≤®~æÔ'¿∏∑Œ ¥Î√ºµ«æ˙¥Ÿ... π´æﬂ»£~\n";
+				else if (Luck == 6) {   //ÍΩù
+					cout << "ÎãπÏã†Ïùò 500Ïõê, 'Í∫º~Ïñµ'ÏúºÎ°ú ÎåÄÏ≤¥ÎêòÏóàÎã§... Î¨¥ÏïºÌò∏~\n";
 					Money -= Price[Num];
 				}
-				cout << "º“¡ˆ±› : " << Money + Price[Num] << " -> " << Money << endl;
+				cout << "ÏÜåÏßÄÍ∏à : " << Money + Price[Num] << " -> " << Money << endl;
 			}
 		}
-		else if (Num == 5) { Item_List(); }    //º“∫Ò æ∆¿Ã≈€ ∏Ò∑œ
-		else if (Num == 6) { Equipment_List(); }    //¿Â∫Ò æ∆¿Ã≈€ ∏Ò∑œ
-		else if (Num == 7) { Throw_Away_Item(inventory); }    //¿Œ∫•≈‰∏Æ¿« æ∆¿Ã≈€ πˆ∏Æ±‚
+		else if (Num == 5) { Item_List(); }    //ÏÜåÎπÑ ÏïÑÏù¥ÌÖú Î™©Î°ù
+		else if (Num == 6) { Equipment_List(); }    //Ïû•ÎπÑ ÏïÑÏù¥ÌÖú Î™©Î°ù
+		else if (Num == 7) { Throw_Away_Item(inventory); }    //Ïù∏Î≤§ÌÜ†Î¶¨Ïùò ÏïÑÏù¥ÌÖú Î≤ÑÎ¶¨Í∏∞
 		else if (Num == 8)
 		{
 			return false;
 			break;
-		}    //ªÛ¡° ¡æ∑·
+		}    //ÏÉÅÏ†ê Ï¢ÖÎ£å
 	}
 
 	return true;
 }
 
 void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot) {
-	// æ∆¿Ã≈€¿ª ªÁøÎ«“ ∂ß
+	// ÏïÑÏù¥ÌÖúÏùÑ ÏÇ¨Ïö©Ìï† Îïå
 	int n;
 
-	cout << "\n¿Œ∫•≈‰∏Æ ∏Ò∑œ\n";
+	setColor(2);
+	cout << "Ïù∏Î≤§ÌÜ†Î¶¨ Î™©Î°ù\n";
+	setColor(15);
+
 	for (int i = 0; i < 5; i++) { cout << i << " : " << Inventory[i] << "\n"; }
-	cout << "\n0~4∏¶ ¡¶ø‹«— ¥Ÿ∏• º˝¿⁄ ¿‘∑¬Ω√ æ∆¿Ã≈€ ªÁøÎ¿Ã √Îº“µÀ¥œ¥Ÿ\n";
-	cout << "ªÁøÎ«“ æ∆¿Ã≈€¿« ¿ßƒ°∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n" << "¿ßƒ° : ";
+	cout << "\n0~4Î•º Ï†úÏô∏Ìïú Îã§Î•∏ Ïà´Ïûê ÏûÖÎ†•Ïãú ÏïÑÏù¥ÌÖú ÏÇ¨Ïö©Ïù¥ Ï∑®ÏÜåÎê©ÎãàÎã§\n";
+	cout << "ÏÇ¨Ïö©Ìï† ÏïÑÏù¥ÌÖúÏùò ÏúÑÏπòÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n" << "ÏúÑÏπò : ";
 	cin >> n;
 	if (n >= 0 && n <= 4) {
-		if (Inventory[n] == "0") { cout << "\nº±≈√«œΩ≈ ¿ßƒ°ø° æ∆¿Ã≈€¿Ã æ¯Ω¿¥œ¥Ÿ\n\n"; }
+		if (Inventory[n] == "0") { cout <<"\nÏÑ†ÌÉùÌïòÏã† ÏúÑÏπòÏóê ÏïÑÏù¥ÌÖúÏù¥ ÏóÜÏäµÎãàÎã§\n" << "------------------------\n"; }
 		else {
-			for (int i = 0; i < 14; i++) {   //14¥¬ items πËø≠ ≈©±‚
-				if (Inventory[n] == Items[i].Name) {  //º“∫Òæ∆¿Ã≈€ ªÁøÎ
+			for (int i = 0; i < 14; i++) {   //14Îäî items Î∞∞Ïó¥ ÌÅ¨Í∏∞
+				if (Inventory[n] == Items[i].Name) {  //ÏÜåÎπÑÏïÑÏù¥ÌÖú ÏÇ¨Ïö©
 					Character->Hp += Items[i].Hp;
 					Character->Mp += Items[i].Mp;
 					Character->Atk += Items[i].Atk;
 					Character->Def += Items[i].Def;
 					Character->Speed += Items[i].Speed;
 					Inventory[n] = "0";
-					cout << "\n" << Items[i].Name << "¿ª ªÁøÎ«ﬂΩ¿¥œ¥Ÿ\n";
+					cout << "\n" << Items[i].Name << "ÏùÑ ÏÇ¨Ïö©ÌñàÏäµÎãàÎã§\n";
 					cout << "hp : " << Character->Hp - Items[i].Hp << " -> " << Character->Hp << "\n";
 					cout << "mp : " << Character->Mp - Items[i].Mp << " -> " << Character->Mp << "\n";
 					cout << "atk : " << Character->Atk - Items[i].Atk << " -> " << Character->Atk << "\n";
@@ -465,16 +496,16 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 					break;
 				}
 			}
-			for (int i = 0; i < 15; i++) {   //15¥¬ Equipments πËø≠ ≈©±‚
-				if (Inventory[n] == "0") { break; }//æ’¿« forπÆø°º≠ æ∆¿Ã≈€¿ª ªÁøÎ«ﬂ¥Ÿ∏È ¿Ã forπÆ¿ª µπ∏Æ¡ˆ æ ¿Ω
+			for (int i = 0; i < 15; i++) {   //15Îäî Equipments Î∞∞Ïó¥ ÌÅ¨Í∏∞
+				if (Inventory[n] == "0") { break; }//ÏïûÏùò forÎ¨∏ÏóêÏÑú ÏïÑÏù¥ÌÖúÏùÑ ÏÇ¨Ïö©ÌñàÎã§Î©¥ Ïù¥ forÎ¨∏ÏùÑ ÎèåÎ¶¨ÏßÄ ÏïäÏùå
 				if (Inventory[n] == Equipments[i].Name) {
 					int Num = Equipments[i].Kind;
-					if (Equipment_slot[Num] != "0") {//¿Â∫Ò√¢ »Æ¿Œ
-						cout << "º±≈√«œΩ≈ ¿Â∫ÒøÕ ∞∞¿∫ ¡æ∑˘¿« ¿Â∫Ò∏¶ ¿ÃπÃ ¬¯øÎ«œ∞Ì ¿÷Ω¿¥œ¥Ÿ.\n";
-						cout << "¬¯øÎ¡ﬂ¿Œ ¿Â∫Ò∏¶ «ÿ¡¶«œ∞Ì ¥ŸΩ√ Ω√µµ«ÿ¡÷ººø‰\n";
+					if (Equipment_slot[Num] != "0") {//Ïû•ÎπÑÏ∞Ω ÌôïÏù∏
+						cout << "ÏÑ†ÌÉùÌïòÏã† Ïû•ÎπÑÏôÄ Í∞ôÏùÄ Ï¢ÖÎ•òÏùò Ïû•ÎπÑÎ•º Ïù¥ÎØ∏ Ï∞©Ïö©ÌïòÍ≥† ÏûàÏäµÎãàÎã§.\n";
+						cout << "Ï∞©Ïö©Ï§ëÏù∏ Ïû•ÎπÑÎ•º Ìï¥Ï†úÌïòÍ≥† Îã§Ïãú ÏãúÎèÑÌï¥Ï£ºÏÑ∏Ïöî\n";
 						break;
 					}
-					else {    //¿Â∫Ò æ∆¿Ã≈€ ¬¯øÎ
+					else {    //Ïû•ÎπÑ ÏïÑÏù¥ÌÖú Ï∞©Ïö©
 						Equipment_slot[Num] == Gacha_Equipments[i].Name;
 						Character->Hp += Equipments[i].Hp;
 						Character->Mp += Equipments[i].Mp;
@@ -482,7 +513,7 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 						Character->Def += Equipments[i].Def;
 						Character->Speed += Equipments[i].Speed;
 						Inventory[n] = "0";
-						cout << "\n" << Equipments[i].Name << "¿ª ¬¯øÎ«ﬂΩ¿¥œ¥Ÿ\n";
+						cout << "\n" << Equipments[i].Name << "ÏùÑ Ï∞©Ïö©ÌñàÏäµÎãàÎã§\n";
 						cout << "hp : " << Character->Hp - Equipments[i].Hp << " -> " << Character->Hp << "\n";
 						cout << "mp : " << Character->Mp - Equipments[i].Mp << " -> " << Character->Mp << "\n";
 						cout << "atk : " << Character->Atk - Equipments[i].Atk << " -> " << Character->Atk << "\n";
@@ -492,16 +523,16 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 					}
 				}
 			}
-			for (int i = 0; i < 5; i++) {   //5¥¬ Gacha_Equipments πËø≠ ≈©±‚
-				if (Inventory[n] == "0") { break; }//æ’¿« forπÆø°º≠ æ∆¿Ã≈€¿ª ªÁøÎ«ﬂ¥Ÿ∏È ¿Ã forπÆ¿ª µπ∏Æ¡ˆ æ ¿Ω
+			for (int i = 0; i < 5; i++) {   //5Îäî Gacha_Equipments Î∞∞Ïó¥ ÌÅ¨Í∏∞
+				if (Inventory[n] == "0") { break; }//ÏïûÏùò forÎ¨∏ÏóêÏÑú ÏïÑÏù¥ÌÖúÏùÑ ÏÇ¨Ïö©ÌñàÎã§Î©¥ Ïù¥ forÎ¨∏ÏùÑ ÎèåÎ¶¨ÏßÄ ÏïäÏùå
 				if (Inventory[n] == Gacha_Equipments[i].Name) {
 					int Num = Gacha_Equipments[i].Kind;
-					if (Equipment_slot[Num] != "0") {//¿Â∫Ò√¢ »Æ¿Œ
-						cout << "º±≈√«œΩ≈ ¿Â∫ÒøÕ ∞∞¿∫ ¡æ∑˘¿« ¿Â∫Ò∏¶ ¿ÃπÃ ¬¯øÎ«œ∞Ì ¿÷Ω¿¥œ¥Ÿ.\n";
-						cout << "¬¯øÎ¡ﬂ¿Œ ¿Â∫Ò∏¶ «ÿ¡¶«œ∞Ì ¥ŸΩ√ Ω√µµ«ÿ¡÷ººø‰\n";
+					if (Equipment_slot[Num] != "0") {//Ïû•ÎπÑÏ∞Ω ÌôïÏù∏
+						cout << "ÏÑ†ÌÉùÌïòÏã† Ïû•ÎπÑÏôÄ Í∞ôÏùÄ Ï¢ÖÎ•òÏùò Ïû•ÎπÑÎ•º Ïù¥ÎØ∏ Ï∞©Ïö©ÌïòÍ≥† ÏûàÏäµÎãàÎã§.\n";
+						cout << "Ï∞©Ïö©Ï§ëÏù∏ Ïû•ÎπÑÎ•º Ìï¥Ï†úÌïòÍ≥† Îã§Ïãú ÏãúÎèÑÌï¥Ï£ºÏÑ∏Ïöî\n";
 						break;
 					}
-					else {    //∞°√≠ ¿Â∫Ò ¬¯øÎ
+					else {    //Í∞ÄÏ±† Ïû•ÎπÑ Ï∞©Ïö©
 						Equipment_slot[Num] == Gacha_Equipments[i].Name;
 						Character->Hp += Gacha_Equipments[i].Hp;
 						Character->Mp += Gacha_Equipments[i].Mp;
@@ -509,7 +540,7 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 						Character->Def += Gacha_Equipments[i].Def;
 						Character->Speed += Gacha_Equipments[i].Speed;
 						Inventory[n] = "0";
-						cout << "\n" << Gacha_Equipments[i].Name << "¿ª ¬¯øÎ«ﬂΩ¿¥œ¥Ÿ\n";
+						cout << "\n" << Gacha_Equipments[i].Name << "ÏùÑ Ï∞©Ïö©ÌñàÏäµÎãàÎã§\n";
 						cout << "hp : " << Character->Hp - Gacha_Equipments[i].Hp << " -> " << Character->Hp << "\n";
 						cout << "mp : " << Character->Mp - Gacha_Equipments[i].Mp << " -> " << Character->Mp << "\n";
 						cout << "atk : " << Character->Atk - Gacha_Equipments[i].Atk << " -> " << Character->Atk << "\n";
@@ -521,35 +552,35 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 			}
 		}
 	}
-	else { cout << "æ∆¿Ã≈€ ªÁøÎ¿Ã √Îº“µ«æ˙Ω¿¥œ¥Ÿ\n"; }
+	else { cout << "ÏïÑÏù¥ÌÖú ÏÇ¨Ïö©Ïù¥ Ï∑®ÏÜåÎêòÏóàÏäµÎãàÎã§\n"; }
 }
 
 void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equipment_slot) {
-	//¿Â∫Ò æ∆¿Ã≈€ ¬¯øÎ «ÿ¡¶ «‘ºˆ
+	//Ïû•ÎπÑ ÏïÑÏù¥ÌÖú Ï∞©Ïö© Ìï¥Ï†ú Ìï®Ïàò
 	int Count = 0;
 	int N;
-	for (int I = 0; I < 5; I++) {      //¿Œ∫•≈‰∏Æø° ∫Û∞¯∞£¿Ã ¿÷¥¬¡ˆ »Æ¿Œ
+	for (int I = 0; I < 5; I++) {      //Ïù∏Î≤§ÌÜ†Î¶¨Ïóê ÎπàÍ≥µÍ∞ÑÏù¥ ÏûàÎäîÏßÄ ÌôïÏù∏
 		if (Inventory[I] == "0") { Count++; }
 	}
-	if (Count == 0) {    //¿Œ∫•≈‰∏Æ∞° ∞°µÊ ¬˘ ∞ÊøÏ
-		cout << "¿Œ∫•≈‰∏Æ∞° ∞°µÊ √°Ω¿¥œ¥Ÿ.\n";
-		cout << "¿Œ∫•≈‰∏Æ∏¶ ∫ÒøÓ »ƒø° ¥ŸΩ√ Ω√µµ«ÿ¡÷ººø‰\n";
+	if (Count == 0) {    //Ïù∏Î≤§ÌÜ†Î¶¨Í∞Ä Í∞ÄÎìù Ï∞¨ Í≤ΩÏö∞
+		cout << "Ïù∏Î≤§ÌÜ†Î¶¨Í∞Ä Í∞ÄÎìù Ï∞ºÏäµÎãàÎã§.\n";
+		cout << "Ïù∏Î≤§ÌÜ†Î¶¨Î•º ÎπÑÏö¥ ÌõÑÏóê Îã§Ïãú ÏãúÎèÑÌï¥Ï£ºÏÑ∏Ïöî\n";
 	}
 	else {
-		cout << "¬¯øÎ¡ﬂ¿Œ ¿Â∫Ò æ∆¿Ã≈€ ∏Ò∑œ\n";
+		cout << "Ï∞©Ïö©Ï§ëÏù∏ Ïû•ÎπÑ ÏïÑÏù¥ÌÖú Î™©Î°ù\n";
 		for (int I = 0; I < 5; I++) { cout << I << " : " << Equipment_slot[I] << endl; }
 		cout << "------------------------\n";
-		cout << "¬¯øÎ «ÿ¡¶«“ æ∆¿Ã≈€¿« π¯»£∏¶ ¿‘∑¬«ÿ¡÷ººø‰\n";
-		cout << "0~4 ¿Ãø‹¿« º˝¿⁄∏¶ ¿‘∑¬«œ∏È ¿Â∫Ò «ÿ¡¶∞° √Îº“µÀ¥œ¥Ÿ.\n";
-		cout << "¿‘∑¬ : ";
+		cout << "Ï∞©Ïö© Ìï¥Ï†úÌï† ÏïÑÏù¥ÌÖúÏùò Î≤àÌò∏Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî\n";
+		cout << "0~4 Ïù¥Ïô∏Ïùò Ïà´ÏûêÎ•º ÏûÖÎ†•ÌïòÎ©¥ Ïû•ÎπÑ Ìï¥Ï†úÍ∞Ä Ï∑®ÏÜåÎê©ÎãàÎã§.\n";
+		cout << "ÏûÖÎ†• : ";
 		cin >> N;
 		cout << endl;
-		if (N < 0 && N > 4) { cout << "º±≈√«œΩ≈ ¿ßƒ°ø° ¬¯øÎ¡ﬂ¿Œ ¿Â∫Ò∞° æ¯Ω¿¥œ¥Ÿ.\n"; }
+		if (N < 0 && N > 4) { cout << "ÏÑ†ÌÉùÌïòÏã† ÏúÑÏπòÏóê Ï∞©Ïö©Ï§ëÏù∏ Ïû•ÎπÑÍ∞Ä ÏóÜÏäµÎãàÎã§.\n"; }
 		else if (N >= 0 && N <= 4) {
-			if (Equipment_slot[N] == "0") { cout << "º±≈√«œΩ≈ ¿ßƒ°ø° ¬¯øÎ¡ﬂ¿Œ ¿Â∫Ò∞° æ¯Ω¿¥œ¥Ÿ.\n"; }
+			if (Equipment_slot[N] == "0") { cout << "ÏÑ†ÌÉùÌïòÏã† ÏúÑÏπòÏóê Ï∞©Ïö©Ï§ëÏù∏ Ïû•ÎπÑÍ∞Ä ÏóÜÏäµÎãàÎã§.\n"; }
 			else {
-				for (int J = 0; J < 15; J++) {//15¥¬ Equipments πËø≠ ≈©±‚
-					if (Equipment_slot[N] == Equipments[J].Name) {//¿Â∫Ò æ∆¿Ã≈€ ¬¯øÎ «ÿ¡¶
+				for (int J = 0; J < 15; J++) {//15Îäî Equipments Î∞∞Ïó¥ ÌÅ¨Í∏∞
+					if (Equipment_slot[N] == Equipments[J].Name) {//Ïû•ÎπÑ ÏïÑÏù¥ÌÖú Ï∞©Ïö© Ìï¥Ï†ú
 						Pick_Up_Item(Inventory, Equipment_slot[N]);
 						Character->Hp -= Equipments[J].Hp;
 						Character->Mp -= Equipments[J].Mp;
@@ -557,7 +588,7 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						Character->Def -= Equipments[J].Def;
 						Character->Speed -= Equipments[J].Speed;
 						Equipment_slot[N] == "0";
-						cout << "\n" << Equipments[J].Name << "¿ª ¬¯øÎ «ÿ¡¶«ﬂΩ¿¥œ¥Ÿ\n";
+						cout << "\n" << Equipments[J].Name << "ÏùÑ Ï∞©Ïö© Ìï¥Ï†úÌñàÏäµÎãàÎã§\n";
 						cout << "hp : " << Character->Hp + Equipments[J].Hp << " -> " << Character->Hp << "\n";
 						cout << "mp : " << Character->Mp + Equipments[J].Mp << " -> " << Character->Mp << "\n";
 						cout << "atk : " << Character->Atk + Equipments[J].Atk << " -> " << Character->Atk << "\n";
@@ -566,9 +597,9 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						break;
 					}
 				}
-				for (int J = 0; J < 5; J++) {//5¥¬ Gacha_Equipments πËø≠ ≈©±‚
-					if (Equipment_slot[N] == "0") { break; }//æ’¿« forπÆø°º≠ ¿Â∫Ò∏¶ «ÿ¡¶«ﬂ¥Ÿ∏È ¿Ã forπÆ¿ª µπ∏Æ¡ˆ æ ¿Ω
-					if (Equipment_slot[N] == Gacha_Equipments[J].Name) {//∞°√≠ ¿Â∫Ò ¬¯øÎ «ÿ¡¶
+				for (int J = 0; J < 5; J++) {//5Îäî Gacha_Equipments Î∞∞Ïó¥ ÌÅ¨Í∏∞
+					if (Equipment_slot[N] == "0") { break; }//ÏïûÏùò forÎ¨∏ÏóêÏÑú Ïû•ÎπÑÎ•º Ìï¥Ï†úÌñàÎã§Î©¥ Ïù¥ forÎ¨∏ÏùÑ ÎèåÎ¶¨ÏßÄ ÏïäÏùå
+					if (Equipment_slot[N] == Gacha_Equipments[J].Name) {//Í∞ÄÏ±† Ïû•ÎπÑ Ï∞©Ïö© Ìï¥Ï†ú
 						Pick_Up_Item(Inventory, Equipment_slot[N]);
 						Character->Hp -= Gacha_Equipments[J].Hp;
 						Character->Mp -= Gacha_Equipments[J].Mp;
@@ -576,7 +607,7 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						Character->Def -= Gacha_Equipments[J].Def;
 						Character->Speed -= Gacha_Equipments[J].Speed;
 						Equipment_slot[N] == "0";
-						cout << "\n" << Gacha_Equipments[J].Name << "¿ª ¬¯øÎ «ÿ¡¶«ﬂΩ¿¥œ¥Ÿ\n";
+						cout << "\n" << Gacha_Equipments[J].Name << "ÏùÑ Ï∞©Ïö© Ìï¥Ï†úÌñàÏäµÎãàÎã§\n";
 						cout << "hp : " << Character->Hp + Gacha_Equipments[J].Hp << " -> " << Character->Hp << "\n";
 						cout << "mp : " << Character->Mp + Gacha_Equipments[J].Mp << " -> " << Character->Mp << "\n";
 						cout << "atk : " << Character->Atk + Gacha_Equipments[J].Atk << " -> " << Character->Atk << "\n";
@@ -597,8 +628,13 @@ bool Inventory_Menu()
 	int flag;
 	while (Inventoryflag)
 	{
-		cout << "------------------------\n" << "INVENTORY MENU" << endl;
-		cout << "1. æ∆¿Ã≈€ ªÁøÎ\n2. æ∆¿Ã≈€ º≥∏Ì\n3. ¿Œ∫•≈‰∏Æ ∫“∑Øø¿±‚\n0. µ⁄∑Œ∞°±‚\n";
+		cout << "------------------------\n";
+		
+		setColor(10);
+		cout << "INVENTORY MENU" << endl;
+		setColor(15);
+
+		cout << "1. ÏïÑÏù¥ÌÖú ÏÇ¨Ïö©\n2. ÏïÑÏù¥ÌÖú ÏÑ§Î™Ö\n3. Ïù∏Î≤§ÌÜ†Î¶¨ Î∂àÎü¨Ïò§Í∏∞\n0. Îí§Î°úÍ∞ÄÍ∏∞\n";
 		cin >> flag;
 		switch (flag)
 		{
@@ -618,7 +654,7 @@ bool Inventory_Menu()
 			return true;
 			break;
 		default:
-			cout << "¥ŸΩ√ ¿‘∑¬«ÿ ¡÷ººø‰.";
+			cout << "Îã§Ïãú ÏûÖÎ†•Ìï¥ Ï£ºÏÑ∏Ïöî.";
 			break;
 		}
 	}
