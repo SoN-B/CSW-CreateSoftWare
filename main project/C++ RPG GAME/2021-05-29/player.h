@@ -1,12 +1,7 @@
 #pragma once
 #include <iostream>
-#include <Windows.h>
 #include "monster.h"
 using namespace std;
-
-void setColor(unsigned short text) {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
-}
 
 typedef struct My_Character //플레이어 클래스
 {
@@ -25,9 +20,32 @@ typedef struct My_Character //플레이어 클래스
 
 	void Get_Character_Info()//플레이어 상태 출력 
 	{
-		cout << "\Level : " << Level << "\nMax Exp/Exp : " << Max_Exp << "/" << Exp
-			<< "\nHP : " << Hp << "\nMP: " << Mp << "\nATK: " << Atk << "\nDEF: " << Def
-			<< "\nMoney : " << Money << " Coin" << endl;
+		setColor(8);
+		cout << "\nLevel";
+		setColor(15);
+		cout << ": " << Level; 
+
+		setColor(6);
+		cout << "\nMax Exp/Exp";
+		setColor(15);
+		cout << ": " << Max_Exp << "/" << Exp;
+
+		setColor(4);
+		cout << "\nHP";
+		setColor(15);
+		cout << ": " << Hp;
+
+		setColor(9);
+		cout << "\nMP"; 
+		setColor(15);
+
+		cout << " : " << Mp << "\nATK : " << Atk << "\nDEF : " << Def << "\nSPPED : " << Speed;
+
+		setColor(14);
+		cout << "\nMoney";
+		setColor(15);
+
+		cout << " : " << Money << " Coin" << endl;
 		cout << "------------------------\n";
 	}
 
