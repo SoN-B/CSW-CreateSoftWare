@@ -222,7 +222,7 @@ void Mob_Atk(Monster* Mob, My_Character* Character)
 
 bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag);
 bool Inventory_Menu();
-void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
+bool Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 {
 	int Choice; //플레이어 선택 변수
 	bool Atkflag = true; //Atk_Menu 함수 제어용 변수
@@ -267,10 +267,12 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 		case 5: //몬스터 상태보기
 			Mob->Get_Info();
 			break;
-		case 6: //미구현
+		case 6: //미구현 
 			//도주
-			cout << "\n던전에서 도망쳐 나와 게임이 종료됩니다...";
-			exit(0);
+			Atkflag = false;
+			cout << "\n던전에서 도망쳐 나옵니다...";
+			Sleep(2000);//2000ms == 2초
+			return false;
 			break;
 		default: //잘못된 변수 입력받을시
 			cout << "올바르지 않은 입력" << endl;
