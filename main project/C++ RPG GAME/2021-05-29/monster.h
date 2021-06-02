@@ -4,16 +4,21 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <Windows.h>
 using namespace std;
 
+void setColor(unsigned short text) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
+}
+
 typedef struct Monster {
-    double Hp, Mp, Atk, Def, Speed, Exp = 0, Max_Exp = 100;//¼±°ø ¼±º°(Speed)
+    double Hp, Mp, Atk, Def, Speed, Exp = 0, Max_Exp = 100;//ì„ ê³µ ì„ ë³„(Speed)
     double Money = 100;
     double Level = 1;
-    string Ettype; //¸÷Á¾·ù -> normal,elite,boss
-    string Kind; //Á¾Á·
+    string Ettype; //ëª¹ì¢…ë¥˜ -> normal,elite,boss
+    string Kind; //ì¢…ì¡±
     Monster(string Kind, string Ettype = "normal",double Hp = 0, double Mp = 0, double Atk = 0,
-        double Def = 0, double Speed = 1, double Exp = 0, double Money = 0) //default ¸Å°³º¯¼ö ¸Ç³¡
+        double Def = 0, double Speed = 1, double Exp = 0, double Money = 0) //default ë§¤ê°œë³€ìˆ˜ ë§¨ë
     {
         //ex) Monster Slime_Normal = { "slime",100,20,10,5,1,"normal" };
 
@@ -29,11 +34,24 @@ typedef struct Monster {
     }
     void Get_Info()
     {
-        cout << "\nÁ¾Á· : " << this->Kind << " [" << Ettype << "] " << endl;
-        cout << "HP : " << this->Hp << endl;
-        cout << "MP : " << this->Mp << endl;
+        setColor(8);
+        cout << "\nì¢…ì¡± ";
+        setColor(15);
+        cout <<": " << this->Kind << " [" << Ettype << "] " << endl;
+
+        setColor(4);
+        cout << "HP "; 
+        setColor(15);
+        cout << ": " << this->Hp << endl;
+
+        setColor(9);
+        cout << "MP "; 
+        setColor(15);
+        cout << ": " << this->Mp << endl;
+
         cout << "ATK : " << this->Atk << endl;
         cout << "DEF : " << this->Def << endl;
+        cout << "SPEED : " << this->Speed << endl;
         cout << "------------------------\n";
     }
     void Hp_Plus(double a)
