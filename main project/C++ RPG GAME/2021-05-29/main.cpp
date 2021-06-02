@@ -11,9 +11,11 @@ using namespace std;
 
 int Menu;
 int Select;
+int Cancel;
 bool Firstflag = true; //do while문 탈출조건
 bool Secondflag = true;
 bool Thirdflag = true;
+bool Fourthflag = true;
 
 void GoToXy(int x, int y)
 {
@@ -70,7 +72,8 @@ bool Menu1()
             {
                 if (SoNB_P->Speed > Map[i][j]->Speed)//스피드 비교 
                 {
-                    Atk_Menu(SoNB_P, Map[i][j]);//캐릭터 spd>mob spd 이므로 플레이어 선공
+                    Fourthflag = Atk_Menu(SoNB_P, Map[i][j]);//캐릭터 spd>mob spd 이므로 플레이어 선공
+                    if (Fourthflag == false) return true;
                     if (Map[i][j]->Hp < 0)//몬스터 사망시
                     {
                         cout << "\n" << Map[i][j]->Kind << " 를 물리쳤다!" << endl;
@@ -107,6 +110,7 @@ bool Menu1()
                     }
 
                     Atk_Menu(SoNB_P, Map[i][j]);
+                    if (Fourthflag == false) return true;
                     if (Map[i][j]->Hp < 0)
                     {
                         cout << Map[i][j]->Kind << " 를 물리쳤다!" << endl;
@@ -186,8 +190,13 @@ int main()
             }
             break;
         case 2:
-            cout << "\n이 게임은 현재 개발 중에 있는 C++ 기반 RPG입니다.\n";
-            cout << "------------------------\n";
+            while (true)
+            {
+                cout << "\n이 게임은 현재 개발 중에 있는 C++ 기반 RPG입니다.\n('0'을 누르면 뒤로갑니다.)";
+                Cancel = _getch() - 48;
+                system("cls");
+                if (Cancel == 0) break;
+            }
             break;
         case 3:
             Firstflag = false;
