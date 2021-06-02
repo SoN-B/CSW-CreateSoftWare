@@ -72,8 +72,7 @@ bool Menu1()
             {
                 if (SoNB_P->Speed > Map[i][j]->Speed)//스피드 비교 
                 {
-                    Fourthflag = Atk_Menu(SoNB_P, Map[i][j]);//캐릭터 spd>mob spd 이므로 플레이어 선공
-                    if (Fourthflag == false) return true;
+                    Atk_Menu(SoNB_P, Map[i][j]);//캐릭터 spd>mob spd 이므로 플레이어 선공
                     if (Map[i][j]->Hp < 0)//몬스터 사망시
                     {
                         cout << "\n" << Map[i][j]->Kind << " 를 물리쳤다!" << endl;
@@ -110,7 +109,6 @@ bool Menu1()
                     }
 
                     Atk_Menu(SoNB_P, Map[i][j]);
-                    if (Fourthflag == false) return true;
                     if (Map[i][j]->Hp < 0)
                     {
                         cout << Map[i][j]->Kind << " 를 물리쳤다!" << endl;
