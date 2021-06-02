@@ -311,9 +311,21 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 			cin >> Skillcheck; //스킬사용 최종확인
 			if (Skillcheck == "Y")//스킬 사용 확인시
 			{
+				if (Character->Hp - Skill_Arry[Skillmenu - 1].Usedhp <= 0)//스킬 사용시 HP가 0이하가 되는경우 방지
+				{
+					cout << "HP가 모자랍니다." << endl;
+					Skillflag = false;//스킬메뉴 탈출
+					return true;//플레이어 턴 유지
+				}
+				if (Character->Mp - Skill_Arry[Skillmenu - 1].Usedmp < 0)//스킬 사용시 MP가 0미만이 되는경우 방지
+				{
+					cout << "MP가 모자랍니다." << endl;
+					Skillflag = false;//스킬메뉴 탈출
+					return true;//플레이어 턴 유지
+				}
 				Skill_Arry[Skillmenu - 1].Use_Skill(Character, Mob, Skill_Arry[Skillmenu - 1]);//스킬사용
-				Skillflag = false; //Skill_Menu 함수 종료
-				return false; //Atkflag=false : Atk_Menu 함수 종료 return
+				Skillflag = false; //스킬메뉴 탈출
+				return false; //플레이어 턴 종료
 			}
 		}
 	}
