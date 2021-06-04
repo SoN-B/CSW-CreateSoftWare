@@ -4,34 +4,36 @@
 #include <cstdlib>
 #include <ctime>
 using namespace std;
+//----------------í€˜ìŠ¤íŠ¸ ì™„ë£Œ ê¸°ëŠ¥ì€ ìƒì ì— ì¶”ê°€
 
-string Quest_slot[3] = { "0", "0", "0" };    // Äù½ºÆ® Ã¢
+string Quest_slot[3] = { "0", "0", "0" };    // í€˜ìŠ¤íŠ¸ ì°½
 class Quest {
 public:
 	string Goal, Kind;
 	int Num;
-	Quest(string Goal, string Kind, int Num) {  //GoalÀº Äù½ºÆ® ¸ñÇ¥
+	Quest(string Goal, string Kind, int Num) {  //Goalì€ í€˜ìŠ¤íŠ¸ ëª©í‘œ
 		this->Goal = Goal;
 		this->Kind = Kind;
 		this->Num = Num;
 	}
 };
-
-Quest Fabric_collecter_n = { "Fabric collecter - Fabric Àåºñ 5°³¸¦ ÀÎº¥Åä¸®¿¡ ¸ğÀ¸¼¼¿ä", "main quest", 0 };
-Quest Leather_collecter_n = { "Leather collecter - Leather Àåºñ 5°³¸¦ ÀÎº¥Åä¸®¿¡ ¸ğÀ¸¼¼¿ä", "main quest", 1 };
-Quest Wood_collecter_n = { "Wood collecter - Wood Àåºñ 5°³¸¦ ÀÎº¥Åä¸®¿¡ ¸ğÀ¸¼¼¿ä", "main quest", 2 };
-Quest Gacha_winner_n = { "Gacha_winner - Bamboo Àåºñ 1°³¸¦ ÀÎº¥Åä¸®¿¡ ¸ğÀ¸¼¼¿ä", "main quest", 3 };
-Quest Dungeon_owner_n = { "Dungeon_owner - 8000¿øÀ» ¸ğ¾Æ ´øÀüÀ» ±¸¸ÅÇÏ¼¼¿ä", "main quest", 4 };
-Quest Miser_n = { "Miser - 2000¿øÀ» ¸ğ¾Æ ÀÌÀÚ¸¦ ¹ŞÀ¸¼¼¿ä", "sub quest", 0 };
-Quest Collecter_n = { "Collecter - ÀÎº¥Åä¸®¸¦ ²Ë Ã¤¿ì°í º¸³Ê½º¸¦ ¹ŞÀ¸¼¼¿ä", "sub quest", 1 };
-Quest Random_item_n = { "Random item - ¼Òºñ ¾ÆÀÌÅÛÀ» »óÁ¡¿¡ °¡Á®°¡º¸¼¼¿ä, »óÁ¡ ÁÖÀÎÀÇ ¸¶À½¿¡ µç´Ù¸é Åë»ó°¡ÀÇ 5¹è¸¦ µå¸³´Ï´Ù.", "sub quest", 2 };
-Quest Random_equipment_n = { "Random equipment - Àåºñ ¾ÆÀÌÅÛÀ» »óÁ¡¿¡ °¡Á®°¡º¸¼¼¿ä, »óÁ¡ ÁÖÀÎÀÇ ¸¶À½¿¡ µç´Ù¸é Åë»ó°¡ÀÇ 5¹è¸¦ µå¸³´Ï´Ù.", "sub quest", 3 };
-Quest Scholarship_n = { "Scholarship - ·¹º§ 5¸¦ ´Ş¼ºÇÏ¸é ÀåÇĞ±İÀ» µå¸³´Ï´Ù.", "sub quest", 4 };
+//----------------ë©”ì¸ í€˜ìŠ¤íŠ¸
+Quest Fabric_collecter_n = { "Fabric collecter - Fabric ì¥ë¹„ 5ê°œë¥¼ ì¸ë²¤í† ë¦¬ì— ëª¨ìœ¼ì„¸ìš”", "main quest", 0 };
+Quest Leather_collecter_n = { "Leather collecter - Leather ì¥ë¹„ 5ê°œë¥¼ ì¸ë²¤í† ë¦¬ì— ëª¨ìœ¼ì„¸ìš”", "main quest", 1 };
+Quest Wood_collecter_n = { "Wood collecter - Wood ì¥ë¹„ 5ê°œë¥¼ ì¸ë²¤í† ë¦¬ì— ëª¨ìœ¼ì„¸ìš”", "main quest", 2 };
+Quest Gacha_winner_n = { "Gacha_winner - Bamboo ì¥ë¹„ 1ê°œë¥¼ ì¸ë²¤í† ë¦¬ì— ëª¨ìœ¼ì„¸ìš”", "main quest", 3 };
+Quest Dungeon_owner_n = { "Dungeon_owner - 8000ì›ì„ ëª¨ì•„ ë˜ì „ì„ êµ¬ë§¤í•˜ì„¸ìš”", "main quest", 4 };
+//----------------ì„œë¸Œ í€˜ìŠ¤íŠ¸
+Quest Miser_n = { "Miser - 2000ì›ì„ ëª¨ì•„ ì´ìë¥¼ ë°›ìœ¼ì„¸ìš”", "sub quest", 0 };
+Quest Collecter_n = { "Collecter - ì¸ë²¤í† ë¦¬ë¥¼ ê½‰ ì±„ìš°ê³  ë³´ë„ˆìŠ¤ë¥¼ ë°›ìœ¼ì„¸ìš”", "sub quest", 1 };
+Quest Random_item_n = { "Random item - ì†Œë¹„ ì•„ì´í…œì„ ìƒì ì— ê°€ì ¸ê°€ë³´ì„¸ìš”, ìƒì  ì£¼ì¸ì˜ ë§ˆìŒì— ë“ ë‹¤ë©´ í†µìƒê°€ì˜ 5ë°°ë¥¼ ë“œë¦½ë‹ˆë‹¤.", "sub quest", 2 };
+Quest Random_equipment_n = { "Random equipment - ì¥ë¹„ ì•„ì´í…œì„ ìƒì ì— ê°€ì ¸ê°€ë³´ì„¸ìš”, ìƒì  ì£¼ì¸ì˜ ë§ˆìŒì— ë“ ë‹¤ë©´ í†µìƒê°€ì˜ 5ë°°ë¥¼ ë“œë¦½ë‹ˆë‹¤.", "sub quest", 3 };
+Quest Scholarship_n = { "Scholarship - ë ˆë²¨ 5ë¥¼ ë‹¬ì„±í•˜ë©´ ì¥í•™ê¸ˆì„ ë“œë¦½ë‹ˆë‹¤.", "sub quest", 4 };
 
 Quest Main_Quest[5] = { Fabric_collecter_n, Leather_collecter_n, Wood_collecter_n, Gacha_winner_n, Dungeon_owner_n };
 Quest Sub_Quest[5] = { Miser_n, Collecter_n, Random_item_n, Random_equipment_n, Scholarship_n };
 
-void Create_Quest(string* Quest_slot) {
+void Create_Quest(string* Quest_slot) {   //í€˜ìŠ¤íŠ¸ ì°½ì— ëœë¤ í€˜ìŠ¤íŠ¸ë¥¼ ì§‘ì–´ë„£ìŒ
 	srand((unsigned int)time(NULL));
 	int Main = rand() % 5;
 	int Sub1 = rand() % 5;
@@ -41,10 +43,10 @@ void Create_Quest(string* Quest_slot) {
 	Quest_slot[2] = Sub_Quest[Sub2].Goal;
 }
 
-void Look_Quest() {
-	cout << "0Àº ¸ŞÀÎ Äù½ºÆ®, 1°ú2´Â ¼­ºê Äù½ºÆ®ÀÔ´Ï´Ù.\n";
-	cout << "¸ŞÀÎ Äù½ºÆ®¸¦ ¿Ï·áÇÏ¸é °ÔÀÓÀÌ Å¬¸®¾îµÇ°í ¼­ºê Äù½ºÆ®¸¦ ¿Ï·áÇÏ¸é º¸»óÀ» ¹Ş½À´Ï´Ù\n";
-	cout << "Äù½ºÆ® ¸ñ·Ï\n";
+void Look_Quest() {   //í€˜ìŠ¤íŠ¸ 
+	cout << "0ì€ ë©”ì¸ í€˜ìŠ¤íŠ¸, 1ê³¼2ëŠ” ì„œë¸Œ í€˜ìŠ¤íŠ¸ì…ë‹ˆë‹¤.\n";
+	cout << "ë©”ì¸ í€˜ìŠ¤íŠ¸ë¥¼ ì™„ë£Œí•˜ë©´ ê²Œì„ì´ í´ë¦¬ì–´ë˜ê³  ì„œë¸Œ í€˜ìŠ¤íŠ¸ë¥¼ ì™„ë£Œí•˜ë©´ ë³´ìƒì„ ë°›ìŠµë‹ˆë‹¤\n";
+	cout << "í€˜ìŠ¤íŠ¸ ëª©ë¡\n";
 	for (int J = 0; J < 3; J++) {
 		cout << "------------------------\n";
 		cout << J << " : " << Quest_slot[J] << "\n";
@@ -55,13 +57,13 @@ void Fabric_Collecter() {
 	int Count = 0;
 	for (int I = 0; I < 5; I++) {
 		if (Inventory[I].find("Fabric") == string::npos) {
-			cout << "Äù½ºÆ®°¡ ¿Ï·áµÇÁö ¾Ê¾Ò½À´Ï´Ù\n";
+			cout << "í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n";
 			break;
 		}
 		else { Count++; }
 	}
 	if (Count == 5) {
-		cout << "¸ŞÀÎ Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
+		cout << "ë©”ì¸ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
 		cout << "GAME CLEAR!!!\n";
 	}
 }
@@ -70,28 +72,28 @@ void Leather_Collecter() {
 	int Count = 0;
 	for (int I = 0; I < 5; I++) {
 		if (Inventory[I].find("Leather") == string::npos) {
-			cout << "Äù½ºÆ®°¡ ¿Ï·áµÇÁö ¾Ê¾Ò½À´Ï´Ù\n";
+			cout << "í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n";
 			break;
 		}
 		else { Count++; }
 	}
 	if (Count == 5) {
-		cout << "¸ŞÀÎ Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
+		cout << "ë©”ì¸ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
 		cout << "GAME CLEAR!!!\n";
 	}
 }
-
+//----------------í€˜ìŠ¤íŠ¸ 
 void Wood_Collecter() {
 	int Count = 0;
 	for (int I = 0; I < 5; I++) {
 		if (Inventory[I].find("Wood") == string::npos) {
-			cout << "Äù½ºÆ®°¡ ¿Ï·áµÇÁö ¾Ê¾Ò½À´Ï´Ù\n";
+			cout << "í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n";
 			break;
 		}
 		else { Count++; }
 	}
 	if (Count == 5) {
-		cout << "¸ŞÀÎ Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
+		cout << "ë©”ì¸ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
 		cout << "GAME CLEAR!!!\n";
 	}
 }
@@ -100,34 +102,34 @@ void Gacha_Winner() {
 	int Count = 0;
 	for (int I = 0; I < 5; I++) {
 		if (Inventory[I].find("Fabric") != string::npos) {
-			cout << "¸ŞÀÎ Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
+			cout << "ë©”ì¸ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
 			cout << "GAME CLEAR!!!\n";
 			break;
 		}
 		else { Count++; }
 	}
 	if (Count == 5) {
-		cout << "Äù½ºÆ®°¡ ¿Ï·áµÇÁö ¾Ê¾Ò½À´Ï´Ù\n";
+		cout << "í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n";
 	}
 }
 
 void Dungeon_Owner() {
 	if (Money >= 8000) {
-		cout << "¸ŞÀÎ Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
+		cout << "ë©”ì¸ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
 		cout << "GAME CLEAR!!!\n";
 	}
-	else { cout << "Äù½ºÆ®°¡ ¿Ï·áµÇÁö ¾Ê¾Ò½À´Ï´Ù\n"; }
+	else { cout << "í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n"; }
 }
 
 bool Miser() {
 	if (Money >= 2000) {
-		cout << "¼­ºê Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
-		cout << "º¸»óÀ¸·Î 1000¿øÀ» ¹Ş¾Ò½À´Ï´Ù\n";
+		cout << "ì„œë¸Œ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
+		cout << "ë³´ìƒìœ¼ë¡œ 1000ì›ì„ ë°›ì•˜ìŠµë‹ˆë‹¤\n";
 		Money += 1000;
 		return true;
 	}
 	else { 
-		cout << "Äù½ºÆ®°¡ ¿Ï·áµÇÁö ¾Ê¾Ò½À´Ï´Ù\n";
+		cout << "í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n";
 		return false;
 	}
 }
@@ -136,14 +138,14 @@ bool Collecter() {
 	int Count = 0;
 	for (int I = 0; I < 5; I++) {
 		if (Inventory[I] == "0") {
-			cout << "Äù½ºÆ®°¡ ¿Ï·áµÇÁö ¾Ê¾Ò½À´Ï´Ù\n";
+			cout << "í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n";
 			return false;
 		}
 		else { Count++; }
 	}
 	if (Count == 5) {
-		cout << "¼­ºê Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
-		cout << "º¸»óÀ¸·Î 1000¿øÀ» ¹Ş¾Ò½À´Ï´Ù\n";
+		cout << "ì„œë¸Œ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
+		cout << "ë³´ìƒìœ¼ë¡œ 1000ì›ì„ ë°›ì•˜ìŠµë‹ˆë‹¤\n";
 		Money += 1000;
 		return true;
 	}
@@ -156,25 +158,25 @@ bool Random_Item() {
 	string R_item = Items[Num].Name;
 	int R_price = Items[Num].Price;
 	setColor(2);
-	cout << "\nÀÎº¥Åä¸® ¸ñ·Ï\n";
+	cout << "\nì¸ë²¤í† ë¦¬ ëª©ë¡\n";
 	setColor(15);
 
 	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
 	cout << "------------------------\n";
-	cout << "»óÁ¡ ÁÖÀÎ¿¡°Ô °Ç³¾ ¾ÆÀÌÅÛÀÇ ¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n";
-	cout << "0~4 ÀÌ¿ÜÀÇ ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¸é Ãë¼ÒµË´Ï´Ù.\n";
-	cout << "ÀÔ·Â : ";
+	cout << "ìƒì  ì£¼ì¸ì—ê²Œ ê±´ë‚¼ ì•„ì´í…œì˜ ìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”\n";
+	cout << "0~4 ì´ì™¸ì˜ ìˆ«ìë¥¼ ì…ë ¥í•˜ë©´ ì·¨ì†Œë©ë‹ˆë‹¤.\n";
+	cout << "ì…ë ¥ : ";
 	cin >> N;
 	cout << "------------------------\n";
 	if (Inventory[N] == R_item) {
-		cout << "¼­ºê Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
-		cout << "º¸»óÀ¸·Î " << R_price * 5 << "¿øÀ» ¹Ş¾Ò½À´Ï´Ù.\n";
+		cout << "ì„œë¸Œ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
+		cout << "ë³´ìƒìœ¼ë¡œ " << R_price * 5 << "ì›ì„ ë°›ì•˜ìŠµë‹ˆë‹¤.\n";
 		Money += R_price * 5;
 		return true;
 	}
 	else {
-		cout << "ÀÌ°Ô ¾Æ´Ï¾ß!!!\n";
-		cout << "»óÁ¡ ÁÖÀÎÀÌ È­°¡ ³µ½À´Ï´Ù...\n";
+		cout << "ì´ê²Œ ì•„ë‹ˆì•¼!!!\n";
+		cout << "ìƒì  ì£¼ì¸ì´ í™”ê°€ ë‚¬ìŠµë‹ˆë‹¤...\n";
 		return false;
 	}
 }
@@ -186,38 +188,38 @@ bool Random_Equipment() {
 	string R_equipment = Equipments[Num].Name;
 	int R_price = Equipments[Num].Price;
 	setColor(2);
-	cout << "\nÀÎº¥Åä¸® ¸ñ·Ï\n";
+	cout << "\nì¸ë²¤í† ë¦¬ ëª©ë¡\n";
 	setColor(15);
 
 	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
 	cout << "------------------------\n";
-	cout << "»óÁ¡ ÁÖÀÎ¿¡°Ô °Ç³¾ ¾ÆÀÌÅÛÀÇ ¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n";
-	cout << "0~4 ÀÌ¿ÜÀÇ ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¸é Ãë¼ÒµË´Ï´Ù.\n";
-	cout << "ÀÔ·Â : ";
+	cout << "ìƒì  ì£¼ì¸ì—ê²Œ ê±´ë‚¼ ì•„ì´í…œì˜ ìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”\n";
+	cout << "0~4 ì´ì™¸ì˜ ìˆ«ìë¥¼ ì…ë ¥í•˜ë©´ ì·¨ì†Œë©ë‹ˆë‹¤.\n";
+	cout << "ì…ë ¥ : ";
 	cin >> N;
 	cout << "------------------------\n";
 	if (Inventory[N] == R_equipment) {
-		cout << "¼­ºê Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
-		cout << "º¸»óÀ¸·Î " << R_price * 5 << "¿øÀ» ¹Ş¾Ò½À´Ï´Ù.\n";
+		cout << "ì„œë¸Œ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
+		cout << "ë³´ìƒìœ¼ë¡œ " << R_price * 5 << "ì›ì„ ë°›ì•˜ìŠµë‹ˆë‹¤.\n";
 		Money += R_price * 5;
 		return true;
 	}
 	else {
-		cout << "ÀÌ°Ô ¾Æ´Ï¾ß!!!\n";
-		cout << "»óÁ¡ ÁÖÀÎÀÌ È­°¡ ³µ½À´Ï´Ù...\n";
+		cout << "ì´ê²Œ ì•„ë‹ˆì•¼!!!\n";
+		cout << "ìƒì  ì£¼ì¸ì´ í™”ê°€ ë‚¬ìŠµë‹ˆë‹¤...\n";
 		return false;
 	}
 }
 
 bool Scholarship() {
 	if (SoNB_P->Level >= 5) {
-		cout << "¼­ºê Äù½ºÆ®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù\n";
-		cout << "º¸»óÀ¸·Î 1000¿øÀ» ¹Ş¾Ò½À´Ï´Ù\n";
+		cout << "ì„œë¸Œ í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n";
+		cout << "ë³´ìƒìœ¼ë¡œ 1000ì›ì„ ë°›ì•˜ìŠµë‹ˆë‹¤\n";
 		Money += 1000;
 		return true;
 	}
 	else {
-		cout << "Äù½ºÆ®°¡ ¿Ï·áµÇÁö ¾Ê¾Ò½À´Ï´Ù\n";
+		cout << "í€˜ìŠ¤íŠ¸ê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n";
 		return false;
 	}
 }
