@@ -359,6 +359,8 @@ void Throw_Away_Item(string* Inventory) {       //아이템을 버릴 때
 	else { cout << "아이템 버리기가 취소되었습니다\n"; }
 }
 
+#include "quest.h"
+
 bool Open_Store(string* inventory) {  //상점
 	int Num;
 	string Gacha = "Gacha";
@@ -387,7 +389,8 @@ bool Open_Store(string* inventory) {  //상점
 		cout << "5를 입력하시면 소비 아이템의 정보를 볼 수 있습니다.\n";
 		cout << "6을 입력하시면 장비 아이템의 정보를 볼 수 있습니다.\n";
 		cout << "7을 입력하시면 인벤토리의 아이템을 버릴 수 있습니다.\n";
-		cout << "8을 입력하시면 상점을 종료할 수 있습니다.\n";
+		cout << "8을 입력하시면 퀘스트를 완료할 수 있습니다.\n";
+		cout << "9를 입력하시면 상점을 종료할 수 있습니다.\n";
 
 		setColor(14);
 		cout << "\nGacha"; 
@@ -454,7 +457,76 @@ bool Open_Store(string* inventory) {  //상점
 		else if (Num == 5) { Item_List(); }    //소비 아이템 목록
 		else if (Num == 6) { Equipment_List(); }    //장비 아이템 목록
 		else if (Num == 7) { Throw_Away_Item(inventory); }    //인벤토리의 아이템 버리기
-		else if (Num == 8)
+		else if (Num == 8) {   //퀘스트
+			int Num2;
+			cout << "0은 메인 퀘스트, 1과2는 서브 퀘스트입니다.\n";
+			cout << "메인 퀘스트를 완료하면 게임이 클리어되고 서브 퀘스트를 완료하면 보상을 받습니다\n";
+			setColor(2);
+			cout << "퀘스트 목록\n";
+			setColor(15);
+
+			for (int J = 0; J < 3; J++) {   //퀘스트 목록
+				cout << "------------------------\n";
+				cout << J << " : " << Quest_slot[J] << "\n";
+			}
+			cout << "------------------------\n";
+			cout << "완료할 퀘스트의 숫자를 입력해주세요.\n" << "0~2 이외의 숫자를 입력하면 취소됩니다.\n";
+			cout << "입력 : ";
+			cin >> Num2;
+			cout << "------------------------\n";
+			if (Num2 < 0 && Num2 >2) { cout << "퀘스트 완료가 취소되었습니다.\n"; }
+			else if (Num2 == 0) {    //메인 퀘스트 선택
+				for (int K = 0; K < 5; K++) {
+					if (Quest_slot[Num2] == Main_Quest[K].Goal) {
+						switch (Main_Quest[K].Num) {
+						case 0:
+							Fabric_Collecter();
+							break;
+						case 1:
+							Leather_Collecter();
+							break;
+						case 2:
+							Wood_Collecter();
+							break;
+						case 3:
+							Gacha_Winner();
+							break;
+						case 4:
+							Dungeon_Owner();
+							break;
+						}
+					}
+				}
+			}
+			else if (Num2 == 1 || Num2 == 2) {   //서브 퀘스트 선택
+				bool Questflag;   //    퀘스트 완료 여부 체크
+				for (int K = 0; K < 5; K++) {
+					if (Quest_slot[Num2] == Sub_Quest[K].Goal) {
+						switch (Sub_Quest[K].Num) {
+						case 0:
+							Questflag = Miser();
+							break;
+						case 1:
+							Questflag = Collecter();
+							break;
+						case 2:
+							Questflag = Random_Item();
+							break;
+						case 3:
+							Questflag = Random_Equipment();
+							break;
+						case 4:
+							Questflag = Scholarship();
+							break;
+						}
+						if (Questflag == true) {
+							Quest_slot[Num2] = "완료";
+						}
+					}
+				}
+			}
+		}
+		else if (Num == 9)
 		{
 			return false;
 			break;

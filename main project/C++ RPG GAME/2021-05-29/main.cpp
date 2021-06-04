@@ -159,6 +159,7 @@ int main()
             Gameflag = true;//메인메뉴 --> 맵선택(flase방지)
             while (Gameflag)
             {
+				Create_Quest(Quest_slot);
                 system("cls");
                 GoToXy(10, 15);
                 cout << "1. 맵 선택";
