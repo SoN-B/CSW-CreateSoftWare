@@ -3,9 +3,10 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <conio.h>
+#include <Windows.h>
 #include "player.h"
-
-double Money = SoNB_P->Money;
+#include "quest.h"
 using namespace std;
 // 인벤토리의 빈 공간을 "0"으로 표현함
 string DropItem;
@@ -359,9 +360,9 @@ void Throw_Away_Item(string* Inventory) {       //아이템을 버릴 때
 	else { cout << "아이템 버리기가 취소되었습니다\n"; }
 }
 
-#include "quest.h"
 
 bool Open_Store(string* inventory) {  //상점
+	double Money = SoNB_P->Money;
 	int Num;
 	string Gacha = "Gacha";
 	srand((unsigned int)time(NULL));

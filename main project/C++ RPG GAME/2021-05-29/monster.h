@@ -4,11 +4,19 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <conio.h>
 #include <Windows.h>
 using namespace std;
 
 void setColor(unsigned short text) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
+}
+void Cursor_Move(double x, double y)
+{
+    COORD cur;
+    cur.X = x;
+    cur.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur);
 }
 
 typedef struct Monster {
@@ -74,8 +82,49 @@ typedef struct Monster {
     {
         this->Speed += a;
     }
+    void Get_Info_Right();
 }Monster;
+void Monster::Get_Info_Right()
+{
+    COORD cur;
+    int i = 0;
+    Cursor_Move(62, i);
+    setColor(8);
+    cout << "종족 ";
+    setColor(15);
+    cout << ": " << this->Kind << " [" << Ettype << "] ";
 
+    i = i + 1;
+
+    Cursor_Move(62, i);
+    setColor(4);
+    cout << "HP ";
+    setColor(15);
+    cout << ": " << this->Hp;
+
+    i = i + 1;
+
+    Cursor_Move(62, i);
+    setColor(9);
+    cout << "MP ";
+    setColor(15);
+    cout << ": " << this->Mp;
+
+    i = i + 1;
+
+    Cursor_Move(62, i);
+    cout << "ATK : " << this->Atk;
+
+    i = i + 1;
+
+    Cursor_Move(62, i);
+    cout << "DEF : " << this->Def << endl;
+
+    i = i + 1;
+
+    Cursor_Move(62, i);
+    cout << "SPEED : " << this->Speed << endl;
+}
 void Randy()
 {
     srand((unsigned int)time(NULL));

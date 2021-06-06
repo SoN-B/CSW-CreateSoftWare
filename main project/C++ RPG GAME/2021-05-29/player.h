@@ -2,10 +2,10 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
-#include "monster.h"
+#include "Ui.h"
 using namespace std;
 
-typedef struct My_Character //플레이어 클래스
+/*typedef struct My_Character //플레이어 클래스
 {
 	double Hp, Mp, Atk, Def, Speed, Level = 1, Exp = 0, Max_Exp = 100, Money = 0;
 
@@ -85,8 +85,37 @@ typedef struct My_Character //플레이어 클래스
 	}
 }My_Character;
 My_Character SoNB;
-My_Character* SoNB_P = &SoNB;
+My_Character* SoNB_P = &SoNB;*/
+void My_Character::Get_Character_Info_Left()
+{
+	Cursor_Move(0, 0);
+	setColor(8);
+	cout << "\nLevel";
+	setColor(15);
+	cout << ": " << Level;
 
+	setColor(6);
+	cout << "\nMax Exp/Exp";
+	setColor(15);
+	cout << ": " << Max_Exp << "/" << Exp;
+
+	setColor(4);
+	cout << "\nHP";
+	setColor(15);
+	cout << ": " << Hp;
+
+	setColor(9);
+	cout << "\nMP";
+	setColor(15);
+
+	cout << " : " << Mp << "\nATK : " << Atk << "\nDEF : " << Def << "\nSPPED : " << Speed;
+
+	setColor(14);
+	cout << "\nMoney";
+	setColor(15);
+
+	cout << " : " << Money << " Coin" << endl << endl;
+}
 class Skill //스킬 클래스
 {
 public:
@@ -208,18 +237,8 @@ void Mob_Atk(Monster* Mob, My_Character* Character)
 	//몹 공격력<플레이어 방어력 경우 음수 나오는 상황 배제
 
 	Character->Hp -= Damage;
-
-	setColor(10);
-	cout << "【" << Mob->Kind << " 의 공격!】" << endl;
-	setColor(15);
-
-	cout << "플레이어는 ";
-
-	setColor(12);
-	cout << Damage;
-	setColor(15);
-
-	cout << " 의 피해를 입었다!\n" << endl;
+	Monster_Attack_Result(Mob, Damage);
+	Combat_Ui(Character, Mob);
 }
 
 bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag);
@@ -237,24 +256,13 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 		{
 		case 1: //기본공격
 			setColor(12);
-			cout << "\n적에게 공격을 가합니다!!\n\n";
+			Print("적에게 공격을 가합니다.!");
 			setColor(15);
 
 			Damage = Character->Atk - Mob->Def; //플레이어 데미지 계산 (플레이어Atk - 몬스터def)
 			if (Damage < 0) Damage = 0; //예외사항: 데미지 음수일 경우 0으로 계산
 			Mob->Hp -= Damage; //최종 데미지 계산
-
-			setColor(10);
-			cout << "【플레이어의 공격!】" << endl;
-			setColor(15);
-
-			cout << "플레이어는 ";
-
-			setColor(12);
-			cout << Damage;
-			setColor(15);
-
-			cout << " 의 피해를 입혔다!\n" << endl;
+			Player_Attack_Result(Damage);
 			Atkflag = false;
 			break;
 		case 2: //스킬사용
@@ -272,15 +280,17 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 		case 6: //미구현 
 			//도주
 			//Atkflag = false;
-			cout << "\n던전에서 도망쳐 나옵니다...";
+			Print("던전에서 도망쳐 나옵니다...");
 			Sleep(2000);
 			exit(0);
 			break;
 		default: //잘못된 변수 입력받을시
-			cout << "올바르지 않은 입력" << endl;
+			Print("올바르지 않은 입력");
 			break;
 		}
 	}
+	//여기에 Player의 UI랑 monster의 UI 갱신 부분이 들어가야함.
+	Combat_Ui(Character, Mob);
 }
 
 bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)

@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <Windows.h>
 #include <conio.h>
-#include "player.h"
 #include "inventory.h"
 #include "map.h"
 using namespace std;
@@ -60,9 +59,10 @@ bool Map_Combat()//맵선택 및 전투
     {
         for (int j = 0; j < Map[i].size(); j++)//j=해당 방의 몬스터 수
         {
-            cout << "------------------------\n";
+            Combat_Ui(SoNB_P, Map[i][j]);
             setColor(2);
-            cout << Map[i][j]->Kind << " 가 나타났다!\n" << endl;//몬스터 등장
+            Print_Line(Map[i][j]->Kind);
+            Print(" 가 나타났다!");
             setColor(15);
 
             Temp_Mob_P->Hp = Map[i][j]->Hp;
@@ -72,10 +72,17 @@ bool Map_Combat()//맵선택 및 전투
             {
                 if (SoNB_P->Speed > Map[i][j]->Speed)//스피드 비교: 플레이어선공
                 {
+                    Cursor_Move(58, 8);
+                    cout << "※";        //player의 턴을 나타냄.
+                    Cursor_Move(62, 8);
+                    cout << "□";        //monster의 턴 끝남
+
+                    Cursor_Move(0, 11);
                     Atk_Menu(SoNB_P, Map[i][j]);//플레이어 턴(선공)
                     if (Map[i][j]->Hp < 0)//몬스터 사망시
                     {
-                        cout << "\n" << Map[i][j]->Kind << " 를 물리쳤다!" << endl;
+                        Print_Line(Map[i][j]->Kind);
+                        Print(" 를 물리쳤다!");
                         Monster_Die(SoNB_P, Map[i][j]);
                         Map[i][j]->Hp = Temp_Mob_P->Hp;
                         Map[i][j]->Mp = Temp_Mob_P->Mp;
@@ -83,6 +90,12 @@ bool Map_Combat()//맵선택 및 전투
                         if (DropItem != "") Pick_Up_Item(Inventory, DropItem);
                         break;//while문 탈출: 전투끝
                     }
+                    Sleep(1000);
+
+                    Cursor_Move(58, 8);
+                    cout << "□";        //player의 턴 끝남.
+                    Cursor_Move(62, 8);
+                    cout << "※";        //monster의 턴을 나타냄.
                     Mob_Atk(Map[i][j], SoNB_P);//몬스터 턴(후공)
                     if (SoNB_P->Hp < 0) //도중에 캐릭터가 사망시 게임오버 
                     {
@@ -92,7 +105,10 @@ bool Map_Combat()//맵선택 및 전투
                         return false; 
                         break;//while문 탈출: 전투끝
                     }
-                    cout << "------------------------\n";
+                    Cursor_Move(62, 8);
+                    Sleep(1000);
+
+                    Cursor_Move(0, 11);  //order창으로.
 
                 }
 
@@ -111,7 +127,8 @@ bool Map_Combat()//맵선택 및 전투
                     Atk_Menu(SoNB_P, Map[i][j]);//플레이어 턴 (후공)
                     if (Map[i][j]->Hp < 0) //몬스터 사망시
                     {
-                        cout << Map[i][j]->Kind << " 를 물리쳤다!" << endl;
+                        Print_Line(Map[i][j]->Kind);
+                        Print(" 를 물리쳤다!");
                         Monster_Die(SoNB_P, Map[i][j]);
                         Map[i][j]->Hp = Temp_Mob_P->Hp;
                         Map[i][j]->Mp = Temp_Mob_P->Mp;
