@@ -6,7 +6,6 @@
 #include <conio.h>
 #include <Windows.h>
 #include "player.h"
-#include "quest.h"
 using namespace std;
 // 인벤토리의 빈 공간을 "0"으로 표현함
 string DropItem;
@@ -360,9 +359,9 @@ void Throw_Away_Item(string* Inventory) {       //아이템을 버릴 때
 	else { cout << "아이템 버리기가 취소되었습니다\n"; }
 }
 
+#include "quest.h"
 
 bool Open_Store(string* inventory) {  //상점
-	double Money = SoNB_P->Money;
 	int Num;
 	string Gacha = "Gacha";
 	srand((unsigned int)time(NULL));
@@ -403,24 +402,24 @@ bool Open_Store(string* inventory) {  //상점
 		setColor(15);
 		cout << "로만 구할 수 있는 아이템도 존재하니 여러분의 운을 시험해보세요.\n";
 		cout << "------------------------\n";
-		cout << "소지금 : " << Money << endl;
+		cout << "소지금 : " << SoNB_P->Money << endl;
 		cout << "입력 : ";
 		cin >> Num;
 		cout << endl;
 		if (Num < 0 && Num > 8) { cout << "제대로 된 숫자를 입력해주세요\n"; }
 		else if (Num >= 0 && Num < 4) {     //아이템 구매
-			if (Money < Price[Num]) { cout << "돈이 부족합니다.\n"; }
+			if (SoNB_P->Money < Price[Num]) { cout << "돈이 부족합니다.\n"; }
 			else {
 				Pick_Up_Item(inventory, Item_list[Num]);
-				Money -= Price[Num];
+				SoNB_P->Money -= Price[Num];
 				cout << Item_list[Num] << "을(를) 구매했습니다.\n";
-				cout << "소지금 : " << Money + Price[Num] << " -> " << Money << endl;
+				cout << "소지금 : " << SoNB_P->Money + Price[Num] << " -> " << SoNB_P->Money << endl;
 				Item_list[Num] = "0";
 				Price[Num] = 0;
 			}
 		}
 		else if (Num == 4) {    //가챠 구매
-			if (Money < Price[Num]) { cout << "돈이 부족합니다.\n"; }
+			if (SoNB_P->Money < Price[Num]) { cout << "돈이 부족합니다.\n"; }
 			else {
 				int L;
 				string result;
@@ -431,14 +430,14 @@ bool Open_Store(string* inventory) {  //상점
 					result = Items[L].Name;
 					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!";
 					Pick_Up_Item(inventory, result);
-					Money -= Price[Num];
+					SoNB_P->Money -= Price[Num];
 				}
 				else if (Luck >= 3 && Luck < 5) {    //가챠에서 장비 아이템 등장
 					L = rand() % 15;
 					result = Equipments[L].Name;
 					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!";
 					Pick_Up_Item(inventory, result);
-					Money -= Price[Num];
+					SoNB_P->Money -= Price[Num];
 				}
 				else if (Luck == 5) {    //가챠에서 가챠 장비 등장
 					L = rand() % 5;
@@ -446,13 +445,13 @@ bool Open_Store(string* inventory) {  //상점
 					cout << "오잉? 가챠에서 빛이?\n";
 					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!";
 					Pick_Up_Item(inventory, result);
-					Money -= Price[Num];
+					SoNB_P->Money -= Price[Num];
 				}
 				else if (Luck == 6) {   //꽝
 					cout << "당신의 500원, '꺼~억'으로 대체되었다... 무야호~\n";
-					Money -= Price[Num];
+					SoNB_P->Money -= Price[Num];
 				}
-				cout << "소지금 : " << Money + Price[Num] << " -> " << Money << endl;
+				cout << "소지금 : " << SoNB_P->Money + Price[Num] << " -> " << SoNB_P->Money << endl;
 			}
 		}
 		else if (Num == 5) { Item_List(); }    //소비 아이템 목록

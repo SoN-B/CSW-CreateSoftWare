@@ -114,7 +114,7 @@ void Gacha_Winner() {
 }
 
 void Dungeon_Owner() {
-	if (Money >= 8000) {
+	if (SoNB_P->Money >= 8000) {
 		cout << "메인 퀘스트가 완료되었습니다\n";
 		cout << "GAME CLEAR!!!\n";
 	}
@@ -122,10 +122,10 @@ void Dungeon_Owner() {
 }
 
 bool Miser() {
-	if (Money >= 2000) {
+	if (SoNB_P->Money >= 2000) {
 		cout << "서브 퀘스트가 완료되었습니다\n";
 		cout << "보상으로 1000원을 받았습니다\n";
-		Money += 1000;
+		SoNB_P->Money += 1000;
 		return true;
 	}
 	else { 
@@ -146,7 +146,7 @@ bool Collecter() {
 	if (Count == 5) {
 		cout << "서브 퀘스트가 완료되었습니다\n";
 		cout << "보상으로 1000원을 받았습니다\n";
-		Money += 1000;
+		SoNB_P->Money += 1000;
 		return true;
 	}
 }
@@ -171,7 +171,7 @@ bool Random_Item() {
 	if (Inventory[N] == R_item) {
 		cout << "서브 퀘스트가 완료되었습니다\n";
 		cout << "보상으로 " << R_price * 5 << "원을 받았습니다.\n";
-		Money += R_price * 5;
+		SoNB_P->Money += R_price * 5;
 		return true;
 	}
 	else {
@@ -201,7 +201,7 @@ bool Random_Equipment() {
 	if (Inventory[N] == R_equipment) {
 		cout << "서브 퀘스트가 완료되었습니다\n";
 		cout << "보상으로 " << R_price * 5 << "원을 받았습니다.\n";
-		Money += R_price * 5;
+		SoNB_P->Money += R_price * 5;
 		return true;
 	}
 	else {
@@ -215,7 +215,7 @@ bool Scholarship() {
 	if (SoNB_P->Level >= 5) {
 		cout << "서브 퀘스트가 완료되었습니다\n";
 		cout << "보상으로 1000원을 받았습니다\n";
-		Money += 1000;
+		SoNB_P->Money += 1000;
 		return true;
 	}
 	else {
