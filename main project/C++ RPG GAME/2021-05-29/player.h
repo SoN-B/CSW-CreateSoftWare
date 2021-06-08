@@ -228,7 +228,7 @@ Skill Blood_Slash("블러드 슬래시", 100, 0, 0, 0, 0, 150);//체력100소모
 Skill Mind_Fuel("회광반조", 0, 30, 15, 0, 0, 0);//마나 30소모, 체력15회복
 Skill Prayer("기도", 0, 0, 0, 20, 0, 0);//소모없음, 마나20회복
 //플레이어의 스킬창 기본값
-Skill Skill_Arry[4] = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };
+Skill Skill_Array[4] = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };
 
 void Mob_Atk(Monster* Mob, My_Character* Character)
 {
@@ -307,7 +307,7 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 		cout << "SKILL MENU" << endl;
 		setColor(15);
 
-		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Arry[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
+		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Array[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
 		cout << "0. 뒤로가기" << endl;//0번 입력시 뒤로가기 출력
 		cin >> Skillmenu;
 		if (Skillmenu == 0)
@@ -318,24 +318,24 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 		}
 		if (Skillmenu >= 1 && Skillmenu <= 4)
 		{
-			Skill_Arry[Skillmenu - 1].Skill_Info(Character, Skill_Arry[Skillmenu - 1]);//스킬정보 출력
-			cout << Skill_Arry[Skillmenu - 1].Skillname << " 를 사용할까? (Y or else)" << endl;
+			Skill_Array[Skillmenu - 1].Skill_Info(Character, Skill_Array[Skillmenu - 1]);//스킬정보 출력
+			cout << Skill_Array[Skillmenu - 1].Skillname << " 를 사용할까? (Y or else)" << endl;
 			cin >> Skillcheck; //스킬사용 최종확인
 			if (Skillcheck == "Y")//스킬 사용 확인시
 			{
-				if (Character->Hp - Skill_Arry[Skillmenu - 1].Usedhp <= 0)//스킬 사용시 HP가 0이하가 되는경우 방지
+				if (Character->Hp - Skill_Array[Skillmenu - 1].Usedhp <= 0)//스킬 사용시 HP가 0이하가 되는경우 방지
 				{
 					cout << "HP가 모자랍니다." << endl;
 					Skillflag = false;//Skill_Menu 함수 종료
 					return true;//Atkflag=true : 플레이어 턴 유지
 				}
-				if (Character->Mp - Skill_Arry[Skillmenu - 1].Usedmp < 0)//스킬 사용시 MP가 0미만이 되는경우 방지
+				if (Character->Mp - Skill_Array[Skillmenu - 1].Usedmp < 0)//스킬 사용시 MP가 0미만이 되는경우 방지
 				{
 					cout << "MP가 모자랍니다." << endl;
 					Skillflag = false;//Skill_Menu 함수 종료
 					return true;//Atkflag=true : 플레이어 턴 유지
 				}
-				Skill_Arry[Skillmenu - 1].Use_Skill(Character, Mob, Skill_Arry[Skillmenu - 1]);//스킬사용
+				Skill_Array[Skillmenu - 1].Use_Skill(Character, Mob, Skill_Array[Skillmenu - 1]);//스킬사용
 				Skillflag = false; //Skill_Menu 함수 종료
 				return false; //Atkflag=false : 플레이어 턴 종료
 			}
