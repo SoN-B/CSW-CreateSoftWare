@@ -146,3 +146,15 @@ void Order_Clear()
 	}
 	Cursor_Move(0, a);
 }
+void Order_Clear2()
+{
+	for (int i = Order_Y; i < 30; i++)
+	{
+		for (int j = 0; j < Order_X - 2; j = j + 2)
+		{
+			Cursor_Move(j, i);
+			cout << "คิ";
+		}
+	}
+	Cursor_Move(0, 11);
+}
