@@ -112,6 +112,13 @@ void Print_Line(string s)
 	cout << s;
 	Order_x += s.length();
 }
+void Print(string s)
+{
+	Cursor_Move(Order_x, Order_y);
+	cout << s;
+	Order_y++;
+	Order_x = Order_X;
+}
 void clear()
 {
 	system("cls");
