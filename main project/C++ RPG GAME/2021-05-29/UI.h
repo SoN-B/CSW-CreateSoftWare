@@ -7,6 +7,13 @@
 #define Order_Y 11
 int Order_x = 40;
 int Order_y = 11;
+CONSOLE_SCREEN_BUFFER_INFO CurInfo;
+void Cursor_Pos_Now()
+{
+	CONSOLE_SCREEN_BUFFER_INFO CurInfo;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo);
+	//커서의 x 좌표 : CurInfo.X;		//커서의 y 좌표 : CurInfo.y;
+}
 void Combat_Ui(My_Character* Character, Monster* mob = NULL)
 {
 	COORD cur;
@@ -38,8 +45,15 @@ int Cursor_Pos(const char* s)
 	int c = str.size();
 	return Order_X + c;
 }
+int Cursor_Pos(string s)
+{
+	string str = s;
+	int c = str.size();
+	return Order_X + c;
+}
 void Player_Attack_Result(double a)
 {
+	string stod = to_string(a);
 	Cursor_Move(Order_X, Order_y);
 	setColor(10);
 	cout << "【플레이어의 공격!】";
@@ -54,12 +68,14 @@ void Player_Attack_Result(double a)
 	cout << a;
 	setColor(15);
 
-	Cursor_Move(Cursor_Pos("플레이어는 a"), Order_y);
+	stod = "플레이어는" + stod;
+	Cursor_Move(Cursor_Pos(stod), Order_y);
 	cout << " 의 피해를 입혔다!";
 	Order_y++;
 }
 void Monster_Attack_Result(Monster *Mob,double a)
 {
+	string stod = to_string(a);
 	Cursor_Move(Order_X, Order_y);
 	setColor(10);
 	cout << "【" << Mob->Kind << " 의 공격!】" << endl;
@@ -74,7 +90,8 @@ void Monster_Attack_Result(Monster *Mob,double a)
 	cout << a;
 	setColor(15);
 
-	Cursor_Move(Cursor_Pos("플레이어는 a"), Order_y);
+	stod = "플레이어는" + stod;
+	Cursor_Move(Cursor_Pos(stod), Order_y);
 	cout << " 의 피해를 입었다!\n" << endl;
 	Order_y++;
 }
