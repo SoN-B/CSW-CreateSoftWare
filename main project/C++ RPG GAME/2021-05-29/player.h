@@ -309,8 +309,7 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 	double Damage; // 플레이어의 최종 스킬 데미지
 	while (Skillflag)
 	{
-		cout << "------------------------\n";
-
+		Cursor_Pos_Start();
 		setColor(10);
 		cout << "SKILL MENU" << endl;
 		setColor(15);
@@ -318,10 +317,10 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Array[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
 		cout << "0. 뒤로가기" << endl;//0번 입력시 뒤로가기 출력
 		Skillmenu = _getch() - 48;
+
 		if (Skillmenu == 0)
 		{
-			Order_Clear();
-			cout << "------------------------\n";
+			Order_Clear2();
 			Skillflag = false; //Skill_Menu 함수 종료
 			return true; //Atkflag=true : 플레이어 턴 유지
 		}
@@ -335,18 +334,25 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 				if (Character->Hp - Skill_Array[Skillmenu - 1].Usedhp <= 0)//스킬 사용시 HP가 0이하가 되는경우 방지
 				{
 					Print("HP가 모자랍니다.");
+					Order_Clear2();
 					Skillflag = false;//Skill_Menu 함수 종료
 					return true;//Atkflag=true : 플레이어 턴 유지
 				}
 				if (Character->Mp - Skill_Array[Skillmenu - 1].Usedmp < 0)//스킬 사용시 MP가 0미만이 되는경우 방지
 				{
 					Print("MP가 모자랍니다.");
+					Order_Clear2();
 					Skillflag = false;//Skill_Menu 함수 종료
 					return true;//Atkflag=true : 플레이어 턴 유지
 				}
 				Skill_Array[Skillmenu - 1].Use_Skill(Character, Mob, Skill_Array[Skillmenu - 1]);//스킬사용
+				Order_Clear();
 				Skillflag = false; //Skill_Menu 함수 종료
 				return false; //Atkflag=false : 플레이어 턴 종료
+			}
+			else
+			{
+				Order_Clear();
 			}
 		}
 	}
