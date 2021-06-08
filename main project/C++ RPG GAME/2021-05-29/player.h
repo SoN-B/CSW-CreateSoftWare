@@ -142,18 +142,24 @@ public:
 void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스킬 사용 함수
 {
 	double Damage = 0;//데미지 초기화
-	cout << "----------------\n스킬사용! " << Skill.Skillname << endl;
+	Print_Line("스킬사용! ");
+	Print_Line(Skill.Skillname);
+	Print("!");
 	Character->Hp -= Skill.Usedhp;//체력 소모
 	Character->Mp -= Skill.Usedmp;//마나 소모
 	if (Skill.Healhp != 0)//체력 회복
 	{
 		Character->Hp += Skill.Healhp;//체력 회복
-		cout << "플레이어는 " << Skill.Healhp << " 의 체력을 회복했다!" << endl;
+		Print_Line("플레이어는 ");
+		Print_Double(Skill.Healhp);
+		Print(" 의 체력을 회복했다!");
 	}
 	if (Skill.Healmp != 0)//마나 회복
 	{
 		Character->Hp += Skill.Healmp;//체력 회복
-		cout << "플레이어는 " << Skill.Healmp << " 의 마나를 회복했다!" << endl;
+		Print_Line("플레이어는 ");
+		Print_Double(Skill.Healmp);
+		Print(" 의 마나를 회복했다!");
 	}
 	if (Skill.Multiples != 0 || Skill.Static != 0)//공격 관련 경우
 	{
@@ -161,7 +167,9 @@ void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스�
 		if (Skill.Static != 0) { Damage = Skill.Static - Mob->Def; }//고정 데미지 계산
 		if (Damage < 0) { Damage = 0; }//예외사항: 데미지 음수일 경우 0으로 계산
 		Mob->Hp -= Damage;//최종 데미지 계산
-		cout << "플레이어는 " << Damage << " 의 데미지를 입혔다!" << endl;
+		Print_Line("플레이어는 ");
+		Print_Double(Damage);
+		Print(" 의 데미지를 입혔다!");
 	}
 }
 
