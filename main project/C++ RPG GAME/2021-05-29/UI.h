@@ -69,7 +69,7 @@ void Player_Attack_Result(double a)
 
 	Cursor_Move(Cursor_Pos(" 플레이어는 "), Order_y);
 	setColor(12);
-	cout << a;
+	cout << stod;
 	setColor(15);
 
 	stod = " 플레이어는 " + stod;
@@ -91,7 +91,7 @@ void Monster_Attack_Result(Monster *Mob,double a)
 
 	Cursor_Move(Cursor_Pos(" 플레이어는 "), Order_y);
 	setColor(12);
-	cout << a;
+	cout << stod;
 	setColor(15);
 
 	stod = " 플레이어는 " + stod;
