@@ -309,9 +309,10 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 
 		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Array[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
 		cout << "0. 뒤로가기" << endl;//0번 입력시 뒤로가기 출력
-		cin >> Skillmenu;
+		Skillmenu = _getch() - 48;
 		if (Skillmenu == 0)
 		{
+			Order_Clear();
 			cout << "------------------------\n";
 			Skillflag = false; //Skill_Menu 함수 종료
 			return true; //Atkflag=true : 플레이어 턴 유지
@@ -320,18 +321,18 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 		{
 			Skill_Array[Skillmenu - 1].Skill_Info(Character, Skill_Array[Skillmenu - 1]);//스킬정보 출력
 			cout << Skill_Array[Skillmenu - 1].Skillname << " 를 사용할까? (Y or else)" << endl;
-			cin >> Skillcheck; //스킬사용 최종확인
-			if (Skillcheck == "Y")//스킬 사용 확인시
+			Skillcheck = _getch();
+			if (Skillcheck == "Y" || Skillcheck == "y")//스킬 사용 확인시
 			{
 				if (Character->Hp - Skill_Array[Skillmenu - 1].Usedhp <= 0)//스킬 사용시 HP가 0이하가 되는경우 방지
 				{
-					cout << "HP가 모자랍니다." << endl;
+					Print("HP가 모자랍니다.");
 					Skillflag = false;//Skill_Menu 함수 종료
 					return true;//Atkflag=true : 플레이어 턴 유지
 				}
 				if (Character->Mp - Skill_Array[Skillmenu - 1].Usedmp < 0)//스킬 사용시 MP가 0미만이 되는경우 방지
 				{
-					cout << "MP가 모자랍니다." << endl;
+					Print("MP가 모자랍니다.");
 					Skillflag = false;//Skill_Menu 함수 종료
 					return true;//Atkflag=true : 플레이어 턴 유지
 				}
