@@ -96,8 +96,8 @@ int main()
 {//메뉴 선택
     Randy();
     do {
-        cout << "【 TEST BETA GAME 】\n\n" << "메뉴를 선택해 주세요 ~ !\n";
-        cout << "\n1.게임시작\n2.게임 설명\n3.게임 종료\n";
+        cout << "TEST BETA GAME \n\n" << "메뉴를 선택해 주세요 ~ !\n";
+        cout << "\n 1.GameStart \n 2.Game description \n 3.Quit\n";
 
         cin >> Menu;
         switch (Menu)
