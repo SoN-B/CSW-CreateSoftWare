@@ -119,6 +119,13 @@ void Print(string s)
 	Order_y++;
 	Order_x = Order_X;
 }
+
+void Print_Double(double a)
+{
+	string s = to_string(a);
+	Print_Line(s);
+}
+
 void clear()
 {
 	system("cls");
