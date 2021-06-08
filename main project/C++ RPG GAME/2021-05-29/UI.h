@@ -65,16 +65,16 @@ void Player_Attack_Result(double a)
 	setColor(15);
 
 	Cursor_Move(Order_X, Order_y);
-	cout << "플레이어는 ";
+	cout << " 플레이어는 ";
 
-	Cursor_Move(Cursor_Pos("플레이어는 "), Order_y);
+	Cursor_Move(Cursor_Pos(" 플레이어는 "), Order_y);
 	setColor(12);
 	cout << a;
 	setColor(15);
 
-	stod = "플레이어는" + stod;
+	stod = " 플레이어는 " + stod;
 	Cursor_Move(Cursor_Pos(stod), Order_y);
-	cout << " 의 피해를 입혔다!";
+	cout << " 의 피해를 입혔다!\n";
 	Order_y++;
 }
 void Monster_Attack_Result(Monster *Mob,double a)
@@ -87,16 +87,16 @@ void Monster_Attack_Result(Monster *Mob,double a)
 	setColor(15);
 
 	Cursor_Move(Order_X, Order_y);
-	cout << "플레이어는 ";
+	cout << " 플레이어는 ";
 
-	Cursor_Move(Cursor_Pos("플레이어는 "), Order_y);
+	Cursor_Move(Cursor_Pos(" 플레이어는 "), Order_y);
 	setColor(12);
 	cout << a;
 	setColor(15);
 
-	stod = "플레이어는" + stod;
+	stod = " 플레이어는 " + stod;
 	Cursor_Move(Cursor_Pos(stod), Order_y);
-	cout << " 의 피해를 입었다!\n" << endl;
+	cout << " 의 피해를 입었다!\n";
 	Order_y++;
 }
 void Print(const char*s)
