@@ -7,12 +7,16 @@
 #define Order_Y 11
 int Order_x = 40;
 int Order_y = 11;
-CONSOLE_SCREEN_BUFFER_INFO CurInfo;
-void Cursor_Pos_Now()
+CONSOLE_SCREEN_BUFFER_INFO CurInfo1;
+CONSOLE_SCREEN_BUFFER_INFO CurInfo2;
+void Cursor_Pos_Start()
 {
-	CONSOLE_SCREEN_BUFFER_INFO CurInfo;
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo);
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo1);
 	//Ä¿¼­ÀÇ x ÁÂÇ¥ : CurInfo.X;		//Ä¿¼­ÀÇ y ÁÂÇ¥ : CurInfo.y;
+}
+void Cursor_Pos_End()
+{
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo2);
 }
 void Combat_Ui(My_Character* Character, Monster* mob = NULL)
 {
