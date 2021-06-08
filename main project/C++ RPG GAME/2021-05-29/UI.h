@@ -113,3 +113,16 @@ void clear()
 	system("cls");
 	Order_y = Order_Y;
 }
+
+void Order_Clear()
+{
+	for (int i = Order_Y; i < 30; i++)
+	{
+		for (int j = 0; j < Order_X - 2; j++)
+		{
+			Cursor_Move(j, i);
+			cout << "คิ";
+		}
+	}
+	Cursor_Move(0, 11);
+}
