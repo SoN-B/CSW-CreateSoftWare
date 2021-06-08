@@ -134,13 +134,15 @@ void clear()
 
 void Order_Clear()
 {
-	for (int i = Order_Y; i < 30; i++)
+	int a = CurInfo1.dwCursorPosition.Y;
+	int b = CurInfo2.dwCursorPosition.Y;
+	for (int i = a; i < b; i++)
 	{
-		for (int j = 0; j < Order_X - 2; j++)
+		for (int j = 0; j < Order_X; j = j + 2)
 		{
 			Cursor_Move(j, i);
 			cout << "คิ";
 		}
 	}
-	Cursor_Move(0, 11);
+	Cursor_Move(0, a);
 }
