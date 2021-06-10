@@ -25,23 +25,40 @@ void GoToXy(int x, int y) //UI관련
     Pos.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
-void Dungeon() //DUNGEON 로고
+int Dungeon() //DUNGEON 로고
 {
-    GoToXy(10, 10);
-    cout << "DDDDD     UU       UU NNN      N	 GGGGGG    EEEEEEEE	OOOO	NNN      N";
-    GoToXy(10, 11);
-    cout << "DD    DD  UU       UU NNNN     N  GG      GG   EE	      OO    OO	NNNN     N";
-    GoToXy(10, 12);
-    cout << "DD     DD UU       UU NN NN    N  GG           EE	     OO      OO	NN NN    N";
-    GoToXy(10, 13);
-    cout << "DD      DDUU       UU NN  NN   N  GG   GGGGGG  EEEEEEEE OO        OONN  NN   N";
-    GoToXy(10, 14);
-    cout << "DD     DD UU       UU NN   NN  N  GG       GG  EE	     OO      OO	NN   NN  N";
-    GoToXy(10, 15);
-    cout << "DD    DD	UU    UU  NN    NN N	GG    GG   EE	      OO    OO	NN    NN N";
-    GoToXy(10, 16);
-    cout << "DDDDD         UUUU    NN     NNN	  GGGGG    EEEEEEEE	OOOO	NN     NNN";
-    GoToXy(10, 17);
+    int _kbhit(void);
+    int Num;
+    int ColorNum = 11;
+    while (true)
+    {
+        if (_kbhit()) { //키보드 눌렸는지 확인
+            Num = _getch() - 48;
+            break;
+        }
+
+        setColor(++ColorNum);
+        if (ColorNum == 15) ColorNum = 0;
+
+        GoToXy(10, 10);
+        cout << "DDDDD     UU       UU NNN      N	 GGGGGG    EEEEEEEE	OOOO	NNN      N";
+        GoToXy(10, 11);
+        cout << "DD    DD  UU       UU NNNN     N  GG      GG   EE	      OO    OO	NNNN     N";
+        GoToXy(10, 12);
+        cout << "DD     DD UU       UU NN NN    N  GG           EE	     OO      OO	NN NN    N";
+        GoToXy(10, 13);
+        cout << "DD      DDUU       UU NN  NN   N  GG   GGGGGG  EEEEEEEE OO        OONN  NN   N";
+        GoToXy(10, 14);
+        cout << "DD     DD UU       UU NN   NN  N  GG       GG  EE	     OO      OO	NN   NN  N";
+        GoToXy(10, 15);
+        cout << "DD    DD	UU    UU  NN    NN N	GG    GG   EE	      OO    OO	NN    NN N";
+        GoToXy(10, 16);
+        cout << "DDDDD         UUUU    NN     NNN	  GGGGG    EEEEEEEE	OOOO	NN     NNN";
+        GoToXy(10, 17);
+
+        Sleep(700);
+    }
+    return Num;
 }
 bool Map_Combat()//맵선택 및 전투
 {
@@ -62,7 +79,7 @@ bool Map_Combat()//맵선택 및 전투
     if (Map == Maps[1]) PlaySound(TEXT(".\\SoundTrack\\Map2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //1번맵 음악
     if (Map == Maps[2]) PlaySound(TEXT(".\\SoundTrack\\Map3.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //2번맵 음악
 
-    while(Roomnum<Map.size())//방이 맵 끝까지 가면 던전 클리어
+    while (Roomnum < Map.size())//방이 맵 끝까지 가면 던전 클리어
     {
         for (int Monsternum = 0; Monsternum < Map[Roomnum].size(); Monsternum++)//Monsternum=해당 방의 몬스터 수
         {
@@ -115,7 +132,7 @@ bool Map_Combat()//맵선택 및 전투
                         cout << "Game over..." << endl;
                         SoNB_P->Restat();
                         Roomnum = Map.size() - 1; // 변수 i를 올려 for문 탈출
-                        return false; 
+                        return false;
                         break;//while문 탈출: 전투끝
                     }
                     Cursor_Move(62, 8);
@@ -132,7 +149,7 @@ bool Map_Combat()//맵선택 및 전투
                         cout << "Game over..." << endl;
                         SoNB_P->Restat();
                         Roomnum = Map.size() - 1; //변수 i를 올려 for문 탈출
-                        return false; 
+                        return false;
                         break;//while문 탈출: 전투끝
                     }
 
@@ -169,10 +186,6 @@ int main()
         PlaySound(TEXT(".\\SoundTrack\\Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //초기화면 음악 ON
         system("cls");
         //cout << "【 TEST BETA GAME 】\n\n";
-        setColor(12);
-        Dungeon();
-        setColor(15);
-
         GoToXy(25, 18);
         setColor(10);
         cout << "메뉴를 선택해 주세요 ~ !\n";
@@ -184,8 +197,9 @@ int main()
         GoToXy(27, 21);
         cout << "3.게임 종료\n";
 
-        Menu = _getch() - 48;
+        Menu = Dungeon();
         system("cls");
+        setColor(15);
         switch (Menu)
         {
         case 1:
@@ -195,7 +209,7 @@ int main()
                 PlaySound(NULL, 0, 0); //음악 초기화(종료)
                 PlaySound(TEXT(".\\SoundTrack\\Village.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //메인메뉴 음악 ON
 
-				Create_Quest(Quest_slot);
+                Create_Quest(Quest_slot);
                 system("cls");
                 GoToXy(10, 15);
                 cout << "1. 맵 선택";
