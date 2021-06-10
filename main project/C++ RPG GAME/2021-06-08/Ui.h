@@ -72,9 +72,9 @@ void Player_Attack_Result(double a)
 	cout << stod;
 	setColor(15);
 
-	stod = " 플레이어는 " + stod;
+	stod = " 플레이어는" + stod;
 	Cursor_Move(Cursor_Pos(stod), Order_y);
-	cout << " 의 피해를 입혔다!\n";
+	cout << " 의 피해를 입혔다!";
 	Order_y++;
 }
 void Monster_Attack_Result(Monster *Mob,double a)
@@ -96,7 +96,7 @@ void Monster_Attack_Result(Monster *Mob,double a)
 
 	stod = " 플레이어는 " + stod;
 	Cursor_Move(Cursor_Pos(stod), Order_y);
-	cout << " 의 피해를 입었다!\n";
+	cout << " 의 피해를 입었다!\n" << endl;
 	Order_y++;
 }
 void Print(const char*s)
@@ -119,7 +119,6 @@ void Print(string s)
 	Order_y++;
 	Order_x = Order_X;
 }
-
 void Print_Double(double a)
 {
 	string s = to_string(a);
@@ -131,14 +130,13 @@ void clear()
 	system("cls");
 	Order_y = Order_Y;
 }
-
 void Order_Clear()
 {
 	int a = CurInfo1.dwCursorPosition.Y;
 	int b = CurInfo2.dwCursorPosition.Y;
 	for (int i = a; i < b; i++)
 	{
-		for (int j = 0; j < Order_X; j = j + 2)
+		for (int j = 0; j < Order_X; j= j + 2)
 		{
 			Cursor_Move(j, i);
 			cout << "ㅤ";
@@ -150,7 +148,7 @@ void Order_Clear2()
 {
 	for (int i = Order_Y; i < 30; i++)
 	{
-		for (int j = 0; j < Order_X - 2; j = j + 2)
+		for (int j = 0; j < Order_X-2; j = j + 2)
 		{
 			Cursor_Move(j, i);
 			cout << "ㅤ";

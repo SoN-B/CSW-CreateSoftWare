@@ -20,7 +20,7 @@ typedef struct My_Character //플레이어 클래스
 
 	void Get_Character_Info()//플레이어 상태 출력 
 	{
-		cout << "\Level : "<<Level<<"\nHP : " << Hp << "\nMP: " << Mp << "\nATK: " << Atk << "\nDEF: " << Def << endl;
+		cout << "\Level : "<<Level<<"\nHP : " << Hp << "\nMP: " << Mp << "\nATK: " << Atk << "\nDEF: " << Def << "\nExp : " << Exp <<' ' << (Exp/Max_Exp * 100)<<"%"<<endl;
 		cout << "------------------------\n";
 	}
 	void Level_Plus()

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
@@ -142,6 +142,7 @@ public:
 void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스킬 사용 함수
 {
 	double Damage = 0;//데미지 초기화
+	//cout << "----------------\n스킬사용! " << Skill.Skillname << endl;
 	Print_Line("스킬사용! ");
 	Print_Line(Skill.Skillname);
 	Print("!");
@@ -157,6 +158,7 @@ void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스�
 	if (Skill.Healmp != 0)//마나 회복
 	{
 		Character->Hp += Skill.Healmp;//체력 회복
+		//cout << "플레이어는 " << Skill.Healmp << " 의 마나를 회복했다!" << endl;
 		Print_Line("플레이어는 ");
 		Print_Double(Skill.Healmp);
 		Print(" 의 마나를 회복했다!");
@@ -167,6 +169,7 @@ void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스�
 		if (Skill.Static != 0) { Damage = Skill.Static - Mob->Def; }//고정 데미지 계산
 		if (Damage < 0) { Damage = 0; }//예외사항: 데미지 음수일 경우 0으로 계산
 		Mob->Hp -= Damage;//최종 데미지 계산
+		//cout << "플레이어는 " << Damage << " 의 데미지를 입혔다!" << endl;
 		Print_Line("플레이어는 ");
 		Print_Double(Damage);
 		Print(" 의 데미지를 입혔다!");
@@ -231,13 +234,17 @@ void Skill::Skill_Info(My_Character* Character, Skill Skill)//스킬 정보 함�
 	}
 }
 //이하 스킬 구현
+
+//	 skill 변수("스킬이름",사용hp,사용mp,상승Hp,상승Mp,데미지계수,데미지)
+
 Skill Power_Slash("파워 슬래시", 0.0, 20.0, 0.0, 0.0, 1.2, 0.0);//마나20소모, 데미지1.2배
 Skill Blood_Slash("블러드 슬래시", 100, 0, 0, 0, 0, 150);//체력100소모, 150데미지
 Skill Mind_Fuel("회광반조", 0, 30, 15, 0, 0, 0);//마나 30소모, 체력15회복
 Skill Prayer("기도", 0, 0, 0, 20, 0, 0);//소모없음, 마나20회복
 //플레이어의 스킬창 기본값
-Skill Skill_Array[4] = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };
+/*Skill Skill_Arry[4] = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };*/
 
+Skill Skill_Array[4] = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };
 void Mob_Atk(Monster* Mob, My_Character* Character)
 {
 	double Damage = Mob->Atk - Character->Def;
@@ -258,6 +265,7 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 	double Damage; //플레이어의 최종 데미지
 	while (Atkflag)
 	{
+		//Cursor_Pos_Start();
 		cout << "무엇을 할까...\n1. 공격\n2. 스킬\n3. 가방\n4. 내상태\n5. 적 정보\n6. 도주" << endl; //기본 메뉴
 		Choice = _getch()-48;
 		switch (Choice)
@@ -329,6 +337,7 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 			Skill_Array[Skillmenu - 1].Skill_Info(Character, Skill_Array[Skillmenu - 1]);//스킬정보 출력
 			cout << Skill_Array[Skillmenu - 1].Skillname << " 를 사용할까? (Y or else)" << endl;
 			Skillcheck = _getch();
+			Cursor_Pos_End();
 			if (Skillcheck == "Y" || Skillcheck == "y")//스킬 사용 확인시
 			{
 				if (Character->Hp - Skill_Array[Skillmenu - 1].Usedhp <= 0)//스킬 사용시 HP가 0이하가 되는경우 방지
