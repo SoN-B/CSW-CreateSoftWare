@@ -579,6 +579,7 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 					Character->Atk += Items[i].Atk;
 					Character->Def += Items[i].Def;
 					Character->Speed += Items[i].Speed;
+					Items_p[i]->Count++;
 					Inventory[n] = "0";
 					//cout << "\n" << Items[i].Name << "을 사용했습니다\n";
 					Print_Line(Items[i].Name);

@@ -23,10 +23,11 @@ typedef struct Monster {
     double Hp, Mp, Atk, Def, Speed, Exp = 0, Max_Exp = 100;//선공 선별(Speed)
     double Money = 100;
     double Level = 1;
+	int Count;
     string Ettype; //몹종류 -> normal,elite,boss
     string Kind; //종족
     Monster(string Kind, string Ettype = "normal",double Hp = 0, double Mp = 0, double Atk = 0,
-        double Def = 0, double Speed = 1, double Exp = 0, double Money = 0) //default 매개변수 맨끝
+        double Def = 0, double Speed = 1, double Exp = 0, double Money = 0, int Count = 0) //default 매개변수 맨끝
     {
         //ex) Monster Slime_Normal = { "slime",100,20,10,5,1,"normal" };
 
@@ -39,6 +40,7 @@ typedef struct Monster {
         this->Speed = Speed;
         this->Exp = Exp;
         this->Money = Money;
+		this->Count = Count;
     }
     void Get_Info()
     {

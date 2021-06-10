@@ -114,6 +114,7 @@ bool Map_Combat()//맵선택 및 전투
                         Monster_Die(SoNB_P, Map[Roomnum][Monsternum]);
                         Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
                         Map[Roomnum][Monsternum]->Mp = Temp_Mob_P->Mp;
+						Map[Roomnum][Monsternum]->Count++;
                         DropItem = Drop_Item();
                         if (DropItem != "")
                         {
@@ -161,6 +162,7 @@ bool Map_Combat()//맵선택 및 전투
                         Monster_Die(SoNB_P, Map[Roomnum][Monsternum]);
                         Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
                         Map[Roomnum][Monsternum]->Mp = Temp_Mob_P->Mp;
+						Map[Roomnum][Monsternum]->Count++;
                         DropItem = Drop_Item();
                         if (DropItem != "") Pick_Up_Item(Inventory, DropItem);
                         break;//while문 탈출: 전투끝
