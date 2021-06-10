@@ -3,22 +3,22 @@
 #include <Windows.h>
 #include <conio.h>
 #include "pc.h"
-#define Order_X 64			//historyÀÇ º¯ÇÏÁö¾Ê´Â X ±âÁØ¼±.
-#define Order_Y 11			//historyÀÇ º¯ÇÏÁö ¾Ê´Â Y ±âÁØ¼±.
-int Order_x = 64;			//historyÀÇ º¯ÇÏ´Â X ±âÁØ¼±.
-int Order_y = 11;			//historyÀÇ º¯ÇÏ´Â Y ±âÁØ¼±.	historyÀÇ ¿ªÇÒÀ» ÇÏ°Ô ¸¸µç´Ù.
-CONSOLE_SCREEN_BUFFER_INFO CurInfo1;	//Ä¿¼­ÀÇ ½ÃÀÛ ÁÂÇ¥¸¦ ÀúÀåÇÏ±â À§ÇÑ ±¸Á¶Ã¼
-CONSOLE_SCREEN_BUFFER_INFO CurInfo2;	//Ä¿¼­ÀÇ ³¡ ÁÂÇ¥¸¦ ÀúÀåÇÏ±â À§ÇÑ ±¸Á¶Ã¼	ÀÏÁ¤ ºÎºĞÀ» Áö¿ì±â À§ÇÑ ½ÃÀÛ,³¡ ÁÂÇ¥ÀÌ´Ù.
+#define Order_X 64			//historyì˜ ë³€í•˜ì§€ì•ŠëŠ” X ê¸°ì¤€ì„ .
+#define Order_Y 11			//historyì˜ ë³€í•˜ì§€ ì•ŠëŠ” Y ê¸°ì¤€ì„ .
+int Order_x = 64;			//historyì˜ ë³€í•˜ëŠ” X ê¸°ì¤€ì„ .
+int Order_y = 11;			//historyì˜ ë³€í•˜ëŠ” Y ê¸°ì¤€ì„ .	historyì˜ ì—­í• ì„ í•˜ê²Œ ë§Œë“ ë‹¤.
+CONSOLE_SCREEN_BUFFER_INFO CurInfo1;	//ì»¤ì„œì˜ ì‹œì‘ ì¢Œí‘œë¥¼ ì €ì¥í•˜ê¸° ìœ„í•œ êµ¬ì¡°ì²´
+CONSOLE_SCREEN_BUFFER_INFO CurInfo2;	//ì»¤ì„œì˜ ë ì¢Œí‘œë¥¼ ì €ì¥í•˜ê¸° ìœ„í•œ êµ¬ì¡°ì²´	ì¼ì • ë¶€ë¶„ì„ ì§€ìš°ê¸° ìœ„í•œ ì‹œì‘,ë ì¢Œí‘œì´ë‹¤.
 void Cursor_Pos_Start()	
 {
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo1); //Ä¿¼­ÀÇ ÁÂÇ¥¸¦ ÀúÀåÇÑ´Ù.
-	//Ä¿¼­ÀÇ x ÁÂÇ¥ : CurInfo.X;		//Ä¿¼­ÀÇ y ÁÂÇ¥ : CurInfo.y;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo1); //ì»¤ì„œì˜ ì¢Œí‘œë¥¼ ì €ì¥í•œë‹¤.
+	//ì»¤ì„œì˜ x ì¢Œí‘œ : CurInfo.X;		//ì»¤ì„œì˜ y ì¢Œí‘œ : CurInfo.y;
 }
 void Cursor_Pos_End()
 {
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo2); //Ä¿¼­ÀÇ ÁÂÇ¥¸¦ ÀúÀåÇÑ´Ù.
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo2); //ì»¤ì„œì˜ ì¢Œí‘œë¥¼ ì €ì¥í•œë‹¤.
 }
-void Combat_Ui(My_Character* Character, Monster* mob = NULL) //ÀüÅõ UI. 
+void Combat_Ui(My_Character* Character, Monster* mob = NULL) //ì „íˆ¬ UI. 
 {																						
 	COORD cur;
 	cur.X = 60;
@@ -26,24 +26,24 @@ void Combat_Ui(My_Character* Character, Monster* mob = NULL) //ÀüÅõ UI.
 	for (int i = 0; i < 10; i++)
 	{
 		cur.Y = i;
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur); // ³»Á¤º¸¿Í ¸ó½ºÅÍ Ã¢À» ³ª´©´Â ¼¼·Î³×¸ğ ¼±.
-		cout << "¡á";
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur); // ë‚´ì •ë³´ì™€ ëª¬ìŠ¤í„° ì°½ì„ ë‚˜ëˆ„ëŠ” ì„¸ë¡œë„¤ëª¨ ì„ .
+		cout << "â– ";
 	}
 	COORD cur2;
 	cur2.X = 0;
 	cur2.Y = cur.Y;
-	for (int i = 0; i < 60; i++) //Á¤º¸Ã¢°ú ¸í·É,history Ä­À» ³ª´©´Â °¡·Î ³×¸ğ¼±.
+	for (int i = 0; i < 60; i++) //ì •ë³´ì°½ê³¼ ëª…ë ¹,history ì¹¸ì„ ë‚˜ëˆ„ëŠ” ê°€ë¡œ ë„¤ëª¨ì„ .
 	{
 		Cursor_Move(i, cur.Y);
-		cout << "¡á";
+		cout << "â– ";
 	}
 	if (mob != NULL)
 	{
-		mob->Get_Info_Right(); //¸ó½ºÅÍÀÇ Á¤º¸Ã¢.
+		mob->Get_Info_Right(); //ëª¬ìŠ¤í„°ì˜ ì •ë³´ì°½.
 	}
-	Character->Get_Character_Info_Left(); //Ä³¸¯ÅÍÀÇ Á¤º¸Ã¢.
+	Character->Get_Character_Info_Left(); //ìºë¦­í„°ì˜ ì •ë³´ì°½.
 }
-int Cursor_Pos(const char* s) //history¿¡ ÇÑÁÙÀ» ÀÔ·ÂÇÏ±â À§ÇØ, ´ÙÀ½ ÀÔ·Â¹Ş´Â XÁÂÇ¥¸¦ °è»êÇÏ´Â ÇÔ¼ö.
+int Cursor_Pos(const char* s) //historyì— í•œì¤„ì„ ì…ë ¥í•˜ê¸° ìœ„í•´, ë‹¤ìŒ ì…ë ¥ë°›ëŠ” Xì¢Œí‘œë¥¼ ê³„ì‚°í•˜ëŠ” í•¨ìˆ˜.
 {
 	string str = s;
 	int c = str.size();
@@ -52,63 +52,63 @@ int Cursor_Pos(const char* s) //history¿¡ ÇÑÁÙÀ» ÀÔ·ÂÇÏ±â À§ÇØ, ´ÙÀ½ ÀÔ·Â¹Ş´Â XÁ
 int Cursor_Pos(string s)
 {
 	string str = s;
-	int c = str.size(); //Cursor_posÀÇ string Çü.
+	int c = str.size(); //Cursor_posì˜ string í˜•.
 	return Order_X + c;
 }														
-void Cursor_Line() //history¿¡¼­ enter ºÎºĞ.
+void Cursor_Line() //historyì—ì„œ enter ë¶€ë¶„.
 {
 	Cursor_Move(Order_X, Order_y);												
 	Order_y++;
 }
-void Player_Attack_Result(double a)	//ÇÃ·¹ÀÌ¾îÀÇ °ø°İ À» ³ªÅ¸³¿.
+void Player_Attack_Result(double a)	//í”Œë ˆì´ì–´ì˜ ê³µê²© ì„ ë‚˜íƒ€ëƒ„.
 {
 	string stod = to_string(a);
 	Cursor_Move(Order_X, Order_y);
 	setColor(10);
-	cout << "¡¼ÇÃ·¹ÀÌ¾îÀÇ °ø°İ!¡½";
+	cout << "ã€í”Œë ˆì´ì–´ì˜ ê³µê²©!ã€‘";
 	Order_y++;
 	setColor(15);
 
 	Cursor_Move(Order_X, Order_y);
-	cout << "ÇÃ·¹ÀÌ¾î´Â";
+	cout << "í”Œë ˆì´ì–´ëŠ”";
 
-	// Cursor_Move(Cursor_Pos("ÇÃ·¹ÀÌ¾î´Â"), Order_y);
+	// Cursor_Move(Cursor_Pos("í”Œë ˆì´ì–´ëŠ”"), Order_y);
 	setColor(12);
 	cout << stod;
 	setColor(15);
 
-	stod = "ÇÃ·¹ÀÌ¾î´Â" + stod;
+	stod = "í”Œë ˆì´ì–´ëŠ”" + stod;
 	Cursor_Move(Cursor_Pos(stod), Order_y);
-	cout << "ÀÇ ÇÇÇØ¸¦ ÀÔÇû´Ù!";
+	cout << "ì˜ í”¼í•´ë¥¼ ì…í˜”ë‹¤!";
 	Order_y+=2;
 	Cursor_Move(Order_X, Order_y);
 	Sleep(750);
 }
-void Monster_Attack_Result(Monster *Mob,double a) //monsterÀÇ °ø°İ ºÎºĞ.
+void Monster_Attack_Result(Monster *Mob,double a) //monsterì˜ ê³µê²© ë¶€ë¶„.
 {
 	string stod = to_string(a);
 	Cursor_Move(Order_X, Order_y);
 	setColor(10);
-	cout << "¡¼" << Mob->Kind << " ÀÇ °ø°İ!¡½" << endl;
+	cout << "ã€" << Mob->Kind << "ì˜ ê³µê²©!ã€‘" << endl;
 	Order_y++;
 	setColor(15);
 
 	Cursor_Move(Order_X, Order_y);
-	cout << "ÇÃ·¹ÀÌ¾î´Â";
+	cout << "í”Œë ˆì´ì–´ëŠ”";
 
-	// Cursor_Move(Cursor_Pos("ÇÃ·¹ÀÌ¾î´Â"), Order_y);
+	// Cursor_Move(Cursor_Pos("í”Œë ˆì´ì–´ëŠ”"), Order_y);
 	setColor(12);
 	cout << stod;
 	setColor(15);
 
-	stod = "ÇÃ·¹ÀÌ¾î´Â" + stod;
+	stod = "í”Œë ˆì´ì–´ëŠ”" + stod;
 	Cursor_Move(Cursor_Pos(stod), Order_y);
-	cout << " ÀÇ ÇÇÇØ¸¦ ÀÔ¾ú´Ù!";
+	cout << " ì˜ í”¼í•´ë¥¼ ì…ì—ˆë‹¤!";
 	Order_y+=2;
 	Cursor_Move(Order_X, Order_y);
 	Sleep(750);
 }
-void Print(const char*s) //history¿¡ *s¸¦ Ãâ·ÂÇÔ. ±×¸®°í ÇÑÁÙ ¶ç¿ò.
+void Print(const char*s) //historyì— *së¥¼ ì¶œë ¥í•¨. ê·¸ë¦¬ê³  í•œì¤„ ë„ì›€.
 {
 	Cursor_Move(Order_x, Order_y);
 	cout << s;
@@ -116,13 +116,13 @@ void Print(const char*s) //history¿¡ *s¸¦ Ãâ·ÂÇÔ. ±×¸®°í ÇÑÁÙ ¶ç¿ò.
 	Order_y++;
 	Order_x = Order_X;
 }
-void Print_Line(string s) // s¶ó´Â stringÀ» ÁÙ ¶ç¿ò ÇÏÁö ¾Ê°í ¹Ù·Î µÚ¿¡ ÀÔ·ÂÇÏ±â À§ÇÑ ÇÔ¼ö.
+void Print_Line(string s) // së¼ëŠ” stringì„ ì¤„ ë„ì›€ í•˜ì§€ ì•Šê³  ë°”ë¡œ ë’¤ì— ì…ë ¥í•˜ê¸° ìœ„í•œ í•¨ìˆ˜.
 {
 	Cursor_Move(Order_x, Order_y);
 	cout << s;
 	Order_x += s.length();
 }
-void Print(string s) //printÀÇ string ¹öÁ¯.
+void Print(string s) //printì˜ string ë²„ì ¼.
 {
 	Cursor_Move(Order_x, Order_y);
 	cout << s;
@@ -130,22 +130,22 @@ void Print(string s) //printÀÇ string ¹öÁ¯.
 	Order_y++;
 	Order_x = Order_X;
 }
-void Print_Double(double a)	//double ÀÚ·áÇüÀ» Ãâ·ÂÇÏ±â À§ÇÑ ÇÔ¼ö. ¿¬¼ÓÀûÀÎ Ãâ·ÂÀ» ÇÏ±â À§ÇÔÀÌ´Ù.
-{ //ÇÃ·¹ÀÌ¾î´Â	55.000	ÀÇ µ¥¹ÌÁö¸¦ ÀÔÇû´Ù!
+void Print_Double(double a)	//double ìë£Œí˜•ì„ ì¶œë ¥í•˜ê¸° ìœ„í•œ í•¨ìˆ˜. ì—°ì†ì ì¸ ì¶œë ¥ì„ í•˜ê¸° ìœ„í•¨ì´ë‹¤.
+{ //í”Œë ˆì´ì–´ëŠ”	55.000	ì˜ ë°ë¯¸ì§€ë¥¼ ì…í˜”ë‹¤!
 	string s = to_string(a);
 	Print_Line(s);
 }
 void Print_blank()
-{ //ÇÑÁÙ ¶ç¿ì´Â ÇÔ¼ö.
+{ //í•œì¤„ ë„ìš°ëŠ” í•¨ìˆ˜.
 	Order_y += 1;
 }
-void clear() ///cmd¸¦ ¿ÏÀüÈ÷ Áö¿ö¹ö¸².
+void clear() ///cmdë¥¼ ì™„ì „íˆ ì§€ì›Œë²„ë¦¼.
 {
 	system("cls");
 	Order_y = Order_Y;
 }
-void Order_Clear()//OrderÄ­ÀÇ ÀÏÁ¤ ºÎºĞÀ» Áö¿ì±â À§ÇÑ ÇÔ¼ö.
-{ //Ä¿¼­ÀÇ ÁÂÇ¥¸¦ ÀúÀåÇÑ Curinfo1,2¸¦ ÀÌ¿ëÇÑ´Ù.
+void Order_Clear()//Orderì¹¸ì˜ ì¼ì • ë¶€ë¶„ì„ ì§€ìš°ê¸° ìœ„í•œ í•¨ìˆ˜.
+{ //ì»¤ì„œì˜ ì¢Œí‘œë¥¼ ì €ì¥í•œ Curinfo1,2ë¥¼ ì´ìš©í•œë‹¤.
 	int a = CurInfo1.dwCursorPosition.Y;
 	int b = CurInfo2.dwCursorPosition.Y;
 	for (int i = a; i <= b; i++)
@@ -153,20 +153,20 @@ void Order_Clear()//OrderÄ­ÀÇ ÀÏÁ¤ ºÎºĞÀ» Áö¿ì±â À§ÇÑ ÇÔ¼ö.
 		for (int j = 0; j < Order_X-2; j= j + 2)
 		{
 			Cursor_Move(j, i);
-			cout << "¤Ô";
+			cout << "ã…¤";
 		}
 	}
 	Cursor_Move(0, 0);
 	Cursor_Move(0, a);
 }
-void Order_Clear2() //Order Ä­¿¡¼­ ¸¹Àº ¼ö¸¦ Áö¿ì±â À§ÇÑ ÇÔ¼ö.
+void Order_Clear2() //Order ì¹¸ì—ì„œ ë§ì€ ìˆ˜ë¥¼ ì§€ìš°ê¸° ìœ„í•œ í•¨ìˆ˜.
 {
 	for (int i = Order_Y; i < 50; i++)
 	{
 		for (int j = 0; j < Order_X-2; j = j + 2)
 		{
 			Cursor_Move(j, i);
-			cout << "¤Ô";
+			cout << "ã…¤";
 		}
 	}
 	Cursor_Move(0, 0);
