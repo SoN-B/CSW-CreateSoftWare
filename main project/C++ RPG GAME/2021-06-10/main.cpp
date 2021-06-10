@@ -216,7 +216,7 @@ int main()
                 GoToXy(10, 15);
                 cout << "1. 맵 선택";
                 GoToXy(27, 15);
-                cout << "2. 상점";
+                cout << "2. 상점 & 퀘스트";
                 GoToXy(43, 15);
                 cout << "3. 메인메뉴\n";
                 GoToXy(0, 30);
