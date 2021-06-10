@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -69,7 +69,7 @@ bool Map_Combat()//맵선택 및 전투
             Combat_Ui(SoNB_P, Map[Roomnum][Monsternum]);
             setColor(2);
             Print_Line(Map[Roomnum][Monsternum]->Kind);
-            Print(" 가 나타났다!");
+            Print("이(가) 나타났다!");
             setColor(15);
             Print_blank();
             Sleep(1000);
