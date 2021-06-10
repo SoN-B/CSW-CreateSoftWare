@@ -5,87 +5,7 @@
 #include "Ui.h"
 using namespace std;
 
-/*typedef struct My_Character //플레이어 클래스
-{
-	double Hp, Mp, Atk, Def, Speed, Level = 1, Exp = 0, Max_Exp = 100, Money = 0;
 
-	My_Character(double Hp = 200, double Mp = 100, double Atk = 50, double Def = 5,
-		double Speed = 1.5, double Money = 1000)
-	{
-		this->Hp = Hp;
-		this->Mp = Mp;
-		this->Atk = Atk;
-		this->Def = Def;
-		this->Speed = Speed;
-		this->Money = Money;
-	}
-
-	void Get_Character_Info()//플레이어 상태 출력 
-	{
-		setColor(8);
-		cout << "\nLevel";
-		setColor(15);
-		cout << ": " << Level;
-
-		setColor(6);
-		cout << "\nMax Exp/Exp";
-		setColor(15);
-		cout << ": " << Max_Exp << "/" << Exp;
-
-		setColor(4);
-		cout << "\nHP";
-		setColor(15);
-		cout << ": " << Hp;
-
-		setColor(9);
-		cout << "\nMP";
-		setColor(15);
-
-		cout << " : " << Mp << "\nATK : " << Atk << "\nDEF : " << Def << "\nSPPED : " << Speed;
-
-		setColor(14);
-		cout << "\nMoney";
-		setColor(15);
-
-		cout << " : " << Money << " Coin" << endl;
-		cout << "------------------------\n";
-	}
-
-	void Level_Plus()
-	{
-		this->Level += 1;
-		this->Exp = this->Exp - this->Max_Exp;
-		this->Max_Exp = this->Max_Exp + (this->Max_Exp * 0.5);
-		this->Hp += 50;
-		this->Mp += 25;
-		this->Atk += 10;
-		this->Def += 5;
-		this->Speed += 0.1;
-	}
-
-	void Exp_Plus(double a)
-	{
-		this->Exp += a - rand() % 50;
-	}
-	void Pick_UP_Money(double a)
-	{
-		this->Money += a - rand() % 50;
-	}
-	void Restat()
-	{
-		this->Hp = 200;
-		this->Mp = 100;
-		this->Atk = 50;
-		this->Def = 5;
-		this->Speed = 1.5;
-		this->Level = 1;
-		this->Exp = 0;
-		this->Max_Exp = 100;
-		this->Money = 0;
-	}
-}My_Character;
-My_Character SoNB;
-My_Character* SoNB_P = &SoNB;*/
 void My_Character::Get_Character_Info_Left()
 {
 	Cursor_Move(0, 0);
@@ -116,16 +36,17 @@ void My_Character::Get_Character_Info_Left()
 
 	cout << " : " << Money << " Coin" << endl << endl;
 }
+
 class Skill //스킬 클래스
 {
 public:
 	string Skillname;
-	double Usedhp, Usedmp, Healhp, Healmp, Multiples, Static;
+	double Usedhp, Usedmp, Healhp, Healmp, Multiples, Static,Turn;
 	Skill()
 	{
 		Skillname = "";
 	}
-	Skill(string Skillname, double Usedhp, double Usedmp, double Healhp, double Healmp, double Multiples, double Static)
+	Skill(string Skillname, double Usedhp, double Usedmp, double Healhp, double Healmp, double Multiples, double Static,int Turn)
 	{
 		this->Skillname = Skillname; //스킬이름
 		this->Usedhp = Usedhp; //사용되는 Hp
@@ -137,6 +58,7 @@ public:
 	}
 	void Use_Skill(My_Character* Character, Monster* Mob, Skill Skill);
 	void Skill_Info(My_Character* Character, Skill Skill);
+	void Skill_Change(My_Character* Character, Skill Skill);
 };
 
 void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스킬 사용 함수
@@ -177,7 +99,7 @@ void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스�
 		Mob->Hp -= Damage;//최종 데미지 계산
 		//cout << "플레이어는 " << Damage << " 의 데미지를 입혔다!" << endl;
 		Print_Line("플레이어는 ");
-		setColor(7);
+		setColor(12);
 		Print_Double(Damage);
 		setColor(15);
 		Print(" 의 데미지를 입혔다!");
@@ -245,15 +167,16 @@ void Skill::Skill_Info(My_Character* Character, Skill Skill)//스킬 정보 함�
 //이하 스킬 구현
 
 //	 skill 변수("스킬이름",사용hp,사용mp,상승Hp,상승Mp,데미지계수,데미지)
-
-Skill Power_Slash("파워 슬래시", 0.0, 20.0, 0.0, 0.0, 1.2, 0.0);//마나20소모, 데미지1.2배
-Skill Blood_Slash("블러드 슬래시", 100, 0, 0, 0, 0, 150);//체력100소모, 150데미지
-Skill Mind_Fuel("회광반조", 0, 30, 15, 0, 0, 0);//마나 30소모, 체력15회복
-Skill Prayer("기도", 0, 0, 0, 20, 0, 0);//소모없음, 마나20회복
+Skill GOD_ATK("한방딜", 0, 0, 0, 0, 0, 500, 0);
+Skill Power_Slash("파워 슬래시", 0, 20, 0.0, 0.0, 1.2, 0.0, 0);//마나20소모, 데미지1.2배
+Skill Blood_Slash("블러드 슬래시", 100, 0, 0, 0, 0, 150, 0);//체력100소모, 150데미지
+Skill Mind_Fuel("회광반조", 0, 30, 15, 0, 0, 0, 0);//마나 30소모, 체력15회복
+Skill Prayer("기도", 0, 0, 0, 20, 0, 0, 0);//소모없음, 마나20회복
+Skill Fire_bolt("파이어볼트", 0, 15, 0, 0, 0, 75, 0);//마나15소모, 75데미지, 2레벨 해금
 //플레이어의 스킬창 기본값
-/*Skill Skill_Arry[4] = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };*/
 
-Skill Skill_Array[4] = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };
+Skill Skill_Array[4] = { Power_Slash,GOD_ATK,Mind_Fuel,Prayer };
+
 void Mob_Atk(Monster* Mob, My_Character* Character)
 {
 	double Damage = Mob->Atk - Character->Def;
@@ -298,7 +221,7 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 		case 3: //가방열기
 			Atkflag = Inventory_Menu();
 			break;
-		case 4: //캐릭터 상태보기
+		case 4: //도주
 
 			Print("던전에서 도망쳐 나옵니다...");
 			Sleep(2000);
@@ -376,6 +299,58 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 				Skillflag = false;
 				return true;
 			}
+		}
+	}
+}
+
+int Empty_Room(My_Character* Character,int Roomnum)
+{
+	int Choice; //플레이어 선택 변수
+	bool Roomflag = true; //Empty_Room 함수 제어용 변수
+	int Skillmenu;//스킬 선택
+	while (Roomflag)
+	{
+		Cursor_Pos_Start();
+		cout << "무엇을 할까...\n1. 다음방으로 이동\n2. 스킬\n3. 가방\n4. 도주" << endl; //기본 메뉴
+		Cursor_Pos_End();
+		Choice = _getch() - 48;
+		switch (Choice)
+		{
+		case 1: //다음 방으로 이동
+			Print("다음방으로 이동합니다...");
+			Roomnum++;
+			Order_Clear();
+			Roomflag = false;
+			return Roomnum;
+			break;
+		case 2: //스킬관련 미완
+			setColor(10);
+			cout << "SKILL MENU" << endl;
+			setColor(15);
+
+			for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Array[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
+			cout << "0. 뒤로가기" << endl;//0번 입력시 뒤로가기 출력
+			Skillmenu = _getch() - 48;
+			if (Skillmenu == 0)
+			{
+				Order_Clear2();
+				break;
+			}
+
+			break;
+		case 3: //가방열기
+			Roomflag = Inventory_Menu();
+			break;
+		case 4: //도주
+			Print("던전에서 도망쳐 나옵니다...");
+			Sleep(2000);
+			exit(0);
+			break;
+		default: //잘못된 변수 입력받을시
+			Print("올바르지 않은 입력");
+			Cursor_Pos_End();
+			Order_Clear();
+			break;
 		}
 	}
 }

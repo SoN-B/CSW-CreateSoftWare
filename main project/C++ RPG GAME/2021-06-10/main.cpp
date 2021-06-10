@@ -4,9 +4,11 @@
 #include <algorithm>
 #include <Windows.h>
 #include <conio.h>
+#include <mmsystem.h>
 #include "inventory.h"
 #include "map.h"
 using namespace std;
+#pragma comment(lib,"winmm.lib") //음악 사용관련
 
 int Menu; //메인메뉴 선택 변수
 int Select; //Map_Combat 함수 선택 변수
@@ -43,52 +45,58 @@ void Dungeon() //DUNGEON 로고
 }
 bool Map_Combat()//맵선택 및 전투
 {
+    int Roomnum = 0;//방번호
     system("cls");
     GoToXy(10, 15);
-    cout << "Map1";
+    cout << "1. 늪 지대";
     GoToXy(27, 15);
-    cout << "Map2";
+    cout << "2. 고블린 마을";
     GoToXy(43, 15);
-    cout << "Map3";
+    cout << "3. 오크 진지";
     GoToXy(0, 30);
     Select = _getch() - 48;
     Map = Maps[Select - 1];
     system("cls");
 
-    for (int i = 0; i < Map.size(); i++)//i=선택한 맵의 크기(방의 수)
+    if (Map == Maps[0]) PlaySound(TEXT(".\\SoundTrack\\Map1.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //0번맵 음악
+    if (Map == Maps[1]) PlaySound(TEXT(".\\SoundTrack\\Map2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //1번맵 음악
+    if (Map == Maps[2]) PlaySound(TEXT(".\\SoundTrack\\Map3.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //2번맵 음악
+
+    while(Roomnum<=Map.size())//방이 맵 끝까지 가면 던전 클리어
     {
-        for (int j = 0; j < Map[i].size(); j++)//j=해당 방의 몬스터 수
+        for (int Monsternum = 0; Monsternum < Map[Roomnum].size(); Monsternum++)//Monsternum=해당 방의 몬스터 수
         {
-            Combat_Ui(SoNB_P, Map[i][j]);
+            Combat_Ui(SoNB_P, Map[Roomnum][Monsternum]);
             setColor(2);
-            Print_Line(Map[i][j]->Kind);
+            Print_Line(Map[Roomnum][Monsternum]->Kind);
             Print(" 가 나타났다!");
             setColor(15);
             Print_blank();
             Sleep(1000);
 
-            Temp_Mob_P->Hp = Map[i][j]->Hp;
-            Temp_Mob_P->Mp = Map[i][j]->Mp;
-
+            Temp_Mob_P->Hp = Map[Roomnum][Monsternum]->Hp;
+            Temp_Mob_P->Mp = Map[Roomnum][Monsternum]->Mp;
+            int Turn = 0; //전투 턴 초기화
             while (true)//전투
             {
-                if (SoNB_P->Speed > Map[i][j]->Speed)//스피드 비교: 플레이어선공
+                if (SoNB_P->Speed > Map[Roomnum][Monsternum]->Speed)//스피드 비교: 플레이어선공
                 {
+                    //독뎀등 턴수에따른 데미지계산
                     Cursor_Move(58, 8);
                     cout << "※";        //player의 턴을 나타냄.
                     Cursor_Move(62, 8);
                     cout << "□";        //monster의 턴 끝남
 
                     Cursor_Move(0, 11);
-                    Atk_Menu(SoNB_P, Map[i][j]);//플레이어 턴(선공)
-                    if (Map[i][j]->Hp < 0)//몬스터 사망시
+                    Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴(선공)
+                    if (Map[Roomnum][Monsternum]->Hp <= 0)//몬스터 사망시
                     {
-                        Print_Line(Map[i][j]->Kind);
+                        Print_Line(Map[Roomnum][Monsternum]->Kind);
                         Print(" 를 물리쳤다!");
                         Print_blank();
-                        Monster_Die(SoNB_P, Map[i][j]);
-                        Map[i][j]->Hp = Temp_Mob_P->Hp;
-                        Map[i][j]->Mp = Temp_Mob_P->Mp;
+                        Monster_Die(SoNB_P, Map[Roomnum][Monsternum]);
+                        Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
+                        Map[Roomnum][Monsternum]->Mp = Temp_Mob_P->Mp;
                         DropItem = Drop_Item();
                         if (DropItem != "")
                         {
@@ -101,50 +109,54 @@ bool Map_Combat()//맵선택 및 전투
                     cout << "□";        //player의 턴 끝남.
                     Cursor_Move(62, 8);
                     cout << "※";        //monster의 턴을 나타냄.
-                    Mob_Atk(Map[i][j], SoNB_P);//몬스터 턴(후공)
-                    if (SoNB_P->Hp < 0) //도중에 캐릭터가 사망시 게임오버 
+                    Mob_Atk(Map[Roomnum][Monsternum], SoNB_P);//몬스터 턴(후공)
+                    if (SoNB_P->Hp <= 0) //도중에 캐릭터가 사망시 게임오버 
                     {
                         cout << "Game over..." << endl;
                         SoNB_P->Restat();
-                        i = Map.size() - 1; // 변수 i를 올려 for문 탈출
+                        Roomnum = Map.size() - 1; // 변수 i를 올려 for문 탈출
                         return false; 
                         break;//while문 탈출: 전투끝
                     }
                     Cursor_Move(62, 8);
                     Cursor_Move(0, 11);  //order창으로.
-
+                    Turn++;
                 }
 
                 else//플레이어의 spd가 mob보다 낮은 경우: 플레이어 후공
                 {
-                    Mob_Atk(Map[i][j], SoNB_P);//몬스터 턴(선공)
-                    if (SoNB_P->Hp < 0) //도중에 캐릭터가 사망시 게임오버 
+                    //독뎀등 데미지
+                    Mob_Atk(Map[Roomnum][Monsternum], SoNB_P);//몬스터 턴(선공)
+                    if (SoNB_P->Hp <= 0) //도중에 캐릭터가 사망시 게임오버 
                     {
                         cout << "Game over..." << endl;
                         SoNB_P->Restat();
-                        i = Map.size() - 1; //변수 i를 올려 for문 탈출
+                        Roomnum = Map.size() - 1; //변수 i를 올려 for문 탈출
                         return false; 
                         break;//while문 탈출: 전투끝
                     }
 
-                    Atk_Menu(SoNB_P, Map[i][j]);//플레이어 턴 (후공)
-                    if (Map[i][j]->Hp < 0) //몬스터 사망시
+                    Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴 (후공)
+                    if (Map[Roomnum][Monsternum]->Hp <= 0) //몬스터 사망시
                     {
-                        Print_Line(Map[i][j]->Kind);
+                        Print_Line(Map[Roomnum][Monsternum]->Kind);
                         Print(" 를 물리쳤다!");
-                        Monster_Die(SoNB_P, Map[i][j]);
-                        Map[i][j]->Hp = Temp_Mob_P->Hp;
-                        Map[i][j]->Mp = Temp_Mob_P->Mp;
+                        Monster_Die(SoNB_P, Map[Roomnum][Monsternum]);
+                        Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
+                        Map[Roomnum][Monsternum]->Mp = Temp_Mob_P->Mp;
                         DropItem = Drop_Item();
                         if (DropItem != "") Pick_Up_Item(Inventory, DropItem);
                         break;//while문 탈출: 전투끝
                     }
                     cout << "------------------------\n";
+                    Turn++;
                 }
             }
         }
+        Roomnum = Empty_Room(SoNB_P, Roomnum);
     }
     if (SoNB_P->Hp > 0) cout << "\n\nDungeon clear!\n\n"; //맵을 모두 클리어시 던전 클리어
+    PlaySound(NULL, 0, 0); //음악 종료
     return true; //던전클리어시 
 }
 
@@ -153,12 +165,13 @@ int main()
     SetConsoleTitle(TEXT("C++ based RPG GAME"));
 
     do {
+        PlaySound(NULL, 0, 0); //음악 초기화(종료)
+        PlaySound(TEXT(".\\SoundTrack\\Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //초기화면 음악 ON
         system("cls");
         //cout << "【 TEST BETA GAME 】\n\n";
         setColor(12);
         Dungeon();
         setColor(15);
-
 
         GoToXy(25, 18);
         setColor(10);
@@ -179,6 +192,9 @@ int main()
             Gameflag = true;//메인메뉴 --> 맵선택(flase방지)
             while (Gameflag)
             {
+                PlaySound(NULL, 0, 0); //음악 초기화(종료)
+                PlaySound(TEXT(".\\SoundTrack\\Village.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //메인메뉴 음악 ON
+
 				Create_Quest(Quest_slot);
                 system("cls");
                 GoToXy(10, 15);
@@ -195,6 +211,8 @@ int main()
                     Gameflag = Map_Combat();
                     break;
                 case 2:
+                    PlaySound(NULL, 0, 0); //음악 초기화(종료)
+                    PlaySound(TEXT(".\\SoundTrack\\Store.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //상점 음악 ON
                     Storeflag = true;
                     system("cls");
                     while (Storeflag) Storeflag = Open_Store(Inventory);
