@@ -5,7 +5,6 @@
 #include <ctime>
 #include <conio.h>
 #include <Windows.h>
-#include "player.h"
 #include "Item_List.h"
 using namespace std;
 // 인벤토리의 빈 공간을 "0"으로 표현함
@@ -496,7 +495,7 @@ bool Open_Store(string* inventory) {  //상점
 			cout << "------------------------\n";
 			if (Num2 < 0 && Num2 >2) { cout << "퀘스트 완료가 취소되었습니다.\n"; }
 			else if (Num2 == 0) {    //메인 퀘스트 선택
-				for (int K = 0; K < 5; K++) {
+				for (int K = 0; K < 7; K++) {
 					if (Quest_slot[Num2] == Main_Quest[K].Goal) {
 						switch (Main_Quest[K].Num) {
 						case 0:
@@ -514,13 +513,19 @@ bool Open_Store(string* inventory) {  //상점
 						case 4:
 							Dungeon_Owner();
 							break;
+						case 5:
+							Dungeon_Clear();
+							break;
+						case 6:
+							Potion_Shower();
+							break;
 						}
 					}
 				}
 			}
 			else if (Num2 == 1 || Num2 == 2) {   //서브 퀘스트 선택
 				bool Questflag;   //    퀘스트 완료 여부 체크
-				for (int K = 0; K < 5; K++) {
+				for (int K = 0; K < 11; K++) {
 					if (Quest_slot[Num2] == Sub_Quest[K].Goal) {
 						switch (Sub_Quest[K].Num) {
 						case 0:
@@ -537,6 +542,24 @@ bool Open_Store(string* inventory) {  //상점
 							break;
 						case 4:
 							Questflag = Scholarship();
+							break;
+						case 5:
+							Questflag = Slime_Slayer();
+							break;
+						case 6:
+							Questflag = Goblin_Slayer();
+							break;
+						case 7:
+							Questflag = Orc_Slayer();
+							break;
+						case 8:
+							Questflag = Protein_Addiction();
+							break;
+						case 9:
+							Questflag = Sugar_Addiction();
+							break;
+						case 10:
+							Questflag = Pear_Addiction();
 							break;
 						}
 						if (Questflag == true) {

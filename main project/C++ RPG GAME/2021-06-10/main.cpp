@@ -5,8 +5,8 @@
 #include <Windows.h>
 #include <conio.h>
 #include <mmsystem.h>
-#include "inventory.h"
 #include "map.h"
+#include "player.h"
 using namespace std;
 #pragma comment(lib,"winmm.lib") //음악 사용관련
 

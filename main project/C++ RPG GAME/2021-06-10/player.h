@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <Windows.h>
 #include "Ui.h"
+#include "inventory.h"
 using namespace std;
 
 
@@ -199,7 +200,7 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 	{
 		//Cursor_Pos_Start();
 		Cursor_Pos_Start();
-		cout << "무엇을 할까...\n1. 공격\n2. 스킬\n3. 가방\n4. 도주" << endl; //기본 메뉴
+		cout << "무엇을 할까...\n1. 공격\n2. 스킬\n3. 가방\n4. 퀘스트\n5. 도주" << endl; //기본 메뉴
 		Choice = _getch()-48;
 		switch (Choice)
 		{
@@ -221,7 +222,10 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 		case 3: //가방열기
 			Atkflag = Inventory_Menu();
 			break;
-		case 4: //도주
+		case 4: //진행중인 퀘스트
+			Look_Quest();
+			break;
+		case 5: //도주
 
 			Print("던전에서 도망쳐 나옵니다...");
 			Sleep(2000);
@@ -311,7 +315,7 @@ int Empty_Room(My_Character* Character,int Roomnum)
 	while (Roomflag)
 	{
 		Cursor_Pos_Start();
-		cout << "무엇을 할까...\n1. 다음방으로 이동\n2. 스킬\n3. 가방\n4. 도주" << endl; //기본 메뉴
+		cout << "무엇을 할까...\n1. 다음방으로 이동\n2. 스킬\n3. 가방\n4. 퀘스트\n5. 도주" << endl; //기본 메뉴
 		Cursor_Pos_End();
 		Choice = _getch() - 48;
 		switch (Choice)
@@ -341,7 +345,10 @@ int Empty_Room(My_Character* Character,int Roomnum)
 		case 3: //가방열기
 			Roomflag = Inventory_Menu();
 			break;
-		case 4: //도주
+		case 4: //진행중인 퀘스트
+			Look_Quest();
+			break;
+		case 5: //도주
 			Print("던전에서 도망쳐 나옵니다...");
 			Sleep(2000);
 			exit(0);
