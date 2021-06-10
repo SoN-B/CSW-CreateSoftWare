@@ -62,7 +62,7 @@ bool Map_Combat()//맵선택 및 전투
     if (Map == Maps[1]) PlaySound(TEXT(".\\SoundTrack\\Map2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //1번맵 음악
     if (Map == Maps[2]) PlaySound(TEXT(".\\SoundTrack\\Map3.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //2번맵 음악
 
-    while(Roomnum<=Map.size())//방이 맵 끝까지 가면 던전 클리어
+    while(Roomnum<Map.size())//방이 맵 끝까지 가면 던전 클리어
     {
         for (int Monsternum = 0; Monsternum < Map[Roomnum].size(); Monsternum++)//Monsternum=해당 방의 몬스터 수
         {
