@@ -182,6 +182,7 @@ int main()
     SetConsoleTitle(TEXT("C++ based RPG GAME"));
 
     do {
+		Create_Quest(Quest_slot);
         PlaySound(NULL, 0, 0); //음악 초기화(종료)
         PlaySound(TEXT(".\\SoundTrack\\Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //초기화면 음악 ON
         system("cls");
@@ -209,7 +210,6 @@ int main()
                 PlaySound(NULL, 0, 0); //음악 초기화(종료)
                 PlaySound(TEXT(".\\SoundTrack\\Village.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //메인메뉴 음악 ON
 
-                Create_Quest(Quest_slot);
                 system("cls");
                 GoToXy(10, 15);
                 cout << "1. 맵 선택";
