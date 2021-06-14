@@ -1,117 +1,378 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
-#include "monster.h"
+#include <conio.h>
+#include <Windows.h>
+#include "Ui.h"
 #include "inventory.h"
 using namespace std;
 
-typedef struct My_Character //ÇÃ·¹ÀÌ¾î Å¬·¡½º
+
+void My_Character::Get_Character_Info_Left()
 {
-    double Hp, Mp, Atk, Def, Speed;
+	Cursor_Move(0, 0);
+	setColor(8);
+	cout << "\nLevel";
+	setColor(15);
+	cout << ": " << Level;
 
-    My_Character(double Hp = 200, double Mp = 100, double Atk = 50, double Def = 5, double Speed = 1.5)
-    {
-        this->Hp = Hp;
-        this->Mp = Mp;
-        this->Atk = Atk;
-        this->Def = Def;
-        this->Speed = Speed;
-    }
+	setColor(6);
+	cout << "\nMax Exp/Exp";
+	setColor(15);
+	cout << ": " << Max_Exp << "/" << Exp;
 
-    void Get_Character_Info()//ÇÃ·¹ÀÌ¾î »óÅÂ Ãâ·Â 
-    {
-        cout << "HP : " << Hp << "\nMP: " << Mp << "\n°ø°İ·Â: " << Atk << "\n¹æ¾î·Â: " << Def << endl;
-    }
-}My_Character;
+	setColor(4);
+	cout << "\nHP";
+	setColor(15);
+	cout << ": " << Hp;
 
-void Atk_Menu(My_Character* Character, mob* Mob)//ÇÃ·¹ÀÌ¾îÅÏ ¸Ş´º
-{
-    int Choice; //ÇÃ·¹ÀÌ¾î ¼±ÅÃ º¯¼ö
-    bool Atkflag = true; //Atk_Menu ÇÔ¼ö Á¦¾î¿ë º¯¼ö
-    double Damage; //ÇÃ·¹ÀÌ¾îÀÇ ÃÖÁ¾ µ¥¹ÌÁö
-    while (Atkflag)
-    {
-        cout << "¹«¾ùÀ» ÇÒ±î...\n1. °ø°İ\n2. ½ºÅ³\n3. °¡¹æ\n4. ³»»óÅÂ\n5. Àû Á¤º¸\n6. µµÁÖ" << endl; //±âº» ¸Ş´º
-        cin >> Choice;
-        switch (Choice)
-        {
-        case 1: //±âº»°ø°İ
-            cout << "\nÀû¿¡°Ô °ø°İÀ» °¡ÇÕ´Ï´Ù!!\n";
-            Damage = Character->Atk - Mob->def; //ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö °è»ê (ÇÃ·¹ÀÌ¾îAtk - ¸ó½ºÅÍdef)
-            if (Damage < 0) Damage = 0; //¿¹¿Ü»çÇ×: µ¥¹ÌÁö À½¼öÀÏ °æ¿ì 0À¸·Î °è»ê
-            Mob->hp -= Damage; //ÃÖÁ¾ µ¥¹ÌÁö °è»ê
-            cout << "ÇÃ·¹ÀÌ¾îÀÇ °ø°İ!" << endl;
-            cout << "ÇÃ·¹ÀÌ¾î´Â " << Damage << " ÀÇ ÇÇÇØ¸¦ ÀÔÇû´Ù!" << endl;
-            Atkflag = false;
-            break;
-        case 2: //½ºÅ³»ç¿ë
-            Atkflag = Skill_Menu(Character, Mob, Atkflag);
-            break;
-        case 3: //°¡¹æ¿­±â
-            Atkflag = inventorymenu();
-            break;
-        case 4: //Ä³¸¯ÅÍ »óÅÂº¸±â
-            Character->Get_Character_Info();
-            break;
-        case 5: //¸ó½ºÅÍ »óÅÂº¸±â
-            Mob->GetInfo();
-            break;
-        case 6: //¹Ì±¸Çö
-            //µµÁÖ
-            break;
-        default: //Àß¸øµÈ º¯¼ö ÀÔ·Â¹ŞÀ»½Ã
-            cout << "¿Ã¹Ù¸£Áö ¾ÊÀº ÀÔ·Â" << endl;
-            break;
-        }
-    }
+	setColor(9);
+	cout << "\nMP";
+	setColor(15);
+
+	cout << " : " << Mp << "\nATK : " << Atk << "\nDEF : " << Def << "\nSPPED : " << Speed;
+
+	setColor(14);
+	cout << "\nMoney";
+	setColor(15);
+
+	cout << " : " << Money << " Coin" << endl << endl;
 }
 
-bool Skill_Menu(My_Character* Character, mob* Mob, bool Atkflag)
+class Skill //ìŠ¤í‚¬ í´ë˜ìŠ¤
 {
-    int Skillmenu;//½ºÅ³ ¼±ÅÃ
-    string Skillcheck;//½ºÅ³ »ç¿ë È®ÀÎ
-    bool Skillflag = true;// Skill_Menu ÇÔ¼ö Á¦¾î¿ë º¯¼ö
-    double Damage; // ÇÃ·¹ÀÌ¾îÀÇ ÃÖÁ¾ ½ºÅ³ µ¥¹ÌÁö
-    while (Skillflag)
-    {
-        cout << "SKILL MENU" << endl;
-        cout << "1. ÆÄ¿ö ½½·¡½Ã\n2. Á×À½ÀÇ DEATH\n0. µÚ·Î°¡±â" << endl;// ½ºÅ³ ¸Ş´º
-        cin >> Skillmenu;
-        switch (Skillmenu)
-        {
-        case 1: //ÆÄ¿ö ½½·¡½Ã 
-            cout << "°ø°İ·Â: " << Character->Atk * 1.2 << "\nMP: 100\n»ç¿ëÇÒ±î? (Y or else)" << endl;
-            cin >> Skillcheck; //½ºÅ³»ç¿ë ÃÖÁ¾È®ÀÎ
-            if (Skillcheck == "Y") //½ºÅ³»ç¿ë
-            {
-                Character->Mp -= 20; //Mp ¼Ò¸ğ
-                Damage = (Character->Atk * 1.5) - Mob->def; //ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö °è»ê (ÇÃ·¹ÀÌ¾îAtk - ¸ó½ºÅÍdef)
-                if (Damage < 0) Damage = 0; //¿¹¿Ü»çÇ×: µ¥¹ÌÁö À½¼öÀÏ °æ¿ì 0À¸·Î °è»ê
-                Mob->hp -= Damage; //ÃÖÁ¾ µ¥¹ÌÁö °è»ê
-                cout << "Po½½·¡½ÃweR!!" << endl;
-                cout << "ÇÃ·¹ÀÌ¾î´Â " << Damage << " ÀÇ ÇÇÇØ¸¦ ÀÔÇû´Ù!" << endl;
-                Skillflag = false; //Skill_Menu ÇÔ¼ö Á¾·á
-                return false; //Atkflag=false : Atk_Menu ÇÔ¼ö Á¾·á return
-            }
-            break;
-        case 2: //Á×À½ÀÇ µ¥½º
-            cout << "°ø°İ·Â: " << Character->Atk * 3 << " (def¹«½Ã)" << "\n-HP: 50%\n»ç¿ëÇÒ±î? (Y or else)" << endl;
-            cin >> Skillcheck;
-            if (Skillcheck == "Y") //½ºÅ³»ç¿ë ÃÖÁ¾È®ÀÎ
-            {
-                Character->Hp = Character->Hp / 2; //Hp¼Ò¸ğ
-                Damage = (Character->Atk * 3); //ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö °è»ê (ÇÃ·¹ÀÌ¾îAtk - ¸ó½ºÅÍdef)
-                if (Damage < 0) Damage = 0; //¿¹¿Ü»çÇ×: µ¥¹ÌÁö À½¼öÀÏ °æ¿ì 0À¸·Î °è»ê
-                Mob->hp -= Damage; //ÃÖÁ¾ µ¥¹ÌÁö °è»ê
-                cout << "JJUGEMÀÇ µ¥½º!!!" << endl;
-                cout << "ÇÃ·¹ÀÌ¾î´Â " << Damage << " ÀÇ ÇÇÇØ¸¦ ÀÔÇû´Ù!" << endl;
-                Skillflag = false; //Skill_Menu ÇÔ¼ö Á¾·á
-                return false; //Atkflag=false : Atk_Menu ÇÔ¼ö Á¾·á return
-            }
-            break;
-        case 0: //µÚ·Î°¡±â
-            Skillflag = false; //Skill_Menu ÇÔ¼ö Á¾·á
-            return true; //Atkflag=ture : Atk_Menu ÇÔ¼ö ÀÌ¾îÁü
-            break;
-        }
-    }
+public:
+	string Skillname;
+	double Usedhp, Usedmp, Healhp, Healmp, Multiples, Static,Turn;
+	Skill()
+	{
+		Skillname = "";
+	}
+	Skill(string Skillname, double Usedhp, double Usedmp, double Healhp, double Healmp, double Multiples, double Static,int Turn)
+	{
+		this->Skillname = Skillname; //ìŠ¤í‚¬ì´ë¦„
+		this->Usedhp = Usedhp; //ì‚¬ìš©ë˜ëŠ” Hp
+		this->Usedmp = Usedmp; //ì‚¬ìš©ë˜ëŠ” Mp
+		this->Healhp = Healhp; // íš¨ê³¼ë¡œ ë°›ëŠ” Hp
+		this->Healmp = Healmp; // íš¨ê³¼ë¡œ ë°›ëŠ” Mp
+		this->Multiples = Multiples; // ë°°ìˆ˜ ë°ë¯¸ì§€
+		this->Static = Static; // ê³ ì •ë°ë¯¸ì§€ 
+	}
+	void Use_Skill(My_Character* Character, Monster* Mob, Skill Skill);
+	void Skill_Info(My_Character* Character, Skill Skill);
+	void Skill_Change(My_Character* Character, Skill Skill);
+};
+
+void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//ìŠ¤í‚¬ ì‚¬ìš© í•¨ìˆ˜
+{
+	double Damage = 0;//ë°ë¯¸ì§€ ì´ˆê¸°í™”
+	//cout << "----------------\nìŠ¤í‚¬ì‚¬ìš©! " << Skill.Skillname << endl;
+	setColor(14);
+	Print_Line("ìŠ¤í‚¬ì‚¬ìš©! ");
+	setColor(15);
+	Print_Line(Skill.Skillname);
+	Print("!");
+	Character->Hp -= Skill.Usedhp;//ì²´ë ¥ ì†Œëª¨
+	Character->Mp -= Skill.Usedmp;//ë§ˆë‚˜ ì†Œëª¨
+	if (Skill.Healhp != 0)//ì²´ë ¥ íšŒë³µ
+	{
+		Character->Hp += Skill.Healhp;//ì²´ë ¥ íšŒë³µ
+		Print_Line("í”Œë ˆì´ì–´ëŠ” ");
+		setColor(10);
+		Print_Double(Skill.Healhp);
+		setColor(15);
+		Print(" ì˜ ì²´ë ¥ì„ íšŒë³µí–ˆë‹¤!");
+	}
+	if (Skill.Healmp != 0)//ë§ˆë‚˜ íšŒë³µ
+	{
+		Character->Mp += Skill.Healmp;//ì²´ë ¥ íšŒë³µ
+		//cout << "í”Œë ˆì´ì–´ëŠ” " << Skill.Healmp << " ì˜ ë§ˆë‚˜ë¥¼ íšŒë³µí–ˆë‹¤!" << endl;
+		Print_Line("í”Œë ˆì´ì–´ëŠ” ");
+		setColor(9);
+		Print_Double(Skill.Healmp);
+		setColor(15);
+		Print(" ì˜ ë§ˆë‚˜ë¥¼ íšŒë³µí–ˆë‹¤!");
+	}
+	if (Skill.Multiples != 0 || Skill.Static != 0)//ê³µê²© ê´€ë ¨ ê²½ìš°
+	{
+		if (Skill.Multiples != 0) { Damage = (Character->Atk * Skill.Multiples) - Mob->Def; }//ë°°ìˆ˜ ë°ë¯¸ì§€ ê³„ì‚°
+		if (Skill.Static != 0) { Damage = Skill.Static - Mob->Def; }//ê³ ì • ë°ë¯¸ì§€ ê³„ì‚°
+		if (Damage < 0) { Damage = 0; }//ì˜ˆì™¸ì‚¬í•­: ë°ë¯¸ì§€ ìŒìˆ˜ì¼ ê²½ìš° 0ìœ¼ë¡œ ê³„ì‚°
+		Mob->Hp -= Damage;//ìµœì¢… ë°ë¯¸ì§€ ê³„ì‚°
+		//cout << "í”Œë ˆì´ì–´ëŠ” " << Damage << " ì˜ ë°ë¯¸ì§€ë¥¼ ì…í˜”ë‹¤!" << endl;
+		Print_Line("í”Œë ˆì´ì–´ëŠ” ");
+		setColor(12);
+		Print_Double(Damage);
+		setColor(15);
+		Print(" ì˜ ë°ë¯¸ì§€ë¥¼ ì…í˜”ë‹¤!");
+		Print_blank();
+	}
+}
+
+void Skill::Skill_Info(My_Character* Character, Skill Skill)//ìŠ¤í‚¬ ì •ë³´ í•¨ìˆ˜
+{//í•´ë‹¹ ìŠ¤í‚¬ì— ê´€ë ¨ëœ ì •ë³´ë§Œ ì „ë‹¬
+	cout << "-------------------\nìŠ¤í‚¬: " << Skill.Skillname << endl;
+	if (Skill.Usedhp != 0) {
+		cout << "ì†Œëª¨ HP: ";
+
+		setColor(4);
+		cout << Skill.Usedhp << endl;
+		setColor(15);
+	}
+	if (Skill.Usedmp != 0) {
+		cout << "ì†Œëª¨ MP: ";
+
+		setColor(9);
+		cout << Skill.Usedmp << endl;
+		setColor(15);
+	}
+	if (Skill.Healhp != 0) {
+		cout << "íšŒë³µ HP: ";
+
+		setColor(4);
+		cout << Skill.Healhp << endl;
+		setColor(15);
+	}
+	if (Skill.Healmp != 0) {
+		cout << "íšŒë³µ MP: ";
+
+		setColor(9);
+		cout << Skill.Healmp << endl;
+		setColor(15);
+	}
+	if (Skill.Multiples != 0)
+	{
+		cout << "ì ì—ê²Œ ";
+
+		setColor(12);
+		cout << Character->Atk << " * " << Skill.Multiples;
+		setColor(15);
+
+
+		cout << " ë§Œí¼ì˜ ë°ë¯¸ì§€ë¥¼ ì…íŒë‹¤.\n";
+		cout << "í˜„ì¬ ë°ë¯¸ì§€: ";
+
+		setColor(12);
+		cout << Character->Atk * Skill.Multiples << endl;
+		setColor(15);
+	}
+	if (Skill.Static != 0) {
+		cout << "ì ì—ê²Œ ";
+
+		setColor(12);
+		cout << Skill.Static;
+		setColor(15);
+
+		cout << " ë§Œí¼ì˜ ë°ë¯¸ì§€ë¥¼ ì…íŒë‹¤." << endl;
+	}
+}
+//ì´í•˜ ìŠ¤í‚¬ êµ¬í˜„
+
+//	 skill ë³€ìˆ˜("ìŠ¤í‚¬ì´ë¦„",ì‚¬ìš©hp,ì‚¬ìš©mp,ìƒìŠ¹Hp,ìƒìŠ¹Mp,ë°ë¯¸ì§€ê³„ìˆ˜,ë°ë¯¸ì§€)
+Skill GOD_ATK("í•œë°©ë”œ", 0, 0, 0, 0, 0, 500, 0);
+Skill Power_Slash("íŒŒì›Œ ìŠ¬ë˜ì‹œ", 0, 20, 0.0, 0.0, 1.2, 0.0, 0);//ë§ˆë‚˜20ì†Œëª¨, ë°ë¯¸ì§€1.2ë°°
+Skill Blood_Slash("ë¸”ëŸ¬ë“œ ìŠ¬ë˜ì‹œ", 100, 0, 0, 0, 0, 150, 0);//ì²´ë ¥100ì†Œëª¨, 150ë°ë¯¸ì§€
+Skill Mind_Fuel("íšŒê´‘ë°˜ì¡°", 0, 30, 15, 0, 0, 0, 0);//ë§ˆë‚˜ 30ì†Œëª¨, ì²´ë ¥15íšŒë³µ
+Skill Prayer("ê¸°ë„", 0, 0, 0, 20, 0, 0, 0);//ì†Œëª¨ì—†ìŒ, ë§ˆë‚˜20íšŒë³µ
+Skill Fire_bolt("íŒŒì´ì–´ë³¼íŠ¸", 0, 15, 0, 0, 0, 75, 0);//ë§ˆë‚˜15ì†Œëª¨, 75ë°ë¯¸ì§€, 2ë ˆë²¨ í•´ê¸ˆ
+//í”Œë ˆì´ì–´ì˜ ìŠ¤í‚¬ì°½ ê¸°ë³¸ê°’
+
+Skill Skill_Array[4] = { Power_Slash,GOD_ATK,Mind_Fuel,Prayer };
+
+void Mob_Atk(Monster* Mob, My_Character* Character)
+{
+	double Damage = Mob->Atk - Character->Def;
+	if (Damage < 0) Damage = 0;
+	//ëª¹ ê³µê²©ë ¥<í”Œë ˆì´ì–´ ë°©ì–´ë ¥ ê²½ìš° ìŒìˆ˜ ë‚˜ì˜¤ëŠ” ìƒí™© ë°°ì œ
+
+	Character->Hp -= Damage;
+	Monster_Attack_Result(Mob, Damage);
+	Combat_Ui(Character, Mob);
+}
+
+bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag);
+bool Inventory_Menu();
+void Atk_Menu(My_Character* Character, Monster* Mob)//í”Œë ˆì´ì–´í„´ ë©”ë‰´
+{
+	int Choice; //í”Œë ˆì´ì–´ ì„ íƒ ë³€ìˆ˜
+	bool Atkflag = true; //Atk_Menu í•¨ìˆ˜ ì œì–´ìš© ë³€ìˆ˜
+	double Damage; //í”Œë ˆì´ì–´ì˜ ìµœì¢… ë°ë¯¸ì§€
+	while (Atkflag)
+	{
+		//Cursor_Pos_Start();
+		Cursor_Pos_Start();
+		cout << "ë¬´ì—‡ì„ í• ê¹Œ...\n1. ê³µê²©\n2. ìŠ¤í‚¬\n3. ê°€ë°©\n4. í€˜ìŠ¤íŠ¸\n5. ë„ì£¼" << endl; //ê¸°ë³¸ ë©”ë‰´
+		Choice = _getch()-48;
+		switch (Choice)
+		{
+		case 1: //ê¸°ë³¸ê³µê²©
+			setColor(12);
+			Print("ì ì—ê²Œ ê³µê²©ì„ ê°€í•©ë‹ˆë‹¤.!");
+			setColor(15);
+			Print_blank();
+
+			Damage = Character->Atk - Mob->Def; //í”Œë ˆì´ì–´ ë°ë¯¸ì§€ ê³„ì‚° (í”Œë ˆì´ì–´Atk - ëª¬ìŠ¤í„°def)
+			if (Damage < 0) Damage = 0; //ì˜ˆì™¸ì‚¬í•­: ë°ë¯¸ì§€ ìŒìˆ˜ì¼ ê²½ìš° 0ìœ¼ë¡œ ê³„ì‚°
+			Mob->Hp -= Damage; //ìµœì¢… ë°ë¯¸ì§€ ê³„ì‚°
+			Player_Attack_Result(Damage);
+			Atkflag = false;
+			break;
+		case 2: //ìŠ¤í‚¬ì‚¬ìš©
+			Atkflag = Skill_Menu(Character, Mob, Atkflag);
+			break;
+		case 3: //ê°€ë°©ì—´ê¸°
+			Atkflag = Inventory_Menu();
+			break;
+		case 4: //ì§„í–‰ì¤‘ì¸ í€˜ìŠ¤íŠ¸
+			Look_Quest();
+			break;
+		case 5: //ë„ì£¼
+
+			Print("ë˜ì „ì—ì„œ ë„ë§ì³ ë‚˜ì˜µë‹ˆë‹¤...");
+			Sleep(2000);
+			exit(0);
+			break;
+		default: //ì˜ëª»ëœ ë³€ìˆ˜ ì…ë ¥ë°›ì„ì‹œ
+			Print("ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥");
+			Cursor_Pos_End();
+			Order_Clear();
+			break;
+		}
+	}
+	//ì—¬ê¸°ì— Playerì˜ UIë‘ monsterì˜ UI ê°±ì‹  ë¶€ë¶„ì´ ë“¤ì–´ê°€ì•¼í•¨.
+	Combat_Ui(Character, Mob);
+}
+
+bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
+{
+	int Skillmenu;//ìŠ¤í‚¬ ì„ íƒ
+	string Skillcheck;//ìŠ¤í‚¬ ì‚¬ìš© í™•ì¸
+	bool Skillflag = true;// Skill_Menu í•¨ìˆ˜ ì œì–´ìš© ë³€ìˆ˜
+	double Damage; // í”Œë ˆì´ì–´ì˜ ìµœì¢… ìŠ¤í‚¬ ë°ë¯¸ì§€
+	while (Skillflag)
+	{
+		setColor(10);
+		cout << "SKILL MENU" << endl;
+		setColor(15);
+
+		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Array[i].Skillname << endl; }//ìŠ¤í‚¬ì°½ì— ìˆëŠ” ìŠ¤í‚¬ì´ë¦„ë“¤ì„ ì¶œë ¥
+		cout << "0. ë’¤ë¡œê°€ê¸°" << endl;//0ë²ˆ ì…ë ¥ì‹œ ë’¤ë¡œê°€ê¸° ì¶œë ¥
+		Skillmenu = _getch() - 48;
+
+		if (Skillmenu == 0)
+		{
+			Order_Clear2();
+			Skillflag = false; //Skill_Menu í•¨ìˆ˜ ì¢…ë£Œ
+			return true; //Atkflag=true : í”Œë ˆì´ì–´ í„´ ìœ ì§€
+		}
+		if (Skillmenu >= 1 && Skillmenu <= 4)
+		{
+			Skill_Array[Skillmenu - 1].Skill_Info(Character, Skill_Array[Skillmenu - 1]);//ìŠ¤í‚¬ì •ë³´ ì¶œë ¥
+			cout << Skill_Array[Skillmenu - 1].Skillname << " ë¥¼ ì‚¬ìš©í• ê¹Œ? (Y or else)" << endl;
+			Skillcheck = _getch();
+			Cursor_Pos_End();
+			if (Skillcheck == "Y" || Skillcheck == "y")//ìŠ¤í‚¬ ì‚¬ìš© í™•ì¸ì‹œ
+			{
+				if (Character->Hp - Skill_Array[Skillmenu - 1].Usedhp <= 0)//ìŠ¤í‚¬ ì‚¬ìš©ì‹œ HPê°€ 0ì´í•˜ê°€ ë˜ëŠ”ê²½ìš° ë°©ì§€
+				{
+					setColor(12);
+					Print("HPê°€ ëª¨ìëë‹ˆë‹¤.");
+					setColor(15);
+					Print_blank();
+					Order_Clear2();
+					Skillflag = false;//Skill_Menu í•¨ìˆ˜ ì¢…ë£Œ
+					return true;//Atkflag=true : í”Œë ˆì´ì–´ í„´ ìœ ì§€
+				}
+				if (Character->Mp - Skill_Array[Skillmenu - 1].Usedmp < 0)//ìŠ¤í‚¬ ì‚¬ìš©ì‹œ MPê°€ 0ë¯¸ë§Œì´ ë˜ëŠ”ê²½ìš° ë°©ì§€
+				{
+					setColor(12);
+					Print("MPê°€ ëª¨ìëë‹ˆë‹¤.");
+					setColor(15);
+					Print_blank();
+					Order_Clear2();
+					Skillflag = false;//Skill_Menu í•¨ìˆ˜ ì¢…ë£Œ
+					return true;//Atkflag=true : í”Œë ˆì´ì–´ í„´ ìœ ì§€
+				}
+				Skill_Array[Skillmenu - 1].Use_Skill(Character, Mob, Skill_Array[Skillmenu - 1]);//ìŠ¤í‚¬ì‚¬ìš©
+				Order_Clear();
+				Skillflag = false; //Skill_Menu í•¨ìˆ˜ ì¢…ë£Œ
+				return false; //Atkflag=false : í”Œë ˆì´ì–´ í„´ ì¢…ë£Œ
+			}
+			else
+			{
+				Order_Clear();
+				Skillflag = false;
+				return true;
+			}
+		}
+	}
+}
+
+int Empty_Room(My_Character* Character,int Roomnum)
+{
+	int Choice; //í”Œë ˆì´ì–´ ì„ íƒ ë³€ìˆ˜
+	bool Roomflag = true; //Empty_Room í•¨ìˆ˜ ì œì–´ìš© ë³€ìˆ˜
+	int Skillmenu;//ìŠ¤í‚¬ ì„ íƒ
+	while (Roomflag)
+	{
+		Cursor_Pos_Start();
+		cout << "ë¬´ì—‡ì„ í• ê¹Œ...\n1. ë‹¤ìŒë°©ìœ¼ë¡œ ì´ë™\n2. ìŠ¤í‚¬\n3. ê°€ë°©\n4. í€˜ìŠ¤íŠ¸\n5. ë„ì£¼" << endl; //ê¸°ë³¸ ë©”ë‰´
+		Cursor_Pos_End();
+		Choice = _getch() - 48;
+		switch (Choice)
+		{
+		case 1: //ë‹¤ìŒ ë°©ìœ¼ë¡œ ì´ë™
+			Print("ë‹¤ìŒë°©ìœ¼ë¡œ ì´ë™í•©ë‹ˆë‹¤...");
+			Roomnum++;
+			Order_Clear();
+			Roomflag = false;
+			return Roomnum;
+			break;
+		case 2: //ìŠ¤í‚¬ê´€ë ¨ ë¯¸ì™„
+			setColor(10);
+			cout << "SKILL MENU" << endl;
+			setColor(15);
+
+			for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Array[i].Skillname << endl; }//ìŠ¤í‚¬ì°½ì— ìˆëŠ” ìŠ¤í‚¬ì´ë¦„ë“¤ì„ ì¶œë ¥
+			cout << "0. ë’¤ë¡œê°€ê¸°" << endl;//0ë²ˆ ì…ë ¥ì‹œ ë’¤ë¡œê°€ê¸° ì¶œë ¥
+			Skillmenu = _getch() - 48;
+			if (Skillmenu == 0)
+			{
+				Order_Clear2();
+				break;
+			}
+
+			break;
+		case 3: //ê°€ë°©ì—´ê¸°
+			Roomflag = Inventory_Menu();
+			break;
+		case 4: //ì§„í–‰ì¤‘ì¸ í€˜ìŠ¤íŠ¸
+			Look_Quest();
+			break;
+		case 5: //ë„ì£¼
+			Print("ë˜ì „ì—ì„œ ë„ë§ì³ ë‚˜ì˜µë‹ˆë‹¤...");
+			Sleep(2000);
+			exit(0);
+			break;
+		default: //ì˜ëª»ëœ ë³€ìˆ˜ ì…ë ¥ë°›ì„ì‹œ
+			Print("ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥");
+			Cursor_Pos_End();
+			Order_Clear();
+			break;
+		}
+	}
+}
+
+void Monster_Die(My_Character* a, Monster* b)
+{
+	a->Pick_UP_Money(b->Money);
+	SoNB_P->Exp_Plus(b->Exp);
+	if (SoNB_P->Exp > SoNB_P->Max_Exp)
+	{
+		SoNB_P->Level_Plus();
+	}
+}
+
+int Get_Money()
+{
+	return SoNB_P->Money;
 }

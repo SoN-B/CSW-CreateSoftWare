@@ -3,7 +3,9 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include "map.h"
 using namespace std;
+
 //----------------퀘스트 완료 기능은 상점에 추가
 string Quest_slot[3] = { "0", "0", "0" };    // 퀘스트 창
 class Quest {
@@ -16,6 +18,7 @@ public:
 		this->Num = Num;
 	}
 };
+
 //----------------메인 퀘스트
 Quest Fabric_collecter_n = { "Fabric collecter - Fabric 장비 5개를 인벤토리에 모으세요", "main quest", 0 };
 Quest Leather_collecter_n = { "Leather collecter - Leather 장비 5개를 인벤토리에 모으세요", "main quest", 1 };
