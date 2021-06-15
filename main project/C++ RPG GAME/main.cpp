@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -13,6 +13,7 @@ using namespace std;
 int Menu; //메인메뉴 선택 변수
 int Select; //Map_Combat 함수 선택 변수
 int Cancel; //게임설명 탈출용 변수 :0입력으로 탈출
+int Amvalue; //Atk_Menu의 리턴값
 bool Mainflag = true; //main함수 do while문 제어 변수
 bool Gameflag = true; //do while문 내부 게임시작 제어 변수
 bool Storeflag = true;//상점 제어 변수
@@ -25,6 +26,7 @@ void GoToXy(int x, int y) //UI관련
     Pos.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
+
 int Dungeon() //DUNGEON 로고
 {
     int _kbhit(void);
@@ -65,13 +67,16 @@ bool Map_Combat()//맵선택 및 전투
     int Roomnum = 0;//방번호
     system("cls");
     GoToXy(10, 15);
-    cout << "1. 늪 지대";
+    cout << "Ⅰ. 늪 지대";
     GoToXy(27, 15);
-    cout << "2. 고블린 마을";
+    cout << "Ⅱ. 고블린 마을";
     GoToXy(43, 15);
-    cout << "3. 오크 진지";
+    cout << "Ⅲ. 오크 진지";
+    GoToXy(25, 27);
+    cout << "아무키 입력 시, 뒤로 갑니다.";
     GoToXy(0, 30);
     Select = _getch() - 48;
+    if (Select != 1 && Select != 2 && Select != 3) return true;
     Map = Maps[Select - 1];
     system("cls");
 
@@ -105,7 +110,8 @@ bool Map_Combat()//맵선택 및 전투
                     cout << "□";        //monster의 턴 끝남
 
                     Cursor_Move(0, 11);
-                    Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴(선공)
+                    Amvalue = Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴(선공)
+                    if (Amvalue == 1) return true;
                     if (Map[Roomnum][Monsternum]->Hp <= 0)//몬스터 사망시
                     {
                         Print_Line(Map[Roomnum][Monsternum]->Kind);
@@ -154,7 +160,8 @@ bool Map_Combat()//맵선택 및 전투
                         break;//while문 탈출: 전투끝
                     }
 
-                    Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴 (후공)
+                    Amvalue = Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴 (후공)
+                    if (Amvalue == 1) return true;
                     if (Map[Roomnum][Monsternum]->Hp <= 0) //몬스터 사망시
                     {
                         Print_Line(Map[Roomnum][Monsternum]->Kind);
