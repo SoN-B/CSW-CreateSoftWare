@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <iostream> 
 #include <string>
 #include <cstdlib>
@@ -7,6 +7,8 @@
 #include <Windows.h>
 #include "Item_List.h"
 using namespace std;
+
+int Inventoryflag = 1;
 // 인벤토리의 빈 공간을 "0"으로 표현함
 /*string DropItem;
 //----------------장비창
@@ -168,7 +170,8 @@ string Drop_Item() {
 	return "";
 }
 
-void Equipment_List() {  //장비 아이템 설명
+int Equipment_List() {  //장비 아이템 설명
+	system("cls");
 	cout << "------------------------\n";
 	cout << "가챠 장비\n";
 	cout << "0.Bamboo helmet : Hp +150\n";
@@ -243,9 +246,12 @@ void Equipment_List() {  //장비 아이템 설명
 	cout << "              : Def +15\n";
 	cout << "              : Speed +0.5\n";
 	cout << "              : Kind 신발\n";
+	cout << "\n\n아무키 입력 시, 뒤로 갑니다.\n\n";
+	if (_getch() - 48) return 1;
 }
 
-void Item_List() {   //아이템 설명
+int Item_List() {   //아이템 설명
+	system("cls");
 	cout << "------------------------\n";
 	cout << "0.Red potion : Hp +10\n";
 	cout << "1.Yellow potion : Hp +20\n";
@@ -265,6 +271,8 @@ void Item_List() {   //아이템 설명
 	cout << "         : Def -10\n";
 	cout << "13.Tea : Atk -10\n";
 	cout << "       : Def +30\n";
+	cout << "\n\n아무키 입력 시, 뒤로 갑니다.\n\n";
+	if (_getch() - 48) return 1;
 }
 
 void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 때
@@ -365,6 +373,7 @@ void Swap_Item(string* Inventory) {     //인벤토리에 있는 아이템 위�
 
 
 void Throw_Away_Item(string* Inventory) {       //아이템을 버릴 때
+	system("cls");
 	int N;
 	setColor(2);
 	cout << "인벤토리 목록\n";
@@ -374,7 +383,9 @@ void Throw_Away_Item(string* Inventory) {       //아이템을 버릴 때
 	cout << "버릴 아이템의 위치를 입력해주세요\n" << "입력 : ";
 	N = _getch() - 48;
 	if (N >= 0 && N <= 4) { Inventory[N] = "0"; }
-	else { cout << "아이템 버리기가 취소되었습니다\n"; }
+	else { cout << "\n\n아이템 버리기가 취소되었습니다\n"; }
+	Sleep(1000);
+	system("cls");
 }
 
 #include "quest.h"
@@ -392,7 +403,7 @@ bool Open_Store(string* inventory) {  //상점
 		Equipments[E_num1].Name, Equipments[E_num2].Name, Gacha };
 	double Price[5] = { Items[I_num1].Price, Items[I_num2].Price,     //아이템의 가격을 담아두는 배열
 		Equipments[E_num1].Price, Equipments[E_num2].Price, 500 };
-	while (true) {
+	while (Inventoryflag) {
 		for (int I = 0; I < 5; I++) {     //상점 아이템 목록
 			cout << "------------------------\n";
 
@@ -403,11 +414,19 @@ bool Open_Store(string* inventory) {  //상점
 		}
 		cout << "------------------------\n";
 		cout << "아이템을 구매하시려면 0~4중에 원하는 아이템의 숫자를 입력해주세요\n\n";
-		cout << "5를 입력하시면 소비 아이템의 정보를 볼 수 있습니다.\n";
-		cout << "6을 입력하시면 장비 아이템의 정보를 볼 수 있습니다.\n";
-		cout << "7을 입력하시면 인벤토리의 아이템을 버릴 수 있습니다.\n";
-		cout << "8을 입력하시면 퀘스트를 완료할 수 있습니다.\n";
-		cout << "9를 입력하시면 상점을 종료할 수 있습니다.\n";
+		cout << "'5'를 입력하시면 소비 아이템의 정보를 볼 수 있습니다.\n";
+		cout << "'6'을 입력하시면 장비 아이템의 정보를 볼 수 있습니다.\n";
+		cout << "'7'을 입력하시면 인벤토리의 아이템을 버릴 수 있습니다.\n";
+		cout << "'8'을 입력하시면 ";
+		setColor(10);
+		cout << "퀘스트를 완료";
+		setColor(15);
+		cout << "할 수 있습니다.\n";
+		cout << "'9'를 입력하시면 ";
+		setColor(12);
+		cout << "상점을 종료";
+		setColor(15);
+		cout << "할 수 있습니다.\n";
 
 		setColor(14);
 		cout << "\nGacha"; 
@@ -438,23 +457,27 @@ bool Open_Store(string* inventory) {  //상점
 			}
 		}
 		else if (Num == 4) {    //가챠 구매
+			system("cls");
 			if (SoNB_P->Money < Price[Num]) { cout << "돈이 부족합니다.\n"; }
 			else {
 				int L;
 				string result;
-				cout << Item_list[Num] << "을(를) 구매했습니다.\n";
+				setColor(14);
+				cout << Item_list[Num];
+				setColor(15);
+				cout << "을(를) 구매했습니다.\n";
 				int Luck = rand() % 7;
 				if (Luck >= 0 && Luck < 3) {   //가챠에서 소비 아이템 등장
 					L = rand() % 14;
 					result = Items[L].Name;
-					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!";
+					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!\n\n";
 					Pick_Up_Item(inventory, result);
 					SoNB_P->Money -= Price[Num];
 				}
 				else if (Luck >= 3 && Luck < 5) {    //가챠에서 장비 아이템 등장
 					L = rand() % 15;
 					result = Equipments[L].Name;
-					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!";
+					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!\n\n";
 					Pick_Up_Item(inventory, result);
 					SoNB_P->Money -= Price[Num];
 				}
@@ -462,7 +485,7 @@ bool Open_Store(string* inventory) {  //상점
 					L = rand() % 5;
 					result = Gacha_Equipments[L].Name;
 					cout << "오잉? 가챠에서 빛이?\n";
-					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!";
+					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!\n\n";
 					Pick_Up_Item(inventory, result);
 					SoNB_P->Money -= Price[Num];
 				}
@@ -472,14 +495,15 @@ bool Open_Store(string* inventory) {  //상점
 				}
 				cout << "소지금 : " << SoNB_P->Money + Price[Num] << " -> " << SoNB_P->Money << endl;
 			}
+			system("cls");
 		}
-		else if (Num == 5) { Item_List(); }    //소비 아이템 목록
-		else if (Num == 6) { Equipment_List(); }    //장비 아이템 목록
+		else if (Num == 5) { Inventoryflag = Item_List(); }    //소비 아이템 목록
+		else if (Num == 6) { Inventoryflag = Equipment_List(); }    //장비 아이템 목록
 		else if (Num == 7) { Throw_Away_Item(inventory); }    //인벤토리의 아이템 버리기
 		else if (Num == 8) {   //퀘스트
 			int Num2;
 			cout << "\n0은 메인 퀘스트, 1과2는 서브 퀘스트입니다.\n";
-			cout << "메인 퀘스트를 완료하면 게임이 클리어되고 서브 퀘스트를 완료하면 보상을 받습니다\n";
+			cout << "메인 퀘스트를 완료하면 게임이 클리어되고 서브 퀘스트를 완료하면 보상을 받습니다\n\n";
 			setColor(2);
 			cout << "퀘스트 목록\n";
 			setColor(15);
@@ -492,7 +516,6 @@ bool Open_Store(string* inventory) {  //상점
 			cout << "완료할 퀘스트의 숫자를 입력해주세요.\n" << "0~2 이외의 숫자를 입력하면 취소됩니다.\n";
 			cout << "입력 : ";
 			Num2 = _getch() - 48;
-			cout << "------------------------\n";
 			if (Num2 < 0 && Num2 >2) { cout << "퀘스트 완료가 취소되었습니다.\n"; }
 			else if (Num2 == 0) {    //메인 퀘스트 선택
 				for (int K = 0; K < 7; K++) {
