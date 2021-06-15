@@ -196,9 +196,9 @@ int main()
         PlaySound(TEXT(".\\SoundTrack\\Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //초기화면 음악 ON
         system("cls");
         //cout << "【 TEST BETA GAME 】\n\n";
-        GoToXy(25, 18);
+        GoToXy(23, 18);
         setColor(10);
-        cout << "메뉴를 선택해 주세요 ~ !\n";
+        cout << "!!! ~ 메뉴를 선택해 주세요 ~ !!!\n";
         setColor(15);
         GoToXy(27, 19);
         cout << "1.게임시작\n";
