@@ -201,7 +201,7 @@ int main()
         cout << "!!! ~ 메뉴를 선택해 주세요 ~ !!!\n";
         setColor(15);
         GoToXy(27, 19);
-        cout << "1.게임시작\n";
+        cout << "1.게임 시작\n";
         GoToXy(27, 20);
         cout << "2.게임 설명\n";
         GoToXy(27, 21);
