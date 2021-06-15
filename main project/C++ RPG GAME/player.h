@@ -191,7 +191,7 @@ void Mob_Atk(Monster* Mob, My_Character* Character)
 
 bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag);
 bool Inventory_Menu();
-void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
+int Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 {
 	int Choice; //플레이어 선택 변수
 	bool Atkflag = true; //Atk_Menu 함수 제어용 변수
@@ -229,7 +229,7 @@ void Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 
 			Print("던전에서 도망쳐 나옵니다...");
 			Sleep(2000);
-			exit(0);
+			return 1;
 			break;
 		default: //잘못된 변수 입력받을시
 			Print("올바르지 않은 입력");
