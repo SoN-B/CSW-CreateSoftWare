@@ -11,7 +11,7 @@ void My_Character::Get_Character_Info_Left()
 {
 	Cursor_Move(0, 0);
 	setColor(8);
-	cout << "\nLevel";
+	cout << "Level";
 	setColor(15);
 	cout << ": " << Level;
 
@@ -29,7 +29,7 @@ void My_Character::Get_Character_Info_Left()
 	cout << "\nMP";
 	setColor(15);
 
-	cout << " : " << Mp << "\nATK : " << Atk << "\nDEF : " << Def << "\nSPPED : " << Speed;
+	cout << " : " << Mp << "\nATK : " << Atk << "\nDEF : " << Def << "\nSPEED : " << Speed;
 
 	setColor(14);
 	cout << "\nMoney";
@@ -200,6 +200,7 @@ int Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 	{
 		//Cursor_Pos_Start();
 		Cursor_Pos_Start();
+		Cursor_Move(0, Order_Y);
 		cout << "무엇을 할까...\n1. 공격\n2. 스킬\n3. 가방\n4. 퀘스트\n5. 도주" << endl; //기본 메뉴
 		Choice = _getch()-48;
 		switch (Choice)
@@ -314,6 +315,8 @@ int Empty_Room(My_Character* Character,int Roomnum)
 	int Skillmenu;//스킬 선택
 	while (Roomflag)
 	{
+		Order_Clear();
+		Cursor_Move(0, Order_Y);
 		Cursor_Pos_Start();
 		cout << "무엇을 할까...\n1. 다음방으로 이동\n2. 스킬\n3. 가방\n4. 퀘스트\n5. 도주" << endl; //기본 메뉴
 		Cursor_Pos_End();
@@ -322,6 +325,8 @@ int Empty_Room(My_Character* Character,int Roomnum)
 		{
 		case 1: //다음 방으로 이동
 			Print("다음방으로 이동합니다...");
+			Sleep(1000);
+			clear();
 			Roomnum++;
 			Order_Clear();
 			Roomflag = false;
