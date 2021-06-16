@@ -61,6 +61,15 @@ void History_Clear()
 		}
 	}
 }
+void History_Reset()
+{
+	if (Order_y > 30)
+	{
+		History_Clear();
+		Order_y = Order_Y;
+	}
+
+}
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
 {																						
 	COORD cur;
