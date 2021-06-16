@@ -283,6 +283,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 		if (Inventory[I] == "0") { Count++; }
 	}
 	if (Count == 0) {    //인벤토리가 가득 찬 경우
+		Cursor_Move(0, Order_Y);
 		cout << "인벤토리가 가득 찼습니다.\n";
 		while (true) {
 
@@ -300,7 +301,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 			}
 			else if (C == 'Y' || C == 'y') {
 				cout << "\n교체할 아이템의 위치를 입력해주세요\n" << "입력 : ";
-				N = _getch();
+				N = _getch() - 48;
 				if (N >= 0 && N <= 4) {
 					Inventory[N] = Item_Name;
 					Cursor_Pos_End();
@@ -314,7 +315,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 	}
 	else {     //인벤토리에 빈 공간이 있는 경우
 		while (true) {
-
+			Sleep(75);
 			setColor(2);
 			cout << "인벤토리 목록\n";
 			setColor(15);
