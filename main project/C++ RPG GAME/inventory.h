@@ -351,6 +351,7 @@ void Swap_Item(string* Inventory) {     //인벤토리에 있는 아이템 위�
 	int N1, N2;
 	string Temp;
 	setColor(2);
+	Cursor_Move(0, Order_Y);
 	cout << "인벤토리 목록\n";
 	setColor(15);
 
@@ -377,6 +378,7 @@ void Throw_Away_Item(string* Inventory) {       //아이템을 버릴 때
 	system("cls");
 	int N;
 	setColor(2);
+	Cursor_Move(0, Order_Y);
 	cout << "인벤토리 목록\n";
 	setColor(15);
 	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
