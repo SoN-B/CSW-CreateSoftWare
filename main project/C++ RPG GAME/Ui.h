@@ -44,6 +44,12 @@ void Player_Clear()
 		}
 	}
 }
+
+void Status_Reset()
+{
+	Monster_Clear();
+	Player_Clear();
+}
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
 {																						
 	COORD cur;
