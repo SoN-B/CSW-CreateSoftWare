@@ -667,7 +667,7 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 						break;
 					}
 					else {    //장비 아이템 착용
-						Equipment_slot[Num] == Gacha_Equipments[i].Name;
+						Equipment_slot[Num] = Equipments[i].Name;
 						Character->Hp += Equipments[i].Hp;
 						Character->Mp += Equipments[i].Mp;
 						Character->Atk += Equipments[i].Atk;
@@ -705,7 +705,7 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 						break;
 					}
 					else {    //가챠 장비 착용
-						Equipment_slot[Num] == Gacha_Equipments[i].Name;
+						Equipment_slot[Num] = Gacha_Equipments[i].Name;
 						Character->Hp += Gacha_Equipments[i].Hp;
 						Character->Mp += Gacha_Equipments[i].Mp;
 						Character->Atk += Gacha_Equipments[i].Atk;
@@ -753,7 +753,7 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 		cout << "0~4 이외의 숫자를 입력하면 장비 해제가 취소됩니다.\n";
 		cout << "입력 : ";
 		Cursor_Pos_End();
-		N = _getch();
+		N = _getch() - 48;
 		cout << endl;
 		if (N < 0 && N > 4) { cout << "선택하신 위치에 착용중인 장비가 없습니다.\n"; }
 		else if (N >= 0 && N <= 4) {
@@ -767,7 +767,7 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						Character->Atk -= Equipments[J].Atk;
 						Character->Def -= Equipments[J].Def;
 						Character->Speed -= Equipments[J].Speed;
-						Equipment_slot[N] == "0";
+						Equipment_slot[N] = "0";
 						Cursor_Line();
 						cout << Equipments[J].Name << "을 착용 해제했습니다";
 						cout << "hp : " << Character->Hp + Equipments[J].Hp << " -> " << Character->Hp;
@@ -792,7 +792,7 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						Character->Atk -= Gacha_Equipments[J].Atk;
 						Character->Def -= Gacha_Equipments[J].Def;
 						Character->Speed -= Gacha_Equipments[J].Speed;
-						Equipment_slot[N] == "0";
+						Equipment_slot[N] = "0";
 						Cursor_Line();
 						cout <<Gacha_Equipments[J].Name << "을 착용 해제했습니다\n";
 						Cursor_Line();
@@ -828,7 +828,7 @@ bool Inventory_Menu()
 		cout << "INVENTORY MENU" << endl;
 		setColor(15);
 
-		cout << "1. 아이템 사용\n2. 아이템 설명\n0. 뒤로가기\n";
+		cout << "1. 아이템 사용\n2. 아이템 설명\n3. 장비 착용 해제\n0. 뒤로가기\n";
 		flag = _getch() - 48;
 		switch (flag)
 		{
@@ -838,6 +838,9 @@ bool Inventory_Menu()
 			break;
 		case 2:
 			Item_List();
+			break;
+		case 3:
+			Take_Off_Equipment(SoNB_P, Inventory, Equipment_slot);
 			break;
 		case 0:
 			cout << "------------------------\n";
