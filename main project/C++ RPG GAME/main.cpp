@@ -88,6 +88,7 @@ bool Map_Combat()//맵선택 및 전투
     {
         for (int Monsternum = 0; Monsternum < Map[Roomnum].size(); Monsternum++)//Monsternum=해당 방의 몬스터 수
         {
+            Sleep(100);
             Combat_Ui(SoNB_P, Map[Roomnum][Monsternum]);
             setColor(2);
             Print_Line(Map[Roomnum][Monsternum]->Kind);
@@ -151,6 +152,7 @@ bool Map_Combat()//맵선택 및 전투
                 {
                     //독뎀등 데미지
                     Mob_Atk(Map[Roomnum][Monsternum], SoNB_P);//몬스터 턴(선공)
+                    Sleep(1000);
                     if (SoNB_P->Hp <= 0) //도중에 캐릭터가 사망시 게임오버 
                     {
                         cout << "Game over..." << endl;
@@ -177,6 +179,7 @@ bool Map_Combat()//맵선택 및 전투
                     cout << "------------------------\n";
                     Turn++;
                 }
+                Combat_Ui(SoNB_P, Map[Roomnum][Monsternum]);
             }
         }
         Roomnum = Empty_Room(SoNB_P, Roomnum);
