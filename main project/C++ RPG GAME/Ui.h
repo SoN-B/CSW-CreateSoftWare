@@ -50,6 +50,17 @@ void Status_Reset()
 	Monster_Clear();
 	Player_Clear();
 }
+void History_Clear()
+{
+	for (int i = Order_Y; i < 32; i++)
+	{
+		for (int j = Order_X; j < 100; j++)
+		{
+			Cursor_Move(j, i);
+			cout << "ㅤ";
+		}
+	}
+}
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
 {																						
 	COORD cur;
