@@ -321,7 +321,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 			setColor(15);
 
 			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
-			cout << Item_Name <<" 을 인벤토리의 몇 번 위치에 두실 겁니까?\n" << "입력 : ";
+			cout << Item_Name << " 을 인벤토리의 몇 번 위치에 두실 겁니까?\n" << "입력 : ";
 			N = _getch() - 48;
 			cout << endl;
 			if (N >= 0 && N <= 4) {
@@ -329,8 +329,10 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 					Inventory[N] = Item_Name;
 					break;
 				}
-				else { cout << "선택하신 위치에는 이미 아이템이 있습니다.\n";
-						cout << "다른 위치를 선택해 주십시오\n"; }
+				else {
+					cout << "선택하신 위치에는 이미 아이템이 있습니다.\n";
+					cout << "다른 위치를 선택해 주십시오\n";
+				}
 			}
 			else { cout << "0~4의 숫자 중 하나를 입력해주세요\n\n"; }
 		}
@@ -432,7 +434,7 @@ bool Open_Store(string* inventory) {  //상점
 		cout << "할 수 있습니다.\n";
 
 		setColor(14);
-		cout << "\nGacha"; 
+		cout << "\nGacha";
 		setColor(15);
 		cout << "는 구매와 동시에 사용되며 랜덤 아이템을 획득할 수 있습니다.\n오직";
 
@@ -447,7 +449,10 @@ bool Open_Store(string* inventory) {  //상점
 		cout << endl;
 		if (Num < 0 && Num > 8) { cout << "제대로 된 숫자를 입력해주세요\n"; }
 		else if (Num >= 0 && Num < 4) {     //아이템 구매
-			if (SoNB_P->Money < Price[Num]) { cout << "돈이 부족합니다.\n"; }
+			if (SoNB_P->Money < Price[Num]) { 
+				cout << "\n돈이 부족합니다.\n"; 
+				Sleep(1000);
+			}
 			else {
 				system("cls");
 				Pick_Up_Item(inventory, Item_list[Num]);
@@ -461,7 +466,10 @@ bool Open_Store(string* inventory) {  //상점
 		}
 		else if (Num == 4) {    //가챠 구매
 			system("cls");
-			if (SoNB_P->Money < Price[Num]) { cout << "돈이 부족합니다.\n"; }
+			if (SoNB_P->Money < Price[Num]) { 
+				cout << "\n돈이 부족합니다.\n"; 
+				Sleep(1000);
+			}
 			else {
 				int L;
 				string result;
@@ -615,7 +623,7 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 	int n;
 	setColor(2);
 	cout << "\n0~4를 제외한 다른 숫자 입력시 아이템 사용이 취소됩니다\n";
-	cout << "사용할 아이템의 위치를 입력해주세요\n" << "위치 : ";	
+	cout << "사용할 아이템의 위치를 입력해주세요\n" << "위치 : ";
 	setColor(15);
 	Cursor_Pos_End();
 	n = _getch() - 48;
@@ -720,15 +728,15 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 						Cursor_Line();
 						cout << Gacha_Equipments[i].Name << "을 착용했습니다\n";
 						Cursor_Line();
-						cout << "hp : " << Character->Hp - Gacha_Equipments[i].Hp << " -> " << Character->Hp ;
+						cout << "hp : " << Character->Hp - Gacha_Equipments[i].Hp << " -> " << Character->Hp;
 						Cursor_Line();
-						cout << "mp : " << Character->Mp - Gacha_Equipments[i].Mp << " -> " << Character->Mp ;
+						cout << "mp : " << Character->Mp - Gacha_Equipments[i].Mp << " -> " << Character->Mp;
 						Cursor_Line();
-						cout << "atk : " << Character->Atk - Gacha_Equipments[i].Atk << " -> " << Character->Atk ;
+						cout << "atk : " << Character->Atk - Gacha_Equipments[i].Atk << " -> " << Character->Atk;
 						Cursor_Line();
-						cout << "def : " << Character->Def - Gacha_Equipments[i].Def << " -> " << Character->Def ;
+						cout << "def : " << Character->Def - Gacha_Equipments[i].Def << " -> " << Character->Def;
 						Cursor_Line();
-						cout << "speed : " << Character->Speed - Gacha_Equipments[i].Speed << " -> " << Character->Speed ;
+						cout << "speed : " << Character->Speed - Gacha_Equipments[i].Speed << " -> " << Character->Speed;
 						Order_Clear();
 						break;
 					}
@@ -799,7 +807,7 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						Character->Speed -= Gacha_Equipments[J].Speed;
 						Equipment_slot[N] = "0";
 						Cursor_Line();
-						cout <<Gacha_Equipments[J].Name << "을 착용 해제했습니다\n";
+						cout << Gacha_Equipments[J].Name << "을 착용 해제했습니다\n";
 						Cursor_Line();
 						cout << "hp : " << Character->Hp + Gacha_Equipments[J].Hp << " -> " << Character->Hp;
 						Cursor_Line();
@@ -828,7 +836,7 @@ bool Inventory_Menu()
 	{
 		Look_Inventory(Inventory);
 		cout << "------------------------\n";
-		
+
 		setColor(10);
 		cout << "INVENTORY MENU" << endl;
 		setColor(15);
