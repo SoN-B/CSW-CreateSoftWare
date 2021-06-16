@@ -31,6 +31,19 @@ void Monster_Clear()
 		}
 	}
 }
+void Player_Clear()
+{
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 60; j = j + 2)
+		{
+			Cursor_Move(j, i);
+			cout << "ㅤ";
+			//cout << j;
+			//cout << "□";
+		}
+	}
+}
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
 {																						
 	COORD cur;
