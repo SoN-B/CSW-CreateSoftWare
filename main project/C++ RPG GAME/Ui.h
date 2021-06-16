@@ -232,3 +232,57 @@ void Order_Clear2() //Order 칸에서 많은 수를 지우기 위한 함수.
 	Cursor_Move(0, 0);
 	Cursor_Move(0, 11);
 }
+void Level_Plus_Show(My_Character* a, My_Character b)
+{
+	Cursor_Move(30, 0);
+	setColor(14);
+	cout << "Level UP!!!";
+
+	Cursor_Move(30, 1);
+	setColor(4);
+	cout << "HP";
+	setColor(15);
+	cout << " : " << a->Hp;
+	setColor(14);
+	cout << " -> ";
+	setColor(12);
+	cout << b.Hp;
+	setColor(15);
+
+	Cursor_Move(30, 2);
+	setColor(1);
+	cout << "MP";
+	setColor(15);
+	cout << " : " << a->Mp;
+	setColor(14);
+	cout << " -> ";
+	setColor(9);
+	cout << b.Mp;
+	setColor(15);
+
+	Cursor_Move(30, 3);
+	setColor(15);
+	cout << "ATK";
+	setColor(15);
+	cout << " : " << a->Atk;
+	setColor(14);
+	cout << " -> ";
+	setColor(15);
+	cout << b.Atk;
+
+	Cursor_Move(30, 4);
+	setColor(15);
+	cout << "DEF" << " : " << a->Def;
+	setColor(14);
+	cout << " -> ";
+	setColor(15);
+	cout << b.Def;
+
+	Cursor_Move(30, 5);
+	setColor(15);
+	cout << "SPEED" << " : " << a->Speed;
+	setColor(14);
+	cout << " -> ";
+	setColor(15);
+	cout << b.Speed;
+}
