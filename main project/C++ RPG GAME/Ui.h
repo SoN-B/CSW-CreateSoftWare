@@ -71,7 +71,9 @@ void History_Reset()
 
 }
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
-{																						
+{								
+	Sleep(100);
+	Status_Reset();
 	COORD cur;
 	cur.X = 60;
 	cur.Y = 0;
@@ -91,9 +93,13 @@ void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI.
 	}
 	if (mob != NULL)
 	{
+		Sleep(50);
 		mob->Get_Info_Right(); //몬스터의 정보창.
+		Sleep(50);
 	}
+	Sleep(50);
 	Character->Get_Character_Info_Left(); //캐릭터의 정보창.
+	Sleep(50);
 }
 int Cursor_Pos(const char* s) //history에 한줄을 입력하기 위해, 다음 입력받는 X좌표를 계산하는 함수.
 {
