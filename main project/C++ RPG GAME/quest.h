@@ -6,6 +6,7 @@
 #include "map.h"
 using namespace std;
 
+int Quest_num = 11;
 //----------------퀘스트 완료 기능은 상점에 추가
 string Quest_slot[3] = { "0", "0", "0" };    // 퀘스트 창
 class Quest {
@@ -48,10 +49,14 @@ Slime_slayer_n, Goblin_slayer_n, Orc_slayer_n, Protein_addiction_n, Sugar_addict
 void Create_Quest(string* Quest_slot) {   //퀘스트 창에 랜덤 퀘스트를 집어넣음
 	srand((unsigned int)time(NULL));
 	int Main = rand() % 7;
-	int Sub1 = rand() % 11;
-	int Sub2 = rand() % 11;
 	Quest_slot[0] = Main_Quest[Main].Goal;
+	int Sub1 = rand() % Quest_num;
 	Quest_slot[1] = Sub_Quest[Sub1].Goal;
+	for (int I = Sub1; I < Quest_num - 1; I++) {
+		Sub_Quest[I] = Sub_Quest[I + 1];
+	}
+	Quest_num--;
+	int Sub2 = rand() % Quest_num;
 	Quest_slot[2] = Sub_Quest[Sub2].Goal;
 }
 

@@ -589,7 +589,12 @@ bool Open_Store(string* inventory) {  //상점
 							break;
 						}
 						if (Questflag == true) {
-							Quest_slot[Num2] = "완료";
+							for (int A = K; A < Quest_num - 1; A++) {
+								Sub_Quest[A] = Sub_Quest[A + 1];
+							}
+							Quest_num--;
+							int Sub3 = rand() % Quest_num;
+							Quest_slot[Num2] = Sub_Quest[Sub3].Goal;
 						}
 					}
 				}
