@@ -139,6 +139,7 @@ void Player_Attack_Result(double a)	//플레이어의 공격 을 나타냄.
 	Cursor_Move(Cursor_Pos(stod), Order_y);
 	cout << "의 피해를 입혔다!";
 	Order_y+=2;
+	History_Reset();
 	Cursor_Move(Order_X, Order_y);
 	Sleep(750);
 }
@@ -163,6 +164,7 @@ void Monster_Attack_Result(Monster *Mob,double a) //monster의 공격 부분.
 	Cursor_Move(Cursor_Pos(stod), Order_y);
 	cout << " 의 피해를 입었다!";
 	Order_y+=2;
+	History_Reset();
 	Cursor_Move(Order_X, Order_y);
 	Sleep(750);
 }
