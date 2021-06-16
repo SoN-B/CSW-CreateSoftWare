@@ -153,7 +153,7 @@ string Drop_Item() {
 			Print_Line(Drop_Item);
 			Print(" 이 떨어졌다!!!");
 			Print_blank();
-			Sleep(750);
+			Sleep(75);
 			return Drop_Item;
 		}
 		else if (Temp == 3) {   //장비 아이템 드랍
@@ -163,7 +163,7 @@ string Drop_Item() {
 			Print_Line(Drop_Item);
 			Print("이 떨어졌다!!!");
 			Print_blank();
-			Sleep(750);
+			Sleep(75);
 			return Drop_Item;
 		}
 	}
