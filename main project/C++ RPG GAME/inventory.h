@@ -833,7 +833,7 @@ bool Inventory_Menu()
 		cout << "INVENTORY MENU" << endl;
 		setColor(15);
 
-		cout << "1. 아이템 사용\n2. 아이템 설명\n3. 장비 착용&해제\n0. 뒤로가기\n";
+		cout << "1. 아이템 사용\n2. 아이템 설명\n3. 장비 해제\n0. 뒤로가기\n";
 		flag = _getch() - 48;
 		switch (flag)
 		{
