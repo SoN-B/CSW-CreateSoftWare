@@ -1,0 +1,52 @@
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+string solution(vector<int> numbers) {
+    string answer = "";
+    vector <int> number;
+    for(int i = 0; i < numbers.size();i++)
+    {
+        if(numbers[i]/10)
+        {
+            number.push_back(numbers.at(i)/10);
+        }
+        else if(numbers[i]%10)
+        {
+            number.push_back(numbers.at(i)%10);
+        }
+    }
+    for(int i = 0; i < number.size();i++)
+    {
+        cout << number[i] << ' ';
+    }
+    return answer;
+}
+
+----------------------------------------------------------------------------------------------
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+string solution(vector<int> numbers) {
+    string answer = "";
+    vector <int> number;
+    for(int i = 0; i < numbers.size();i++)
+    {
+        if(numbers[i]/10)
+        {
+            number.push_back(numbers.at(i)/10);
+        }
+        else if(numbers[i]%10)
+        {
+            number.push_back(numbers.at(i)%10);
+        }
+    }
+    for(int i = 0; i < number.size();i++)
+    {
+        cout << number[i] << ' ';
+    }
+    return answer;
+}

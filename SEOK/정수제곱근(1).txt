@@ -1,0 +1,23 @@
+#include <string>
+#include <vector>
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+long long solution(long long n) {
+    long long answer = 0;
+    answer = sqrt(n);
+    if(pow(answer,2) ==n)
+    {
+        answer = answer+1;
+        cout << "answer : " << answer;
+        answer = pow(answer,2);
+    }
+    else
+    {
+        answer = -1;
+    }
+    
+    return answer;
+}
+----------------------------------------------------------------------------

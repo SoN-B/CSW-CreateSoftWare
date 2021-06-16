@@ -1,0 +1,54 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+bool solution(vector<string> phone_book) {
+    bool answer = true;
+    string a;
+    vector<string>::iterator iter;
+    vector<string>::iterator iter2;
+    vector<int>phone_bock;
+    vector<string>phone_book2;
+    
+    for(iter = phone_book.begin();iter!=phone_book.end();iter++)
+    {
+        phone_bock.push_back(stoi(*iter));
+        sort(phone_bock.begin(),phone_bock.end());
+    }
+    for(int i =0; i < phone_bock.size();i++)
+    {
+        phone_book2.push_back(to_string(phone_bock[i]));
+    }
+    for(iter = phone_book2.begin();iter!=phone_book2.end();iter++)
+    {
+        for(iter2=iter+1;iter2!=phone_book2.end();iter2++)
+        {
+            string b;
+            a = *iter;
+            b = *iter2;
+            int c = b.find(a);
+            cout << "a : " <<a << " b : " << b << " c : " << c <<endl;
+            if(c == 0)
+                answer = false;
+        }
+    }
+    return answer;
+}
+------------------------------------------------------------------------------------------------------------
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+bool solution(vector<string> phone_book) {
+    bool answer = true;
+    sort(phone_book.begin(),phone_book.end());
+    for(int i = 0; i < phone_book.size()-1;i++)
+    {
+        if(phone_book[i] == phone_book[i+1].substr(0,phone_book[i].size()))
+            return false;
+    }
+    return answer;
+}

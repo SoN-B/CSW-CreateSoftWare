@@ -1,0 +1,42 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+int fibonachi(int n)
+{
+    if(n==0)
+    {
+    return 0;
+    }   
+    if(n==1)
+    {   
+    return 1;
+    }
+    int a = fibonachi(n-2) + fibonachi(n-1);
+    return a;
+}
+int solution(int n) {
+    int answer = 0;
+    answer = fibonachi(n)%1234567;
+    return answer;
+    
+}
+----------------------------------------------------------------------
+#include <string>
+#include <vector>
+using namespace std;
+
+int solution(int n) {
+    int answer = 0;
+    int c,a = 0,b=1;
+    n = n-1;
+    while(n)
+    {
+        c = (a + b) %1234567;
+        a = b;
+        b = c;
+        n--;
+    }
+    answer = c;
+    return answer;
+}

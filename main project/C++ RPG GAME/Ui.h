@@ -18,6 +18,19 @@ void Cursor_Pos_End()
 {
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo2); //커서의 좌표를 저장한다.
 }
+void Monster_Clear()
+{
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 60; j < 90; j = j + 2)
+		{
+			Cursor_Move(j, i);
+			cout << "ㅤ";
+			//cout <<j; 
+			//cout << "□";
+		}
+	}
+}
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
 {																						
 	COORD cur;

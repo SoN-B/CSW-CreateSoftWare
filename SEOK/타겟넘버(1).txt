@@ -1,0 +1,52 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+void combination(vector <int> a,int degree)
+{
+	vector<int>b(a);
+		//즉 부호가 변한 요소들의 개수가 degree의 수
+	if(degree > a.size())
+        return ;
+	else
+	{
+		for(vector<int>::iterator iter = a.begin(); iter!=a.end();iter++)
+		{
+			*iter = *iter * -1;		
+            for(int i =0;i<a.size();i++)
+            {
+               cout <<a[i] << ' ';
+            }
+            cout << endl;
+		}
+	}
+}
+int solution(vector<int> numbers, int target) {
+    int answer = 0;
+    combination(numbers,0);
+    return answer;
+}
+-------------------------------------------------------------------------------------------
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+int answer  = 0;
+void dfs(vector <int> & numbers,int target,int sum,int depth)
+{
+    if(depth == numbers.size())
+    {
+        if(target == sum)
+        {
+            answer++;
+        }
+        return ;
+    }
+    dfs(numbers,target,sum+numbers[depth],depth+1);
+    dfs(numbers,target,sum-numbers[depth],depth+1);
+}
+int solution(vector<int> numbers, int target) {
+    dfs(numbers,target,0,0);
+    return answer;
+}
