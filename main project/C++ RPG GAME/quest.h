@@ -52,12 +52,17 @@ void Create_Quest(string* Quest_slot) {   //퀘스트 창에 랜덤 퀘스트를
 	Quest_slot[0] = Main_Quest[Main].Goal;
 	int Sub1 = rand() % Quest_num;
 	Quest_slot[1] = Sub_Quest[Sub1].Goal;
+	Quest Temp = Sub_Quest[Sub1];
 	for (int I = Sub1; I < Quest_num - 1; I++) {
 		Sub_Quest[I] = Sub_Quest[I + 1];
 	}
 	Quest_num--;
 	int Sub2 = rand() % Quest_num;
 	Quest_slot[2] = Sub_Quest[Sub2].Goal;
+	for (int I = 10; I > Sub1; I--) {
+		Sub_Quest[I] = Sub_Quest[I - 1];
+	}
+	Sub_Quest[Sub1] = Temp;
 }
 
 void Look_Quest() {   //퀘스트 

@@ -453,6 +453,9 @@ bool Open_Store(string* inventory) {  //상점
 				cout << "\n돈이 부족합니다.\n"; 
 				Sleep(1000);
 			}
+			else if (Item_list[Num] == "품절") {
+				cout << "품절 : 해당 칸의 아이템은 이미 구매하셨습니다.\n";
+			}
 			else {
 				system("cls");
 				Pick_Up_Item(inventory, Item_list[Num]);
@@ -460,7 +463,7 @@ bool Open_Store(string* inventory) {  //상점
 				SoNB_P->Money -= Price[Num];
 				cout << Item_list[Num] << "을(를) 구매했습니다.\n";
 				cout << "소지금 : " << SoNB_P->Money + Price[Num] << " -> " << SoNB_P->Money << endl;
-				Item_list[Num] = "0";
+				Item_list[Num] = "품절";
 				Price[Num] = 0;
 			}
 		}
@@ -564,36 +567,47 @@ bool Open_Store(string* inventory) {  //상점
 						switch (Sub_Quest[K].Num) {
 						case 0:
 							Questflag = Miser();
+							K = 11;
 							break;
 						case 1:
 							Questflag = Collecter();
+							K = 11;
 							break;
 						case 2:
 							Questflag = Random_Item();
+							K = 11;
 							break;
 						case 3:
 							Questflag = Random_Equipment();
+							K = 11;
 							break;
 						case 4:
 							Questflag = Scholarship();
+							K = 11;
 							break;
 						case 5:
 							Questflag = Slime_Slayer();
+							K = 11;
 							break;
 						case 6:
 							Questflag = Goblin_Slayer();
+							K = 11;
 							break;
 						case 7:
 							Questflag = Orc_Slayer();
+							K = 11;
 							break;
 						case 8:
 							Questflag = Protein_Addiction();
+							K = 11;
 							break;
 						case 9:
 							Questflag = Sugar_Addiction();
+							K = 11;
 							break;
 						case 10:
 							Questflag = Pear_Addiction();
+							K = 11;
 							break;
 						}
 						if (Questflag == true) {
@@ -603,6 +617,7 @@ bool Open_Store(string* inventory) {  //상점
 							Quest_num--;
 							int Sub3 = rand() % Quest_num;
 							Quest_slot[Num2] = Sub_Quest[Sub3].Goal;
+							Questflag = false;
 						}
 					}
 				}
