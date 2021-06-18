@@ -58,7 +58,7 @@ int Dungeon() //DUNGEON 로고
         cout << "DDDDD         UUUU    NN     NNN	  GGGGG    EEEEEEEE	OOOO	NN     NNN";
         GoToXy(10, 17);
 
-        Sleep(700);
+        Sleep(715);
     }
     return Num;
 }
@@ -112,7 +112,11 @@ bool Map_Combat()//맵선택 및 전투
 
                     Cursor_Move(0, 11);
                     Amvalue = Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴(선공)
-                    if (Amvalue == 1) return true;
+                    if (Amvalue == 1) {
+                        Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
+                        Map[Roomnum][Monsternum]->Mp = Temp_Mob_P->Mp;
+                        return true;
+                    }
                     if (Map[Roomnum][Monsternum]->Hp <= 0)//몬스터 사망시
                     {
                         Print_Line(Map[Roomnum][Monsternum]->Kind);
@@ -137,7 +141,10 @@ bool Map_Combat()//맵선택 및 전투
                     Mob_Atk(Map[Roomnum][Monsternum], SoNB_P);//몬스터 턴(후공)
                     if (SoNB_P->Hp <= 0) //도중에 캐릭터가 사망시 게임오버 
                     {
+                        system("cls");
+                        GoToXy(27, 15);
                         cout << "Game over..." << endl;
+                        Sleep(3000);
                         SoNB_P->Restat();
                         Roomnum = Map.size() - 1; // 변수 i를 올려 for문 탈출
                         return false;
@@ -155,7 +162,10 @@ bool Map_Combat()//맵선택 및 전투
                     Sleep(1000);
                     if (SoNB_P->Hp <= 0) //도중에 캐릭터가 사망시 게임오버 
                     {
+                        system("cls");
+                        GoToXy(27, 15);
                         cout << "Game over..." << endl;
+                        Sleep(3000);
                         SoNB_P->Restat();
                         Roomnum = Map.size() - 1; //변수 i를 올려 for문 탈출
                         return false;
@@ -163,7 +173,11 @@ bool Map_Combat()//맵선택 및 전투
                     }
 
                     Amvalue = Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴 (후공)
-                    if (Amvalue == 1) return true;
+                    if (Amvalue == 1) {
+                        Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
+                        Map[Roomnum][Monsternum]->Mp = Temp_Mob_P->Mp;
+                        return true;
+                    }
                     if (Map[Roomnum][Monsternum]->Hp <= 0) //몬스터 사망시
                     {
                         Print_Line(Map[Roomnum][Monsternum]->Kind);
@@ -184,7 +198,12 @@ bool Map_Combat()//맵선택 및 전투
         }
         Roomnum = Empty_Room(SoNB_P, Roomnum);
     }
-    if (SoNB_P->Hp > 0) cout << "\n\nDungeon clear!\n\n"; //맵을 모두 클리어시 던전 클리어
+    if (SoNB_P->Hp > 0) {
+        system("cls");
+        GoToXy(27, 15);
+        cout << "Dungeon clear!";
+        Sleep(3000);
+    }//맵을 모두 클리어시 던전 클리어
     PlaySound(NULL, 0, 0); //음악 종료
     return true; //던전클리어시 
 }
