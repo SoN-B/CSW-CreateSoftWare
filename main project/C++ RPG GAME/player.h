@@ -186,6 +186,7 @@ void Mob_Atk(Monster* Mob, My_Character* Character)
 
 	Character->Hp -= Damage;
 	Monster_Attack_Result(Mob, Damage);
+	//Status_Reset();
 	Combat_Ui(Character, Mob);
 }
 
@@ -227,7 +228,6 @@ int Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 			Look_Quest();
 			break;
 		case 5: //도주
-
 			Print("던전에서 도망쳐 나옵니다...");
 			Sleep(2000);
 			return 1;
@@ -240,6 +240,7 @@ int Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 		}
 	}
 	//여기에 Player의 UI랑 monster의 UI 갱신 부분이 들어가야함.
+	//Status_Reset();
 	Combat_Ui(Character, Mob);
 }
 
@@ -371,8 +372,13 @@ void Monster_Die(My_Character* a, Monster* b)
 {
 	a->Pick_UP_Money(b->Money);
 	SoNB_P->Exp_Plus(b->Exp);
+	Combat_Ui(a, b);
 	if (SoNB_P->Exp > SoNB_P->Max_Exp)
 	{
+		My_Character Temp_P;
+		memcpy(&Temp_P, a, sizeof(struct My_Character));
+		Temp_P.Level_Plus();
+		Level_Plus_Show(SoNB_P, Temp_P);
 		SoNB_P->Level_Plus();
 	}
 }

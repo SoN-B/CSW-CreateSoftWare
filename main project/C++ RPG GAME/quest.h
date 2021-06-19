@@ -64,7 +64,6 @@ void Create_Quest(string* Quest_slot) {   //퀘스트 창에 랜덤 퀘스트를
 	}
 	Sub_Quest[Sub1] = Temp;
 }
-
 void Look_Quest() {   //퀘스트 
 	cout << "------------------------\n";
 	cout << "0은 메인 퀘스트, 1과2는 서브 퀘스트입니다.\n";

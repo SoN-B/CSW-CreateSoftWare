@@ -18,11 +18,12 @@ void Cursor_Pos_End()
 {
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo2); //커서의 좌표를 저장한다.
 }
+
 void Monster_Clear()
 {
 	for (int i = 0; i < 9; i++)
 	{
-		for (int j = 60; j < 90; j = j + 2)
+		for (int j = 60; j < 90; j=j+2)
 		{
 			Cursor_Move(j, i);
 			cout << "ㅤ";
@@ -35,9 +36,9 @@ void Player_Clear()
 {
 	for (int i = 0; i < 9; i++)
 	{
-		for (int j = 0; j < 60; j = j + 2)
+		for (int j = 0; j < 60; j= j +2)
 		{
-			Cursor_Move(j, i);
+			Cursor_Move(j,i);
 			cout << "ㅤ";
 			//cout << j;
 			//cout << "□";
@@ -70,8 +71,9 @@ void History_Reset()
 	}
 
 }
+
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
-{								
+{	
 	Sleep(100);
 	Status_Reset();
 	COORD cur;
@@ -86,7 +88,7 @@ void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI.
 	COORD cur2;
 	cur2.X = 0;
 	cur2.Y = cur.Y;
-	for (int i = 0; i < 60; i++) //정보창과 명령,history 칸을 나누는 가로 네모선.
+	for (int i = 0; i < 115; i++) //정보창과 명령,history 칸을 나누는 가로 네모선.
 	{
 		Cursor_Move(i, cur.Y);
 		cout << "■";
@@ -141,7 +143,8 @@ void Player_Attack_Result(double a)	//플레이어의 공격 을 나타냄.
 	Order_y+=2;
 	History_Reset();
 	Cursor_Move(Order_X, Order_y);
-	Sleep(750);
+	Sleep(50);
+
 }
 void Monster_Attack_Result(Monster *Mob,double a) //monster의 공격 부분.
 {
@@ -174,6 +177,7 @@ void Print(const char*s) //history에 *s를 출력함. 그리고 한줄 띄움.
 	cout << s;
 	Sleep(500);
 	Order_y++;
+	History_Reset();
 	Order_x = Order_X;
 }
 void Print_Line(string s) // s라는 string을 줄 띄움 하지 않고 바로 뒤에 입력하기 위한 함수.
@@ -188,6 +192,7 @@ void Print(string s) //print의 string 버젼.
 	cout << s;
 	Sleep(500);
 	Order_y++;
+	History_Reset();
 	Order_x = Order_X;
 }
 void Print_Double(double a)	//double 자료형을 출력하기 위한 함수. 연속적인 출력을 하기 위함이다.
@@ -198,6 +203,7 @@ void Print_Double(double a)	//double 자료형을 출력하기 위한 함수. �
 void Print_blank()
 { //한줄 띄우는 함수.
 	Order_y += 1;
+	History_Reset();
 }
 void clear() ///cmd를 완전히 지워버림.
 {
@@ -232,9 +238,10 @@ void Order_Clear2() //Order 칸에서 많은 수를 지우기 위한 함수.
 	Cursor_Move(0, 0);
 	Cursor_Move(0, 11);
 }
-void Level_Plus_Show(My_Character* a, My_Character b)
+
+void Level_Plus_Show(My_Character *a,My_Character b)
 {
-	Cursor_Move(30, 0);
+	Cursor_Move(30,0);
 	setColor(14);
 	cout << "Level UP!!!";
 
@@ -242,7 +249,7 @@ void Level_Plus_Show(My_Character* a, My_Character b)
 	setColor(4);
 	cout << "HP";
 	setColor(15);
-	cout << " : " << a->Hp;
+	cout << " : "<< a->Hp;
 	setColor(14);
 	cout << " -> ";
 	setColor(12);

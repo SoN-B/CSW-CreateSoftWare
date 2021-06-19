@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -26,7 +26,6 @@ void GoToXy(int x, int y) //UI관련
     Pos.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
-
 int Dungeon() //DUNGEON 로고
 {
     int _kbhit(void);
@@ -76,7 +75,7 @@ bool Map_Combat()//맵선택 및 전투
     cout << "아무키 입력 시, 뒤로 갑니다.";
     GoToXy(0, 30);
     Select = _getch() - 48;
-    if (Select != 1 && Select != 2 && Select != 3) return true;
+    if (Select != 1 && Select != 2 && Select != 3 && Select != 4) return true;
     Map = Maps[Select - 1];
     system("cls");
 
@@ -201,7 +200,7 @@ bool Map_Combat()//맵선택 및 전투
     if (SoNB_P->Hp > 0) {
         system("cls");
         GoToXy(27, 15);
-        cout << "Dungeon clear!";
+        cout << "Dungeon clear!!!";
         Sleep(3000);
     }//맵을 모두 클리어시 던전 클리어
     PlaySound(NULL, 0, 0); //음악 종료

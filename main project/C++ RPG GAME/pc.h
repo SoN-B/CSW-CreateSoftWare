@@ -5,7 +5,7 @@
 #include "monster.h"
 using namespace std;
 
-typedef struct My_Character //í”Œë ˆì´ì–´ í´ë˜ìŠ¤
+typedef struct My_Character //ÇÃ·¹ÀÌ¾î Å¬·¡½º
 {
 	double Hp, Mp, Atk, Def, Speed, Level = 1, Exp = 0, Max_Exp = 100, Money = 0;
 
@@ -20,7 +20,7 @@ typedef struct My_Character //í”Œë ˆì´ì–´ í´ë˜ìŠ¤
 		this->Money = Money;
 	}
 
-	void Get_Character_Info()//í”Œë ˆì´ì–´ ìƒíƒœ ì¶œë ¥ 
+	void Get_Character_Info()//ÇÃ·¹ÀÌ¾î »óÅÂ Ãâ·Â 
 	{
 		setColor(8);
 		cout << "\nLevel";

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "monster.h"
 #include <vector>
 //[기본 설정 스텟 설정]
