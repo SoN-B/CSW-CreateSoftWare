@@ -505,7 +505,10 @@ bool Open_Store(string* inventory) {  //상점
 					SoNB_P->Money -= Price[Num];
 				}
 				else if (Luck == 6) {   //꽝
+					cout << "꽝!!!\n";
 					cout << "당신의 500원, '꺼~억'으로 대체되었다... 무야호~\n";
+					cout << "5초 후 넘어갑니다.";
+					Sleep(5000);
 					SoNB_P->Money -= Price[Num];
 				}
 				cout << "소지금 : " << SoNB_P->Money + Price[Num] << " -> " << SoNB_P->Money << endl;
@@ -565,6 +568,7 @@ bool Open_Store(string* inventory) {  //상점
 				bool Questflag;   //    퀘스트 완료 여부 체크
 				for (int K = 0; K < 11; K++) {
 					if (Quest_slot[Num2] == Sub_Quest[K].Goal) {
+						int Temp = K;
 						switch (Sub_Quest[K].Num) {
 						case 0:
 							Questflag = Miser();
@@ -612,13 +616,26 @@ bool Open_Store(string* inventory) {  //상점
 							break;
 						}
 						if (Questflag == true) {
-							for (int A = K; A < Quest_num - 1; A++) {
-								Sub_Quest[A] = Sub_Quest[A + 1];
+							if (Quest_num <= 2) {
+								Quest_slot[Num2] = "퀘스트 완료 - 더 이상 남은 퀘스트가 없습니다.";
 							}
-							Quest_num--;
-							int Sub3 = rand() % Quest_num;
-							Quest_slot[Num2] = Sub_Quest[Sub3].Goal;
-							Questflag = false;
+							else {
+								for (int A = Temp; A < Quest_num - 1; A++) {
+									Sub_Quest[A] = Sub_Quest[A + 1];
+								}
+								Quest_num--;
+								int Sub3 = rand() % Quest_num;
+								Quest_slot[Num2] = Sub_Quest[Sub3].Goal;
+								if (Quest_slot[1] == Quest_slot[2]) {
+									int Sub4 = Sub3;
+									while (Sub4 == Sub3) {
+										Sub4 = rand() % Quest_num;
+									}
+									Quest_slot[Num2] = Sub_Quest[Sub4].Goal;
+								}
+								Questflag = false;
+								cout << Quest_num;
+							}
 						}
 					}
 				}

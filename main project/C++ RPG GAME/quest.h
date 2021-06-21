@@ -48,22 +48,26 @@ Slime_slayer_n, Goblin_slayer_n, Orc_slayer_n, Protein_addiction_n, Sugar_addict
 
 void Create_Quest(string* Quest_slot) {   //퀘스트 창에 랜덤 퀘스트를 집어넣음
 	srand((unsigned int)time(NULL));
-	int Main = rand() % 7;
-	Quest_slot[0] = Main_Quest[Main].Goal;
-	int Sub1 = rand() % Quest_num;
-	Quest_slot[1] = Sub_Quest[Sub1].Goal;
-	Quest Temp = Sub_Quest[Sub1];
-	for (int I = Sub1; I < Quest_num - 1; I++) {
-		Sub_Quest[I] = Sub_Quest[I + 1];
+	if (Quest_num > 2) {
+		int Main = rand() % 7;
+		Quest_slot[0] = Main_Quest[Main].Goal;
+		int Sub1 = rand() % Quest_num;
+		Quest_slot[1] = Sub_Quest[Sub1].Goal;
+		Quest Temp = Sub_Quest[Sub1];
+		for (int I = Sub1; I < Quest_num - 1; I++) {
+			Sub_Quest[I] = Sub_Quest[I + 1];
+		}
+		Quest_num--;
+		int Sub2 = rand() % Quest_num;
+		Quest_slot[2] = Sub_Quest[Sub2].Goal;
+		for (int I = 10; I > Sub1; I--) {
+			Sub_Quest[I] = Sub_Quest[I - 1];
+		}
+		Sub_Quest[Sub1] = Temp;
+		Quest_num++;
 	}
-	Quest_num--;
-	int Sub2 = rand() % Quest_num;
-	Quest_slot[2] = Sub_Quest[Sub2].Goal;
-	for (int I = 10; I > Sub1; I--) {
-		Sub_Quest[I] = Sub_Quest[I - 1];
-	}
-	Sub_Quest[Sub1] = Temp;
 }
+
 void Look_Quest() {   //퀘스트 
 	cout << "------------------------\n";
 	cout << "0은 메인 퀘스트, 1과2는 서브 퀘스트입니다.\n";
@@ -253,7 +257,7 @@ bool Random_Item() {
 	cout << "상점 주인에게 건낼 아이템의 숫자를 입력해주세요\n";
 	cout << "0~4 이외의 숫자를 입력하면 취소됩니다.\n";
 	cout << "입력 : ";
-	cin >> N;
+	N = _getch() - 48;
 	cout << "------------------------\n";
 	if (Inventory[N] == R_item) {
 		cout << "서브 퀘스트가 완료되었습니다\n";
@@ -283,7 +287,7 @@ bool Random_Equipment() {
 	cout << "상점 주인에게 건낼 아이템의 숫자를 입력해주세요\n";
 	cout << "0~4 이외의 숫자를 입력하면 취소됩니다.\n";
 	cout << "입력 : ";
-	cin >> N;
+	N = _getch() - 48;
 	cout << "------------------------\n";
 	if (Inventory[N] == R_equipment) {
 		cout << "서브 퀘스트가 완료되었습니다\n";
