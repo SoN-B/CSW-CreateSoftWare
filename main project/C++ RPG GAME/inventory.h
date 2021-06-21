@@ -8,6 +8,8 @@
 #include "Item_List.h"
 using namespace std;
 
+bool Questflag2 = false;
+bool Questflag3 = false;
 int Inventoryflag = 1;
 // 인벤토리의 빈 공간을 "0"으로 표현함
 /*string DropItem;
@@ -140,6 +142,14 @@ Item Tea = { "Tea", 0, 0, -10, 30, 0, 200 };
 
 Item Items[14] = { Red_portion,Yellow_portion,Blue_portion,Purple_portion
 ,Carrot ,Protein ,Radish ,Sugar ,Banana ,Pear ,Sweet_potato,Dew,Chili,Tea };*/
+
+void GoToXy2(int x, int y) //UI관련
+{
+	COORD Pos;
+	Pos.X = 2 * x;
+	Pos.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
 
 string Drop_Item() {
 	srand((unsigned int)time(NULL));
@@ -540,25 +550,37 @@ bool Open_Store(string* inventory) {  //상점
 					if (Quest_slot[Num2] == Main_Quest[K].Goal) {
 						switch (Main_Quest[K].Num) {
 						case 0:
-							Fabric_Collecter();
+							Questflag2 = Fabric_Collecter();
 							break;
 						case 1:
-							Leather_Collecter();
+							Questflag2 = Leather_Collecter();
 							break;
 						case 2:
-							Wood_Collecter();
+							Questflag2 = Wood_Collecter();
 							break;
 						case 3:
-							Gacha_Winner();
+							Questflag2 = Gacha_Winner();
 							break;
 						case 4:
-							Dungeon_Owner();
+							Questflag2 = Dungeon_Owner();
 							break;
 						case 5:
-							Dungeon_Clear();
+							Questflag2 = Dungeon_Clear();
 							break;
 						case 6:
-							Potion_Shower();
+							Questflag2 = Potion_Shower();
+							break;
+						}
+						if (Questflag2 == true) {
+							clear();
+							GoToXy2(27, 10);
+							cout << "GAME CLEAR!!\n";
+							GoToXy2(23, 13);
+							cout << "메인 퀘스트가 완료되었습니다\n";
+							GoToXy2(23, 15);
+							cout << "5초 후 메인 화면으로 이동합니다.\n";
+							Sleep(5000);
+							return false;
 							break;
 						}
 					}

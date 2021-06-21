@@ -118,11 +118,12 @@ void Look_Quest() {   //퀘스트
 	}
 }
 //----------------메인 퀘스트 
-void Fabric_Collecter() {
+bool Fabric_Collecter() {
 	int Count = 0;
 	for (int I = 0; I < 5; I++) {
 		if (Inventory[I].find("Fabric") == string::npos) {
 			cout << "퀘스트가 완료되지 않았습니다\n";
+			return false;
 			break;
 		}
 		else { Count++; }
@@ -130,14 +131,16 @@ void Fabric_Collecter() {
 	if (Count == 5) {
 		cout << "메인 퀘스트가 완료되었습니다\n";
 		cout << "GAME CLEAR!!!\n";
+		return true;
 	}
 }
 
-void Leather_Collecter() {
+bool Leather_Collecter() {
 	int Count = 0;
 	for (int I = 0; I < 5; I++) {
 		if (Inventory[I].find("Leather") == string::npos) {
 			cout << "퀘스트가 완료되지 않았습니다\n";
+			return false;
 			break;
 		}
 		else { Count++; }
@@ -145,14 +148,16 @@ void Leather_Collecter() {
 	if (Count == 5) {
 		cout << "메인 퀘스트가 완료되었습니다\n";
 		cout << "GAME CLEAR!!!\n";
+		return true;
 	}
 }
 
-void Wood_Collecter() {
+bool Wood_Collecter() {
 	int Count = 0;
 	for (int I = 0; I < 5; I++) {
 		if (Inventory[I].find("Wood") == string::npos) {
 			cout << "퀘스트가 완료되지 않았습니다\n";
+			return false;
 			break;
 		}
 		else { Count++; }
@@ -160,48 +165,58 @@ void Wood_Collecter() {
 	if (Count == 5) {
 		cout << "메인 퀘스트가 완료되었습니다\n";
 		cout << "GAME CLEAR!!!\n";
+		return true;
 	}
 }
 
-void Gacha_Winner() {
+bool Gacha_Winner() {
 	int Count = 0;
 	for (int I = 0; I < 5; I++) {
 		if (Inventory[I].find("Bamboo") != string::npos) {
 			cout << "메인 퀘스트가 완료되었습니다\n";
 			cout << "GAME CLEAR!!!\n";
+			return true;
 			break;
 		}
 		else { Count++; }
 	}
 	if (Count == 5) {
 		cout << "퀘스트가 완료되지 않았습니다\n";
+		return false;
 	}
 }
 
-void Dungeon_Owner() {
+bool Dungeon_Owner() {
 	if (SoNB_P->Money >= 8000) {
 		cout << "메인 퀘스트가 완료되었습니다\n";
 		cout << "GAME CLEAR!!!\n";
+		return true;
 	}
-	else { cout << "퀘스트가 완료되지 않았습니다\n"; }
+	else {
+		cout << "퀘스트가 완료되지 않았습니다\n";
+		return false;
+	}
 }
 
-void Dungeon_Clear() {
+bool Dungeon_Clear() {
 	if (Orc_Boss_P->Count >= 1) {
 		cout << "메인 퀘스트가 완료되었습니다\n";
 		cout << "GAME CLEAR!!!\n";
+		return true;
 	}
 	else {
 		cout << "퀘스트가 완료되지 않았습니다\n";
 		cout << "현재 오크 킹을 " << Orc_Boss_P->Count << "번 잡았습니다.\n";
+		return false;
 	}
 }
 
-void Potion_Shower() {
+bool Potion_Shower() {
 	if (Red_portion_p->Count >= 1 && Yellow_portion_p->Count >= 1
 		&& Blue_portion_p->Count >= 1 && Purple_portion_p->Count >= 1) {
 		cout << "메인 퀘스트가 완료되었습니다\n";
 		cout << "GAME CLEAR!!!\n";
+		return true;
 	}
 	else {
 		cout << "퀘스트가 완료되지 않았습니다\n";
@@ -209,6 +224,7 @@ void Potion_Shower() {
 		cout << "현재 Yellow potion을 " << Yellow_portion_p->Count << "번 사용했습니다.\n";
 		cout << "현재 Blue potion을 " << Blue_portion_p->Count << "번 사용했습니다.\n";
 		cout << "현재 Purple potion을 " << Purple_portion_p->Count << "번 사용했습니다.\n";
+		return false;
 	}
 }
 //----------------서브 퀘스트 

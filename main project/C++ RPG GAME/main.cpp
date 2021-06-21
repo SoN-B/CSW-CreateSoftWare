@@ -38,6 +38,11 @@ int Dungeon() //DUNGEON 로고
             break;
         }
 
+		if (Questflag3 == true) {
+			GoToXy(26, 5);
+			cout << "C L E A R E D ! !";
+		}
+
         setColor(++ColorNum);
         if (ColorNum == 15) ColorNum = 0;
 
@@ -237,6 +242,13 @@ int main()
             Gameflag = true;//메인메뉴 --> 맵선택(flase방지)
             while (Gameflag)
             {
+				if (Questflag2 == true) {
+					Gameflag = false;
+					Questflag2 = false;
+					Questflag3 = true;
+					break;
+				}
+
                 PlaySound(NULL, 0, 0); //음악 초기화(종료)
                 PlaySound(TEXT(".\\SoundTrack\\Village.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //메인메뉴 음악 ON
 
