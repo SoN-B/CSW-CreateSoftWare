@@ -2,6 +2,7 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
+#include <vector>
 #include "Ui.h"
 #include "inventory.h"
 using namespace std;
@@ -168,15 +169,17 @@ void Skill::Skill_Info(My_Character* Character, Skill Skill)//스킬 정보 함�
 //이하 스킬 구현
 
 //	 skill 변수("스킬이름",사용hp,사용mp,상승Hp,상승Mp,데미지계수,데미지)
-Skill GOD_ATK("한방딜", 0, 0, 0, 0, 0, 500, 0);
+Skill GOD_ATK("한방딜",0, 0, 0, 0, 0, 500, 0);
 Skill Power_Slash("파워 슬래시", 0, 20, 0.0, 0.0, 1.2, 0.0, 0);//마나20소모, 데미지1.2배
 Skill Blood_Slash("블러드 슬래시", 100, 0, 0, 0, 0, 150, 0);//체력100소모, 150데미지
 Skill Mind_Fuel("회광반조", 0, 30, 15, 0, 0, 0, 0);//마나 30소모, 체력15회복
 Skill Prayer("기도", 0, 0, 0, 20, 0, 0, 0);//소모없음, 마나20회복
 Skill Fire_bolt("파이어볼트", 0, 15, 0, 0, 0, 75, 0);//마나15소모, 75데미지, 2레벨 해금
+Skill Power_Slash2("파워 슬래시Ⅱ", 0, 50, 0, 0, 1.35, 0, 0);//마나50소모, 1.35배 데미지, 3레벨 해금
 //플레이어의 스킬창 기본값
 
 Skill Skill_Array[4] = { Power_Slash,GOD_ATK,Mind_Fuel,Prayer };
+vector<Skill>Skill_Tree = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };//스킬트리
 
 void Mob_Atk(Monster* Mob, My_Character* Character)
 {
@@ -311,15 +314,16 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 
 int Empty_Room(My_Character* Character,int Roomnum)
 {
+	string Skillcheck;//스킬 선택 확인
 	int Choice; //플레이어 선택 변수
 	bool Roomflag = true; //Empty_Room 함수 제어용 변수
-	int Skillmenu;//스킬 선택
+	int Skillmenu = 0;;//스킬 선택
 	while (Roomflag)
 	{
 		Order_Clear();
 		Cursor_Move(0, Order_Y);
 		Cursor_Pos_Start();
-		cout << "무엇을 할까...\n1. 다음방으로 이동\n2. 스킬\n3. 가방\n4. 퀘스트\n5. 도주" << endl; //기본 메뉴
+		cout << "무엇을 할까...\n1. 다음방으로 이동\n2. 스킬설정\n3. 가방\n4. 퀘스트\n5. 도주" << endl; //기본 메뉴
 		Cursor_Pos_End();
 		Choice = _getch() - 48;
 		switch (Choice)
@@ -346,10 +350,23 @@ int Empty_Room(My_Character* Character,int Roomnum)
 				Order_Clear2();
 				break;
 			}
-
+			if (Skillmenu >= 1 && Skillmenu <= 4)
+			{
+				Order_Clear2();
+				Skill_Array[Skillmenu - 1].Skill_Info(Character,Skill_Array[Skillmenu-1]);
+				cout << "교체하시겟습니까?(Y or else)" <<endl;
+				Skillcheck = _getch();
+				if (Skillcheck == "Y" || Skillcheck == "y")
+				{
+					for (int Skillint = 0; Skillint < Skill_Tree.size(); Skillint++) { cout << Skillint + 1 << ". " << Skill_Tree[Skillint].Skillname << endl; }
+					cout << "교체할 스킬을 선택" << endl;
+					Skillmenu = _getch() - 48;
+					//미완성 
+				}
+			}	
 			break;
 		case 3: //가방열기
-			Roomflag = Inventory_Menu();
+			Inventory_Menu();
 			break;
 		case 4: //진행중인 퀘스트
 			Look_Quest();
@@ -357,7 +374,7 @@ int Empty_Room(My_Character* Character,int Roomnum)
 		case 5: //도주
 			Print("던전에서 도망쳐 나옵니다...");
 			Sleep(2000);
-			exit(0);
+			return -1;
 			break;
 		default: //잘못된 변수 입력받을시
 			Print("올바르지 않은 입력");

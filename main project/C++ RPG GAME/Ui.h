@@ -292,4 +292,5 @@ void Level_Plus_Show(My_Character *a,My_Character b)
 	cout << " -> ";
 	setColor(15);
 	cout << b.Speed;
+	//스킬얻기 추가필요
 }
