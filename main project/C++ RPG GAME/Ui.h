@@ -300,3 +300,12 @@ void Player_Turn()
 	cout << "□";        //monster의 턴 끝남
 	Sleep(50);
 }
+void Monster_Turn()
+{
+	Sleep(50);
+	Cursor_Move(58, 8);
+	cout << "□";        //player의 턴 끝남.
+	Cursor_Move(62, 8);
+	cout << "※";
+	Sleep(50);
+}
