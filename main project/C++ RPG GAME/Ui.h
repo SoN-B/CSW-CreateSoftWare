@@ -191,7 +191,6 @@ void Print(string s) //print의 string 버젼.
 	cout << s;
 	Sleep(500);
 	Order_y++;
-	History_Reset();
 	Order_x = Order_X;
 }
 void Print_Double(double a)	//double 자료형을 출력하기 위한 함수. 연속적인 출력을 하기 위함이다.
