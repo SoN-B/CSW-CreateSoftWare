@@ -183,6 +183,8 @@ vector<Skill>Skill_Tree = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };//스킬�
 
 void Mob_Atk(Monster* Mob, My_Character* Character)
 {
+	Monster_Turn();
+	Sleep(75);
 	double Damage = Mob->Atk - Character->Def;
 	if (Damage < 0) Damage = 0;
 	//몹 공격력<플레이어 방어력 경우 음수 나오는 상황 배제
