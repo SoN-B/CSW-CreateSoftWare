@@ -94,7 +94,7 @@ bool Map_Combat()//맵선택 및 전투
         {
             Sleep(100);
             Combat_Ui(SoNB_P, Map[Roomnum][Monsternum]);
-            Map_Show(Roomnum, Map.size());
+            //Map_Show(Roomnum, Map.size());
             setColor(2);
             Print_Line(Map[Roomnum][Monsternum]->Kind);
             Print("이(가) 나타났다!");
