@@ -177,7 +177,6 @@ void Print(const char*s) //history에 *s를 출력함. 그리고 한줄 띄움.
 	cout << s;
 	Sleep(500);
 	Order_y++;
-	History_Reset();
 	Order_x = Order_X;
 }
 void Print_Line(string s) // s라는 string을 줄 띄움 하지 않고 바로 뒤에 입력하기 위한 함수.
