@@ -211,6 +211,7 @@ int Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 		cout << "무엇을 할까...\n1. 공격\n2. 스킬\n3. 가방\n4. 퀘스트\n5. 도주" << endl; //기본 메뉴
 		Cursor_Pos_End();
 		Choice = _getch()-48;
+		History_Reset();
 		switch (Choice)
 		{
 		case 1: //기본공격
