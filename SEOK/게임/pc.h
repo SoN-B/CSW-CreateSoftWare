@@ -9,8 +9,8 @@ typedef struct My_Character //플레이어 클래스
 {
 	double Hp, Mp, Atk, Def, Speed, Level = 1, Exp = 0, Max_Exp = 100, Money = 0;
 
-	My_Character(double Hp = 200, double Mp = 100, double Atk = 50, double Def = 5,
-		double Speed = 1.5, double Money = 1000)
+	My_Character(double Hp = 200, double Mp = 100, double Atk = 20, double Def = 0,
+		double Speed = 1, double Money = 1000)
 	{
 		this->Hp = Hp;
 		this->Mp = Mp;
@@ -55,8 +55,8 @@ typedef struct My_Character //플레이어 클래스
 		this->Level += 1;
 		this->Exp = this->Exp - this->Max_Exp;
 		this->Max_Exp = this->Max_Exp + (this->Max_Exp * 0.5);
-		this->Hp += 50;
-		this->Mp += 25;
+		this->Hp += 20;
+		this->Mp += 15;
 		this->Atk += 10;
 		this->Def += 5;
 		this->Speed += 0.1;

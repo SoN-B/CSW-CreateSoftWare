@@ -13,6 +13,7 @@ using namespace std;
 int Menu; //메인메뉴 선택 변수
 int Select; //Map_Combat 함수 선택 변수
 int Cancel; //게임설명 탈출용 변수 :0입력으로 탈출
+int Amvalue; //Atk_Menu의 리턴값
 bool Mainflag = true; //main함수 do while문 제어 변수
 bool Gameflag = true; //do while문 내부 게임시작 제어 변수
 bool Storeflag = true;//상점 제어 변수
@@ -37,6 +38,11 @@ int Dungeon() //DUNGEON 로고
             break;
         }
 
+		if (Questflag3 == true) {
+			GoToXy(26, 5);
+			cout << "C L E A R E D ! !";
+		}
+
         setColor(++ColorNum);
         if (ColorNum == 15) ColorNum = 0;
 
@@ -56,7 +62,7 @@ int Dungeon() //DUNGEON 로고
         cout << "DDDDD         UUUU    NN     NNN	  GGGGG    EEEEEEEE	OOOO	NN     NNN";
         GoToXy(10, 17);
 
-        Sleep(700);
+        Sleep(715);
     }
     return Num;
 }
@@ -65,13 +71,16 @@ bool Map_Combat()//맵선택 및 전투
     int Roomnum = 0;//방번호
     system("cls");
     GoToXy(10, 15);
-    cout << "1. 늪 지대";
+    cout << "Ⅰ. 늪 지대";
     GoToXy(27, 15);
-    cout << "2. 고블린 마을";
+    cout << "Ⅱ. 고블린 마을";
     GoToXy(43, 15);
-    cout << "3. 오크 진지";
+    cout << "Ⅲ. 오크 진지";
+    GoToXy(25, 27);
+    cout << "아무키 입력 시, 뒤로 갑니다.";
     GoToXy(0, 30);
     Select = _getch() - 48;
+    if (Select != 1 && Select != 2 && Select != 3 && Select != 4) return true;
     Map = Maps[Select - 1];
     system("cls");
 
@@ -85,11 +94,14 @@ bool Map_Combat()//맵선택 및 전투
         {
             Sleep(100);
             Combat_Ui(SoNB_P, Map[Roomnum][Monsternum]);
+            Map_Show(Roomnum, Map.size());
             setColor(2);
             Print_Line(Map[Roomnum][Monsternum]->Kind);
             Print("이(가) 나타났다!");
             setColor(15);
             Print_blank();
+            Sleep(1000);
+
             Temp_Mob_P->Hp = Map[Roomnum][Monsternum]->Hp;
             Temp_Mob_P->Mp = Map[Roomnum][Monsternum]->Mp;
             int Turn = 0; //전투 턴 초기화
@@ -98,13 +110,18 @@ bool Map_Combat()//맵선택 및 전투
                 if (SoNB_P->Speed > Map[Roomnum][Monsternum]->Speed)//스피드 비교: 플레이어선공
                 {
                     //독뎀등 턴수에따른 데미지계산
-                    Cursor_Move(58, 8);
+                    /*Cursor_Move(58, 6);
                     cout << "※";        //player의 턴을 나타냄.
-                    Cursor_Move(62, 8);
-                    cout << "□";        //monster의 턴 끝남
+                    Cursor_Move(62, 6);
+                    cout << "□";*/        //monster의 턴 끝남
 
                     Cursor_Move(0, 11);
-                    Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴(선공)
+                    Amvalue = Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴(선공)
+                    if (Amvalue == 1) {
+                        Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
+                        Map[Roomnum][Monsternum]->Mp = Temp_Mob_P->Mp;
+                        return true;
+                    }
                     if (Map[Roomnum][Monsternum]->Hp <= 0)//몬스터 사망시
                     {
                         Print_Line(Map[Roomnum][Monsternum]->Kind);
@@ -122,14 +139,17 @@ bool Map_Combat()//맵선택 및 전투
                         }
                         break;//while문 탈출: 전투끝
                     }
-                    Cursor_Move(58, 8);
+                    /*Cursor_Move(58, 6);
                     cout << "□";        //player의 턴 끝남.
-                    Cursor_Move(62, 8);
-                    cout << "※";        //monster의 턴을 나타냄.
+                    Cursor_Move(62, 6);
+                    cout << "※";*/        //monster의 턴을 나타냄.
                     Mob_Atk(Map[Roomnum][Monsternum], SoNB_P);//몬스터 턴(후공)
                     if (SoNB_P->Hp <= 0) //도중에 캐릭터가 사망시 게임오버 
                     {
+                        system("cls");
+                        GoToXy(27, 15);
                         cout << "Game over..." << endl;
+                        Sleep(3000);
                         SoNB_P->Restat();
                         Roomnum = Map.size() - 1; // 변수 i를 올려 for문 탈출
                         return false;
@@ -147,14 +167,22 @@ bool Map_Combat()//맵선택 및 전투
                     Sleep(1000);
                     if (SoNB_P->Hp <= 0) //도중에 캐릭터가 사망시 게임오버 
                     {
+                        system("cls");
+                        GoToXy(27, 15);
                         cout << "Game over..." << endl;
+                        Sleep(3000);
                         SoNB_P->Restat();
                         Roomnum = Map.size() - 1; //변수 i를 올려 for문 탈출
                         return false;
                         break;//while문 탈출: 전투끝
                     }
 
-                    Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴 (후공)
+                    Amvalue = Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴 (후공)
+                    if (Amvalue == 1) {
+                        Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
+                        Map[Roomnum][Monsternum]->Mp = Temp_Mob_P->Mp;
+                        return true;
+                    }
                     if (Map[Roomnum][Monsternum]->Hp <= 0) //몬스터 사망시
                     {
                         Print_Line(Map[Roomnum][Monsternum]->Kind);
@@ -167,7 +195,6 @@ bool Map_Combat()//맵선택 및 전투
                         if (DropItem != "") Pick_Up_Item(Inventory, DropItem);
                         break;//while문 탈출: 전투끝
                     }
-                    cout << "------------------------\n";
                     Turn++;
                 }
                 Combat_Ui(SoNB_P, Map[Roomnum][Monsternum]);
@@ -175,7 +202,12 @@ bool Map_Combat()//맵선택 및 전투
         }
         Roomnum = Empty_Room(SoNB_P, Roomnum);
     }
-    if (SoNB_P->Hp > 0) cout << "\n\nDungeon clear!\n\n"; //맵을 모두 클리어시 던전 클리어
+    if (SoNB_P->Hp > 0) {
+        system("cls");
+        GoToXy(27, 15);
+        cout << "Dungeon clear!!!";
+        Sleep(3000);
+    }//맵을 모두 클리어시 던전 클리어
     PlaySound(NULL, 0, 0); //음악 종료
     return true; //던전클리어시 
 }
@@ -190,12 +222,12 @@ int main()
         PlaySound(TEXT(".\\SoundTrack\\Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //초기화면 음악 ON
         system("cls");
         //cout << "【 TEST BETA GAME 】\n\n";
-        GoToXy(25, 18);
+        GoToXy(23, 18);
         setColor(10);
-        cout << "메뉴를 선택해 주세요 ~ !\n";
+        cout << "!!! ~ 메뉴를 선택해 주세요 ~ !!!\n";
         setColor(15);
         GoToXy(27, 19);
-        cout << "1.게임시작\n";
+        cout << "1.게임 시작\n";
         GoToXy(27, 20);
         cout << "2.게임 설명\n";
         GoToXy(27, 21);
@@ -210,10 +242,18 @@ int main()
             Gameflag = true;//메인메뉴 --> 맵선택(flase방지)
             while (Gameflag)
             {
+				if (Questflag2 == true) {
+					Gameflag = false;
+					Questflag2 = false;
+					Questflag3 = true;
+					break;
+				}
+
                 PlaySound(NULL, 0, 0); //음악 초기화(종료)
                 PlaySound(TEXT(".\\SoundTrack\\Village.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //메인메뉴 음악 ON
 
                 system("cls");
+                clear();
                 GoToXy(10, 15);
                 cout << "1. 맵 선택";
                 GoToXy(27, 15);
@@ -246,7 +286,39 @@ int main()
         case 2:
             while (true)
             {
-                cout << "\n이 게임은 현재 개발 중에 있는 C++ 기반 RPG입니다.\n('0'을 누르면 뒤로갑니다.)";
+                cout << "DUNGEON은 C++ 기반 RPG game입니다.\n";
+                cout << "\n<";
+                setColor(10);
+                cout << "맵 & 전투방식";
+                setColor(15);
+                cout << "> ";
+                cout << "\n총 3개의 맵으로 구성되어, 맵 상의 몬스터들과 전투해 나가는 방식입니다.\n";
+                cout << "하나의 맵은 총 5개의 방으로 이루어져 각각 1~2마리의 몬스터가 등장합니다.\n";
+                cout << "마지막 5번째 방에는 보스가 등장합니다.\n\n";
+
+                cout << "전투는 간단하게 공격, 스킬 메뉴를 선택하여 진행합니다.\n";
+                cout << "캐릭터, 몬스터 스텟인 SPEED는 선제공격의 결정 요소가 됩니다.\n";
+                cout << "(즉, SPEED 스텟이 더 높은 쪽이 선제공격을 가져갑니다.)\n";
+                cout << "\n전투도중 가방 내에서 소비 아이템을 사용하거나 도주함으로써, 위험한 상황을 모면할 수 있습니다.\n\n";
+
+                cout << "<";
+                setColor(10);
+                cout << "인벤토리 & 상점";
+                setColor(15);
+                cout << ">";
+                cout << "\n몬스터는 사망 시에, 아이템을 드랍하게 되는데 드랍한 아이템을 가방에 보관할 수 있으며,\n";
+                cout << "가방은 최대 5개의 아이템(소비&장비)만을 수용합니다. 장비는 가방 내에서 착용&해제가 가능합니다.\n\n";
+                cout << "상점에서는 총 5개의 아이템이 진열되는데, 5번째 아이템은 Gacha(가챠)로 랜덤 뽑기가 가능합니다.\n\n";
+
+                cout << "<";
+                setColor(10);
+                cout << "클리어 조건";
+                setColor(15);
+                cout << ">";
+                cout << "\n모든 메인 퀘스트 클리어 시, 게임도 클리어 됩니다. 다만, 캐릭터 사망 시 게임오버 됩니다.\n";
+                cout << "퀘스트 완료는 '상점 & 퀘스트'에서 할 수 있습니다.\n\n";
+
+                cout << "'0'을 누르면 뒤로갑니다.";
                 Cancel = _getch() - 48;
                 system("cls");
                 if (Cancel == 0) break;

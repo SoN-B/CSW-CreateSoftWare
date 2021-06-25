@@ -6,13 +6,13 @@
 #include <Windows.h>
 using namespace std;
 string DropItem;
-//----------------¿Â∫Ò√¢
-//----------------¿Œµ¶Ω∫∏∂¥Ÿ ¿Â¬¯ ∞°¥…«— ¡æ∑˘∞° ¥Ÿ∏ß
-//----------------0 : ≈ı±∏, 1 : ∞©ø , 2 : π´±‚, 3 : ¿Â∞©, 4 : Ω≈πﬂ
+//----------------Ïû•ÎπÑÏ∞Ω
+//----------------Ïù∏Îç±Ïä§ÎßàÎã§ Ïû•Ï∞© Í∞ÄÎä•Ìïú Ï¢ÖÎ•òÍ∞Ä Îã§Î¶Ñ
+//----------------0 : Ìà¨Íµ¨, 1 : Í∞ëÏò∑, 2 : Î¨¥Í∏∞, 3 : Ïû•Í∞ë, 4 : Ïã†Î∞ú
 string Equipment_slot[5] = { "0", "0", "0", "0", "0" };
-//----------------¿Œ∫•≈‰∏Æ
+//----------------Ïù∏Î≤§ÌÜ†Î¶¨
 string Inventory[5] = { "0", "0", "0", "0", "0" };
-// ¿Â∫Ò : ¿Â∫Ò¿Ã∏ß,HP¡ı∞°∑Æ,MP¡ı∞°∑Æ,ATK¡ı∞°∑Æ,DEF¡ı∞°∑Æ,Speed¡ı∞°∑Æ,Price¡ı∞°∑Æ,¡æ∑˘
+// Ïû•ÎπÑ : Ïû•ÎπÑÏù¥Î¶Ñ,HPÏ¶ùÍ∞ÄÎüâ,MPÏ¶ùÍ∞ÄÎüâ,ATKÏ¶ùÍ∞ÄÎüâ,DEFÏ¶ùÍ∞ÄÎüâ,SpeedÏ¶ùÍ∞ÄÎüâ,PriceÏ¶ùÍ∞ÄÎüâ,Ï¢ÖÎ•ò
 class Equipment {
 public:
 	string Name;
@@ -27,33 +27,33 @@ public:
 		this->Def = Def;
 		this->Speed = Speed;
 		this->Price = Price;
-		//----------------Kind¥¬ æ∆¿Ã≈€¿« ¡æ∑˘∏¶ ≥™≈∏≥ø
-		//----------------0 : ≈ı±∏, 1 : ∞©ø , 2 : π´±‚, 3 : ¿Â∞©, 4 : Ω≈πﬂ
+		//----------------KindÎäî ÏïÑÏù¥ÌÖúÏùò Ï¢ÖÎ•òÎ•º ÎÇòÌÉÄÎÉÑ
+		//----------------0 : Ìà¨Íµ¨, 1 : Í∞ëÏò∑, 2 : Î¨¥Í∏∞, 3 : Ïû•Í∞ë, 4 : Ïã†Î∞ú
 		this->Kind = Kind;
 	}
 };
 
-//----------------¿Â∫Ò æ∆¿Ã≈€
-//----------------≈ı±∏
-Equipment Fabric_helmet = { "Fabric helmet", 5, 0, 0, 5, 0, 200, 0 };
-Equipment Leather_helmet = { "Leather helmet", 10, 0, 0, 10, 0, 300 , 0 };
-Equipment Wood_helmet = { "Wood helmet", 20, 0, 0, 20, -0.3, 500, 0 };
-//----------------∞©ø 
-Equipment Fabric_armor = { "Fabric armor", 10, 0, 0, 10, 0, 300, 1 };
-Equipment Leather_armor = { "Leather armor", 15, 0, 0, 15, 0, 400, 1 };
-Equipment Wood_armor = { "Wood armor", 25, 0, 0, 25, -0.5, 600, 1 };
-//----------------π´±‚
-Equipment Fabric_sword = { "Fabric sword", 0, 0, 15, 0, 1, 300, 2 };
-Equipment Leather_sword = { "Leather sword", 0, 0, 20, 0, 1, 400, 2 };
-Equipment Wood_sword = { "Wood sword", 0, 0, 30, 0, 1, 600, 2 };
-//----------------¿Â∞©
-Equipment Fabric_gloves = { "Fabric gloves", 3, 0, 0, 3, 0.2, 100, 3 };
-Equipment Leather_gloves = { "Leather gloves", 5, 0, 0, 5, 0.2, 250, 3 };
-Equipment Wood_gloves = { "Wood gloves", 15, 0, 0, 15, 0.5, 450, 3 };
-//----------------Ω≈πﬂ
-Equipment Fabric_shoes = { "Fabric shoes", 3, 0, 0, 3, 0.2, 100, 4 };
-Equipment Leather_shoes = { "Leather shoes", 5, 0, 0, 5, 0.2, 250, 4 };
-Equipment Wood_shoes = { "Wood shoes", 15, 0, 0, 15, 0.5, 450, 4 };
+//----------------Ïû•ÎπÑ ÏïÑÏù¥ÌÖú
+//----------------Ìà¨Íµ¨
+Equipment Fabric_helmet = { "Fabric helmet", 12.5, 5, 0, 0, 0, 200, 0 };
+Equipment Leather_helmet = { "Leather helmet", 25, 10, 0, 1, 0, 300 , 0 };
+Equipment Wood_helmet = { "Wood helmet", 50, 15, 0, 2, -0.3, 500, 0 };
+//----------------Í∞ëÏò∑
+Equipment Fabric_armor = { "Fabric armor", 15, 0, 0, 5, 0, 350, 1 };
+Equipment Leather_armor = { "Leather armor", 30, 0, 0, 10, 0, 500, 1 };
+Equipment Wood_armor = { "Wood armor", 60, 0, 0, 15, -0.5, 700, 1 };
+//----------------Î¨¥Í∏∞
+Equipment Fabric_sword = { "Fabric sword", 0, 0, 5, 0, 1, 400, 2 };
+Equipment Leather_sword = { "Leather sword", 0, 0, 10, 0, 1, 500, 2 };
+Equipment Wood_sword = { "Wood sword", 0, 0, 15, 0, 1, 800, 2 };
+//----------------Ïû•Í∞ë
+Equipment Fabric_gloves = { "Fabric gloves", 10, 10, 0, 0, 0.2, 100, 3 };
+Equipment Leather_gloves = { "Leather gloves", 15, 15, 0, 0, 0.2, 250, 3 };
+Equipment Wood_gloves = { "Wood gloves", 30, 30, 0, 0, 0.5, 450, 3 };
+//----------------Ïã†Î∞ú
+Equipment Fabric_shoes = { "Fabric shoes", 0, 0, 0, 0, 0.2, 100, 4 };
+Equipment Leather_shoes = { "Leather shoes", 0, 0, 0, 0, 0.3, 250, 4 };
+Equipment Wood_shoes = { "Wood shoes", 0, 0, 0, 0, 0.5, 450, 4 };
 
 Equipment Equipments[15] = { Fabric_helmet, Leather_helmet, Wood_helmet, Fabric_armor,
 Leather_armor, Wood_armor, Fabric_sword, Leather_sword, Wood_sword, Fabric_gloves,
@@ -61,7 +61,7 @@ Leather_gloves, Wood_gloves, Fabric_shoes, Leather_shoes, Wood_shoes };
 #pragma once
 
 
-class Gacha_Equipment {   //ªÛ¡°¿« ∞°√≠ø°º≠∏∏ ªÃ¿ª ºˆ ¿÷¥¬ »Ò±Õ æ∆¿Ã≈€
+class Gacha_Equipment {   //ÏÉÅÏ†êÏùò Í∞ÄÏ±†ÏóêÏÑúÎßå ÎΩëÏùÑ Ïàò ÏûàÎäî Ìù¨Í∑Ä ÏïÑÏù¥ÌÖú
 public:
 	string Name;
 	double Hp, Mp, Atk, Def, Speed, Price;
@@ -75,21 +75,21 @@ public:
 		this->Def = Def;
 		this->Speed = Speed;
 		this->Price = Price;
-		//----------------Kind¥¬ æ∆¿Ã≈€¿« ¡æ∑˘∏¶ ≥™≈∏≥ø
-		//----------------0 : ≈ı±∏, 1 : ∞©ø , 2 : π´±‚, 3 : ¿Â∞©, 4 : Ω≈πﬂ
+		//----------------KindÎäî ÏïÑÏù¥ÌÖúÏùò Ï¢ÖÎ•òÎ•º ÎÇòÌÉÄÎÉÑ
+		//----------------0 : Ìà¨Íµ¨, 1 : Í∞ëÏò∑, 2 : Î¨¥Í∏∞, 3 : Ïû•Í∞ë, 4 : Ïã†Î∞ú
 		this->Kind = Kind;
 	}
 };
 
-Gacha_Equipment Bamboo_helmet = { "Bamboo helmet", 150, 0, 0, 50, 0, 0, 0 };
-//----------------∞©ø 
-Gacha_Equipment Bamboo_aromr = { "Bamboo armor", 150, 0, 0, 50, 0, 0, 1 };
-//----------------π´±‚
-Gacha_Equipment Bamboo_spear = { "Bamboo spear", 0, 0, 100, 0, 10, 0, 2 };
-//----------------¿Â∞©
-Gacha_Equipment Bamboo_gloves = { "Bamboo gloves", 100, 0, 0, 50, 10, 0, 3 };
-//----------------Ω≈πﬂ
-Gacha_Equipment Bamboo_shoes = { "Bamboo shoes", 100, 0, 0, 50, 10, 0, 4 };
+Gacha_Equipment Bamboo_helmet = { "Bamboo helmet", 80, 50, 0, 10, 0, 0, 0 };
+//----------------Í∞ëÏò∑
+Gacha_Equipment Bamboo_aromr = { "Bamboo armor", 100, 70, 0, 15, 0, 0, 1 };
+//----------------Î¨¥Í∏∞
+Gacha_Equipment Bamboo_spear = { "Bamboo spear", 0, 0, 15, 0, 0.3, 0, 2 };
+//----------------Ïû•Í∞ë
+Gacha_Equipment Bamboo_gloves = { "Bamboo gloves", 50, 100, 0, 0, 0, 0, 3 };
+//----------------Ïã†Î∞ú
+Gacha_Equipment Bamboo_shoes = { "Bamboo shoes", 0, 0, 0, 0, 1, 0, 4 };
 
 Gacha_Equipment Gacha_Equipments[5] = { Bamboo_helmet, Bamboo_aromr, Bamboo_spear,
 Bamboo_gloves, Bamboo_shoes };
@@ -110,41 +110,41 @@ struct Item {
 		this->Count = Count;
 	}
 };
-//----------------º“∫Ò æ∆¿Ã≈€
+//----------------ÏÜåÎπÑ ÏïÑÏù¥ÌÖú
 //----------------Hp
-Item Red_portion = { "Red potion", 10, 0, 0, 0, 0, 100, 0 };
+Item Red_portion = { "Red potion", 30, 0, 0, 0, 0, 150, 0 };
 Item* Red_portion_p = &Red_portion;
-Item Yellow_portion = { "Yellow potion", 20, 0, 0, 0, 0, 200, 0 };
+Item Yellow_portion = { "Yellow potion", 50, 0, 0, 0, 0, 300, 0 };
 Item* Yellow_portion_p = &Yellow_portion;
 //----------------Mp
-Item Blue_portion = { "Blue potion", 0, 10, 0, 0, 0, 100, 0 };
+Item Blue_portion = { "Blue potion", 0, 25, 0, 0, 0, 150, 0 };
 Item* Blue_portion_p = &Blue_portion;
-Item Purple_portion = { "Purple potion", 0, 20, 0, 0, 0, 200, 0 };
+Item Purple_portion = { "Purple potion", 0, 40, 0, 0, 0, 300, 0 };
 Item* Purple_portion_p = &Purple_portion;
 //----------------Atk
-Item Carrot = { "Carrot", 0, 0, 10, 0, 0, 100, 0 };
+Item Carrot = { "Carrot", 0, 0, 5, 0, 0, 600, 0 };
 Item* Carrot_p = &Carrot;
-Item Protein = { "Protein", 0, 0, 20, 0, 0, 200, 0 };
+Item Protein = { "Protein", 0, 0, 10, 0, 0, 900, 0 };
 Item* Protein_p = &Protein;
 //----------------Def
-Item Radish = { "Radish", 0, 0, 0, 5, 0, 100, 0 };
+Item Radish = { "Radish", 0, 0, 0, 5, 0, 350, 0 };
 Item* Radish_p = &Radish;
-Item Sugar = { "Sugar", 0, 0, 0, 10, 0, 200, 0 };
+Item Sugar = { "Sugar", 0, 0, 0, 10, 0, 600, 0 };
 Item* Sugar_p = &Sugar;
 //----------------Speed
-Item Banana = { "Banana", 0, 0, 0, 0, 0.5, 100, 0 };
+Item Banana = { "Banana", 0, 0, 0, 0, 0.1, 300, 0 };
 Item* Banana_p = &Banana;
-Item Pear = { "Pear", 0, 0, 0, 0, 1, 200, 0 };
+Item Pear = { "Pear", 0, 0, 0, 0, 0.2, 600, 0 };
 Item* Pear_p = &Pear;
 //----------------Hp,Mp
-Item Sweet_potato = { "Sweet potato", 30, -10, 0, 0, 0, 200, 0 };
+Item Sweet_potato = { "Sweet potato", 60, -30, 0, 0, 0, 300, 0 };
 Item* Sweet_potato_p = &Sweet_potato;
-Item Dew = { "Dew", -10, 30, 0, 0, 0, 200, 0 };
+Item Dew = { "Dew", -30, 60, 0, 0, 0, 300, 0 };
 Item* Dew_p = &Dew;
 //----------------Atk,Def
-Item Chili = { "Chili", 0, 0, 30, -10, 0, 200, 0 };
+Item Chili = { "Chili", 0, 0, 10, -5, 0, 300, 0 };
 Item* Chili_p = &Chili;
-Item Tea = { "Tea", 0, 0, -10, 30, 0, 200, 0 };
+Item Tea = { "Tea", 0, 0, -7, 10, 0, 300, 0 };
 Item* Tea_p = &Tea;
 
 Item Items[14] = { Red_portion,Yellow_portion,Blue_portion,Purple_portion

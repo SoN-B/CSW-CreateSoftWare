@@ -11,7 +11,7 @@ using namespace std;
 void setColor(unsigned short text) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
 }
-void Cursor_Move(int x, int y)
+void Cursor_Move(double x, double y)
 {
     COORD cur;
     cur.X = x;
@@ -120,12 +120,12 @@ void Monster::Get_Info_Right()
     i = i + 1;
 
     Cursor_Move(62, i);
-    cout << "DEF : " << this->Def;
+    cout << "DEF : " << this->Def << endl;
 
     i = i + 1;
 
     Cursor_Move(62, i);
-    cout << "SPEED : " << this->Speed;
+    cout << "SPEED : " << this->Speed << endl;
 }
 void Randy()
 {

@@ -3,12 +3,14 @@
 #include <Windows.h>
 #include <conio.h>
 #include "pc.h"
+using namespace std;
 #define Order_X 64			//history의 변하지않는 X 기준선.
 #define Order_Y 11			//history의 변하지 않는 Y 기준선.
 int Order_x = 64;			//history의 변하는 X 기준선.
 int Order_y = 11;			//history의 변하는 Y 기준선.	history의 역할을 하게 만든다.
 CONSOLE_SCREEN_BUFFER_INFO CurInfo1;	//커서의 시작 좌표를 저장하기 위한 구조체
 CONSOLE_SCREEN_BUFFER_INFO CurInfo2;	//커서의 끝 좌표를 저장하기 위한 구조체	일정 부분을 지우기 위한 시작,끝 좌표이다.
+
 void Cursor_Pos_Start()	
 {
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo1); //커서의 좌표를 저장한다.
@@ -21,7 +23,7 @@ void Cursor_Pos_End()
 
 void Monster_Clear()
 {
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 60; j < 90; j=j+2)
 		{
@@ -36,7 +38,7 @@ void Player_Clear()
 {
 	for (int i = 0; i < 9; i++)
 	{
-		for (int j = 0; j < 60; j= j +2)
+		for (int j = 0; j < 58; j= j +2)
 		{
 			Cursor_Move(j,i);
 			cout << "ㅤ";
@@ -71,7 +73,6 @@ void History_Reset()
 	}
 
 }
-
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
 {	
 	Sleep(100);
@@ -88,6 +89,7 @@ void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI.
 	COORD cur2;
 	cur2.X = 0;
 	cur2.Y = cur.Y;
+	Sleep(100);
 	for (int i = 0; i < 115; i++) //정보창과 명령,history 칸을 나누는 가로 네모선.
 	{
 		Cursor_Move(i, cur.Y);
@@ -177,7 +179,6 @@ void Print(const char*s) //history에 *s를 출력함. 그리고 한줄 띄움.
 	cout << s;
 	Sleep(500);
 	Order_y++;
-	History_Reset();
 	Order_x = Order_X;
 }
 void Print_Line(string s) // s라는 string을 줄 띄움 하지 않고 바로 뒤에 입력하기 위한 함수.
@@ -192,7 +193,6 @@ void Print(string s) //print의 string 버젼.
 	cout << s;
 	Sleep(500);
 	Order_y++;
-	History_Reset();
 	Order_x = Order_X;
 }
 void Print_Double(double a)	//double 자료형을 출력하기 위한 함수. 연속적인 출력을 하기 위함이다.
@@ -203,7 +203,6 @@ void Print_Double(double a)	//double 자료형을 출력하기 위한 함수. �
 void Print_blank()
 { //한줄 띄우는 함수.
 	Order_y += 1;
-	History_Reset();
 }
 void clear() ///cmd를 완전히 지워버림.
 {
@@ -292,4 +291,52 @@ void Level_Plus_Show(My_Character *a,My_Character b)
 	cout << " -> ";
 	setColor(15);
 	cout << b.Speed;
+	//스킬얻기 추가필요
+}
+void Player_Turn()
+{
+	Sleep(50);
+	Cursor_Move(58, 8);
+	cout << "※";        //player의 턴을 나타냄.
+	Cursor_Move(62, 8);
+	cout << "□";        //monster의 턴 끝남
+	Sleep(50);
+}
+void Monster_Turn()
+{
+	Sleep(50);
+	Cursor_Move(58, 8);
+	cout << "□";        //player의 턴 끝남.
+	Cursor_Move(62, 8);
+	cout << "※";
+	Sleep(50);
+}
+void Map_Show(int Roomnum,int Mapsize)
+{
+	Cursor_Move(30,10);
+	int i = 0;
+	for(i; i < Mapsize;i++)
+	{
+		if( i < Roomnum )
+		{
+			cout << "●";
+		}
+		else if( i == Roomnum)
+		{
+			cout << "◎";
+			if(Roomnum == Mapsize-1)
+			{
+				break;
+			}
+		}
+		else 
+		{
+			cout << "○";
+			if (i == Mapsize-1)
+			{
+				break;
+			}
+		}
+		cout << "ㅡ";
+	}
 }
