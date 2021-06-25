@@ -291,3 +291,12 @@ void Level_Plus_Show(My_Character *a,My_Character b)
 	cout << b.Speed;
 	//스킬얻기 추가필요
 }
+void Player_Turn()
+{
+	Sleep(50);
+	Cursor_Move(58, 8);
+	cout << "※";        //player의 턴을 나타냄.
+	Cursor_Move(62, 8);
+	cout << "□";        //monster의 턴 끝남
+	Sleep(50);
+}
