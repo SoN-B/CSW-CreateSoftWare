@@ -309,3 +309,32 @@ void Monster_Turn()
 	cout << "※";
 	Sleep(50);
 }
+void Map_Show(int Roomnum, int Mapsize)
+{
+	Cursor_Move(30, 10);
+	int i = 0;
+	for (i; i < Mapsize; i++)
+	{
+		if (i < Roomnum)
+		{
+			cout << "●";
+		}
+		else if (i == Roomnum)
+		{
+			cout << "◎";
+			if (Roomnum == Mapsize - 1)
+			{
+				break;
+			}
+		}
+		else
+		{
+			cout << "○";
+			if (i == Mapsize - 1)
+			{
+				break;
+			}
+		}
+		cout << "ㅡ";
+	}
+}
