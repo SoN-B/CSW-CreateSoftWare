@@ -94,6 +94,7 @@ bool Map_Combat()//맵선택 및 전투
         {
             Sleep(100);
             Combat_Ui(SoNB_P, Map[Roomnum][Monsternum]);
+            Map_Show(Roomnum, Map.size());
             setColor(2);
             Print_Line(Map[Roomnum][Monsternum]->Kind);
             Print("이(가) 나타났다!");
@@ -108,12 +109,6 @@ bool Map_Combat()//맵선택 및 전투
             {
                 if (SoNB_P->Speed > Map[Roomnum][Monsternum]->Speed)//스피드 비교: 플레이어선공
                 {
-                    //독뎀등 턴수에따른 데미지계산
-                    Cursor_Move(58, 8);
-                    cout << "※";        //player의 턴을 나타냄.
-                    Cursor_Move(62, 8);
-                    cout << "□";        //monster의 턴 끝남
-
                     Cursor_Move(0, 11);
                     Amvalue = Atk_Menu(SoNB_P, Map[Roomnum][Monsternum]);//플레이어 턴(선공)
                     if (Amvalue == 1) {
