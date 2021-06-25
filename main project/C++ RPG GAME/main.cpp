@@ -133,10 +133,6 @@ bool Map_Combat()//맵선택 및 전투
                         }
                         break;//while문 탈출: 전투끝
                     }
-                    Cursor_Move(58, 8);
-                    cout << "□";        //player의 턴 끝남.
-                    Cursor_Move(62, 8);
-                    cout << "※";        //monster의 턴을 나타냄.
                     Mob_Atk(Map[Roomnum][Monsternum], SoNB_P);//몬스터 턴(후공)
                     if (SoNB_P->Hp <= 0) //도중에 캐릭터가 사망시 게임오버 
                     {
