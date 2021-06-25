@@ -185,7 +185,6 @@ bool Map_Combat()//맵선택 및 전투
                         if (DropItem != "") Pick_Up_Item(Inventory, DropItem);
                         break;//while문 탈출: 전투끝
                     }
-                    cout << "------------------------\n";
                     Turn++;
                 }
                 Combat_Ui(SoNB_P, Map[Roomnum][Monsternum]);
