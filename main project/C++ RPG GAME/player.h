@@ -204,6 +204,7 @@ int Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 	double Damage; //플레이어의 최종 데미지
 	while (Atkflag)
 	{
+		Player_Turn();
 		//Cursor_Pos_Start();
 		Cursor_Pos_Start();
 		Cursor_Move(0, Order_Y);
