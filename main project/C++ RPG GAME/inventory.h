@@ -294,6 +294,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 		cout << "인벤토리가 가득 찼습니다.\n";
 		while (true) {
 			Order_Clear();
+			Cursor_Move(0, 11);
 			setColor(2);
 			cout << "인벤토리 목록\n";
 			setColor(15);
