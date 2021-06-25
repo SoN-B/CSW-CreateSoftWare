@@ -300,7 +300,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 			setColor(15);
 
 			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
-			cout << "기존의 아이템과 교체하실거면 Y, 아니면 N를 입력해주세요\n" << "입력 : ";
+			cout << "기존의 아이템과 교체하실거면 Y, 아니면 N를 입력해주세요\n";
 			C = _getch();
 			if (C == 'N' || C == 'n') {
 				Cursor_Line();
@@ -308,7 +308,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 				break;
 			}
 			else if (C == 'Y' || C == 'y') {
-				cout << "\n교체할 아이템의 위치를 입력해주세요\n" << "입력 : ";
+				cout << "\n\n교체할 아이템의 위치를 입력해주세요\n";
 				N = _getch() - 48;
 				if (N >= 0 && N <= 4) {
 					Inventory[N] = Item_Name;
@@ -331,7 +331,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 			setColor(15);
 
 			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
-			cout << Item_Name <<" 을 인벤토리의 몇 번 위치에 두실 겁니까?\n" << "입력 : ";
+			cout << Item_Name <<" 을 인벤토리의 몇 번 위치에 두실 겁니까?\n";
 			N = _getch() - 48;
 			cout << endl;
 			if (N >= 0 && N <= 4) {
