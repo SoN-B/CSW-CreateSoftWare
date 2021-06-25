@@ -201,7 +201,6 @@ void Print_Double(double a)	//double 자료형을 출력하기 위한 함수. �
 void Print_blank()
 { //한줄 띄우는 함수.
 	Order_y += 1;
-	History_Reset();
 }
 void clear() ///cmd를 완전히 지워버림.
 {
