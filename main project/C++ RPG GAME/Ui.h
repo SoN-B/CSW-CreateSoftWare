@@ -21,7 +21,7 @@ void Cursor_Pos_End()
 
 void Monster_Clear()
 {
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 60; j < 90; j=j+2)
 		{
@@ -36,7 +36,7 @@ void Player_Clear()
 {
 	for (int i = 0; i < 9; i++)
 	{
-		for (int j = 0; j < 60; j= j +2)
+		for (int j = 0; j < 58; j= j +2)
 		{
 			Cursor_Move(j,i);
 			cout << "ㅤ";
