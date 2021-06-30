@@ -242,8 +242,7 @@ int Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 			break;
 		default: //잘못된 변수 입력받을시
 			Print("올바르지 않은 입력");
-			Cursor_Pos_End();
-			Order_Clear();
+
 			break;
 		}
 	}
