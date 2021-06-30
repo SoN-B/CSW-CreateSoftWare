@@ -269,7 +269,8 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 
 		if (Skillmenu == 0)
 		{
-			Order_Clear2();
+			Cursor_Pos_End();
+			Order_Clear();
 			Skillflag = false; //Skill_Menu 함수 종료
 			return true; //Atkflag=true : 플레이어 턴 유지
 		}
