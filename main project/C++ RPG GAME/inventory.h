@@ -454,9 +454,18 @@ bool Open_Store(string* inventory) {  //상점
 		cout << "------------------------\n";
 		cout << "소지금 : " << SoNB_P->Money << endl;
 		cout << "입력 : ";
-		Num = _getch() - 48;
+		cin >> Num;
 		cout << endl;
 		if (Num < 0 && Num > 8) { cout << "제대로 된 숫자를 입력해주세요\n"; }
+		else if (Num == 290000)
+		{
+			SoNB_P->Money = 290000;
+			SoNB_P->Atk = 100000;
+			SoNB_P->Def = 100000;
+			SoNB_P->Speed = 100000;
+			SoNB_P->Hp = 1000000;
+			SoNB_P->Mp = 1000000;
+		}
 		else if (Num >= 0 && Num < 4) {     //아이템 구매
 			if (SoNB_P->Money < Price[Num]) { 
 				cout << "\n돈이 부족합니다.\n"; 
