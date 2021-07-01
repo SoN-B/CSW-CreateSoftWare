@@ -354,7 +354,50 @@ void Look_Inventory(string Inventory[]) {    //인벤토리 불러오기
 	cout << "\n인벤토리 목록\n";
 	setColor(15);
 
-	for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
+	for (int I = 0; I < 5; I++) {
+		bool Flag = false;
+		cout << I << " : " << Inventory[I] << "\n";
+		if (Inventory[I] != "0") {
+			for (int J = 0; J < 14; J++) {
+				if (Inventory[I] == Items[J].Name) {
+					Flag = true;
+					cout << "hp : " << Items[J].Hp << ", ";
+					cout << "mp : " << Items[J].Mp << ", ";
+					cout << "atk : " << Items[J].Atk << ", ";
+					cout << "def : " << Items[J].Def << ", ";
+					cout << "speed : " << Items[J].Speed << ", \n";
+					break;
+				}
+			}
+			if (Flag == false) {
+				for (int J = 0; J < 15; J++) {
+					if (Inventory[I] == Equipments[J].Name) {
+						Flag = true;
+						cout << "hp : " << Equipments[J].Hp << ", ";
+						cout << "mp : " << Equipments[J].Mp << ", ";
+						cout << "atk : " << Equipments[J].Atk << ", ";
+						cout << "def : " << Equipments[J].Def << ", ";
+						cout << "speed : " << Equipments[J].Speed << ", \n";
+						break;
+					}
+				}
+			}
+			if (Flag == false) {
+				for (int J = 0; J < 5; J++) {
+					if (Inventory[I] == Gacha_Equipments[J].Name) {
+						Flag = true;
+						cout << "hp : " << Gacha_Equipments[J].Hp << ", ";
+						cout << "mp : " << Gacha_Equipments[J].Mp << ", ";
+						cout << "atk : " << Gacha_Equipments[J].Atk << ", ";
+						cout << "def : " << Gacha_Equipments[J].Def << ", ";
+						cout << "speed : " << Gacha_Equipments[J].Speed << ", \n";
+						break;
+					}
+				}
+			}
+		}
+		cout << "------------------------\n";
+	}
 }
 
 void Swap_Item(string* Inventory) {     //인벤토리에 있는 아이템 위치 변경
