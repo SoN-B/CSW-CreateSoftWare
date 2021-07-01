@@ -233,7 +233,18 @@ int Atk_Menu(My_Character* Character, Monster* Mob)//플레이어턴 메뉴
 			Atkflag = Inventory_Menu();
 			break;
 		case 4: //진행중인 퀘스트
+			cout << "------------------------\n";
+			cout << "0을 입력하면 나가집니다.\n";
 			Look_Quest();
+			int B;
+			while (true) {
+				B = _getch() - 48;
+				if (B == 0) {
+					Cursor_Pos_End();
+					Order_Clear();
+					break;
+				}
+			}
 			break;
 		case 5: //도주
 			Print("던전에서 도망쳐 나옵니다...");
