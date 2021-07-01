@@ -374,7 +374,18 @@ int Empty_Room(My_Character* Character,int Roomnum)
 			Inventory_Menu();
 			break;
 		case 4: //진행중인 퀘스트
+			cout << "------------------------\n";
+			cout << "0을 입력하면 나가집니다.\n";
 			Look_Quest();
+			int A;
+			while (true) {
+				A = _getch() - 48;
+				if (A == 0) {
+					Cursor_Pos_End();
+					Order_Clear();
+					break;
+				}
+			}
 			break;
 		case 5: //도주
 			Print("던전에서 도망쳐 나옵니다...");

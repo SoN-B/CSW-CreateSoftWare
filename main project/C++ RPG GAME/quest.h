@@ -31,8 +31,8 @@ Quest Potion_shower_n = { "Potion_shower - 4 종류의 모든 포션을 각각 1
 //----------------서브 퀘스트
 Quest Miser_n = { "Miser - 2000원을 모아 이자를 받으세요", "sub quest", 0 };
 Quest Collecter_n = { "Collecter - 인벤토리를 꽉 채우고 보너스를 받으세요", "sub quest", 1 };
-Quest Random_item_n = { "Random item - 소비 아이템을 상점에 가져가보세요, 상점 주인의 마음에 든다면 통상가의 5배를 드립니다.", "sub quest", 2 };
-Quest Random_equipment_n = { "Random equipment - 장비 아이템을 상점에 가져가보세요, 상점 주인의 마음에 든다면 통상가의 5배를 드립니다.", "sub quest", 3 };
+Quest Random_item_n = { "Random item - 랜덤 소비 아이템을 상점에 가져가세요.", "sub quest", 2 };
+Quest Random_equipment_n = { "Random equipment - 랜덤 장비 아이템을 상점에 가져가세요.", "sub quest", 3 };
 Quest Scholarship_n = { "Scholarship - 레벨 5를 달성하면 장학금을 드립니다.", "sub quest", 4 };
 Quest Slime_slayer_n = { "Slime slayer - 슬라임을 3번 이상 잡으세요", "sub quest", 5 };
 Quest Goblin_slayer_n = { "Goblin slayer - 고블린을 3번 이상 잡으세요", "sub quest", 6 };
@@ -71,7 +71,8 @@ void Create_Quest(string* Quest_slot) {   //퀘스트 창에 랜덤 퀘스트를
 void Look_Quest() {   //퀘스트 
 	cout << "------------------------\n";
 	cout << "0은 메인 퀘스트, 1과2는 서브 퀘스트입니다.\n";
-	cout << "메인 퀘스트를 완료하면 게임이 클리어되고 서브 퀘스트를 완료하면 보상을 받습니다\n";
+	cout << "메인 퀘스트를 완료하면 게임이 클리어됩니다.\n";
+	cout << "서브 퀘스트를 완료하면 보상을 받습니다.\n";
 	setColor(2);
 	cout << "퀘스트 목록\n";
 	setColor(15);

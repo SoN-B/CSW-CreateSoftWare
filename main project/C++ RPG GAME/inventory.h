@@ -536,6 +536,7 @@ bool Open_Store(string* inventory) {  //상점
 		else if (Num == 6) { Inventoryflag = Equipment_List(); }    //장비 아이템 목록
 		else if (Num == 7) { Throw_Away_Item(inventory); }    //인벤토리의 아이템 버리기
 		else if (Num == 8) {   //퀘스트
+			system("cls");
 			int Num2;
 			cout << "\n0은 메인 퀘스트, 1과2는 서브 퀘스트입니다.\n";
 			cout << "메인 퀘스트를 완료하면 게임이 클리어되고 서브 퀘스트를 완료하면 보상을 받습니다\n";
