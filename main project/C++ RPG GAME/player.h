@@ -389,10 +389,10 @@ int Empty_Room(My_Character* Character,int Roomnum)
 			cout << "------------------------\n";
 			cout << "0을 입력하면 나가집니다.\n";
 			Look_Quest();
-			int A;
+			int Questinput;
 			while (true) {
-				A = _getch() - 48;
-				if (A == 0) {
+				Questinput = _getch() - 48;
+				if (Questinput == 0) {
 					Cursor_Pos_End();
 					Order_Clear();
 					break;
