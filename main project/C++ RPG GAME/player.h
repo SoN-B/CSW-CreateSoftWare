@@ -14,29 +14,29 @@ void My_Character::Get_Character_Info_Left()
 	setColor(8);
 	cout << "Level";
 	setColor(15);
-	cout << ": " << Level;
+	cout << " :  " << Level;
 
 	setColor(6);
 	cout << "\nMax Exp/Exp";
 	setColor(15);
-	cout << ": " << Max_Exp << "/" << Exp;
+	cout << " :  " << Max_Exp << "/" << Exp;
 
 	setColor(4);
 	cout << "\nHP";
 	setColor(15);
-	cout << ": " << Hp;
+	cout << " : " << Hp;
 
 	setColor(9);
 	cout << "\nMP";
 	setColor(15);
 
-	cout << " : " << Mp << "\nATK : " << Atk << "\nDEF : " << Def << "\nSPEED : " << Speed;
+	cout << " : " << Mp << "\nATK : " << Atk << "\nDEF :" << Def << "\nSPEED :" << Speed;
 
 	setColor(14);
 	cout << "\nMoney";
 	setColor(15);
 
-	cout << " : " << Money << " Coin" << endl << endl;
+	cout << " :" << Money << " Coin" << endl << endl;
 }
 
 class Skill //스킬 클래스

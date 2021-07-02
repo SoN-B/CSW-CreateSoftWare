@@ -75,6 +75,7 @@ void History_Reset()
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
 {	
 	Sleep(100);
+	Status_Reset();
 	if (mob != NULL)
 	{
 		Sleep(50);
