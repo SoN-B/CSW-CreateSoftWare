@@ -191,7 +191,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 	else {     //인벤토리에 빈 공간이 있는 경우
 			Sleep(75);
 			Order_Clear();
-			Cursor_Move(0, Order_Y + 1);
+			Cursor_Move(0, Order_Y);
 			setColor(2);
 			cout << "인벤토리 목록\n";
 			setColor(15);
