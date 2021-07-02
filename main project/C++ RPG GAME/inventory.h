@@ -8,6 +8,8 @@
 #include "Item_List.h"
 using namespace std;
 
+bool Purchaseflag = false;
+bool Inventoryflag3 = false;
 bool Questflag2 = false;
 bool Questflag3 = false;
 int Inventoryflag = 1;
@@ -180,6 +182,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 				cout << "\n\n교체할 아이템의 위치를 입력해주세요\n";
 				N = _getch() - 48;
 				if (N >= 0 && N <= 4) {
+					Purchaseflag = true;
 					Inventory[N] = Item_Name;
 					Cursor_Pos_End();
 					Order_Clear();
@@ -203,6 +206,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 			if (N >= 0 && N <= 4) {
 				if (Inventory[N] == "0") {
 					Inventory[N] = Item_Name;
+					Purchaseflag = true;
 				}
 				else { cout << "선택하신 위치에는 이미 아이템이 있습니다.\n";
 						cout << "다른 위치를 선택해 주십시오\n"; }
@@ -272,16 +276,14 @@ void Pick_Up_Item_Gacha(string* Inventory, string Item_Name) { //아이템을 �
 			if (N >= 0 && N <= 4) {
 				if (Inventory[N] == "0") {
 					Inventory[N] = Item_Name;
-				}
-				else {
 					break;
 				}
-			else {
-				Cursor_Pos_End();
-				Order_Clear();
-				cout << "선택하신 위치에는 이미 아이템이 있습니다.\n";
-				cout << "다른 위치를 선택해 주십시오\n"; \n";
-			}
+				else {
+					Cursor_Pos_End();
+					Order_Clear();
+					cout << "선택하신 위치에는 이미 아이템이 있습니다.\n";
+					cout << "다른 위치를 선택해 주십시오\n\n";
+				}
 			}
 			else {
 				Cursor_Pos_End();
@@ -444,15 +446,17 @@ bool Open_Store(string* inventory) {  //상점
 		cout << "입력 : ";
 		cin >> Num;
 		cout << endl;
-		if (Num < 0 && Num > 8) { cout << "제대로 된 숫자를 입력해주세요\n"; }
-		else if (Num == 290000)
-		{
-			SoNB_P->Money = 290000;
-			SoNB_P->Atk = 100000;
-			SoNB_P->Def = 100000;
-			SoNB_P->Speed = 100000;
-			SoNB_P->Hp = 1000000;
-			SoNB_P->Mp = 1000000;
+		if (Num < 0 && || Num > 89) {
+			if (Num == 290000)
+			{
+				SoNB_P->Money = 290000;
+				SoNB_P->Atk = 100000;
+				SoNB_P->Def = 100000;
+				SoNB_P->Speed = 100000;
+				SoNB_P->Hp = 1000000;
+				SoNB_P->Mp = 1000000;
+			}
+			else { cout << "제대로 된 숫자를 입력해주세요\n"; }
 		}
 		else if (Num >= 0 && Num < 4) {     //아이템 구매
 			if (SoNB_P->Money < Price[Num]) { 
@@ -466,11 +470,14 @@ bool Open_Store(string* inventory) {  //상점
 				system("cls");
 				Pick_Up_Item(inventory, Item_list[Num]);
 				system("cls");
-				SoNB_P->Money -= Price[Num];
-				cout << Item_list[Num] << "을(를) 구매했습니다.\n";
-				cout << "소지금 : " << SoNB_P->Money + Price[Num] << " -> " << SoNB_P->Money << endl;
-				Item_list[Num] = "품절";
-				Price[Num] = 0;
+				if (Purchaseflag == true) {
+					SoNB_P->Money -= Price[Num];
+					cout << Item_list[Num] << "을(를) 구매했습니다.\n";
+					cout << "소지금 : " << SoNB_P->Money + Price[Num] << " -> " << SoNB_P->Money << endl;
+					Item_list[Num] = "품절";
+					Price[Num] = 0;
+					Purchaseflag = false;
+				}
 			}
 		}
 		else if (Num == 4) { //가챠 구매
@@ -491,14 +498,14 @@ bool Open_Store(string* inventory) {  //상점
 					L = rand() % 14;
 					result = Items[L].Name;
 					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!\n\n";
-					Pick_Up_Item(inventory, result);
+					Pick_Up_Item_Gacha(inventory, result);
 					SoNB_P->Money -= Price[Num];
 				}
 				else if (Luck >= 3 && Luck < 5) {    //가챠에서 장비 아이템 등장
 					L = rand() % 15;
 					result = Equipments[L].Name;
 					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!\n\n";
-					Pick_Up_Item(inventory, result);
+					Pick_Up_Item_Gacha(inventory, result);
 					SoNB_P->Money -= Price[Num];
 				}
 				else if (Luck == 5) {    //가챠에서 가챠 장비 등장
@@ -506,7 +513,7 @@ bool Open_Store(string* inventory) {  //상점
 					result = Gacha_Equipments[L].Name;
 					cout << "오잉? 가챠에서 빛이?\n";
 					cout << "가챠에서 " << result << "이(가) 나왔습니다!!!\n\n";
-					Pick_Up_Item(inventory, result);
+					Pick_Up_Item_Gacha(inventory, result);
 					SoNB_P->Money -= Price[Num];
 				}
 				else if (Luck == 6) {   //꽝
