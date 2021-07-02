@@ -53,7 +53,7 @@ void Status_Reset()
 }
 void History_Clear()
 {
-	for (int i = Order_Y; i < 32; i++)
+	for (int i = Order_Y; i < 35; i++)
 	{
 		for (int j = Order_X; j < 100; j++)
 		{
