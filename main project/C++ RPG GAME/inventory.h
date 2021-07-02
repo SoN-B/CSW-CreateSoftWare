@@ -600,8 +600,9 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 
 	if (n >= 0 && n <= 4) {
 		if (Inventory[n] == "0") { //cout <<"\n선택하신 위치에 아이템이 없습니다\n" << "------------------------\n"; 
-			Print("선택하신 위치에 	아이템이 없습니다.");
+			Cursor_Pos_End();
 			Order_Clear();
+			cout << ("선택하신 위치에 아이템이 없습니다.\n");
 		}
 		else {
 			for (int i = 0; i < 14; i++) {   //14는 items 배열 크기
@@ -637,6 +638,7 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 					Print_Double(Character->Hp);
 					Print("");*/
 					Order_Clear();
+					Inventoryflag3 = true;
 					break;
 				}
 			}
@@ -674,6 +676,7 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 						Print_blank();
 						Sleep(750);
 						Order_Clear();
+						Inventoryflag3 = true;
 						break;
 					}
 				}
@@ -698,6 +701,7 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 						Cursor_Line();
 						cout << Gacha_Equipments[i].Name << "을 착용했습니다\n";
 						Cursor_Line();
+						setColor(11);
 						cout << "hp : " << Character->Hp - Gacha_Equipments[i].Hp << " -> " << Character->Hp ;
 						Cursor_Line();
 						cout << "mp : " << Character->Mp - Gacha_Equipments[i].Mp << " -> " << Character->Mp ;
@@ -707,14 +711,22 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 						cout << "def : " << Character->Def - Gacha_Equipments[i].Def << " -> " << Character->Def ;
 						Cursor_Line();
 						cout << "speed : " << Character->Speed - Gacha_Equipments[i].Speed << " -> " << Character->Speed ;
+						setColor(15);
+						Print_blank();
+						Sleep(750);
 						Order_Clear();
+						Inventoryflag3 = true;
 						break;
 					}
 				}
 			}
 		}
 	}
-	else { cout << "아이템 사용이 취소되었습니다\n"; }
+	else {
+	Cursor_Pos_End();
+	Order_Clear();
+	cout << "아이템 사용이 취소되었습니다.\n";
+	}
 }
 
 void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equipment_slot) {
