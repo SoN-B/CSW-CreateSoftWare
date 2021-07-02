@@ -213,6 +213,87 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 	Order_Clear();
 }
 
+void Pick_Up_Item_Gacha(string* Inventory, string Item_Name) { //아이템을 주울 때
+	int Count = 0;
+	int N;
+	char C;
+	for (int I = 0; I < 5; I++) {      //인벤토리에 빈공간이 있는지 확인
+		if (Inventory[I] == "0") { Count++; }
+	}
+	if (Count == 0) {    //인벤토리가 가득 찬 경우
+		cout << "인벤토리가 가득 찼습니다.\n";
+		while (true) {
+
+			setColor(2);
+			cout << "인벤토리 목록\n";
+			setColor(15);
+
+			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
+			cout << "기존의 아이템과 교체하실거면 Y, 아니면 N를 입력해주세요\n" << "입력 : ";
+			C = _getch();
+			if (C == 'N' || C == 'n') {
+				Cursor_Line();
+				cout << "아이템을 교체하지 않았습니다.\n";
+				break;
+			}
+			else if (C == 'Y' || C == 'y') {
+				cout << "\n\n교체할 아이템의 위치를 입력해주세요\n" << "입력 : ";
+				N = _getch() - 48;
+				if (N >= 0 && N <= 4) {
+					Inventory[N] = Item_Name;
+					Cursor_Pos_End();
+					Order_Clear();
+					break;
+				}
+				else {
+					Cursor_Pos_End();
+					Order_Clear();
+					cout << "0~4의 숫자 중 하나를 입력해주세요\n\n";
+				}
+			}
+			else {
+				Cursor_Pos_End();
+				Order_Clear();
+				cout << "다시 입력해주세요\n\n";
+			}
+		}
+	}
+	else {     //인벤토리에 빈 공간이 있는 경우
+		while (true) {
+
+			setColor(2);
+			cout << "인벤토리 목록\n";
+			setColor(15);
+
+			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
+			cout << Item_Name << " 을 인벤토리의 몇 번 위치에 두실 겁니까?\n" << "입력 : ";
+			N = _getch() - 48;
+			cout << endl;
+			if (N >= 0 && N <= 4) {
+				if (Inventory[N] == "0") {
+					Inventory[N] = Item_Name;
+				}
+				else {
+					break;
+				}
+			else {
+				Cursor_Pos_End();
+				Order_Clear();
+				cout << "선택하신 위치에는 이미 아이템이 있습니다.\n";
+				cout << "다른 위치를 선택해 주십시오\n"; \n";
+			}
+			}
+			else {
+				Cursor_Pos_End();
+				Order_Clear();
+				cout << "0~4의 숫자 중 하나를 입력해주세요\n\n";
+			}
+		}
+		Cursor_Pos_End();
+		Order_Clear();
+	}
+}
+
 void Look_Inventory(string Inventory[]) {    //인벤토리 불러오기
 	setColor(2);
 	cout << "\n인벤토리 목록\n";
@@ -741,6 +822,7 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 		cout << "인벤토리를 비운 후에 다시 시도해주세요\n";
 	}
 	else {
+		cout << "------------------------\n";
 		cout << "착용중인 장비 아이템 목록\n";
 		for (int I = 0; I < 5; I++) { cout << I << " : " << Equipment_slot[I] << endl; }
 		cout << "------------------------\n";
@@ -750,13 +832,17 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 		Cursor_Pos_End();
 		N = _getch() - 48;
 		cout << endl;
-		if (N < 0 && N > 4) { cout << "선택하신 위치에 착용중인 장비가 없습니다.\n"; }
+		Cursor_Pos_End();
+		Order_Clear();
+		if (N < 0 || N > 4) { cout << "장비 해제가 취소되었습니다.\n"; }
 		else if (N >= 0 && N <= 4) {
 			if (Equipment_slot[N] == "0") { cout << "선택하신 위치에 착용중인 장비가 없습니다.\n"; }
 			else {
+				Cursor_Pos_End();
+				Order_Clear();
 				for (int J = 0; J < 15; J++) {//15는 Equipments 배열 크기
 					if (Equipment_slot[N] == Equipments[J].Name) {//장비 아이템 착용 해제
-						Pick_Up_Item(Inventory, Equipment_slot[N]);
+						Pick_Up_Item_Gacha(Inventory, Equipment_slot[N]);
 						Character->Hp -= Equipments[J].Hp;
 						Character->Mp -= Equipments[J].Mp;
 						Character->Atk -= Equipments[J].Atk;
@@ -764,7 +850,9 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						Character->Speed -= Equipments[J].Speed;
 						Equipment_slot[N] = "0";
 						Cursor_Line();
-						cout << Equipments[J].Name << "을 착용 해제했습니다";
+						cout << Equipments[J].Name << "을 착용 해제했습니다.\n";
+						Cursor_Line();
+						setColor(11);
 						cout << "hp : " << Character->Hp + Equipments[J].Hp << " -> " << Character->Hp;
 						Cursor_Line();
 						cout << "mp : " << Character->Mp + Equipments[J].Mp << " -> " << Character->Mp;
@@ -774,6 +862,9 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						cout << "def : " << Character->Def + Equipments[J].Def << " -> " << Character->Def;
 						Cursor_Line();
 						cout << "speed : " << Character->Speed + Equipments[J].Speed << " -> " << Character->Speed;
+						setColor(15);
+						Print_blank();
+						Sleep(750);
 						Order_Clear();
 						break;
 					}
@@ -781,7 +872,7 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 				for (int J = 0; J < 5; J++) {//5는 Gacha_Equipments 배열 크기
 					if (Equipment_slot[N] == "0") { break; }//앞의 for문에서 장비를 해제했다면 이 for문을 돌리지 않음
 					if (Equipment_slot[N] == Gacha_Equipments[J].Name) {//가챠 장비 착용 해제
-						Pick_Up_Item(Inventory, Equipment_slot[N]);
+						Pick_Up_Item_Gacha(Inventory, Equipment_slot[N]);
 						Character->Hp -= Gacha_Equipments[J].Hp;
 						Character->Mp -= Gacha_Equipments[J].Mp;
 						Character->Atk -= Gacha_Equipments[J].Atk;
@@ -789,8 +880,9 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						Character->Speed -= Gacha_Equipments[J].Speed;
 						Equipment_slot[N] = "0";
 						Cursor_Line();
-						cout <<Gacha_Equipments[J].Name << "을 착용 해제했습니다\n";
+						cout <<Gacha_Equipments[J].Name << "을 착용 해제했습니다.\n";
 						Cursor_Line();
+						setColor(11);
 						cout << "hp : " << Character->Hp + Gacha_Equipments[J].Hp << " -> " << Character->Hp;
 						Cursor_Line();
 						cout << "mp : " << Character->Mp + Gacha_Equipments[J].Mp << " -> " << Character->Mp;
@@ -800,6 +892,9 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 						cout << "def : " << Character->Def + Gacha_Equipments[J].Def << " -> " << Character->Def;
 						Cursor_Line();
 						cout << "speed : " << Character->Speed + Gacha_Equipments[J].Speed << " -> " << Character->Speed;
+						setColor(15);
+						Print_blank();
+						Sleep(750);
 						Order_Clear();
 						break;
 					}
@@ -812,9 +907,9 @@ void Take_Off_Equipment(My_Character* Character, string* Inventory, string* Equi
 bool Inventory_Menu()
 {
 	int Inventorymenu;
-	bool Inventoryflag = true;
+	bool Inventoryflag2 = true;
 	int flag;
-	while (Inventoryflag)
+	while (Inventoryflag2)
 	{
 		Look_Inventory(Inventory);
 		cout << "------------------------\n";
@@ -823,27 +918,33 @@ bool Inventory_Menu()
 		cout << "INVENTORY MENU" << endl;
 		setColor(15);
 
-		cout << "1. 아이템 사용\n2.장비 해제\n0. 뒤로가기\n";
+		cout << "1. 아이템 사용\n2. 장비 해제\n0. 뒤로가기\n";
 		flag = _getch() - 48;
 		switch (flag)
 		{
 		case 1:
 			Use_Item(SoNB_P, Inventory, Equipment_slot);
-			Inventoryflag = false;
+			if (Inventoryflag3 == true) {
+				Inventoryflag2 = false;
+			}
+			//Inventoryflag = false;
 			break;
 		case 2:
+			Cursor_Pos_End();
+			Order_Clear();
 			Take_Off_Equipment(SoNB_P, Inventory, Equipment_slot);
 			break;
 		case 0:
 			cout << "------------------------\n";
 			Cursor_Pos_End();
 			Order_Clear();
-			Inventoryflag = false;
+			Inventoryflag2 = false;
 			return true;
 			break;
 		default:
 			cout << "다시 입력해 주세요.";
 			break;
 		}
+		Inventoryflag3 = false;
 	}
 }
