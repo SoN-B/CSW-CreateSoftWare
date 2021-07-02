@@ -169,6 +169,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 
 			for (int I = 0; I < 5; I++) { cout << I << " : " << Inventory[I] << "\n"; }
 			cout << "기존의 아이템과 교체하실거면 Y, 아니면 N를 입력해주세요\n";
+			Cursor_Pos_End();
 			C = _getch();
 			if (C == 'N' || C == 'n') {
 				Cursor_Line();
