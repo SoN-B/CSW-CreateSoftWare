@@ -811,7 +811,7 @@ bool Inventory_Menu()
 		cout << "INVENTORY MENU" << endl;
 		setColor(15);
 
-		cout << "1. 아이템 사용\n2. 아이템 설명\n3. 장비 해제\n0. 뒤로가기\n";
+		cout << "1. 아이템 사용\n2.장비 해제\n0. 뒤로가기\n";
 		flag = _getch() - 48;
 		switch (flag)
 		{
@@ -820,9 +820,6 @@ bool Inventory_Menu()
 			Inventoryflag = false;
 			break;
 		case 2:
-			Item_List();
-			break;
-		case 3:
 			Take_Off_Equipment(SoNB_P, Inventory, Equipment_slot);
 			break;
 		case 0:
