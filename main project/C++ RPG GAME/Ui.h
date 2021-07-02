@@ -71,7 +71,15 @@ void History_Reset()
 	}
 
 }
+void History_Reset2()
+{
+	if (Order_y > 11)
+	{
+		History_Clear();
+		Order_y = Order_Y;
+	}
 
+}
 void Combat_Ui(My_Character* Character, Monster* mob = NULL) //전투 UI. 
 {	
 	Sleep(100);
