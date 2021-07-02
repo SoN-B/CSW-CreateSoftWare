@@ -446,7 +446,7 @@ bool Open_Store(string* inventory) {  //상점
 		cout << "입력 : ";
 		cin >> Num;
 		cout << endl;
-		if (Num < 0 && || Num > 89) {
+		if (Num < 0 || Num > 89) {
 			if (Num == 290000)
 			{
 				SoNB_P->Money = 290000;
