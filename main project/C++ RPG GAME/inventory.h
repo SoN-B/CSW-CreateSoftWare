@@ -8,6 +8,7 @@
 #include "Item_List.h"
 using namespace std;
 
+bool Removeflag = false;
 bool Purchaseflag = false;
 bool Inventoryflag3 = false;
 bool Questflag2 = false;
@@ -250,14 +251,24 @@ void Pick_Up_Item_Gacha(string* Inventory, string Item_Name) { //아이템을 �
 					break;
 				}
 				else {
-					Cursor_Pos_End();
-					Order_Clear();
+					if (Removeflag == false) {
+						Cursor_Pos_End();
+						Order_Clear();
+					}
+					else {
+						system("cls");
+					}
 					cout << "0~4의 숫자 중 하나를 입력해주세요\n\n";
 				}
 			}
 			else {
-				Cursor_Pos_End();
-				Order_Clear();
+				if (Removeflag == false) {
+					Cursor_Pos_End();
+					Order_Clear();
+				}
+				else {
+					system("cls");
+				}
 				cout << "다시 입력해주세요\n\n";
 			}
 		}
@@ -279,15 +290,25 @@ void Pick_Up_Item_Gacha(string* Inventory, string Item_Name) { //아이템을 �
 					break;
 				}
 				else {
-					Cursor_Pos_End();
-					Order_Clear();
+					if (Removeflag == false) {
+						Cursor_Pos_End();
+						Order_Clear();
+					}
+					else {
+						system("cls");
+					}
 					cout << "선택하신 위치에는 이미 아이템이 있습니다.\n";
 					cout << "다른 위치를 선택해 주십시오\n\n";
 				}
 			}
 			else {
-				Cursor_Pos_End();
-				Order_Clear();
+				if (Removeflag == false) {
+					Cursor_Pos_End();
+					Order_Clear();
+				}
+				else {
+					system("cls");
+				}
 				cout << "0~4의 숫자 중 하나를 입력해주세요\n\n";
 			}
 		}
@@ -393,6 +414,7 @@ void Throw_Away_Item(string* Inventory) {       //아이템을 버릴 때
 
 #include "quest.h"
 bool Open_Store(string* inventory) {  //상점
+	Removeflag = true;
 	int Num;
 	string Gacha = "Gacha";
 	srand((unsigned int)time(NULL));
@@ -668,6 +690,7 @@ bool Open_Store(string* inventory) {  //상점
 		}
 		else if (Num == 9)
 		{
+			Removeflag = false;
 			return false;
 			break;
 		}    //상점 종료
@@ -735,6 +758,8 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 				if (Inventory[n] == Equipments[i].Name) {
 					int Num = Equipments[i].Kind;
 					if (Equipment_slot[Num] != "0") {//장비창 확인
+						Cursor_Pos_End();
+						Order_Clear();
 						cout << "선택하신 장비와 같은 종류의 장비를 이미 착용하고 있습니다.\n";
 						cout << "착용중인 장비를 해제하고 다시 시도해주세요\n";
 						break;
@@ -774,6 +799,8 @@ void Use_Item(My_Character* Character, string* Inventory, string* Equipment_slot
 				if (Inventory[n] == Gacha_Equipments[i].Name) {
 					int Num = Gacha_Equipments[i].Kind;
 					if (Equipment_slot[Num] != "0") {//장비창 확인
+						Cursor_Pos_End();
+						Order_Clear();
 						cout << "선택하신 장비와 같은 종류의 장비를 이미 착용하고 있습니다.\n";
 						cout << "착용중인 장비를 해제하고 다시 시도해주세요\n";
 						break;
@@ -916,6 +943,8 @@ bool Inventory_Menu()
 	int Inventorymenu;
 	bool Inventoryflag2 = true;
 	int flag;
+	Cursor_Pos_End();
+	Order_Clear();
 	while (Inventoryflag2)
 	{
 		Look_Inventory(Inventory);
@@ -949,6 +978,8 @@ bool Inventory_Menu()
 			return true;
 			break;
 		default:
+			Cursor_Pos_End();
+			Order_Clear();
 			cout << "다시 입력해 주세요.";
 			break;
 		}

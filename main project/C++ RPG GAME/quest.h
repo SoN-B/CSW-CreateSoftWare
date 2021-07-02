@@ -27,7 +27,7 @@ Quest Wood_collecter_n = { "Wood collecter - Wood 장비 5개를 인벤토리에
 Quest Gacha_winner_n = { "Gacha_winner - Bamboo 장비 1개를 인벤토리에 모으세요", "main quest", 3 };
 Quest Dungeon_owner_n = { "Dungeon_owner - 8000원을 모아 던전을 구매하세요", "main quest", 4 };
 Quest Dungeon_clear_n = { "Dungeon_clear - 오크 킹을 1번 이상 잡으세요", "main quest", 5 };
-Quest Potion_shower_n = { "Potion_shower - 4 종류의 모든 포션을 각각 1번 이상 사용하세요", "main quest", 6 };
+Quest Potion_shower_n = { "Potion_shower - 4 종류의 포션을 모두 1번 이상 사용하세요", "main quest", 6 };
 //----------------서브 퀘스트
 Quest Miser_n = { "Miser - 2000원을 모아 이자를 받으세요", "sub quest", 0 };
 Quest Collecter_n = { "Collecter - 인벤토리를 꽉 채우고 보너스를 받으세요", "sub quest", 1 };
