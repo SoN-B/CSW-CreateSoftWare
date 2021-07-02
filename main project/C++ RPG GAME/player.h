@@ -60,7 +60,6 @@ public:
 	}
 	void Use_Skill(My_Character* Character, Monster* Mob, Skill Skill);
 	void Skill_Info(My_Character* Character, Skill Skill);
-	void Skill_Change(My_Character* Character, Skill Skill);
 };
 
 void Skill::Use_Skill(My_Character* Character, Monster* Mob, Skill Skill)//스킬 사용 함수
@@ -178,8 +177,8 @@ Skill Fire_bolt("파이어볼트", 0, 15, 0, 0, 0, 75, 0);//마나15소모, 75�
 Skill Power_Slash2("파워 슬래시Ⅱ", 0, 50, 0, 0, 1.35, 0, 0);//마나50소모, 1.35배 데미지, 3레벨 해금
 //플레이어의 스킬창 기본값
 
-Skill Skill_Array[4] = { Power_Slash,GOD_ATK,Mind_Fuel,Prayer };
-vector<Skill>Skill_Tree = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer };//스킬트리
+Skill Skill_Slot[4] = { Power_Slash,GOD_ATK,Mind_Fuel,Prayer };//스킬 슬롯
+vector<Skill>Skill_Tree = { Power_Slash,Blood_Slash,Mind_Fuel,Prayer,Fire_bolt,Power_Slash2 };//가지고있는 스킬
 
 void Mob_Atk(Monster* Mob, My_Character* Character)
 {
@@ -268,14 +267,13 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 	int Skillmenu;//스킬 선택
 	string Skillcheck;//스킬 사용 확인
 	bool Skillflag = true;// Skill_Menu 함수 제어용 변수
-	double Damage; // 플레이어의 최종 스킬 데미지
 	while (Skillflag)
 	{
 		setColor(10);
 		cout << "SKILL MENU" << endl;
 		setColor(15);
 
-		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Array[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
+		for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Slot[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
 		cout << "0. 뒤로가기" << endl;//0번 입력시 뒤로가기 출력
 		Skillmenu = _getch() - 48;
 
@@ -288,13 +286,13 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 		}
 		if (Skillmenu >= 1 && Skillmenu <= 4)
 		{
-			Skill_Array[Skillmenu - 1].Skill_Info(Character, Skill_Array[Skillmenu - 1]);//스킬정보 출력
-			cout << Skill_Array[Skillmenu - 1].Skillname << " 를 사용할까? (Y or else)" << endl;
+			Skill_Slot[Skillmenu - 1].Skill_Info(Character, Skill_Slot[Skillmenu - 1]);//스킬정보 출력
+			cout << Skill_Slot[Skillmenu - 1].Skillname << " 를 사용할까? (Y or else)" << endl;
 			Skillcheck = _getch();
 			Cursor_Pos_End();
 			if (Skillcheck == "Y" || Skillcheck == "y")//스킬 사용 확인시
 			{
-				if (Character->Hp - Skill_Array[Skillmenu - 1].Usedhp <= 0)//스킬 사용시 HP가 0이하가 되는경우 방지
+				if (Character->Hp - Skill_Slot[Skillmenu - 1].Usedhp <= 0)//스킬 사용시 HP가 0이하가 되는경우 방지
 				{
 					setColor(12);
 					Print("HP가 모자랍니다.");
@@ -304,7 +302,7 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 					Skillflag = false;//Skill_Menu 함수 종료
 					return true;//Atkflag=true : 플레이어 턴 유지
 				}
-				if (Character->Mp - Skill_Array[Skillmenu - 1].Usedmp < 0)//스킬 사용시 MP가 0미만이 되는경우 방지
+				if (Character->Mp - Skill_Slot[Skillmenu - 1].Usedmp < 0)//스킬 사용시 MP가 0미만이 되는경우 방지
 				{
 					setColor(12);
 					Print("MP가 모자랍니다.");
@@ -314,7 +312,7 @@ bool Skill_Menu(My_Character* Character, Monster* Mob, bool Atkflag)
 					Skillflag = false;//Skill_Menu 함수 종료
 					return true;//Atkflag=true : 플레이어 턴 유지
 				}
-				Skill_Array[Skillmenu - 1].Use_Skill(Character, Mob, Skill_Array[Skillmenu - 1]);//스킬사용
+				Skill_Slot[Skillmenu - 1].Use_Skill(Character, Mob, Skill_Slot[Skillmenu - 1]);//스킬사용
 				Order_Clear();
 				Skillflag = false; //Skill_Menu 함수 종료
 				return false; //Atkflag=false : 플레이어 턴 종료
@@ -359,7 +357,7 @@ int Empty_Room(My_Character* Character,int Roomnum)
 			cout << "SKILL MENU" << endl;
 			setColor(15);
 
-			for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Array[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
+			for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Slot[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
 			cout << "0. 뒤로가기" << endl;//0번 입력시 뒤로가기 출력
 			Skillmenu = _getch() - 48;
 			if (Skillmenu == 0)
@@ -369,17 +367,33 @@ int Empty_Room(My_Character* Character,int Roomnum)
 			}
 			if (Skillmenu >= 1 && Skillmenu <= 4)
 			{
-				Order_Clear2();
-				Skill_Array[Skillmenu - 1].Skill_Info(Character,Skill_Array[Skillmenu-1]);
+				Skill_Slot[Skillmenu - 1].Skill_Info(Character,Skill_Slot[Skillmenu-1]);
 				cout << "교체하시겟습니까?(Y or else)" <<endl;
 				Skillcheck = _getch();
 				if (Skillcheck == "Y" || Skillcheck == "y")
 				{
-					for (int Skillint = 0; Skillint < Skill_Tree.size(); Skillint++) { cout << Skillint + 1 << ". " << Skill_Tree[Skillint].Skillname << endl; }
+					Order_Clear2();
+					int Beforeskillnum = Skillmenu - 1;
 					cout << "교체할 스킬을 선택" << endl;
+					for (int Skillint = 0; Skillint < Skill_Tree.size(); Skillint++) { cout << Skillint + 1 << ". " << Skill_Tree[Skillint].Skillname << endl; }
+					cout << "0. 뒤로가기" << endl;//0번 입력시 뒤로가기 출력
 					Skillmenu = _getch() - 48;
-					//미완성 
+					if (Skillmenu == 0)
+					{
+						Order_Clear2();
+						break;
+					}
+					if (Skillmenu < Skill_Tree.size() + 2)
+					{
+						Skill_Tree[Skillmenu - 1].Skill_Info(Character, Skill_Tree[Skillmenu - 1]);
+						Skill_Slot[Beforeskillnum] = Skill_Tree[Skillmenu - 1];
+						Sleep(3000);
+						Order_Clear2();
+						break;
+					}
+					else { cout << "잘못된 입력!"; }
 				}
+				else { Order_Clear2(); }
 			}	
 			break;
 		case 3: //가방열기

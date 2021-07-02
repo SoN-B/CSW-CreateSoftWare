@@ -191,6 +191,7 @@ bool Map_Combat()//맵선택 및 전투
             }
         }
         Roomnum = Empty_Room(SoNB_P, Roomnum);
+        if (Roomnum == -1) { return true; }
     }
     if (SoNB_P->Hp > 0) {
         system("cls");
