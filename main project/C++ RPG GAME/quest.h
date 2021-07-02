@@ -74,7 +74,7 @@ void Look_Quest() {   //퀘스트
 	cout << "메인 퀘스트를 완료하면 게임이 클리어됩니다.\n";
 	cout << "서브 퀘스트를 완료하면 보상을 받습니다.\n";
 	setColor(2);
-	cout << "퀘스트 목록\n";
+	cout << "\n퀘스트 목록\n";
 	setColor(15);
 	for (int J = 0; J < 3; J++) {
 		cout << "------------------------\n";

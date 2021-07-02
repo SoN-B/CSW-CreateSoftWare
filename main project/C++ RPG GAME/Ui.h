@@ -64,7 +64,7 @@ void History_Clear()
 }
 void History_Reset()
 {
-	if (Order_y > 30)
+	if (Order_y > 11)
 	{
 		History_Clear();
 		Order_y = Order_Y;

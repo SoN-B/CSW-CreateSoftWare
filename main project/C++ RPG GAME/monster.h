@@ -92,40 +92,40 @@ void Monster::Get_Info_Right()
     int i = 0;
     Cursor_Move(62, i);
     setColor(8);
-    cout << "종족 ";
+    cout << "ㅤ" << "종족 ";
     setColor(15);
-    cout << ": " << this->Kind << " [" << Ettype << "] ";
+    cout << " : " << this->Kind << " [" << Ettype << "] ";
 
     i = i + 1;
 
     Cursor_Move(62, i);
     setColor(4);
-    cout << "HP ";
+    cout << "ㅤ" << "HP ";
     setColor(15);
-    cout << ": " << this->Hp;
+    cout << " : " << this->Hp;
 
     i = i + 1;
 
     Cursor_Move(62, i);
     setColor(9);
-    cout << "MP ";
+    cout << "ㅤ" << "MP ";
     setColor(15);
-    cout << ": " << this->Mp;
+    cout << " : " << this->Mp;
 
     i = i + 1;
 
     Cursor_Move(62, i);
-    cout << "ATK : " << this->Atk;
+    cout << "ㅤ" << "ATK : " << this->Atk;
 
     i = i + 1;
 
     Cursor_Move(62, i);
-    cout << "DEF : " << this->Def << endl;
+    cout << "ㅤ" << "DEF : " << this->Def << endl;
 
     i = i + 1;
 
     Cursor_Move(62, i);
-    cout << "SPEED : " << this->Speed << endl;
+    cout << "ㅤ" << "SPEED : " << this->Speed << endl;
 }
 void Randy()
 {

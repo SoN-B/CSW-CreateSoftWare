@@ -83,7 +83,7 @@ bool Map_Combat()//맵선택 및 전투
     if (Select != 1 && Select != 2 && Select != 3 && Select != 4) return true;
     Map = Maps[Select - 1];
     system("cls");
-
+    History_Reset();
     if (Map == Maps[0]) PlaySound(TEXT(".\\SoundTrack\\Map1.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //0번맵 음악
     if (Map == Maps[1]) PlaySound(TEXT(".\\SoundTrack\\Map2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //1번맵 음악
     if (Map == Maps[2]) PlaySound(TEXT(".\\SoundTrack\\Map3.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //2번맵 음악
