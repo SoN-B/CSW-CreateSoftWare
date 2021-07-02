@@ -174,6 +174,7 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 			if (C == 'N' || C == 'n') {
 				Cursor_Line();
 				cout << "아이템을 줍지 않았습니다\n";
+				Order_Clear();
 			}
 			else if (C == 'Y' || C == 'y') {
 				cout << "\n\n교체할 아이템의 위치를 입력해주세요\n";
