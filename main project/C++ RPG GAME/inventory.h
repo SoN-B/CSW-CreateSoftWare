@@ -159,10 +159,10 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 	for (int I = 0; I < 5; I++) {      //인벤토리에 빈공간이 있는지 확인
 		if (Inventory[I] == "0") { Count++; }
 	}
-	if (Count == 0) {    //인벤토리가 가득 찬 경우
+	if (Count == 0) 
+	{    //인벤토리가 가득 찬 경우
 		Cursor_Move(0, Order_Y);
 		cout << "인벤토리가 가득 찼습니다.\n";
-		while (true) {
 			Order_Clear();
 			Cursor_Move(0, 11);
 			setColor(2);
@@ -175,7 +175,6 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 			if (C == 'N' || C == 'n') {
 				Cursor_Line();
 				cout << "아이템을 줍지 않았습니다\n";
-				break;
 			}
 			else if (C == 'Y' || C == 'y') {
 				cout << "\n\n교체할 아이템의 위치를 입력해주세요\n";
@@ -184,15 +183,12 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 					Inventory[N] = Item_Name;
 					Cursor_Pos_End();
 					Order_Clear();
-					break;
 				}
 				else { cout << "다시 입력해주세요\n"; }
 			}
 			else { cout << "다시 입력해주세요\n"; }
-		}
 	}
 	else {     //인벤토리에 빈 공간이 있는 경우
-		while (true) {
 			Sleep(75);
 			Order_Clear();
 			Cursor_Move(0, Order_Y + 1);
@@ -207,16 +203,14 @@ void Pick_Up_Item(string* Inventory, string Item_Name) { //아이템을 주울 �
 			if (N >= 0 && N <= 4) {
 				if (Inventory[N] == "0") {
 					Inventory[N] = Item_Name;
-					break;
 				}
 				else { cout << "선택하신 위치에는 이미 아이템이 있습니다.\n";
 						cout << "다른 위치를 선택해 주십시오\n"; }
 			}
 			else { cout << "0~4의 숫자 중 하나를 입력해주세요\n\n"; }
-		}
-		Cursor_Pos_End();
-		Order_Clear();
 	}
+	Cursor_Pos_End();
+	Order_Clear();
 }
 
 void Look_Inventory(string Inventory[]) {    //인벤토리 불러오기
