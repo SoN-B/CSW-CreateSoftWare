@@ -169,12 +169,12 @@ void Skill::Skill_Info(My_Character* Character, Skill Skill)//스킬 정보 함�
 
 //	 skill 변수("스킬이름",사용hp,사용mp,상승Hp,상승Mp,데미지계수,데미지)
 Skill GOD_ATK("한방딜",0, 0, 0, 0, 0, 500, 0);
-Skill Power_Slash("파워 슬래시", 0, 20, 0.0, 0.0, 1.2, 0.0, 0);//마나20소모, 데미지1.2배
+Skill Power_Slash("파워 슬래시", 0, 20, 0.0, 0.0, 1.35, 0.0, 0);//마나20소모, 데미지1.2배
 Skill Blood_Slash("블러드 슬래시", 100, 0, 0, 0, 0, 150, 0);//체력100소모, 150데미지
-Skill Mind_Fuel("회광반조", 0, 30, 15, 0, 0, 0, 0);//마나 30소모, 체력15회복
-Skill Prayer("기도", 0, 0, 0, 20, 0, 0, 0);//소모없음, 마나20회복
+Skill Mind_Fuel("회광반조", 0, 30, 100, 0, 0, 0, 0);//마나 30소모, 체력50회복
+Skill Prayer("기도", 0, 0, 0, 50, 0, 0, 0);//소모없음, 마나20회복
 Skill Fire_bolt("파이어볼트", 0, 15, 0, 0, 0, 75, 0);//마나15소모, 75데미지, 2레벨 해금
-Skill Power_Slash2("파워 슬래시Ⅱ", 0, 50, 0, 0, 1.35, 0, 0);//마나50소모, 1.35배 데미지, 3레벨 해금
+Skill Power_Slash2("파워 슬래시Ⅱ", 0, 50, 0, 0, 1.7, 0, 0);//마나50소모, 1.35배 데미지, 3레벨 해금
 //플레이어의 스킬창 기본값
 
 Skill Skill_Slot[4] = { Power_Slash,GOD_ATK,Mind_Fuel,Prayer };//스킬 슬롯
@@ -338,7 +338,7 @@ int Empty_Room(My_Character* Character,int Roomnum)
 		Order_Clear();
 		Cursor_Move(0, Order_Y);
 		Cursor_Pos_Start();
-		cout << "무엇을 할까...\n1. 다음방으로 이동\n2. 스킬설정\n3. 가방\n4. 퀘스트\n5. 도주" << endl; //기본 메뉴
+		cout << "무엇을 할까...\n1. 다음방으로 이동\n2. 스킬변경\n3. 가방\n4. 퀘스트\n5. 도주" << endl; //기본 메뉴
 		Cursor_Pos_End();
 		Choice = _getch() - 48;
 		switch (Choice)
@@ -359,6 +359,7 @@ int Empty_Room(My_Character* Character,int Roomnum)
 
 			for (int i = 0; i < 4; i++) { cout << i + 1 << ". " << Skill_Slot[i].Skillname << endl; }//스킬창에 있는 스킬이름들을 출력
 			cout << "0. 뒤로가기" << endl;//0번 입력시 뒤로가기 출력
+			cout << "\n교체할 스킬 번호를 입력해 주세요.\n";
 			Skillmenu = _getch() - 48;
 			if (Skillmenu == 0)
 			{
@@ -387,6 +388,7 @@ int Empty_Room(My_Character* Character,int Roomnum)
 					{
 						Skill_Tree[Skillmenu - 1].Skill_Info(Character, Skill_Tree[Skillmenu - 1]);
 						Skill_Slot[Beforeskillnum] = Skill_Tree[Skillmenu - 1];
+						printf("\n\n스킬변경중 ...\n");
 						Sleep(3000);
 						Order_Clear2();
 						break;

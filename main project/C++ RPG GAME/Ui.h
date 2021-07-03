@@ -128,7 +128,7 @@ void Cursor_Line() //history에서 enter 부분.
 	Cursor_Move(Order_X, Order_y);												
 	Order_y++;
 }
-void Player_Attack_Result(double a)	//플레이어의 공격 을 나타냄.
+void Player_Attack_Result(int a)	//플레이어의 공격 을 나타냄.
 {
 	string stod = to_string(a);
 	Cursor_Move(Order_X, Order_y);
@@ -154,7 +154,7 @@ void Player_Attack_Result(double a)	//플레이어의 공격 을 나타냄.
 	Sleep(50);
 
 }
-void Monster_Attack_Result(Monster *Mob,double a) //monster의 공격 부분.
+void Monster_Attack_Result(Monster *Mob,int a) //monster의 공격 부분.
 {
 	string stod = to_string(a);
 	Cursor_Move(Order_X, Order_y);
@@ -201,7 +201,7 @@ void Print(string s) //print의 string 버젼.
 	Order_y++;
 	Order_x = Order_X;
 }
-void Print_Double(double a)	//double 자료형을 출력하기 위한 함수. 연속적인 출력을 하기 위함이다.
+void Print_Double(int a)	//double 자료형을 출력하기 위한 함수. 연속적인 출력을 하기 위함이다.
 { //플레이어는	55.000	의 데미지를 입혔다!
 	string s = to_string(a);
 	Print_Line(s);

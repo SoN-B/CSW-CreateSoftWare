@@ -3,13 +3,14 @@
 #include <conio.h>
 #include <Windows.h>
 #include "monster.h"
+#include "Item_List.h"
 using namespace std;
 
 typedef struct My_Character //플레이어 클래스
 {
 	double Hp, Mp, Atk, Def, Speed, Level = 1, Exp = 0, Max_Exp = 100, Money = 0;
 
-	My_Character(double Hp = 200, double Mp = 100, double Atk = 20, double Def = 0,
+	My_Character(double Hp = 500, double Mp = 250, double Atk = 30, double Def = 0,
 		double Speed = 1, double Money = 1000)
 	{
 		this->Hp = Hp;
@@ -74,13 +75,18 @@ typedef struct My_Character //플레이어 클래스
 	{
 		this->Hp = 200;
 		this->Mp = 100;
-		this->Atk = 50;
-		this->Def = 5;
-		this->Speed = 1.5;
+		this->Atk = 20;
+		this->Def = 0;
+		this->Speed = 1;
 		this->Level = 1;
 		this->Exp = 0;
 		this->Max_Exp = 100;
 		this->Money = 0;
+		for (int i = 0; i < 5; i++)
+		{
+			Equipment_slot[i] = "0";
+			Inventory[i] = "0";
+		}
 	}
 	void Get_Character_Info_Left();
 }My_Character;

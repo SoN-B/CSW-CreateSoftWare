@@ -119,7 +119,7 @@ bool Map_Combat()//맵선택 및 전투
                     if (Map[Roomnum][Monsternum]->Hp <= 0)//몬스터 사망시
                     {
                         Print_Line(Map[Roomnum][Monsternum]->Kind);
-                        Print(" 를 물리쳤다!");
+                        Print("(을)를 물리쳤다!");
                         Print_blank();
                         Monster_Die(SoNB_P, Map[Roomnum][Monsternum]);
                         Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
@@ -176,7 +176,7 @@ bool Map_Combat()//맵선택 및 전투
                     if (Map[Roomnum][Monsternum]->Hp <= 0) //몬스터 사망시
                     {
                         Print_Line(Map[Roomnum][Monsternum]->Kind);
-                        Print(" 를 물리쳤다!");
+                        Print("(을)를 물리쳤다!");
                         Monster_Die(SoNB_P, Map[Roomnum][Monsternum]);
                         Map[Roomnum][Monsternum]->Hp = Temp_Mob_P->Hp;
                         Map[Roomnum][Monsternum]->Mp = Temp_Mob_P->Mp;
@@ -284,11 +284,16 @@ int main()
                 cout << "> ";
                 cout << "\n총 3개의 맵으로 구성되어, 맵 상의 몬스터들과 전투해 나가는 방식입니다.\n";
                 cout << "하나의 맵은 총 5개의 방으로 이루어져 각각 1~2마리의 몬스터가 등장합니다.\n";
-                cout << "마지막 5번째 방에는 보스가 등장합니다.\n\n";
+                cout << "마지막 5번째 방에는 보스가 등장합니다.\n";
+                cout << "방표시 --> 남은 방 : ○,현재 진행 중인 방 : ◎,클리어 된 방 : ●\n\n";
 
                 cout << "전투는 간단하게 공격, 스킬 메뉴를 선택하여 진행합니다.\n";
                 cout << "캐릭터, 몬스터 스텟인 SPEED는 선제공격의 결정 요소가 됩니다.\n";
                 cout << "(즉, SPEED 스텟이 더 높은 쪽이 선제공격을 가져갑니다.)\n";
+
+                cout << "\n방 클리어 시, 한번 쉬어갈 수 있도록 '방 쉬기' 기능이 있습니다. 이때는, 다음 방으로 넘어가기 전\n";
+                cout << "소비 아이템을 사용하여, 회복하거나 장비 & 스킬들을 정비할 수 있습니다.\n";
+
                 cout << "\n전투도중 가방 내에서 소비 아이템을 사용하거나 도주함으로써, 위험한 상황을 모면할 수 있습니다.\n\n";
 
                 cout << "<";
