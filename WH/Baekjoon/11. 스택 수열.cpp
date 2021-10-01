@@ -3,6 +3,9 @@
 #include<string.h>
 using namespace std;
 
+//í’€ì§€ ëª»í•´ì„œ ë‹¤ë¥¸ ì‚¬ëŒì˜ í’€ì´ ê°€ì ¸ì˜´
+// ì¶œì²˜ : https://cocoon1787.tistory.com/231
+
 int n, amx;
 int cnt = 0;
 int seq[100001];
@@ -12,14 +15,14 @@ vector<char> ans;
 int main()
 {
 	cin >> n;
-	for (int i = 0; i < n; i++) cin >> seq[i]; // ¼ö¿­ ÀÔ·Â
+	for (int i = 0; i < n; i++) cin >> seq[i]; // ìˆ˜ì—´ ì…ë ¥
 
 	for (int i = 1; i <= n; i++)
 	{
 		v.push_back(i);
 		ans.push_back('+');
 
-		// º¤ÅÍ°¡ ºñ¾îÀÖÁö¾Ê°í,  cnt¹øÂ° ¼ö¿­ÀÌ º¤ÅÍÀÇ ¸¶Áö¸· ¿ø¼Ò¿Í °°À»°æ¿ì
+		// ë²¡í„°ê°€ ë¹„ì–´ìˆì§€ì•Šê³ ,  cntë²ˆì§¸ ìˆ˜ì—´ì´ ë²¡í„°ì˜ ë§ˆì§€ë§‰ ì›ì†Œì™€ ê°™ì„ê²½ìš°
 		while (!v.empty() && v.back() == seq[cnt])
 		{
 			v.pop_back();
@@ -28,7 +31,7 @@ int main()
 		}
 	}
 
-	if (!v.empty()) cout << "NO"; // ¼ö¿­ÀÌ ¸¸µé¾îÁ³´Ù¸é º¤ÅÍ°¡ ºñ¾îÀÖ¾î¾ß ÇÏ¹Ç·Î.
+	if (!v.empty()) cout << "NO"; // ìˆ˜ì—´ì´ ë§Œë“¤ì–´ì¡Œë‹¤ë©´ ë²¡í„°ê°€ ë¹„ì–´ìˆì–´ì•¼ í•˜ë¯€ë¡œ.
 	else for (int i = 0; i < ans.size(); i++) cout << ans[i] << '\n';
 
 
