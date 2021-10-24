@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+ 
+long long a[1500001]; 
+//1000000으로 나눌때 피보나치 수열의 피사노주기
+//입력받는 n의크기가 엄청크기때문에 longlong
+int m = 1000000; //각각 1000000으로 나눔
+ 
+void fibonacci() {
+    a[0] = 0;
+    a[1] = 1;
+    for (int i = 0; i < 1500000; i++) {
+        a[i + 2] = (a[i + 1] + a[i]) % m;
+    }
+}
+ 
+int main() {
+    long long n;
+    cin >> n;
+    fibonacci();
+    cout << a[n%1500000] << "\n";
+}
+---------------------------------------------------------------------
+#include<iostream>
+
+using namespace std;
+
+int fisano_period(int m) {
+    int count = 0, m1 = 0, m2 = 1;
+    do {
+        int temp = m1;
+        m1 = m2;
+        m2 = (temp + m1) % m;
+        count++;
+    } while (m1 != 0 || m2 != 1);    //0,1이 나온다는 것은 주기가 반복된다는 것이다.
+
+    //지금까지 길이를 반환한다.
+    return count;
+}
+
+int main() {
+    int P, N, M;
+    cin >> P;
+    for (int i = 0; i < P; i++) {
+        cin >> N >> M;
+        cout << N << " " << fisano_period(M) << endl;
+    }
+}
+
