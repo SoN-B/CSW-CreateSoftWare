@@ -19,13 +19,13 @@
   + 모든 메인 퀘스트 클리어 시, 게임도 클리어 됩니다. 다만, 캐릭터 사망 시 게임오버 됩니다.
   + 퀘스트 완료는 '상점 & 퀘스트'에서 할 수 있습니다.
 
-## Contents
+## 📚 Contents
 
-- [Features](#Features)
-- [Execution Screens](#Execution-Screens)
-- [Summary Notes](#Summary-Notes)
+- [Features](#-Features)
+- [Execution Screens](#-Execution-Screens)
+- [Summary Notes](#-Summary-Notes)
 
-## Features [![Notion](https://img.shields.io/badge/Notion-000000.svg?style=flat&logo=Notion&logoColor=white)](https://tranquil-lunaria-ed9.notion.site/21db80de222849fea2b8e6a7989f05f1)
+## ⚙ Features [![Notion](https://img.shields.io/badge/Notion-000000.svg?style=flat&logo=Notion&logoColor=white)](https://tranquil-lunaria-ed9.notion.site/21db80de222849fea2b8e6a7989f05f1)
 > Click Notion icon
 
 + 메인화면 & 메뉴
@@ -66,7 +66,7 @@
   + 내 진영, 상대 진영 구분
   + 몬스터 처지 & 특정 핻동 & 해당 내용 넘어갈 시, 콘솔 창 클리어 구현
 
-## Execution Screens
+## 💻 Execution Screens
 
 > **메인 & 메뉴 화면**
 
@@ -90,7 +90,7 @@
 | :-----------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
 |                                                      일반 전투                                                      |                                                       스킬 교체                                                        |                                                       방 쉬기 & 레벨업                                                        |                                                       아이템 사용                                                        |                                                      던전 도주                                                      |
 
-## Summary Notes
+## 📓 Summary Notes
 > Click Notion icon
 
 #### 상세소개: [![Notion](https://img.shields.io/badge/Notion-000000.svg?style=flat&logo=Notion&logoColor=white)](https://quilt-tanker-16d.notion.site/DUNGEON-208b0f1865034725a0be62e8e9b7a8ff)
